@@ -15,35 +15,60 @@ key_svy_funs <-
  data.table(
   name = c('mean',
            'quantile',
-           'count'),
+           'count',
+           'proportion'),
   svy_stat_fun = list(svy_stat_mean,
                       svy_stat_quantile,
-                      svy_stat_count),
+                      svy_stat_count,
+                      svy_stat_proportion),
   svy_statby_fun = list(svy_statby_mean,
                         svy_statby_quantile,
-                        svy_statby_count)
+                        svy_statby_count,
+                        svy_statby_proportion)
  ) %>%
  split(by = 'name')
 
 time_var <- key_data[type == 'time', variable]
 time_lab <- key_list[[time_var]]$label
 
+design <- svy_design_new(nhanes_data,
+                         years = c("1999-2000",
+                                   "2001-2002",
+                                   "2003-2004"))
 
-
-design <- svy_design_new(nhanes_data, years = c("1999-2000",
-                                                "2001-2002",
-                                                "2003-2004"))
 # conditional input
 quantiles <- c(0.25, 0.50, 0.75)
 
-design %>%
- svy_design_summarize(
-  outcome = 'bp_sys_mean',
-  key_svy_calls = c('mean', 'quantile'),
-  key_svy_funs,
-  time_var,
-  exposure,
-  group)
+outcomes <- key_data %>%
+ filter(outcome) %>%
+ pull(variable)
+
+results <- list()
+
+o = 'htn_jnc7'
+
+for (o in outcomes){
+
+ key_svy_calls <-
+  switch(key_list[[o]]$type,
+         'ctns' = c('mean', 'quantile'),
+         'catg' = c('count', 'proportion'),
+         'bnry' = c('count', 'proportion'),
+         'intg' = c('count', 'proportion', 'quantile'))
+
+ results[[o]] <- design %>%
+  svy_design_summarize(
+   outcome = o,
+   key_svy_calls = key_svy_calls,
+   key_svy_funs,
+   time_var = time_var,
+   exposure = NULL,
+   group = NULL
+  )
+
+}
+
+
 
 
   # else if(key_list[[outcome]]$type %in% c('bnry', 'catg', 'intg')){

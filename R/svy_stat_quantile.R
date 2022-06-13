@@ -14,7 +14,7 @@ svy_stat_quantile <- function(outcome, design, quantiles, ...) {
              na.rm = TRUE,
              ci = TRUE,
              se = TRUE) %>%
-  attribute_add(.name = '..svy_stat_type..', .value = 'quantile') %>%
-  attribute_add(.name = '..svy_stat_fun..', .value = 'stat')
+  svy_stat_adorn(stat_type = 'quantile',
+                 stat_fun = 'stat')
 
 }

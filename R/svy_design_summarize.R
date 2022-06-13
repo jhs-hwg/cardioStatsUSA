@@ -54,6 +54,6 @@ svy_design_summarize <- function(
   }
 
  ) %>%
-  rbindlist()
+  rbindlist(fill = TRUE)
 
 }

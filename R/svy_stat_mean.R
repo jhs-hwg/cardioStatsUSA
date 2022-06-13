@@ -11,7 +11,7 @@ svy_stat_mean <- function(outcome, design, ...) {
   svymean(x = as_svy_formula(outcome),
           design = design,
           na.rm = TRUE) %>%
-  attribute_add(.name = '..svy_stat_type..', .value = 'mean') %>%
-  attribute_add(.name = '..svy_stat_fun..', .value = 'stat')
+  svy_stat_adorn(stat_type = 'mean',
+                 stat_fun = 'stat')
 
 }

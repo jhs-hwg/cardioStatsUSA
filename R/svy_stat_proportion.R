@@ -3,27 +3,20 @@
 #' .. content for \details{} ..
 #'
 #' @title
-#' @param x
+#' @param outcome
 #' @param design
 #' @param ...
-svy_stat_count <- function(outcome, design, ...) {
+svy_stat_proportion <- function(outcome, design, ...) {
 
 
  if(is.integer(design$variables[[outcome]])){
   design$variables[[outcome]] <- as.factor(design$variables[[outcome]])
  }
 
- svytotal(x = as_svy_formula(outcome),
-          na.rm = TRUE,
-          design = design) %>%
-  svy_stat_adorn(stat_type = 'count',
+ svyciprop(formula = as_svy_formula(outcome),
+           design = design,
+           na.rm = TRUE) %>%
+  svy_stat_adorn(stat_type = 'proportion',
                  stat_fun = 'stat')
 
-
 }
-
-
-
-
-
-

@@ -2,14 +2,13 @@
 
 svy_statby_quantile <- function(outcome, by_vars, design, quantiles, ...){
 
- svyby(formula = as_svy_formula(outcome),
-       by = as_svy_formula(by_vars),
-       design = design,
-       FUN = svyquantile,
-       na.rm = TRUE,
-       quantiles = quantiles,
-       vartype = c('ci', 'se')) %>%
-  attribute_add(.name = '..svy_stat_type..', .value = 'quantile') %>%
-  attribute_add(.name = '..svy_stat_fun..', .value = 'statby')
+
+ svy_statby(outcome = outcome,
+            by_vars = by_vars,
+            design = design,
+            svy_stat_fun = svyquantile,
+            quantiles = quantiles) %>%
+  svy_stat_adorn(stat_type = 'quantile',
+                 stat_fun = 'statby')
 
 }
