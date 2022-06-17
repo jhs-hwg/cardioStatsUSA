@@ -10,7 +10,7 @@
 #'
 nhanes_load <- function(as = 'tibble'){
 
- data_in <- read_sas('data/small9920.sas7bdat')
+ data_in <- read_sas(file.path(here(), 'data', 'small9920.sas7bdat'))
 
  switch(
   as,

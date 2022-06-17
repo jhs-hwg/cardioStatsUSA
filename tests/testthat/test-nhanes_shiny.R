@@ -5,10 +5,14 @@ test_that("nhanes_shiny data matches source data from SAS", {
 
  nhanes_shiny <- nhanes_shiny_load()
 
- nhanes_sas <- read_sas('data/small9920.sas7bdat') %>%
+ nhanes_sas <- here() %>%
+  file.path('data', 'small9920.sas7bdat') %>%
+  read_sas() %>%
   nhanes_rename()
 
- nhanes_key <- fread('data/nhanes_key.csv')
+ nhanes_key <- here() %>%
+  file.path('data', 'nhanes_key.csv') %>%
+  fread()
 
  # number of NAs should match:
 

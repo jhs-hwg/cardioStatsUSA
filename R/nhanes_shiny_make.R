@@ -19,9 +19,15 @@ nhanes_shiny_make <- function(write_data = TRUE){
   select(where(is.factor)) %>%
   map(levels)
 
- write_rds(nhanes_fctrs, 'data/nhanes_shiny_fctrs.rds')
+ write_rds(nhanes_fctrs,
+           file.path(here(),
+                     'data',
+                     'nhanes_shiny_fctrs.rds'))
 
- fwrite(nhanes_data, 'data/nhanes_shiny.csv')
+ fwrite(nhanes_data,
+        file.path(here(),
+                  'data',
+                  'nhanes_shiny.csv'))
 
  NULL
 

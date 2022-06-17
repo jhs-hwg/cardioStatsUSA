@@ -13,24 +13,13 @@ svy_statby_proportion <- function(outcome, by_vars, design, ...){
   design$variables[[outcome]] <- as.factor(design$variables[[outcome]])
  }
 
- outcome_type <- key_list[[outcome]]$type
-
- svy_stat_fun <- switch(
-  outcome_type,
-  'bnry' = svyciprop,
-  'intg' = svymean,
-  'catg' = svymean
- )
-
  svy_statby(
   outcome = outcome,
   by_vars = by_vars,
   design = design,
-  svy_stat_fun = svy_stat_fun
+  svy_stat_fun = svymean
  ) %>%
-  svy_stat_adorn(stat_type = paste('proportion', outcome_type, sep = '_'),
+  svy_stat_adorn(stat_type = 'proportion',
                  stat_fun = 'statby')
 
 }
-
-
