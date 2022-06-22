@@ -24,8 +24,8 @@ svy_design_summarize <- function(
 
  time_var <- ifelse(pool_svy_years, 'None', key$time_var)
 
- if(is.null(exposure)) exposure <- 'None'
- if(is.null(group)) group <- 'None'
+ if(is.null(exposure) || is_empty(exposure)) exposure <- 'None'
+ if(is.null(group) || is_empty(group)) group <- 'None'
 
  by_vars <- c(time_var, exposure, group) %>%
   setdiff('None')
@@ -59,35 +59,52 @@ svy_design_summarize <- function(
                 key = key,
                 quantiles = quantiles) %>%
     svy_stat_tidy(outcome = outcome,
-                  by_vars = by_vars)
+                  by_vars = by_vars) %>%
+    .[, outcome := NULL]
 
-   if(exposure != 'None')
-    .out <- setnames(.out, old = exposure, new = 'exposure')
-   else
-    .out[, exposure := 'None']
 
-   if(group != 'None')
-    .out <- setnames(.out, old = group, new = 'group')
-   else
-    .out[, group := 'None']
 
-   if(pool_svy_years)
-    .out[[key$time_var]] <- 'None'
+   if(is_discrete(outcome)){
 
-   if( !('level' %in% names(.out)) )
-    .out$level <- NA_character_
+    setnames(.out, old = 'level', new = outcome)
 
-   setcolorder(.out,
-               neworder = c(key$time_var,
-                            'outcome',
-                            'level',
-                            'exposure',
-                            'group',
-                            'statistic',
-                            'estimate',
-                            'std_error',
-                            'ci_lower',
-                            'ci_upper'))
+    lvls <- key$fctrs[[outcome]]
+
+    if(is_empty(lvls) || is.null(lvls))
+     lvls <- sort(unique(nhanes_shiny[[outcome]]))
+
+    .out[, x := factor(x, levels = lvls), env = list(x = outcome)]
+
+   }
+
+   if(exposure != 'None'){
+
+    lvls <- key$fctrs[[exposure]]
+    .out[, x := factor(x, levels = lvls), env = list(x = exposure)]
+
+   }
+
+   if(group != 'None'){
+
+    lvls <- key$fctrs[[group]]
+    .out[, x := factor(x, levels = lvls), env = list(x = group)]
+
+   }
+
+   neworder <- c(key$time_var,
+                 exposure,
+                 group,
+                 outcome,
+                 'statistic',
+                 'estimate',
+                 'std_error',
+                 'ci_lower',
+                 'ci_upper') %>%
+    intersect(names(.out))
+
+   setcolorder(.out, neworder = neworder)
+
+   if(!is_empty(by_vars)) setorderv(.out, cols = by_vars)
 
    .out
 

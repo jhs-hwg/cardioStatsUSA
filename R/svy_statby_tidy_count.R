@@ -43,15 +43,4 @@ svy_statby_tidy_count <- function(x, outcome, by_vars, ...) {
 }
 
 
-svy_statby_tidy_proportion <- function(x, outcome, by_vars, ...) {
-
- out <- svy_statby_tidy_count(x, outcome, by_vars) %>%
-  .[, statistic := 'proportion'] %>%
-  .[, ci_lower := pmax(ci_lower, 0)] %>%
-  .[, ci_upper := pmin(ci_upper, 1)]
-
- out
-
-}
-
 

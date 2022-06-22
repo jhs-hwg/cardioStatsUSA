@@ -28,7 +28,7 @@ nhanes_recode <- function(data = NULL){
      "SBP of 120 to <130 and DBP <80 mm Hg",
      "SBP of 130 to <140 or DBP 80 to <90 mm Hg (and SBP<140 and DBP<90)",
      "SBP of 140 to <160 or DBP 90 to <100 mm Hg (and SBP<100 and DBP<100)",
-     "SBP \u2265160 or DBP \u2265100 mm Hg"
+     "SBP 160+ or DBP 100+ mm Hg"
     )
    ),
 
@@ -42,7 +42,7 @@ nhanes_recode <- function(data = NULL){
      "SBP of 120 to <130 and DBP < 80 mm Hg",
      "SBP of 130 to <140 or DBP 80 to <90 mm Hg (and SBP<140 and DBP <90)",
      "SBP of 140 to <160 or DBP 90 to <100 mm Hg (and SBP<100 and DBP<100)",
-     "SBP \u2265160 or DBP \u2265100 mm Hg",
+     "SBP 160+ or DBP 100+ mm Hg",
      "taking antihypertensive medications"
     )
    ),
