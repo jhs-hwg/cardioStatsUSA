@@ -12,8 +12,6 @@ r_files <- list.files(file.path(here(), 'R'),
 
 for(f in r_files) source(f)
 
-
-
 rspec <- round_spec() %>%
  round_using_magnitude(digits = c(2, 1, 0), breaks = c(10, 100, Inf))
 
@@ -322,14 +320,6 @@ server = function(input, output, session) {
    selected = key$svy_calls[[key$variables[[input$outcome]]$type]][1]
   )
 
-  updatePickerInput(
-   session = session,
-   inputId = 'statistic_primary',
-   choices = key$svy_calls[[key$variables[[input$outcome]]$type]],
-   selected = key$svy_calls[[key$variables[[input$outcome]]$type]][1]
-  )
-
-
 
   if(!is.null(input$exposure)){
 
@@ -372,6 +362,17 @@ server = function(input, output, session) {
    }
 
   }
+
+ })
+
+ observeEvent(input$statistic, {
+
+  updatePickerInput(
+   session = session,
+   inputId = 'statistic_primary',
+   choices = input$statistic,
+   selected = input$statistic[1]
+  )
 
  })
 
@@ -432,7 +433,7 @@ server = function(input, output, session) {
 
   }
 
-  if(!is_continuous(input$exposure)){
+  if(!is_continuous(input$exposure, key)){
 
    updatePickerInput(
     session = session,
@@ -508,7 +509,9 @@ server = function(input, output, session) {
    group = input$group,
    stat_all = stat_all,
    statistic_primary = input$statistic_primary,
-   geom = input$geom
+   geom = input$geom,
+   years = years(),
+   pool = input$pool,
   )
 
  }) %>%

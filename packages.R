@@ -11,6 +11,7 @@ library(data.table)
 library(magrittr)
 library(here)
 library(DT)
+library(plotly)
 
 conflicted::conflict_prefer('filter', 'dplyr')
 conflicted::conflict_prefer("recode", "dplyr")

@@ -9,7 +9,8 @@
 #'
 nhanes_shiny_make <- function(write_data = TRUE){
 
- nhanes_data <- nhanes_load(as = 'data.table') %>%
+ nhanes_data <-
+  nhanes_load(as = 'data.table') %>%
   nhanes_recode() %>%
   nhanes_rename()
 

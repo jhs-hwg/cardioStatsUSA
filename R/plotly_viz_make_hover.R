@@ -4,13 +4,24 @@
 #'
 #' @title
 
-plotly_viz_make_hover <- function(data_fig, stat_all) {
+plotly_viz_make_hover <- function(data, stat_all, exposure, key) {
 
- numeric_cols <- get_numeric_colnames(data_fig)
+ numeric_cols <- get_numeric_colnames(data)
 
- stat_cols <- intersect(stat_all, unique(data_fig$statistic))
+ stat_cols <- intersect(stat_all, unique(data$statistic))
 
- data_fig %>%
+ data$exposure_label <- ""
+ label_sep <- ""
+
+ if(is_used(exposure)){
+  data$exposure_label <- key$variables %>%
+   getElement(exposure) %>%
+   getElement('label') %>%
+   paste(data[[exposure]], sep = ': ')
+  label_sep <- "\n"
+ }
+
+ data %>%
   as_tibble() %>%
   mutate(across(all_of(numeric_cols), table_value)) %>%
   mutate(
@@ -22,6 +33,7 @@ plotly_viz_make_hover <- function(data_fig, stat_all) {
   select(-all_of(numeric_cols)) %>%
   pivot_wider(names_from = statistic, values_from = stat_label) %>%
   unite(col = 'hover', !!!stat_cols, sep = '<br>') %>%
+  mutate(hover = glue("{exposure_label}{label_sep}{hover}")) %>%
   as.data.table()
 
 }

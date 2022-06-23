@@ -16,13 +16,12 @@ nhanes_shiny_load <- function(){
 
  }
 
- data_in <- fread(file.path(fpath_data, 'nhanes_shiny.csv'),
-                  na.strings = c('', 'NA'),
-                  stringsAsFactors = TRUE)
+ data_in <- fread(file.path(fpath_data, 'nhanes_shiny.csv'))
 
  fctrs <- read_rds(file.path(fpath_data, 'nhanes_shiny_fctrs.rds'))
 
- for(f in names(fctrs)) levels(data_in[[f]]) <- fctrs[[f]]
+ for(f in names(fctrs))
+  data_in[, .f := factor(.f, levels = fctrs[[f]]), env = list(.f=f)]
 
  data_in
 
