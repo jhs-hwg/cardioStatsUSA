@@ -497,7 +497,6 @@ server = function(input, output, session) {
 
  })
 
-
  # Stat summary ------------------------------------------------------------
 
  years <- reactive({
@@ -524,7 +523,8 @@ server = function(input, output, session) {
     exposure = input$exposure,
     n_exposure_group = as.numeric(input$n_exposure_group),
     exposure_cut_type = input$exposure_cut_type,
-    years = years()
+    years = years(),
+    pool = input$pool
    )
 
   for(i in seq(n_exclusion_max)){
@@ -539,8 +539,6 @@ server = function(input, output, session) {
    }
 
   }
-
-
 
   svy_design_summarize(
    design = ds,
@@ -573,7 +571,7 @@ server = function(input, output, session) {
    statistic_primary = input$statistic_primary,
    geom = input$geom,
    years = years(),
-   pool = input$pool,
+   pool = input$pool
   )
 
  }) %>%
