@@ -271,6 +271,12 @@ plotly_viz_worker <- function(data,
     l = 50,
     r = 50
    ),
+   annotations = list(x = 0.5,
+                      y = -0.25,
+                      text = "(Courtesy of Byron, Ligong, and Paul)",
+                      showarrow = F,
+                      xref='paper',
+                      yref='paper'),
    xaxis = xaxis,
    yaxis = yaxis,
    legend = legend_args

@@ -23,6 +23,7 @@ nhanes_shiny <- nhanes_shiny_load()
 key <- key_load()
 nhanes_cycles <- levels(nhanes_shiny[[key$time_var]])
 
+n_exclusion_max <- 5
 
 variable_choices <- map(
  .x = list(
@@ -46,10 +47,7 @@ compute_ready <- glue(
    input.outcome.length > 0
  ) & (
    input.statistic.length > 0
- ) & (
-   input.subset_variable.length == 0 |
-   (input.subset_value.length > 0 & input.subset_variable.length > 0)
- )"
+ ) "
 )
 
 
@@ -185,26 +183,13 @@ ui <- fluidPage(
     )
    ),
 
-   pickerInput(
-    inputId = 'subset_variable',
-    label = 'Select a subsetting variable',
-    choices = variable_choices$subset,
-    selected = NULL,
-    multiple = TRUE,
-    options = pickerOptions(maxOptions = 1),
-    width = input_width
-   ),
+   pickerInput("subset_n",
+               "How many exclusions to make?",
+               choices = 1:5,
+               selected = 1,
+               width = input_width),
 
-   conditionalPanel(
-    condition = 'input.subset_variable.length >= 1',
-    prettyCheckboxGroup(
-     inputId = 'subset_value',
-     label = 'Include these subsets:',
-     choices = c(),
-     selected = NULL,
-     width = input_width
-    )
-   ),
+   uiOutput("subset_ui"),
 
    pickerInput(
     inputId = 'exposure',
@@ -311,6 +296,52 @@ server = function(input, output, session) {
                             selected = character(0))
  })
 
+ output$subset_ui <-
+  renderUI({
+
+   if(input$subset_n < 1) return(NULL)
+
+  map(
+   .x = seq(as.integer(input$subset_n)),
+   ~ {
+
+    new_id <- paste('subset_variable', .x, sep = '_')
+    new_id_value <- paste('subset_value', .x, sep = '_')
+
+    new_value_choices <- input[[new_id]] %||% character()
+
+    if(!is_empty(new_value_choices)){
+     new_value_choices <- levels(nhanes_shiny[[new_value_choices]])
+    }
+
+    tagList(
+     pickerInput(
+      inputId = new_id,
+      label = 'Select a subsetting variable',
+      choices = variable_choices$subset,
+      selected = isolate(input[[new_id]]) %||% character(),
+      multiple = TRUE,
+      options = pickerOptions(maxOptions = 1),
+      width = input_width
+     ),
+
+     conditionalPanel(
+      condition = as.character(
+       glue('input.{new_id}.length > 0')
+      ),
+      prettyCheckboxGroup(
+       inputId = new_id_value,
+       label = 'Include these subsets:',
+       choices = new_value_choices,
+       selected = isolate(input[[new_id_value]]) %||% character(),
+       width = input_width
+      )
+     )
+    )
+   }
+  )
+ })
+
  observeEvent(input$outcome, {
 
   updatePrettyCheckboxGroup(
@@ -336,32 +367,42 @@ server = function(input, output, session) {
 
   }
 
-  if(!is.null(input$subset_variable)){
+  for(i in seq(n_exclusion_max)){
 
-   if(input$outcome == input$subset_variable){
+   ss_var <- paste('subset_variable', i, sep = '_')
+   ss_val <- paste('subset_value', i, sep = '_')
 
-    updatePickerInput(
-     session = session,
-     inputId = 'subset_variable',
-     choices = variable_choices$exposure,
-     selected = character(0)
-    )
+   if(!is.null(input[[ss_var]])){
 
-    updatePickerInput(
-     session = session,
-     inputId = 'subset_variable',
-     choices = variable_choices$exposure,
-     selected = character(0)
-    )
+    if(input$outcome == input[[ss_var]]){
 
-    updatePrettyCheckboxGroup(
-     inputId = 'subset_value',
-     selected = character(0)
-    )
+     updatePickerInput(
+      session = session,
+      inputId = ss_var,
+      choices = variable_choices$exposure,
+      selected = character(0)
+     )
+
+     updatePickerInput(
+      session = session,
+      inputId = ss_var,
+      choices = variable_choices$exposure,
+      selected = character(0)
+     )
+
+     updatePrettyCheckboxGroup(
+      inputId = ss_val,
+      selected = character(0)
+     )
+
+    }
 
    }
 
+
   }
+
+
 
  })
 
@@ -376,38 +417,48 @@ server = function(input, output, session) {
 
  })
 
- observeEvent(input$subset_variable, {
+ map(
+  .x = seq(n_exclusion_max),
+  .f = ~ {
 
-  updatePrettyCheckboxGroup(
-   inputId = 'subset_value',
-   choices = levels(nhanes_shiny[[input$subset_variable]]),
-   selected = character(0) #subset_value_selected
-  )
+   ss_var <- paste('subset_variable', .x, sep = '_')
+   ss_val <- paste('subset_value', .x, sep = '_')
 
-  if(!is.null(input$outcome)){
-
-   if(input$outcome == input$subset_variable){
-
-    updatePickerInput(
-     session = session,
-     inputId = 'outcome',
-     choices = variable_choices$outcome,
-     selected = character(0)
-    )
+   observeEvent(input[[ss_var]], {
 
     updatePrettyCheckboxGroup(
-     session = session,
-     inputId = 'statistic',
-     choices = character(0),
-     selected = character(0)
+     inputId = ss_val,
+     choices = levels(nhanes_shiny[[ input[[ss_var]] ]]),
+     selected = character(0) #subset_value_selected
     )
 
-   }
+    if(!is.null(input$outcome)){
+
+     if(input$outcome == input[[ss_var]]){
+
+      updatePickerInput(
+       session = session,
+       inputId = 'outcome',
+       choices = variable_choices$outcome,
+       selected = character(0)
+      )
+
+      updatePrettyCheckboxGroup(
+       session = session,
+       inputId = 'statistic',
+       choices = character(0),
+       selected = character(0)
+      )
+
+     }
+
+    }
+
+
+   })
 
   }
-
-
- })
+ )
 
  observeEvent(input$exposure, {
 
@@ -476,9 +527,20 @@ server = function(input, output, session) {
     years = years()
    )
 
-  if(is_used(input$subset_variable))
-   ds %<>% svy_design_subset(input$subset_variable,
-                             input$subset_value)
+  for(i in seq(n_exclusion_max)){
+
+   ss_var <- paste('subset_variable', i, sep = '_')
+   ss_val <- paste('subset_value', i, sep = '_')
+
+   if(is_used(input[[ss_var]]) && !is_empty(input[[ss_val]])){
+
+    ds %<>% svy_design_subset(input[[ss_var]], input[[ss_val]])
+
+   }
+
+  }
+
+
 
   svy_design_summarize(
    design = ds,
