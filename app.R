@@ -565,6 +565,7 @@ server = function(input, output, session) {
    data = smry(),
    key = key,
    outcome = input$outcome,
+   outcome_type = outcome_type,
    exposure = input$exposure,
    group = input$group,
    stat_all = stat_all,

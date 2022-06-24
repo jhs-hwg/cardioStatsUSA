@@ -63,7 +63,6 @@ svy_design_summarize <- function(
     .[, outcome := NULL]
 
 
-
    if(is_discrete(outcome, key)){
 
     setnames(.out, old = 'level', new = outcome)

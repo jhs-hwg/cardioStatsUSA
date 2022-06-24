@@ -13,6 +13,7 @@
 plotly_viz <- function(data,
                        key,
                        outcome,
+                       outcome_type,
                        exposure,
                        group,
                        stat_all,
@@ -22,7 +23,9 @@ plotly_viz <- function(data,
                        pool,
                        reorder_cats=FALSE){
 
- outcome_type <- key$variables[[outcome]]$type
+ if(outcome_type == 'intg' && statistic_primary != 'quantile'){
+  outcome_type <- 'catg'
+ }
 
  if(outcome_type == 'catg'){
 
@@ -76,6 +79,7 @@ plotly_viz <- function(data,
       .f = plotly_viz_worker,
       key = key,
       outcome = outcome,
+      outcome_type = outcome_type,
       exposure = exposure,
       stat_all = stat_all,
       statistic_primary = statistic_primary,
@@ -90,6 +94,7 @@ plotly_viz_worker <- function(data,
                               title_addon,
                               key,
                               outcome,
+                              outcome_type,
                               exposure,
                               stat_all,
                               statistic_primary,
@@ -106,8 +111,6 @@ plotly_viz_worker <- function(data,
  if(statistic_primary == 'quantile'){
   statistic_primary <- 'q50'
  }
-
- outcome_type <- key$variables[[outcome]]$type
 
  exposure_used <- is_used(exposure)
 
