@@ -59,14 +59,17 @@ plotly_viz <- function(data,
   data <- data[x == 'Yes', env = list(x = outcome)]
 
  if(is_used(group)){
-  data_fig <- split(data, by = group)
+
+  data_fig <- split(data, by = group) %>%
+   discard(~nrow(.x) == 0)
+
   title_addons <- paste(key$variables[[group]]$label,
                         names(data_fig), sep = ' = ')
+
  } else {
   data_fig <- list(data)
   title_addons <- ""
  }
-
 
  map2(data_fig,
       title_addons,
@@ -77,7 +80,7 @@ plotly_viz <- function(data,
       stat_all = stat_all,
       statistic_primary = statistic_primary,
       geom = geom,
-      pool,
+      pool = pool,
       reorder_cats = reorder_cats)
 
 }
@@ -93,6 +96,8 @@ plotly_viz_worker <- function(data,
                               geom,
                               pool,
                               reorder_cats) {
+
+ if(nrow(data) == 0) return(NULL)
 
  if('quantile' %in% stat_all){
   stat_all <- c(stat_all, 'q25', 'q50', 'q75')
@@ -247,7 +252,7 @@ plotly_viz_worker <- function(data,
 
  xaxis$title = key$variables[[key$time_var]]$label
 
- yaxis$title <- if(is_continuous(outcome, key)){
+ yaxis$title <- if(outcome_type == 'ctns'){
 
   key$variables[[outcome]]
 
