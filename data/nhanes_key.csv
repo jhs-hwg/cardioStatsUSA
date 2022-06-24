@@ -1,36 +1,36 @@
-variable,type,label,outcome,exposure,subset,group
-svy_id,svy,participant identifier,FALSE,FALSE,FALSE,FALSE
-svy_weight,svy,sample weight,FALSE,FALSE,FALSE,FALSE
-svy_psu,svy,primary sampling unit,FALSE,FALSE,FALSE,FALSE
-svy_strata,svy,strata,FALSE,FALSE,FALSE,FALSE
-svy_year,time,NHANES cycle,FALSE,FALSE,FALSE,FALSE
-demo_age_cat,catg,"Age category, years",FALSE,TRUE,TRUE,TRUE
-demo_race,catg,Race,FALSE,TRUE,TRUE,TRUE
-demo_age_years,ctns,"Age, years",TRUE,TRUE,TRUE,FALSE
-demo_pregnant,bnry,Pregnant,FALSE,TRUE,TRUE,TRUE
-demo_gender,bnry,Gender,FALSE,TRUE,TRUE,TRUE
-bp_sys_mean,ctns,"Systolic blood pressure, mm Hg",TRUE,TRUE,TRUE,FALSE
-bp_dia_mean,ctns,"Diastolic blood pressure, mm Hg",TRUE,TRUE,TRUE,FALSE
-bp_cat_meds_excluded,catg,Blood pressure category (not including antihypertensive medication use),TRUE,TRUE,TRUE,TRUE
-bp_cat_meds_included,catg,Blood pressure category (including antihypertensive medication use),TRUE,TRUE,TRUE,TRUE
-bp_med_use,bnry,Antihypertensive medication use,TRUE,TRUE,TRUE,TRUE
-bp_med_recommended_jnc7,bnry,Antihypertensive medications recommended by JNC7,FALSE,TRUE,TRUE,TRUE
-bp_med_recommended_accaha,bnry,Antihypertensive medications recommended by ACC/AHA 2017,FALSE,TRUE,TRUE,TRUE
-bp_med_n_class,intg,Number of antihypertensive medication classes,TRUE,TRUE,TRUE,TRUE
-bp_control_jnc7,bnry,Blood pressure control (JNC7 defn),TRUE,TRUE,TRUE,TRUE
-bp_control_accaha,bnry,Blood pressure control (ACC/AHA 2017 defn),TRUE,TRUE,TRUE,TRUE
-htn_jnc7,bnry,Hypertension (JNC7 defn),TRUE,TRUE,TRUE,TRUE
-htn_accaha,bnry,Hypertension (ACC/AHA 2017 defn),TRUE,TRUE,TRUE,TRUE
-htn_aware,bnry,Awareness of hypertension,TRUE,TRUE,TRUE,TRUE
-htn_resistant_jnc7,bnry,Resistant hypertension (JNC7 defn),TRUE,TRUE,TRUE,TRUE
-htn_resistant_accaha,bnry,Resistant hypertension (ACC/AHA 2017 defn),TRUE,TRUE,TRUE,TRUE
-cc_smoke,catg,Smoking status,FALSE,TRUE,TRUE,TRUE
-cc_bmi,catg,"Body mass index, kg/m2",TRUE,TRUE,TRUE,TRUE
-cc_diabetes,bnry,Prevalent diabetes,TRUE,TRUE,TRUE,TRUE
-cc_ckd,bnry,Prevalent chronic kidney disease,TRUE,TRUE,TRUE,TRUE
-cc_cvd_mi,bnry,History of myocardial infarction,TRUE,TRUE,TRUE,TRUE
-cc_cvd_chd,bnry,History of coronary heart disease,TRUE,TRUE,TRUE,TRUE
-cc_cvd_stroke,bnry,History of stroke,TRUE,TRUE,TRUE,TRUE
-cc_cvd_ascvd,bnry,History of ASCVD,TRUE,TRUE,TRUE,TRUE
-cc_cvd_hf,bnry,History of heart failure,TRUE,TRUE,TRUE,TRUE
-cc_cvd_any,bnry,History of CVD,TRUE,TRUE,TRUE,TRUE
+class,label,variable,type,outcome,exposure,subset,group
+Survey,participant identifier,svy_id,svy,FALSE,FALSE,FALSE,FALSE
+Survey,sample weight,svy_weight,svy,FALSE,FALSE,FALSE,FALSE
+Survey,primary sampling unit,svy_psu,svy,FALSE,FALSE,FALSE,FALSE
+Survey,strata,svy_strata,svy,FALSE,FALSE,FALSE,FALSE
+Survey,NHANES cycle,svy_year,time,FALSE,FALSE,FALSE,FALSE
+Demographics,"Age category, years",demo_age_cat,catg,FALSE,TRUE,TRUE,TRUE
+Demographics,Race,demo_race,catg,FALSE,TRUE,TRUE,TRUE
+Demographics,"Age, years",demo_age_years,ctns,TRUE,TRUE,TRUE,FALSE
+Demographics,Pregnant,demo_pregnant,bnry,FALSE,TRUE,TRUE,TRUE
+Demographics,Gender,demo_gender,bnry,FALSE,TRUE,TRUE,TRUE
+Blood pressure,"Systolic blood pressure, mm Hg",bp_sys_mean,ctns,TRUE,TRUE,TRUE,FALSE
+Blood pressure,"Diastolic blood pressure, mm Hg",bp_dia_mean,ctns,TRUE,TRUE,TRUE,FALSE
+Blood pressure,Blood pressure category (not including antihypertensive medication use),bp_cat_meds_excluded,catg,TRUE,TRUE,TRUE,TRUE
+Blood pressure,Blood pressure category (including antihypertensive medication use),bp_cat_meds_included,catg,TRUE,TRUE,TRUE,TRUE
+Blood pressure,Blood pressure control (JNC7 defn),bp_control_jnc7,bnry,TRUE,TRUE,TRUE,TRUE
+Blood pressure,Blood pressure control (ACC/AHA 2017 defn),bp_control_accaha,bnry,TRUE,TRUE,TRUE,TRUE
+Antihypertensive medication,Antihypertensive medication use,bp_med_use,bnry,TRUE,TRUE,TRUE,TRUE
+Antihypertensive medication,Antihypertensive medications recommended by JNC7,bp_med_recommended_jnc7,bnry,FALSE,TRUE,TRUE,TRUE
+Antihypertensive medication,Antihypertensive medications recommended by ACC/AHA 2017,bp_med_recommended_accaha,bnry,FALSE,TRUE,TRUE,TRUE
+Antihypertensive medication,Number of antihypertensive medication classes,bp_med_n_class,intg,TRUE,TRUE,TRUE,TRUE
+Hypertension,Hypertension (JNC7 defn),htn_jnc7,bnry,TRUE,TRUE,TRUE,TRUE
+Hypertension,Hypertension (ACC/AHA 2017 defn),htn_accaha,bnry,TRUE,TRUE,TRUE,TRUE
+Hypertension,Awareness of hypertension,htn_aware,bnry,TRUE,TRUE,TRUE,TRUE
+Hypertension,Resistant hypertension (JNC7 defn),htn_resistant_jnc7,bnry,TRUE,TRUE,TRUE,TRUE
+Hypertension,Resistant hypertension (ACC/AHA 2017 defn),htn_resistant_accaha,bnry,TRUE,TRUE,TRUE,TRUE
+Comorbidities,Smoking status,cc_smoke,catg,FALSE,TRUE,TRUE,TRUE
+Comorbidities,"Body mass index, kg/m2",cc_bmi,catg,TRUE,TRUE,TRUE,TRUE
+Comorbidities,Prevalent diabetes,cc_diabetes,bnry,TRUE,TRUE,TRUE,TRUE
+Comorbidities,Prevalent chronic kidney disease,cc_ckd,bnry,TRUE,TRUE,TRUE,TRUE
+Comorbidities,History of myocardial infarction,cc_cvd_mi,bnry,TRUE,TRUE,TRUE,TRUE
+Comorbidities,History of coronary heart disease,cc_cvd_chd,bnry,TRUE,TRUE,TRUE,TRUE
+Comorbidities,History of stroke,cc_cvd_stroke,bnry,TRUE,TRUE,TRUE,TRUE
+Comorbidities,History of ASCVD,cc_cvd_ascvd,bnry,TRUE,TRUE,TRUE,TRUE
+Comorbidities,History of heart failure,cc_cvd_hf,bnry,TRUE,TRUE,TRUE,TRUE
+Comorbidities,History of CVD,cc_cvd_any,bnry,TRUE,TRUE,TRUE,TRUE

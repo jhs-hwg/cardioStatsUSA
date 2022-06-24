@@ -6,11 +6,12 @@
 #' @param x
 #' @param design
 #' @param ...
-svy_stat_count <- function(outcome, design, ...) {
+svy_stat_count <- function(outcome, design, key, ...) {
 
+ if(key$variables[[outcome]]$type == 'intg'){
 
- if(is.integer(design$variables[[outcome]])){
-  design$variables[[outcome]] <- as.factor(design$variables[[outcome]])
+  design$variables[[outcome]] %<>% as.factor()
+
  }
 
  svytotal(x = as_svy_formula(outcome),

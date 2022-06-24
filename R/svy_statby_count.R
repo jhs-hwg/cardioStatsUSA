@@ -1,9 +1,11 @@
 
 
-svy_statby_count <- function(outcome, by_vars, design, ...){
+svy_statby_count <- function(outcome, by_vars, design, key, ...){
 
- if(is.integer(design$variables[[outcome]])){
-  design$variables[[outcome]] <- as.factor(design$variables[[outcome]])
+ if(key$variables[[outcome]]$type == 'intg'){
+
+  design$variables[[outcome]] %<>% as.factor()
+
  }
 
  svy_statby(outcome = outcome,

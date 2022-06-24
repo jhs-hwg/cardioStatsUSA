@@ -7,7 +7,11 @@
 #'
 #' @return a `svydesign` object
 #'
-svy_design_new <- function(data, years){
+svy_design_new <- function(data,
+                           exposure,
+                           n_exposure_group,
+                           exposure_cut_type,
+                           years){
 
  stopifnot(is.data.table(data))
 
@@ -20,6 +24,18 @@ svy_design_new <- function(data, years){
 
  data_design <- data[svy_year %in% years] %>%
   .[, svy_weight := svy_weight / divide_by]
+
+ if(!is_empty(n_exposure_group)){
+
+  data_design <- data_design %>%
+   .[,
+     x := discretize(x,
+                     method = exposure_cut_type,
+                     breaks = n_exposure_group),
+     env = list(x = exposure)
+   ]
+
+ }
 
   # .[, (fctrs) := lapply(.SD, fctr_dots_add), .SDcols = fctrs]
 
