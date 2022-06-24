@@ -11,7 +11,8 @@ svy_design_new <- function(data,
                            exposure,
                            n_exposure_group,
                            exposure_cut_type,
-                           years){
+                           years,
+                           pool){
 
  stopifnot(is.data.table(data))
 
@@ -21,6 +22,8 @@ svy_design_new <- function(data,
   sapply(is.factor) %>%
   which() %>%
   names()
+
+ if(pool == 'no') divide_by <- 1
 
  data_design <- data[svy_year %in% years] %>%
   .[, svy_weight := svy_weight / divide_by]
