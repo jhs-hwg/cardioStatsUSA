@@ -184,7 +184,7 @@ ui <- fluidPage(
    ),
 
    pickerInput("subset_n",
-               "How many exclusions to make?",
+               "How many inclusions to make?",
                choices = 1:5,
                selected = 1,
                width = input_width),
@@ -428,7 +428,9 @@ server = function(input, output, session) {
 
     updatePrettyCheckboxGroup(
      inputId = ss_val,
-     choices = levels(nhanes_shiny[[ input[[ss_var]] ]]),
+     choices =
+      levels(nhanes_shiny[[ input[[ss_var]] ]]) %||%
+      sort(unique(na.omit(nhanes_shiny[[ input[[ss_var]] ]]))),
      selected = character(0) #subset_value_selected
     )
 

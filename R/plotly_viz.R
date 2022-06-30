@@ -27,7 +27,7 @@ plotly_viz <- function(data,
   outcome_type <- 'catg'
  }
 
- if(outcome_type == 'catg'){
+ if(outcome_type == 'catg' && pool == 'no'){
 
   if(is_used(exposure) && is_used(group)){
 
@@ -121,12 +121,12 @@ plotly_viz_worker <- function(data,
   data[[exposure]] <- 1
  }
 
-
  join_names <- intersect(names(data), names(data_hovertext))
 
  data_fig <- data %>%
   .[statistic == statistic_primary] %>%
-  .[data_hovertext, on = join_names]
+  .[data_hovertext, on = join_names] %>%
+  droplevels()
 
  if(exposure_used && reorder_cats){
 
@@ -140,8 +140,16 @@ plotly_viz_worker <- function(data,
 
  }
 
+ stacked_and_pooled <- outcome_type == 'catg' && pool == 'yes'
 
- data_fig <- split(data_fig, by = exposure)
+ data_fig <- data_fig %>%
+  split(
+   by = ifelse(
+    test = stacked_and_pooled,
+    yes = outcome,
+    no = exposure
+   )
+  )
 
  fig <- plot_ly(height = 600)
 
@@ -165,17 +173,25 @@ plotly_viz_worker <- function(data,
 
    'bar' = {
 
+
     fig <- fig %>%
      add_trace(
       type = geom,
-      x = data_fig[[i]][[key$time_var]],
+
+      x = data_fig[[i]][[ifelse(stacked_and_pooled,
+                                exposure,
+                                key$time_var)]],
+
       y = data_fig[[i]]$estimate,
       text = table_value(data_fig[[i]]$estimate),
       textposition = 'top middle',
-      name = if(outcome_type != 'catg')
-       names(data_fig)[i]
-      else
-       data_fig[[i]][[outcome]],
+
+      name = ifelse(
+       test = outcome_type != 'catg' || stacked_and_pooled,
+       yes = names(data_fig)[i],
+       no = data_fig[[i]][[outcome]]
+      ),
+
       hoverinfo = 'text',
       hovertext = data_fig[[i]]$hover
      )
@@ -240,7 +256,10 @@ plotly_viz_worker <- function(data,
 
  if(exposure_used){
 
-  legend_title <- key$variables[[exposure]]$label |>
+  legend_title <- key %>%
+   getElement('variables') %>%
+   getElement(ifelse(stacked_and_pooled, outcome, exposure)) %>%
+   getElement('label') %>%
    str_replace_all(" ", "\n")
 
   legend_args$title <- list(
@@ -249,11 +268,14 @@ plotly_viz_worker <- function(data,
 
  }
 
- fig_title <-  paste(c(key$variables[[outcome]]$label,
-                       title_addon),
+ if(stacked_and_pooled) title_addon <- levels(data[[key$time_var]])
+
+ fig_title <-  paste(c(key$variables[[outcome]]$label, title_addon),
                      collapse = '<br>')
 
- xaxis$title = key$variables[[key$time_var]]$label
+ xaxis$title = ifelse(stacked_and_pooled,
+                      key$variables[[exposure]]$label %||% "",
+                      key$variables[[key$time_var]]$label)
 
  yaxis$title <- if(outcome_type == 'ctns'){
 

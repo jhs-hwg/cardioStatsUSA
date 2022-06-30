@@ -54,23 +54,23 @@ svy_design_summarize <- function(
     getElement(svy_stat_fun_type)
 
    .out <- svy_stat_fun(outcome = outcome,
-                by_vars = by_vars,
-                design = design,
-                key = key,
-                quantiles = quantiles) %>%
+                        by_vars = by_vars,
+                        design = design,
+                        key = key,
+                        quantiles = quantiles) %>%
     svy_stat_tidy(outcome = outcome,
                   by_vars = by_vars) %>%
     .[, outcome := NULL]
 
 
-   if(is_discrete(outcome, key)){
+   if(is_discrete(outcome, key) && 'level' %in% names(.out)){
 
     setnames(.out, old = 'level', new = outcome)
 
     lvls <- key$fctrs[[outcome]]
 
     if(is_empty(lvls) || is.null(lvls))
-     lvls <- sort(unique(nhanes_shiny[[outcome]]))
+     lvls <- sort(unique(design$variables[[outcome]]))
 
     .out[, x := factor(x, levels = lvls), env = list(x = outcome)]
 
@@ -89,6 +89,7 @@ svy_design_summarize <- function(
     .out[, x := factor(x, levels = lvls), env = list(x = group)]
 
    }
+
 
    neworder <- c(key$time_var,
                  exposure,

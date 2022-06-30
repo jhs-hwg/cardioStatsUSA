@@ -50,8 +50,7 @@ key_load <- function() {
   'bnry' = c(Percentage = 'percentage',
              Count = 'count'),
   'intg' = c(Percentage = 'percentage',
-             Count = 'count',
-             Quantiles = 'quantile')
+             Count = 'count')
  )
 
 
