@@ -2,7 +2,7 @@
 #'
 #' .. content for \details{} ..
 #'
-#' @title
+#' @title start the app's engine.
 
 key_load <- function() {
 
