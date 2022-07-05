@@ -114,7 +114,18 @@ plotly_viz_worker <- function(data,
 
  exposure_used <- is_used(exposure)
 
- data_hovertext <- plotly_viz_make_hover(data, stat_all, exposure, key)
+ stacked_and_pooled <-
+  outcome_type == 'catg' && pool == 'yes'
+
+ stacked_stratified_noexp <-
+  outcome_type == 'catg' && pool == 'no' && !exposure_used
+
+ data_hovertext <- data %>%
+  plotly_viz_make_hover(
+   stat_all = stat_all,
+   exposure = ifelse(stacked_stratified_noexp, outcome, exposure),
+   key = key
+  )
 
  if(!exposure_used){
   exposure <- 'fake_._exposure'
@@ -140,12 +151,10 @@ plotly_viz_worker <- function(data,
 
  }
 
- stacked_and_pooled <- outcome_type == 'catg' && pool == 'yes'
-
  data_fig <- data_fig %>%
   split(
    by = ifelse(
-    test = stacked_and_pooled,
+    test = stacked_and_pooled || stacked_stratified_noexp,
     yes = outcome,
     no = exposure
    )
@@ -165,6 +174,8 @@ plotly_viz_worker <- function(data,
 
  }
 
+ # browser()
+
  for(i in seq_along(data_fig)){
 
   switch(
@@ -172,7 +183,6 @@ plotly_viz_worker <- function(data,
    geom,
 
    'bar' = {
-
 
     fig <- fig %>%
      add_trace(
@@ -189,15 +199,12 @@ plotly_viz_worker <- function(data,
       name = ifelse(
        test = outcome_type != 'catg' || stacked_and_pooled,
        yes = names(data_fig)[i],
-       no = data_fig[[i]][[outcome]]
+       no = as.character(data_fig[[i]][[outcome]])[1]
       ),
 
       hoverinfo = 'text',
       hovertext = data_fig[[i]]$hover
      )
-
-    if(outcome_type == 'catg') fig <- fig %>%
-      layout(barmode = 'stack')
 
    },
 
@@ -215,7 +222,6 @@ plotly_viz_worker <- function(data,
      )
 
    },
-
 
    'scatter' = {
 
@@ -242,6 +248,9 @@ plotly_viz_worker <- function(data,
   )
 
  }
+
+ if(geom == 'bar' && outcome_type == 'catg')
+  fig %<>% layout(barmode = 'stack')
 
  xaxis <- yaxis <- list()
 
