@@ -99,7 +99,7 @@ nhanes_recode <- function(data = NULL){
    riagendr = factor(
     riagendr,
     levels = 1:2,
-    labels = c("Women", "Men")
+    labels = c("Men", "Women")
    ),
 
    # race

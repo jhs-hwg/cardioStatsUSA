@@ -23,12 +23,13 @@ svy_design_new <- function(data,
 
  stopifnot(is.data.table(data))
 
- divide_by <- length(years)
 
  fctrs <- data %>%
   sapply(is.factor) %>%
   which() %>%
   names()
+
+ divide_by <- length(years)
 
  if(pool == 'no') divide_by <- 1
 
