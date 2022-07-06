@@ -1,15 +1,4 @@
-#' .. content for \description{} (no empty lines) ..
-#'
-#' .. content for \details{} ..
-#'
-#' @title
-#' @param data
-#' @param key
-#' @param outcome
-#' @param exposure
-#' @param stat_all
-#' @param statistic_primary
-#' @param geom
+
 plotly_viz <- function(data,
                        key,
                        outcome,
@@ -123,7 +112,7 @@ plotly_viz_worker <- function(data,
  data_hovertext <- data %>%
   plotly_viz_make_hover(
    stat_all = stat_all,
-   exposure = ifelse(stacked_stratified_noexp, outcome, exposure),
+   exposure = if(stacked_stratified_noexp) outcome else exposure,
    key = key
   )
 
@@ -151,14 +140,14 @@ plotly_viz_worker <- function(data,
 
  }
 
+ split_by <- if(stacked_and_pooled || stacked_stratified_noexp)
+   outcome
+ else
+  exposure
+
  data_fig <- data_fig %>%
-  split(
-   by = ifelse(
-    test = stacked_and_pooled || stacked_stratified_noexp,
-    yes = outcome,
-    no = exposure
-   )
-  )
+  .[order(x), env = list(x = split_by)] %>%
+  split(by = split_by)
 
  fig <- plot_ly(height = 600)
 

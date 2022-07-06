@@ -1,12 +1,4 @@
-#' .. content for \description{} (no empty lines) ..
-#'
-#' .. content for \details{} ..
-#'
-#' @title
-#' @param x
-#' @param outcome
-#' @param by_vars
-#' @param ...
+
 svy_statby_tidy_count <- function(x, outcome, by_vars, ...) {
 
  out_names <- names(x) %>%

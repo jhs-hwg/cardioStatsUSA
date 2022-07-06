@@ -1,11 +1,4 @@
-#' .. content for \description{} (no empty lines) ..
-#'
-#' .. content for \details{} ..
-#'
-#' @title
-#' @param outcome
-#' @param design
-#' @param ...
+
 svy_stat_percentage <- function(outcome, design, ...) {
 
 

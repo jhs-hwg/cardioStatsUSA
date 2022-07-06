@@ -1,8 +1,3 @@
-#' .. content for \description{} (no empty lines) ..
-#'
-#' .. content for \details{} ..
-#'
-#' @title
 
 plotly_viz_make_hover <- function(data, stat_all, exposure, key) {
 

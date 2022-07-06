@@ -1,10 +1,4 @@
-#' .. content for \description{} (no empty lines) ..
-#'
-#' .. content for \details{} ..
-#'
-#' @title
-#' @param stat_type
-#' @param stat_fun
+
 svy_stat_adorn <- function(x, stat_type, stat_fun) {
 
  x %>%

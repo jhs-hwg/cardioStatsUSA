@@ -1,12 +1,7 @@
-#' .. content for \description{} (no empty lines) ..
-#'
-#' .. content for \details{} ..
-#'
-#' @title start the app's engine.
 
 key_load <- function() {
 
- key_data <- fread(file.path(here(), 'data', 'nhanes_key.csv'))
+ key_data <- fread(file.path(here(), 'data-raw', 'nhanes_key.csv'))
 
  key_variables <- key_data %>%
   as_inline(tbl_variables = 'variable',
@@ -21,7 +16,7 @@ key_load <- function() {
     "ci_upper" = "Upper 95% CI")
 
  key_fctrs <-
-  read_rds(file.path('data', 'nhanes_shiny_fctrs.rds'))
+  readr::read_rds(file.path('data-raw', 'nhanes_shiny_fctrs.rds'))
 
 
  key_svy_funs <-
@@ -30,14 +25,14 @@ key_load <- function() {
             'quantile',
             'count',
             'percentage'),
-   svy_stat_fun = list(svy_stat_mean,
-                       svy_stat_quantile,
-                       svy_stat_count,
-                       svy_stat_percentage),
-   svy_statby_fun = list(svy_statby_mean,
-                         svy_statby_quantile,
-                         svy_statby_count,
-                         svy_statby_percentage)
+   svy_stat_fun = list('svy_stat_mean',
+                       'svy_stat_quantile',
+                       'svy_stat_count',
+                       'svy_stat_percentage'),
+   svy_statby_fun = list('svy_statby_mean',
+                         'svy_statby_quantile',
+                         'svy_statby_count',
+                         'svy_statby_percentage')
   ) %>%
   split(by = 'name') %>%
   map(unlist)
@@ -53,10 +48,23 @@ key_load <- function() {
              Count = 'count')
  )
 
+ key_variable_choices <- map(
+  .x = list(
+   outcome = key_data[outcome == TRUE, .(class, label, variable)],
+   exposure = key_data[exposure == TRUE, .(class, label, variable)],
+   subset = key_data[subset == TRUE, .(class, label, variable)],
+   group = key_data[group == TRUE, .(class, label, variable)]
+  ),
+  .f = ~ .x %>%
+   split(by = 'class', keep.by = FALSE) %>%
+   map(deframe)
+ )
+
 
  list(
   data = key_data,
   variables = key_variables,
+  variable_choices = key_variable_choices,
   recoder = key_recoder,
   fctrs = key_fctrs,
   svy_funs = key_svy_funs,

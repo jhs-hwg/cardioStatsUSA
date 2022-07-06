@@ -1,9 +1,4 @@
-#' .. content for \description{} (no empty lines) ..
-#'
-#' .. content for \details{} ..
-#'
-#' @title
-#' @param x
+
 svy_stat_tidy_quantile <- function(x, ...){
 
  x_data <- getElement(x, 1)

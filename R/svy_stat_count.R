@@ -1,11 +1,4 @@
-#' .. content for \description{} (no empty lines) ..
-#'
-#' .. content for \details{} ..
-#'
-#' @title
-#' @param x
-#' @param design
-#' @param ...
+
 svy_stat_count <- function(outcome, design, key, ...) {
 
  if(key$variables[[outcome]]$type == 'intg'){

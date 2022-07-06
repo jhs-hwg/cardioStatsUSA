@@ -4,6 +4,13 @@
 #'
 #' @param data nhanes data - should be recoded (see [nhanes_recode])
 #' @param years the years to be included in the analysis
+#' @param exposure the exposure variable
+#' @param n_exposure_group how many exposure groups? only applies to
+#'  continuous exposure variables
+#' @param exposure_cut_type how to cut the exposure groups? only applies to
+#'  continuous exposure variables.
+#' @param pool are the results pooled across multiple NHANES cycles?
+#'  if so, say 'yes', o.w. say 'no'
 #'
 #' @return a `svydesign` object
 #'

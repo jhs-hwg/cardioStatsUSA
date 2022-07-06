@@ -1,6 +1,6 @@
 
 
-# variable renaming: NEW NAME = ORIGINAL NAME
+
 nhanes_rename <- function(data){
 
  # in case this function is called before nhanes_recode()

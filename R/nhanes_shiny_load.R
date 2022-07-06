@@ -4,7 +4,7 @@
 nhanes_shiny_load <- function(){
 
  fpath_data <- here() %>%
-  file.path('data')
+  file.path('data-raw')
 
  if(!file.exists(file.path(fpath_data, 'nhanes_shiny.csv'))){
 

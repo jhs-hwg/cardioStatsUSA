@@ -1,9 +1,4 @@
-#' .. content for \description{} (no empty lines) ..
-#'
-#' .. content for \details{} ..
-#'
-#' @title
-#' @param x
+
 svy_stat_tidy_mean <- function(x, ...){
 
  x_ci <- confint(x)

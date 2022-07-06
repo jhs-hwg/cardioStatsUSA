@@ -1,9 +1,12 @@
-#' .. content for \description{} (no empty lines) ..
+
+#' standardize survey function outputs
 #'
-#' .. content for \details{} ..
+#' @param x output from one of the stat functions.
+#' @param outcome the outcome variable
+#' @param by_vars variables to stratify by
 #'
-#' @title
-#' @param svystat
+#' @return a data frame
+#'
 svy_stat_tidy <- function(x, outcome, by_vars) {
 
  tidy_fun <-  paste('svy', get_svy_stat_fun(x),

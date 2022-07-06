@@ -6,6 +6,6 @@ as_svy_formula <- function(x){
 
  x_collapse <- paste(x, collapse = ' + ')
 
- as.formula( paste("~", x_collapse))
+ stats::as.formula( paste("~", x_collapse))
 
 }

@@ -1,15 +1,4 @@
-#' .. content for \description{} (no empty lines) ..
-#'
-#' .. content for \details{} ..
-#'
-#' @title
-#' @param design
-#' @param outcome
-#' @param key_svy_funs
-#' @param time_var
-#' @param exposure
-#' @param group
-#' @param simplify_bnry_output
+
 svy_design_summarize <- function(
   design,
   outcome,
@@ -53,11 +42,12 @@ svy_design_summarize <- function(
     getElement(.x) %>%
     getElement(svy_stat_fun_type)
 
-   .out <- svy_stat_fun(outcome = outcome,
-                        by_vars = by_vars,
-                        design = design,
-                        key = key,
-                        quantiles = quantiles) %>%
+   .out <- do.call(what = svy_stat_fun,
+                   args = list(outcome = outcome,
+                               by_vars = by_vars,
+                               design = design,
+                               key = key,
+                               quantiles = quantiles)) %>%
     svy_stat_tidy(outcome = outcome,
                   by_vars = by_vars) %>%
     .[, outcome := NULL]

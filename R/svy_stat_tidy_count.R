@@ -1,11 +1,4 @@
-#' .. content for \description{} (no empty lines) ..
-#'
-#' .. content for \details{} ..
-#'
-#' @title
-#' @param x
-#' @param outcome
-#' @param by_vars
+
 svy_stat_tidy_count <- function(x, outcome, by_vars, ...){
 
  x_ci <- confint(x)

@@ -1,12 +1,4 @@
-#' .. content for \description{} (no empty lines) ..
-#'
-#' .. content for \details{} ..
-#'
-#' @title
-#' @param outcome
-#' @param by_vars
-#' @param design
-#' @param ...
+
 svy_statby_percentage <- function(outcome, by_vars, design, ...){
 
  if(is.integer(design$variables[[outcome]])){

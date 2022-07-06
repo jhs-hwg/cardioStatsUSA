@@ -1,0 +1,41 @@
+Package: nhanesShinyBP
+Title: Explore 20+ years of blood pressure data from NHANES
+Version: 0.0.0.9000
+Authors@R: 
+    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Description: Use a simple interface to generate summary data and figures
+  from the continuous NHANES exam, beginning in 1999-2000 and continuing 
+  through 2017-2020. Save your results, either in the form of a dataset
+  or as a figure saved to png format. All analyses account for the NHANES
+  design weights and are tested for equivalence with CDC statistics and 
+  reports.
+License: GPL (>= 3)
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
+Imports: 
+    arules,
+    data.table,
+    dplyr,
+    DT,
+    glue,
+    haven,
+    here,
+    magrittr,
+    plotly,
+    purrr,
+    rlang,
+    shiny,
+    shinyWidgets,
+    stringr,
+    survey,
+    table.glue,
+    tibble,
+    tidyr
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Depends: 
+    R (>= 2.10)
+LazyData: true

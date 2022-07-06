@@ -1,10 +1,10 @@
 
 
-#' recode categories of discrete variables in nhanes
+#' @title recode categories of discrete variables in nhanes
 #'
 #' instructions are taken from docs/instructions_NHANES.docx
 #'
-#' @param data if NULL, data are loaded with default routine nhanes_load
+#' @param data if NULL, data are loaded with `nhanes_load`
 #'
 nhanes_recode <- function(data = NULL){
 

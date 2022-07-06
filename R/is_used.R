@@ -1,8 +1,4 @@
-#' .. content for \description{} (no empty lines) ..
-#'
-#' .. content for \details{} ..
-#'
-#' @title
+
 
 is_used <- function(x = NULL) {
 
