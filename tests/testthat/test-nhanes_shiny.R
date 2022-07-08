@@ -2,9 +2,9 @@
 library(testthat)
 library(haven)
 
-test_that("nhanes_shiny data matches source data from SAS", {
+test_that("nhanes_bp data matches source data from SAS", {
 
- nhanes_shiny <- nhanes_bp
+ nhanes_bp <- nhanes_bp
 
  nhanes_sas <- here() %>%
   file.path('data-raw', 'small9920.sas7bdat') %>%
@@ -17,23 +17,23 @@ test_that("nhanes_shiny data matches source data from SAS", {
 
  # number of NAs should match:
 
- for(i in names(nhanes_shiny)){
+ for(i in names(nhanes_bp)){
 
   type <- nhanes_key[variable == i, type]
 
   expect_equal(sum(is.na(nhanes_sas[[i]])),
-               sum(is.na(nhanes_shiny[[i]])))
+               sum(is.na(nhanes_bp[[i]])))
 
   if(type %in% c('ctns', 'svy', 'intg') ){
 
    # these variable should be exactly the same
-   expect_equal(nhanes_sas[[i]], nhanes_shiny[[i]], ignore_attr = TRUE)
+   expect_equal(nhanes_sas[[i]], nhanes_bp[[i]], ignore_attr = TRUE)
 
   } else if(type %in% c('catg', 'bnry', 'time')){
 
    # categorical variables that were recoded should have same counts
    counts_sas   <- sort(table(nhanes_sas[[i]]))
-   counts_shiny <- sort(table(nhanes_shiny[[i]]))
+   counts_shiny <- sort(table(nhanes_bp[[i]]))
    expect_equal(counts_sas, counts_shiny, ignore_attr = TRUE)
 
   } else {

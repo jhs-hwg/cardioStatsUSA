@@ -300,6 +300,7 @@ app_run <- function(...) {
       )
      }
     )
+
    })
 
   observeEvent(input$outcome, {
@@ -489,7 +490,7 @@ app_run <- function(...) {
      pool = input$pool
     )
 
-   for(i in seq(n_exclusion_max)){
+   for(i in seq(as.integer(input$subset_n))){
 
     ss_var <- paste('subset_variable', i, sep = '_')
     ss_val <- paste('subset_value', i, sep = '_')

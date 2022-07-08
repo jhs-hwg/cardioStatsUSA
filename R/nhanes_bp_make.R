@@ -7,7 +7,7 @@
 #' @param write_data if `TRUE`, the file is written.
 #'   If `FALSE`, data are returned and no file is written.
 #'
-nhanes_shiny_make <- function(write_data = TRUE){
+nhanes_bp_make <- function(write_data = TRUE){
 
  nhanes_data <-
   nhanes_load(as = 'data.table') %>%
@@ -23,12 +23,12 @@ nhanes_shiny_make <- function(write_data = TRUE){
  write_rds(nhanes_fctrs,
            file.path(here(),
                      'data',
-                     'nhanes_shiny_fctrs.rds'))
+                     'nhanes_bp_fctrs.rds'))
 
  fwrite(nhanes_data,
         file.path(here(),
                   'data',
-                  'nhanes_shiny.csv'))
+                  'nhanes_bp.csv'))
 
  NULL
 

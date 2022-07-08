@@ -16,7 +16,7 @@ key_load <- function() {
     "ci_upper" = "Upper 95% CI")
 
  key_fctrs <-
-  readr::read_rds(file.path('data-raw', 'nhanes_shiny_fctrs.rds'))
+  readr::read_rds(file.path('data-raw', 'nhanes_bp_fctrs.rds'))
 
 
  key_svy_funs <-
