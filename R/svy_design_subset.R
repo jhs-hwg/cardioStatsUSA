@@ -11,17 +11,21 @@
 #'
 svy_design_subset <- function(
   design,
-  subset_var,
-  subset_values
+  subset_calls
 ){
 
- subset_values_collapsed <- subset_values %>%
-  paste(collapse = "\", \"")
-
- subset_expr <-
-  glue("{subset_var} %in% c(\"{subset_values_collapsed}\")") %>%
+ subset_arg <- map(
+  .x = subset_calls,
+  .f = paste,
+  collapse = "\", \""
+ ) %>%
+  map2_chr(
+   .y = names(subset_calls),
+   .f = ~ glue("{.y} %in% c(\"{.x}\")")
+  ) %>%
+  paste(collapse = ' & ') %>%
   parse_expr()
 
- do.call("subset", args = list(x = design, subset = subset_expr))
+ do.call("subset", args = list(x = design, subset = subset_arg))
 
 }

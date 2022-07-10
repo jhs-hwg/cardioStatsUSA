@@ -3,6 +3,14 @@
 library(shiny)
 
 
+#' Run the NHANES BP application
+#'
+#' @param ... currently not used
+#'
+#' @return runs a shiny application locally
+#'
+#' @export
+#'
 app_run <- function(...) {
 
  # User interface (UI) -----------------------------------------------------
@@ -139,7 +147,7 @@ app_run <- function(...) {
 
     pickerInput("subset_n",
                 "How many inclusions to make?",
-                choices = 1:5,
+                choices = 0:5,
                 selected = 1,
                 width = "95%"),
 
@@ -266,13 +274,38 @@ app_run <- function(...) {
      ~ {
 
       new_id <- paste('subset_variable', .x, sep = '_')
-      new_id_value <- paste('subset_value', .x, sep = '_')
+      new_id_val_catg <- paste('subset_value', .x, 'catg', sep = '_')
+      new_id_val_ctns <- paste('subset_value', .x, 'ctns', sep = '_')
+
+
+      jsc_ctns_subset_variable <- glue(
+       "input.{new_id}.length > 0 &
+             (input.{new_id} == 'demo_age_years' |
+              input.{new_id} == 'bp_sys_mean'    |
+              input.{new_id} == 'bp_dia_mean'    )")
 
       new_value_choices <- input[[new_id]] %||% character()
 
       if(!is_empty(new_value_choices)){
        new_value_choices <- levels(nhanes_bp[[new_value_choices]])
       }
+
+      new_min <- 0
+      new_max <- 0
+
+      if(!is.null(input[[new_id]])){
+
+       if(input[[new_id]] %in% c('demo_age_years',
+                                 'bp_sys_mean',
+                                 'bp_dia_mean')){
+
+        new_min <- nhanes_key$minimum_values[[ input[[new_id]] ]]
+        new_max <- nhanes_key$maximum_values[[ input[[new_id]] ]]
+
+       }
+
+      }
+
 
       tagList(
        pickerInput(
@@ -287,13 +320,29 @@ app_run <- function(...) {
 
        conditionalPanel(
         condition = as.character(
-         glue('input.{new_id}.length > 0')
+         glue('input.{new_id}.length > 0 & {jsc_ctns_subset_variable}')
+        ),
+        sliderInput(
+         inputId = new_id_val_ctns,
+         label = "Include values between the dots:",
+         min = new_min,
+         max = new_max,
+         value = isolate(input[[new_id_val_ctns]]) %||% c(0, 0),
+         ticks = FALSE,
+         step = 1,
+         width = '90%'
+        )
+       ),
+
+       conditionalPanel(
+        condition = as.character(
+         glue('input.{new_id}.length > 0 & !({jsc_ctns_subset_variable})')
         ),
         prettyCheckboxGroup(
-         inputId = new_id_value,
+         inputId = new_id_val_catg,
          label = 'Include these subsets:',
          choices = new_value_choices,
-         selected = isolate(input[[new_id_value]]) %||% character(),
+         selected = isolate(input[[new_id_val_catg]]) %||% character(),
          width = "95%"
         )
        )
@@ -331,7 +380,8 @@ app_run <- function(...) {
    for(i in seq(n_exclusion_max)){
 
     ss_var <- paste('subset_variable', i, sep = '_')
-    ss_val <- paste('subset_value', i, sep = '_')
+    ss_val_ctns <- paste('subset_value', i, 'ctns', sep = '_')
+    ss_val_catg <- paste('subset_value', i, 'catg', sep = '_')
 
     if(!is.null(input[[ss_var]])){
 
@@ -352,8 +402,14 @@ app_run <- function(...) {
       )
 
       updatePrettyCheckboxGroup(
-       inputId = ss_val,
+       inputId = ss_val_catg,
        selected = character(0)
+      )
+
+      updateSliderInput(
+       inputId = ss_val_ctns,
+       value = c(nhanes_key$minimum_values[[input[[ss_var]]]],
+                 nhanes_key$maximum_values[[input[[ss_var]]]])
       )
 
      }
@@ -383,17 +439,37 @@ app_run <- function(...) {
    .f = ~ {
 
     ss_var <- paste('subset_variable', .x, sep = '_')
-    ss_val <- paste('subset_value', .x, sep = '_')
+    ss_val_ctns <- paste('subset_value', .x, 'ctns', sep = '_')
+    ss_val_catg <- paste('subset_value', .x, 'catg', sep = '_')
 
     observeEvent(input[[ss_var]], {
 
-     updatePrettyCheckboxGroup(
-      inputId = ss_val,
-      choices =
-       levels(nhanes_bp[[ input[[ss_var]] ]]) %||%
-       sort(unique(na.omit(nhanes_bp[[ input[[ss_var]] ]]))),
-      selected = character(0) #subset_value_selected
-     )
+     ctns_subset_variable <- input[[ss_var]]  %in% c('demo_age_years',
+                                                     'bp_sys_mean',
+                                                     'bp_dia_mean')
+
+     if(ctns_subset_variable){
+
+      .min <- nhanes_key$minimum_values[[input[[ss_var]]]]
+      .max <- nhanes_key$maximum_values[[input[[ss_var]]]]
+
+      updateSliderInput(inputId = ss_val_ctns,
+                        min = .min,
+                        max = .max,
+                        value = c(.min, .max))
+
+     } else {
+
+      updatePrettyCheckboxGroup(
+       inputId = ss_val_catg,
+       choices =
+        levels(nhanes_bp[[ input[[ss_var]] ]]) %||%
+        sort(unique(na.omit(nhanes_bp[[ input[[ss_var]] ]]))),
+       selected = character(0) #subset_value_selected
+      )
+
+     }
+
 
      if(!is.null(input$outcome)){
 
@@ -481,6 +557,34 @@ app_run <- function(...) {
 
   smry <- reactive({
 
+   # as.integer b/c subset_n is a character value
+   for(i in seq(as.integer(input$subset_n))){
+
+    ss_var <- paste('subset_variable', i, sep = '_')
+    ss_val_ctns <- paste('subset_value', i, 'ctns', sep = '_')
+    ss_val_catg <- paste('subset_value', i, 'catg', sep = '_')
+
+    if(is_continuous(input[[ss_var]], key = nhanes_key)){
+
+     # need to create the subsetting variables based on continuous
+     # cut-points before creating the design object. Doing this
+     # in the reverse order won't work b/c survey doesn't let you
+     # modify the design object's data.
+     nhanes_bp <- nhanes_bp %>%
+      .[,
+        y := fifelse(x >= a & x <= b, 'yes', 'no'),
+        env = list(
+         a = input[[ss_val_ctns]][1],
+         b = input[[ss_val_ctns]][2],
+         x = input[[ss_var]],
+         y = paste(input[[ss_var]], 'tmp', sep='_')
+        )
+      ]
+
+    }
+
+   }
+
    ds <- nhanes_bp %>%
     svy_design_new(
      exposure = input$exposure,
@@ -490,18 +594,31 @@ app_run <- function(...) {
      pool = input$pool
     )
 
+   subset_calls <- list()
+
    for(i in seq(as.integer(input$subset_n))){
 
     ss_var <- paste('subset_variable', i, sep = '_')
-    ss_val <- paste('subset_value', i, sep = '_')
+    ss_val_ctns <- paste('subset_value', i, 'ctns', sep = '_')
+    ss_val_catg <- paste('subset_value', i, 'catg', sep = '_')
 
-    if(is_used(input[[ss_var]]) && !is_empty(input[[ss_val]])){
+    if(is_used(input[[ss_var]]) &&
+       (!is_empty(input[[ss_val_catg]]) |
+         !all( input[[ss_val_ctns]] == input[[ss_val_ctns]][1]))){
 
-     ds %<>% svy_design_subset(input[[ss_var]], input[[ss_val]])
+     subset_calls[[ input[[ss_var]] ]] <- input[[ss_val_catg]]
+
+     if(is_continuous(input[[ss_var]], key = nhanes_key)){
+
+      subset_calls[[ paste(input[[ss_var]], 'tmp', sep='_') ]] <- "yes"
+
+     }
 
     }
 
    }
+
+   ds %<>% svy_design_subset(subset_calls)
 
    svy_design_summarize(
     design = ds,

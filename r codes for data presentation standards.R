@@ -1,0 +1,69 @@
+
+###############Data presentation standards for proportions########################
+###############Data presentation standards for proportions########################
+
+mutate(df=Npsu-Nstrata,
+p=percent/100,
+sep=stderr/100,
+q=1-p,
+df_flag=ifelse(df<8, 1, 0),
+n_eff = ifelse((0 < p < 1), (p*(1-p))/(sep**2), Nobs),
+n_eff = ifelse((is.na(n_eff) | n_eff > Nobs), Nobs, n_eff),
+
+#Korn and Graubard CI absolute width:
+kg_wdth=(uppercl - lowercl)/100,
+
+#create proportions and frequencies with confidence intervals
+pct=format(round((percent), digits=1), nsmall=1),
+lci=format(round((lowercl), digits=1), nsmall=1),
+uci=format(round((uppercl), digits=1), nsmall=1),
+
+CI_prop=glue("{pct}% ({lci}, {uci})"),
+
+freq=format(round((WgtFreq), digits=1), nsmall=1),
+freqlci=format(round((LowerCLWgtFreq), digits=1), nsmall=1),
+frequci=format(round((UpperCLWgtFreq), digits=1), nsmall=1),
+
+CI_wgtfreq=glue("{freq}% ({freqlci}, {frequci})"),
+
+#*Korn and Graubard CI relative width for p
+kg_relw_p=ifelse(p > 0, 100*(kg_wdth/p), NA),
+
+#*Korn and Graubard CI relative width for q
+kg_relw_q=ifelse(q > 0, 100*(kg_wdth/q), NA),
+
+#Proportions with CI width <= 0.05 are reliable, unless:
+#if Effective sample size is less than 30, then not reliable;
+#if Absolute CI width is greater than or equal 0.30, then not reliable;
+#if Relative CI width is greater than 130% , then not reliable;
+p_reliable=ifelse(n_eff < 30 | kg_wdth >= 0.30 | (kg_relw_p > 130 & kg_wdth > 0.05 & kg_wdth < 0.3), 0, 1),
+
+#Determine if estimate should be flagged as having an unreliable complement;
+#Complementary proportions are reliable, unless Relative CI width is greater than 130% ;
+q_reliable=ifelse(p_reliable==1 & kg_relw_q > 130 & kg_wdth > 0.05 & kg_wdth < 0.3, 0, 1),
+
+#Estimates with df < 8 or percents = 0 or 100 or unreliable complement are flagged for statistical review;
+p_staistical=ifelse(p_reliable=1 & (df_flag==1 | p==0 | p==1 | q_reliable==0), 1, 0),
+
+#create the finalized proportions with confidence intervals, with the value suppressed if p_reliable==0
+CI_final=ifelse(p_reliable==0, NA, CI_prop))
+
+
+###############Data presentation standards for means########################
+###############Data presentation standards for means########################
+
+#Calculate realtive standard error:
+mutate(rse=round(StdErr/Mean,digits = 2),
+
+# if rse>=.3 then p_reliable=0;
+p_reliable=ifelse(rse>=0.3, 0, 1),
+
+#create means with confidence intervals
+means=format(round((mean), digits=1), nsmall=1),
+se=format(round((StdErr), digits=1), nsmall=1),
+
+CI_mean=glue("{means} ({se})"),
+
+#create the finalized means with confidence intervals, with the value suppressed if p_reliable==0
+CI_final=ifelse(p_reliable==0, NA, CI_mean))
+

@@ -18,6 +18,17 @@ key_load <- function() {
  key_fctrs <-
   readr::read_rds(file.path('data-raw', 'nhanes_bp_fctrs.rds'))
 
+ key_minimum_value <- nhanes_bp %>%
+  select(all_of(key_data$variable[key_data$type == 'ctns'])) %>%
+  map(min, na.rm = TRUE) %>%
+  map(floor) %>%
+  map(as.integer)
+
+ key_maximum_value <- nhanes_bp %>%
+  select(all_of(key_data$variable[key_data$type == 'ctns'])) %>%
+  map(max, na.rm = TRUE) %>%
+  map(ceiling) %>%
+  map(as.integer)
 
  key_svy_funs <-
   data.table(
@@ -65,6 +76,8 @@ key_load <- function() {
   data = key_data,
   variables = key_variables,
   variable_choices = key_variable_choices,
+  minimum_values = key_minimum_value,
+  maximum_values = key_maximum_value,
   recoder = key_recoder,
   fctrs = key_fctrs,
   svy_funs = key_svy_funs,
