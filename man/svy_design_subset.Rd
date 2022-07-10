@@ -4,7 +4,7 @@
 \alias{svy_design_subset}
 \title{subset a svy design object}
 \usage{
-svy_design_subset(design, subset_var, subset_values)
+svy_design_subset(design, subset_calls)
 }
 \arguments{
 \item{design}{A survey design object.}

@@ -163,7 +163,6 @@ plotly_viz_worker <- function(data,
 
  }
 
- # browser()
 
  for(i in seq_along(data_fig)){
 
@@ -238,6 +237,8 @@ plotly_viz_worker <- function(data,
 
  }
 
+ # browser()
+
  if(geom == 'bar' && outcome_type == 'catg')
   fig %<>% layout(barmode = 'stack')
 
@@ -267,6 +268,13 @@ plotly_viz_worker <- function(data,
  }
 
  if(stacked_and_pooled) title_addon <- levels(data[[key$time_var]])
+
+ if(stacked_and_pooled && !exposure_used){
+  tick_vals <- unique(as.numeric(data[[key$time_var]]))
+  xaxis$tickvals <- tick_vals
+  xaxis$ticktext <- levels(data[[key$time_var]])[tick_vals]
+  xaxis$tickmode <- 'array'
+ }
 
  fig_title <-  paste(c(key$variables[[outcome]]$label, title_addon),
                      collapse = '<br>')

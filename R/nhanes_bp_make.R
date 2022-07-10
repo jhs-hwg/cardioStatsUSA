@@ -7,30 +7,24 @@
 #' @param write_data if `TRUE`, the file is written.
 #'   If `FALSE`, data are returned and no file is written.
 #'
-nhanes_bp_make <- function(write_data = TRUE){
+nhanes_bp_make <- function(){
 
  nhanes_data <-
   nhanes_load(as = 'data.table') %>%
   nhanes_recode() %>%
   nhanes_rename()
 
- if(!write_data) return(nhanes_data)
-
  nhanes_fctrs <- nhanes_data %>%
   select(where(is.factor)) %>%
   map(levels)
 
- write_rds(nhanes_fctrs,
-           file.path(here(),
-                     'data',
-                     'nhanes_bp_fctrs.rds'))
+ readr::write_rds(nhanes_fctrs,
+                  file.path(here::here(),
+                            'data',
+                            'nhanes_bp_fctrs.rds'))
 
- fwrite(nhanes_data,
-        file.path(here(),
-                  'data',
-                  'nhanes_bp.csv'))
 
- NULL
+ nhanes_data
 
 }
 

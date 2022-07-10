@@ -13,17 +13,16 @@ svy_design_summarize <- function(
 
  time_var <- ifelse(pool_svy_years, 'None', key$time_var)
 
- if(is.null(exposure) || is_empty(exposure)) exposure <- 'None'
- if(is.null(group) || is_empty(group)) group <- 'None'
+ if(!is_used(exposure)) exposure <- 'None'
+ if(!is_used(group)) group <- 'None'
 
- by_vars <- c(time_var, exposure, group) %>%
+ by_vars <- c(time_var,
+              exposure,
+              group) %>%
   setdiff('None')
 
- svy_stat_fun_type <- ifelse(
-  is_empty(by_vars),
-  'svy_stat_fun',
-  'svy_statby_fun'
- )
+ svy_stat_fun_type <- is_empty(by_vars) %>%
+  ifelse('svy_stat_fun', 'svy_statby_fun')
 
  key_svy_calls <- key$svy_calls[[key$variables[[outcome]]$type]]
 
@@ -57,10 +56,10 @@ svy_design_summarize <- function(
 
     setnames(.out, old = 'level', new = outcome)
 
-    lvls <- key$fctrs[[outcome]]
+    lvls <- levels(design$variables[[outcome]])
 
-    if(is_empty(lvls) || is.null(lvls))
-     lvls <- sort(unique(design$variables[[outcome]]))
+    # if(is_empty(lvls) || is.null(lvls))
+    #  lvls <- sort(unique(design$variables[[outcome]]))
 
     .out[, x := factor(x, levels = lvls), env = list(x = outcome)]
 
@@ -68,14 +67,16 @@ svy_design_summarize <- function(
 
    if(exposure != 'None'){
 
-    lvls <- key$fctrs[[exposure]]
+    lvls <- levels(design$variables[[exposure]])
+
     .out[, x := factor(x, levels = lvls), env = list(x = exposure)]
 
    }
 
    if(group != 'None'){
 
-    lvls <- key$fctrs[[group]]
+    lvls <- levels(design$variables[[group]])
+
     .out[, x := factor(x, levels = lvls), env = list(x = group)]
 
    }

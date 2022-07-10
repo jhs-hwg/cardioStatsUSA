@@ -14,6 +14,8 @@ svy_design_subset <- function(
   subset_calls
 ){
 
+ if(is_empty(subset_calls)) return(design)
+
  subset_arg <- map(
   .x = subset_calls,
   .f = paste,

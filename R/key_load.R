@@ -15,9 +15,6 @@ key_load <- function() {
     "ci_lower" = "Lower 95% CI",
     "ci_upper" = "Upper 95% CI")
 
- key_fctrs <-
-  readr::read_rds(file.path('data-raw', 'nhanes_bp_fctrs.rds'))
-
  key_minimum_value <- nhanes_bp %>%
   select(all_of(key_data$variable[key_data$type == 'ctns'])) %>%
   map(min, na.rm = TRUE) %>%
@@ -79,7 +76,6 @@ key_load <- function() {
   minimum_values = key_minimum_value,
   maximum_values = key_maximum_value,
   recoder = key_recoder,
-  fctrs = key_fctrs,
   svy_funs = key_svy_funs,
   svy_calls = key_svy_calls,
   time_var = key_data[type == 'time', variable]

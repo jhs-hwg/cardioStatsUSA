@@ -4,7 +4,7 @@
 \alias{nhanes_bp_make}
 \title{make the data used in shiny app}
 \usage{
-nhanes_bp_make(write_data = TRUE)
+nhanes_bp_make()
 }
 \arguments{
 \item{write_data}{if \code{TRUE}, the file is written.

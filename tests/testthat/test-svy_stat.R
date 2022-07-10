@@ -16,8 +16,6 @@ nhanes_bp_test <- nhanes_bp %>%
 
 nhanes_key_test <- nhanes_key
 
-nhanes_key_test$fctrs$demo_age_cat <- c("18-39", "40-59", "60+")
-
 exposure <- 'demo_age_cat'
 
 design <- nhanes_bp_test %>%
@@ -28,10 +26,10 @@ design <- nhanes_bp_test %>%
   years = "2015-2016",
   pool = 'yes'
  ) %>%
- svy_design_subset(subset_var = 'demo_pregnant',
-                   subset_values = 'No')
+ svy_design_subset(subset_calls = list(demo_pregnant = 'No'))
 
 # up to 1/2% of a difference in prevalence estimate is acceptable
+# (our cohorts aren't exactly the same)
 diff_tolerance <- 0.5
 
 # SOURCE: https://www.cdc.gov/nchs/data/databriefs/db289.pdf, Figure 1

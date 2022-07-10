@@ -18,7 +18,7 @@ Blood pressure,Blood pressure control (ACC/AHA 2017 defn),bp_control_accaha,bnry
 Antihypertensive medication,Antihypertensive medication use,bp_med_use,bnry,TRUE,TRUE,TRUE,TRUE
 Antihypertensive medication,Antihypertensive medications recommended by JNC7,bp_med_recommended_jnc7,bnry,FALSE,TRUE,TRUE,TRUE
 Antihypertensive medication,Antihypertensive medications recommended by ACC/AHA 2017,bp_med_recommended_accaha,bnry,FALSE,TRUE,TRUE,TRUE
-Antihypertensive medication,Number of antihypertensive medication classes,bp_med_n_class,intg,TRUE,TRUE,TRUE,TRUE
+Antihypertensive medication,Number of antihypertensive medication classes,bp_med_n_class,catg,TRUE,TRUE,TRUE,TRUE
 Hypertension,Hypertension (JNC7 defn),htn_jnc7,bnry,TRUE,TRUE,TRUE,TRUE
 Hypertension,Hypertension (ACC/AHA 2017 defn),htn_accaha,bnry,TRUE,TRUE,TRUE,TRUE
 Hypertension,Awareness of hypertension,htn_aware,bnry,TRUE,TRUE,TRUE,TRUE

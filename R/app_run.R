@@ -102,7 +102,7 @@ app_run <- function(...) {
      choices = nhanes_key$variable_choices$outcome,
      selected = NULL,
      multiple = TRUE,
-     options = pickerOptions(maxOptions = 1),
+     options = pickerOptions(maxOptions = 1, liveSearch = TRUE),
      width = "95%"
     ),
 
@@ -146,9 +146,14 @@ app_run <- function(...) {
     ),
 
     pickerInput("subset_n",
-                "How many inclusions to make?",
-                choices = 0:5,
-                selected = 1,
+                "How many exclusions to make?",
+                choices = c("None" = 0,
+                            "One" = 1,
+                            "Two" = 2,
+                            "Three" = 3,
+                            "Four" = 4,
+                            "Five" = 5),
+                selected = "None",
                 width = "95%"),
 
     uiOutput("subset_ui"),
@@ -322,15 +327,17 @@ app_run <- function(...) {
         condition = as.character(
          glue('input.{new_id}.length > 0 & {jsc_ctns_subset_variable}')
         ),
-        sliderInput(
-         inputId = new_id_val_ctns,
-         label = "Include values between the dots:",
-         min = new_min,
-         max = new_max,
-         value = isolate(input[[new_id_val_ctns]]) %||% c(0, 0),
-         ticks = FALSE,
-         step = 1,
-         width = '90%'
+        suppressWarnings(
+         sliderInput(
+          inputId = new_id_val_ctns,
+          label = "Include values between the dots:",
+          min = new_min,
+          max = new_max,
+          value = isolate(input[[new_id_val_ctns]]) %||% c(0, 0),
+          ticks = FALSE,
+          step = 1,
+          width = '90%'
+         )
         )
        ),
 
@@ -557,14 +564,23 @@ app_run <- function(...) {
 
   smry <- reactive({
 
+   subset_indices <- c()
+
+   if(input$subset_n > 0){
    # as.integer b/c subset_n is a character value
-   for(i in seq(as.integer(input$subset_n))){
+    subset_indices <- seq(as.integer(input$subset_n))
+   }
+
+   for(i in subset_indices){
 
     ss_var <- paste('subset_variable', i, sep = '_')
-    ss_val_ctns <- paste('subset_value', i, 'ctns', sep = '_')
-    ss_val_catg <- paste('subset_value', i, 'catg', sep = '_')
 
-    if(is_continuous(input[[ss_var]], key = nhanes_key)){
+    if(is_used(input[[ss_var]])){
+
+     ss_val_ctns <- paste('subset_value', i, 'ctns', sep = '_')
+     ss_val_catg <- paste('subset_value', i, 'catg', sep = '_')
+
+     if(is_continuous(input[[ss_var]], key = nhanes_key)){
 
      # need to create the subsetting variables based on continuous
      # cut-points before creating the design object. Doing this
@@ -583,6 +599,9 @@ app_run <- function(...) {
 
     }
 
+    }
+
+
    }
 
    ds <- nhanes_bp %>%
@@ -596,25 +615,30 @@ app_run <- function(...) {
 
    subset_calls <- list()
 
-   for(i in seq(as.integer(input$subset_n))){
+   for(i in subset_indices){
 
     ss_var <- paste('subset_variable', i, sep = '_')
-    ss_val_ctns <- paste('subset_value', i, 'ctns', sep = '_')
-    ss_val_catg <- paste('subset_value', i, 'catg', sep = '_')
 
-    if(is_used(input[[ss_var]]) &&
-       (!is_empty(input[[ss_val_catg]]) |
-         !all( input[[ss_val_ctns]] == input[[ss_val_ctns]][1]))){
+    if(is_used(input[[ss_var]])){
 
-     subset_calls[[ input[[ss_var]] ]] <- input[[ss_val_catg]]
+     ss_val_ctns <- paste('subset_value', i, 'ctns', sep = '_')
+     ss_val_catg <- paste('subset_value', i, 'catg', sep = '_')
 
-     if(is_continuous(input[[ss_var]], key = nhanes_key)){
+     if(!is_empty(input[[ss_val_catg]]) | !all(input[[ss_val_ctns]] == 0)){
 
-      subset_calls[[ paste(input[[ss_var]], 'tmp', sep='_') ]] <- "yes"
+      subset_calls[[ input[[ss_var]] ]] <- input[[ss_val_catg]]
+
+      if(is_continuous(input[[ss_var]], key = nhanes_key)){
+
+       subset_calls[[ paste(input[[ss_var]], 'tmp', sep='_') ]] <- "yes"
+
+      }
 
      }
 
     }
+
+
 
    }
 

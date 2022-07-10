@@ -115,6 +115,20 @@ nhanes_recode <- function(data = NULL){
     )
    ),
 
+   # number of BP medication classes
+   num_htn_class = factor(
+    num_htn_class,
+    levels = 0:7,
+    labels = c("None",
+               "One",
+               "Two",
+               "Three",
+               "Four",
+               "Five or more",
+               "Five or more",
+               "Five or more")
+   ),
+
    # tricky ones...
    across(
     .cols = c(diabetes,
