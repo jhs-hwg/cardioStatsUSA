@@ -50,11 +50,13 @@ svy_design_new <- function(data,
 
   # .[, (fctrs) := lapply(.SD, fctr_dots_add), .SDcols = fctrs]
 
- svydesign(ids = ~ svy_psu,
-           strata = ~ svy_strata,
-           weights = ~ svy_weight,
-           data = data_design,
-           nest = TRUE)
+ design <- svydesign(ids = ~ svy_psu,
+                     strata = ~ svy_strata,
+                     weights = ~ svy_weight,
+                     data = data_design,
+                     nest = TRUE)
+
+ design
 
 }
 

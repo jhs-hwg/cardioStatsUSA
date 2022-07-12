@@ -110,7 +110,7 @@ nhanes_recode <- function(data = NULL){
      "non-Hispanic White",
      "non-Hispanic Black",
      "non-Hispanic Asian",
-     "Hispanic ",
+     "Hispanic",
      "Other"
     )
    ),
@@ -123,10 +123,10 @@ nhanes_recode <- function(data = NULL){
                "One",
                "Two",
                "Three",
-               "Four",
-               "Five or more",
-               "Five or more",
-               "Five or more")
+               "Four or more",
+               "Four or more",
+               "Four or more",
+               "Four or more")
    ),
 
    # tricky ones...

@@ -8,7 +8,9 @@ svy_design_summarize <- function(
   group = NULL,
   pool_svy_years = FALSE,
   simplify_bnry_output = TRUE,
-  quantiles = c(0.25, 0.50, 0.75)
+  quantiles = c(0.25, 0.50, 0.75),
+  age_standardize = FALSE,
+  age_wts = c(0.155, 0.454, 0.215, 0.177)
 ){
 
  time_var <- ifelse(pool_svy_years, 'None', key$time_var)
@@ -20,6 +22,25 @@ svy_design_summarize <- function(
               exposure,
               group) %>%
   setdiff('None')
+
+ if(age_standardize){
+
+  over <- by_vars %>%
+   setdiff('demo_age_cat') %>%
+   as_svy_formula()
+
+  exclude_miss <- c(outcome, by_vars) %>%
+   setdiff('demo_age_cat') %>%
+   as_svy_formula()
+
+  design <- svystandardize(by = ~ demo_age_cat,
+                           over = over,
+                           design = design,
+                           population = age_wts,
+                           excluding.missing = exclude_miss)
+
+
+ }
 
  svy_stat_fun_type <- is_empty(by_vars) %>%
   ifelse('svy_stat_fun', 'svy_statby_fun')

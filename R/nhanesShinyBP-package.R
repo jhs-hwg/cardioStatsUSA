@@ -23,6 +23,6 @@
 #' @importFrom shinyWidgets pickerInput pickerOptions prettyCheckboxGroup
 #' @importFrom shinyWidgets actionGroupButtons sliderTextInput
 #' @importFrom shinyWidgets radioGroupButtons updatePrettyCheckboxGroup
-#' @importFrom shinyWidgets updatePickerInput
+#' @importFrom shinyWidgets updatePickerInput awesomeCheckbox
 ## usethis namespace: end
 NULL

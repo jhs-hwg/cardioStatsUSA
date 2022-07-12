@@ -51,6 +51,13 @@ app_run <- function(...) {
      width = "95%"
     ),
 
+    awesomeCheckbox(
+     inputId = "age_standardize",
+     label = "Age-adjustment by standardization?",
+     value = TRUE,
+     status = "success"
+    ),
+
     pickerInput(
      inputId = "pool",
      label = "Pool results or stratify by cycle?",
@@ -651,7 +658,8 @@ app_run <- function(...) {
     user_calls = input$statistic,
     exposure = input$exposure,
     group = input$group,
-    pool_svy_years = input$pool == 'yes'
+    pool_svy_years = input$pool == 'yes',
+    age_standardize = input$age_standardize
    )
 
   }) %>%
