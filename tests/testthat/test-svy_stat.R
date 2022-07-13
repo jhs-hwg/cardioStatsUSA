@@ -18,7 +18,6 @@ nhanes_bp_test <- nhanes_bp %>%
   !(is.na(bp_dia_mean) & is.na(bp_sys_mean))
  )
 
-
 exposure <- 'demo_age_cat'
 
 design <- nhanes_bp_test %>%
