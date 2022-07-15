@@ -4,9 +4,9 @@
 #'
 #' @param design A survey design object.
 #'
-#' @param subset_var (_character_[length 1]) the variable to subset with.
+#' @param subset_var (_character_(length 1)) the variable to subset with.
 #'
-#' @param subset_values (_character_[length 1+]) the values of the subset
+#' @param subset_values (_character_(length 1+)) the values of the subset
 #'   variable that will be retained.
 #'
 svy_design_subset <- function(
