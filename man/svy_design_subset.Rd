@@ -9,9 +9,9 @@ svy_design_subset(design, subset_calls)
 \arguments{
 \item{design}{A survey design object.}
 
-\item{subset_var}{(\emph{character}\link{length 1}) the variable to subset with.}
+\item{subset_var}{(\emph{character}(length 1)) the variable to subset with.}
 
-\item{subset_values}{(\emph{character}\link{length 1+}) the values of the subset
+\item{subset_values}{(\emph{character}(length 1+)) the values of the subset
 variable that will be retained.}
 }
 \description{

@@ -242,7 +242,10 @@ plotly_viz_worker <- function(data,
  if(geom == 'bar' && outcome_type == 'catg')
   fig %<>% layout(barmode = 'stack')
 
- xaxis <- yaxis <- list()
+ xaxis <- yaxis <- list(showgrid = FALSE,
+                        showline = TRUE)
+
+ yaxis$ticks = "outside"
 
  if(geom == 'scatter'){
   tick_vals <- unique(as.numeric(data[[key$time_var]]))
@@ -298,7 +301,7 @@ plotly_viz_worker <- function(data,
   layout(
    title = list(
     text = fig_title,
-    x = 0.1
+    x = 0.5
    ),
    font = list(size = 16),
    margin = list(

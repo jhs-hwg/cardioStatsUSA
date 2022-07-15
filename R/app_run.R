@@ -31,6 +31,30 @@ app_run <- function(...) {
 
     HTML('<br>'), HTML('<br>'),
 
+    conditionalPanel(
+     condition = compute_ready(),
+     actionButton(
+      inputId =  "run",
+      label = "Compute results",
+      icon = icon("cog"),
+      width = "90%",
+      style = "color: #fff; background-color: #337ab7; border-color: #2e6da4"
+     )
+    ),
+
+    conditionalPanel(
+     condition = paste("!(", compute_ready(), ")", sep = ''),
+     actionButton(
+      inputId =  "wont_do_computation",
+      label = "Compute results",
+      icon = icon("cog"),
+      width = "90%",
+      style = "color: #fff; background-color: #808080; border-color: #2e6da4"
+     )
+    ),
+
+    HTML('<br>'),
+
     pickerInput(
      inputId = "do",
      label = "How to present results?",
@@ -47,7 +71,7 @@ app_run <- function(...) {
       )
      ),
      multiple = FALSE,
-     selected = 'data',
+     selected = 'figure',
      width = "95%"
     ),
 
@@ -210,37 +234,15 @@ app_run <- function(...) {
      multiple = TRUE,
      options = pickerOptions(maxOptions = 1),
      width = "95%"
-    ),
-
-    conditionalPanel(
-     condition = compute_ready(),
- actionButton(
-  inputId =  "run",
-  label = "Compute results",
-  icon = icon("cog"),
-  width = "90%",
-  style = "color: #fff; background-color: #337ab7; border-color: #2e6da4"
- )
-    ),
-
- conditionalPanel(
-  condition = paste("!(", compute_ready(), ")", sep = ''),
-  actionButton(
-   inputId =  "wont_do_computation",
-   label = "Compute results",
-   icon = icon("cog"),
-   width = "90%",
-   style = "color: #fff; background-color: #808080; border-color: #2e6da4"
-  )
- )
+    )
 
    ),
 
- # Main panel --------------------------------------------------------------
- mainPanel(
-  DTOutput('explore_output'),
-  uiOutput("visualize_output")
- )
+   # Main panel --------------------------------------------------------------
+   mainPanel(
+    DTOutput('explore_output'),
+    uiOutput("visualize_output")
+   )
 
   )
 
@@ -355,7 +357,7 @@ app_run <- function(...) {
         prettyCheckboxGroup(
          inputId = new_id_val_catg,
          label = 'Include these subsets:',
-         choices = new_value_choices,
+         choices = c(new_value_choices, 'Missing'),
          selected = isolate(input[[new_id_val_catg]]) %||% character(),
          width = "95%"
         )
@@ -474,11 +476,18 @@ app_run <- function(...) {
 
      } else {
 
+      miss_add <- NULL
+
+      if(any(is.na(nhanes_bp[[ input[[ss_var]] ]]))){
+       miss_add <- "Missing"
+      }
+
       updatePrettyCheckboxGroup(
        inputId = ss_val_catg,
        choices =
         levels(nhanes_bp[[ input[[ss_var]] ]]) %||%
-        sort(unique(na.omit(nhanes_bp[[ input[[ss_var]] ]]))),
+        sort(unique(na.omit(nhanes_bp[[ input[[ss_var]] ]]))) %>%
+        c(miss_add),
        selected = character(0) #subset_value_selected
       )
 
@@ -574,7 +583,7 @@ app_run <- function(...) {
    subset_indices <- c()
 
    if(input$subset_n > 0){
-   # as.integer b/c subset_n is a character value
+    # as.integer b/c subset_n is a character value
     subset_indices <- seq(as.integer(input$subset_n))
    }
 
@@ -589,29 +598,29 @@ app_run <- function(...) {
 
      if(is_continuous(input[[ss_var]], key = nhanes_key)){
 
-     # need to create the subsetting variables based on continuous
-     # cut-points before creating the design object. Doing this
-     # in the reverse order won't work b/c survey doesn't let you
-     # modify the design object's data.
-     nhanes_bp <- nhanes_bp %>%
-      .[,
-        y := fifelse(x >= a & x <= b, 'yes', 'no'),
-        env = list(
-         a = input[[ss_val_ctns]][1],
-         b = input[[ss_val_ctns]][2],
-         x = input[[ss_var]],
-         y = paste(input[[ss_var]], 'tmp', sep='_')
-        )
-      ]
+      # need to create the subsetting variables based on continuous
+      # cut-points before creating the design object. Doing this
+      # in the reverse order won't work b/c survey doesn't let you
+      # modify the design object's data.
+      nhanes_bp <- nhanes_bp %>%
+       .[,
+         y := fifelse(x >= a & x <= b, 'yes', 'no'),
+         env = list(
+          a = input[[ss_val_ctns]][1],
+          b = input[[ss_val_ctns]][2],
+          x = input[[ss_var]],
+          y = paste(input[[ss_var]], 'tmp', sep='_')
+         )
+       ]
 
-    }
+     }
 
     }
 
 
    }
 
-   ds <- nhanes_bp %>%
+   ds <- nhanes_bp[svy_subpop == 1] %>%
     svy_design_new(
      exposure = input$exposure,
      n_exposure_group = as.numeric(input$n_exposure_group),

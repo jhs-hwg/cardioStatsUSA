@@ -12,7 +12,8 @@
 #'
 #' @noRd
 #'
-nhanes_load <- function(as = 'tibble', fname = 'small9920.sas7bdat'){
+nhanes_load <- function(as = 'tibble',
+                        fname = 'small9920_07142022v2.sas7bdat'){
 
  if(!file.exists(file.path(here::here(), 'data-raw', fname))){
   stop("the file \'", fname, "\' could not be found in data-raw/\n",
@@ -21,7 +22,7 @@ nhanes_load <- function(as = 'tibble', fname = 'small9920.sas7bdat'){
  }
 
  data_in <- haven::read_sas(
-  file.path(here::here(), 'data-raw', 'small9920.sas7bdat')
+  file.path(here::here(), 'data-raw', fname)
  )
 
  switch(
