@@ -31,6 +31,30 @@ app_run <- function(...) {
 
     HTML('<br>'), HTML('<br>'),
 
+    conditionalPanel(
+     condition = compute_ready(),
+     actionButton(
+      inputId =  "run",
+      label = "Compute results",
+      icon = icon("cog"),
+      width = "90%",
+      style = "color: #fff; background-color: #337ab7; border-color: #2e6da4"
+     )
+    ),
+
+    conditionalPanel(
+     condition = paste("!(", compute_ready(), ")", sep = ''),
+     actionButton(
+      inputId =  "wont_do_computation",
+      label = "Compute results",
+      icon = icon("cog"),
+      width = "90%",
+      style = "color: #fff; background-color: #808080; border-color: #2e6da4"
+     )
+    ),
+
+    HTML('<br>'),
+
     pickerInput(
      inputId = "do",
      label = "How to present results?",
@@ -210,28 +234,6 @@ app_run <- function(...) {
      multiple = TRUE,
      options = pickerOptions(maxOptions = 1),
      width = "95%"
-    ),
-
-    conditionalPanel(
-     condition = compute_ready(),
-     actionButton(
-      inputId =  "run",
-      label = "Compute results",
-      icon = icon("cog"),
-      width = "90%",
-      style = "color: #fff; background-color: #337ab7; border-color: #2e6da4"
-     )
-    ),
-
-    conditionalPanel(
-     condition = paste("!(", compute_ready(), ")", sep = ''),
-     actionButton(
-      inputId =  "wont_do_computation",
-      label = "Compute results",
-      icon = icon("cog"),
-      width = "90%",
-      style = "color: #fff; background-color: #808080; border-color: #2e6da4"
-     )
     )
 
    ),
