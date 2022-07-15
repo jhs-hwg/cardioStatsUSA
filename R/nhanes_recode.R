@@ -16,6 +16,9 @@ nhanes_recode <- function(data = NULL){
  data %>%
   mutate(
 
+   # temporary
+   newwt = wtmec2yr,
+
    # Blood pressure ----
 
    # BP categories according to the 2017 ACC/AHA BP guideline

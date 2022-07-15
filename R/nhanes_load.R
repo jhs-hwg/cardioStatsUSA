@@ -21,7 +21,7 @@ nhanes_load <- function(as = 'tibble', fname = 'small9920.sas7bdat'){
  }
 
  data_in <- haven::read_sas(
-  file.path(here::here(), 'data-raw', 'small9920.sas7bdat')
+  file.path(here::here(), 'data-raw', 'small9920_07142022v2.sas7bdat')
  )
 
  switch(

@@ -19,6 +19,7 @@ Imports:
     data.table,
     dplyr,
     DT,
+    forcats,
     glue,
     haven,
     here,

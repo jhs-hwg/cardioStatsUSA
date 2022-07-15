@@ -19,6 +19,7 @@ nhanes_rename <- function(data){
   svy_psu    = sdmvpsu,
   svy_strata = sdmvstra,
   svy_year   = surveyyr,
+  svy_subpop = subpophtn,
 
   # Demographics ------------------------------------------------------------
   demo_age_cat   = agecat4,
