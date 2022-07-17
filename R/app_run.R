@@ -17,7 +17,20 @@ app_run <- function(...) {
 
  ui <- fluidPage(
 
-  titlePanel("NHANES BP"),
+  introjsUI(),
+
+  introBox(
+   titlePanel("NHANES BP"),
+   data.step = 1,
+   data.intro = paste(
+    "This application analyzes blood pressure from",
+    "1999 through 2020 using data from the National Health and",
+    "Nutrition Examination Survey (NHANES). It includes survey",
+    "participants who attended their NHANES interview and examination,",
+    "who provided information on antihypertensive medication use, and",
+    "who had complete data on systolic and diastolic blood pressure."
+   )
+  ),
 
   sidebarLayout(
 
@@ -27,70 +40,157 @@ app_run <- function(...) {
     actionButton(inputId = "help",
                  "Press for instructions",
                  icon = icon("question"),
-                 width = "90%"),
+                 width = "100%"),
 
     HTML('<br>'), HTML('<br>'),
 
-    conditionalPanel(
-     condition = compute_ready(),
-     actionButton(
-      inputId =  "run",
-      label = "Compute results",
-      icon = icon("cog"),
-      width = "90%",
-      style = "color: #fff; background-color: #337ab7; border-color: #2e6da4"
-     )
-    ),
+    introBox(
+     conditionalPanel(
+      condition = compute_ready(),
+      actionButton(
+       inputId =  "run",
+       label = "Compute results",
+       icon = icon("cog"),
+       width = "100%",
+       style = "color: #fff; background-color: #337ab7; border-color: #2e6da4"
+      )
+     ),
 
-    conditionalPanel(
-     condition = paste("!(", compute_ready(), ")", sep = ''),
-     actionButton(
-      inputId =  "wont_do_computation",
-      label = "Compute results",
-      icon = icon("cog"),
-      width = "90%",
-      style = "color: #fff; background-color: #808080; border-color: #2e6da4"
+     conditionalPanel(
+      condition = paste("!(", compute_ready(), ")", sep = ''),
+      actionButton(
+       inputId =  "wont_do_computation",
+       label = "Compute results",
+       icon = icon("cog"),
+       width = "100%",
+       style = "color: #fff; background-color: #808080; border-color: #2e6da4"
+      )
+     ),
+     data.step = 2,
+     data.intro = paste(
+      "If this button is blue, all the required inputs have been filled in",
+      "and you can generate results by clicking the button. If it is grey,",
+      "at least one required input is unspecified. Required inputs are:",
+      "(1) How to present results,",
+      "(2) Pool results or stratify by cycle,",
+      "(3) select cycles to include,",
+      "(4) Select an outcome, and",
+      "(5) Statistic(s) to compute. Remember that you need to press",
+      "this button to make things appear in the main window AND to update",
+      "the results that you see in the main window."
      )
     ),
 
     HTML('<br>'),
 
-    pickerInput(
-     inputId = "do",
-     label = "How to present results?",
-     choices = c(
-      "As a dataset" = 'data',
-      "As a table" = 'table',
-      "As a figure" = 'figure'
+    introBox(
+     pickerInput(
+      inputId = "do",
+      label = "How to present results?",
+      choices = c(
+       "As a dataset" = 'data',
+       # "As a table" = 'table',
+       "As a figure" = 'figure'
+      ),
+      choicesOpt = list(
+       icon = c(
+        "glyphicon-list",
+        "glyphicon-tasks",
+        "glyphicon-stats"
+       )
+      ),
+      multiple = FALSE,
+      selected = 'figure',
+      width = "100%"
      ),
-     choicesOpt = list(
-      icon = c(
-       "glyphicon-list",
-       "glyphicon-tasks",
-       "glyphicon-stats"
+     data.step = 3,
+     data.intro = paste(
+      "You can select whether to generate a table with summary data",
+      "or a figure that visualizes the summary data. Both options",
+      "give output that can be saved and used outside of the application."
+     )
+    ),
+
+    introBox(
+
+     awesomeCheckbox(
+      inputId = "age_standardize",
+      label = "Age-adjustment by standardization?",
+      value = TRUE,
+      status = "primary"
+     ),
+
+     introBox(
+      conditionalPanel(
+       condition = "input.age_standardize == true",
+       h5("Weights for each age group (must be >0)"),
+
+       introBox(
+        splitLayout(
+         numericInput(inputId="age_wts_1",
+                      label="18-44",
+                      value = 15.5,
+                      min = 5),
+         numericInput(inputId="age_wts_2",
+                      label="45-64",
+                      value = 45.4,
+                      min = 5),
+         numericInput(inputId="age_wts_3",
+                      label="65-74",
+                      value = 21.5,
+                      min = 5),
+         numericInput(inputId="age_wts_4",
+                      label="75+",
+                      value = 17.7,
+                      min = 5),
+         cellWidths = "24.25%"
+        ),
+        data.step = 6,
+        data.intro = paste(
+         "IMPORTANT: each weight value for each age group should be >0.",
+         "If any of them aren't, then the app won't do age standardization.",
+         "Do they have to add up to 100? No, but it is more interpretable",
+         "if they do."
+        )
+
+       )
+
+      ),
+      data.step = 5,
+      data.intro = paste(
+       "Default weights are from doi:10.1001/jama.2020.14545,",
+       "with the standard being all adults with hypertension",
+       "across 1999 through 2018"
       )
      ),
-     multiple = FALSE,
-     selected = 'figure',
-     width = "95%"
+     data.step = 4,
+     data.intro = paste(
+      "Adjustment for age with direct standardization can be used",
+      "if you want to examine age-adjusted trends over time.",
+      "To opt-out of age-adjustment, uncheck the age-adjustment box."
+     )
     ),
 
-    awesomeCheckbox(
-     inputId = "age_standardize",
-     label = "Age-adjustment by standardization?",
-     value = TRUE,
-     status = "success"
-    ),
+    introBox(
 
-    pickerInput(
-     inputId = "pool",
-     label = "Pool results or stratify by cycle?",
-     choices = c("Pool results" = "yes",
-                 "Stratify by cycle" = "no"),
-     selected = "stratify",
-     multiple = TRUE,
-     options = pickerOptions(maxOptions = 1),
-     width = "95%"
+     pickerInput(
+      inputId = "pool",
+      label = "Pool results or stratify by cycle?",
+      choices = c("Pool results" = "yes",
+                  "Stratify by cycle" = "no"),
+      selected = "no",
+      multiple = TRUE,
+      options = pickerOptions(maxOptions = 1),
+      width = "100%"
+     ),
+
+     data.step = 7,
+     data.intro = paste(
+      "To look at results over time, select 'stratify by cycle'.",
+      "To stack all of the data together and summarize a contiguous",
+      "time period of your choice, select 'pool results'"
+     )
+
     ),
 
     conditionalPanel(
@@ -101,16 +201,17 @@ app_run <- function(...) {
       inline = TRUE,
       selected = NULL,
       choices = levels(nhanes_bp[[nhanes_key$time_var]]),
-      width = "95%"
+      width = "100%"
      ),
      actionGroupButtons(
       inputIds = c('select_all_years',
                    'select_last_5',
                    'deselect_all_years'),
-      labels = c("All",
+      labels = c("All cycles",
                  "Last 5",
                  "None"),
-      status = 'info'
+      status = 'primary',
+      fullwidth = TRUE
      ),
      HTML("<br>"),
      HTML("<br>")
@@ -123,20 +224,28 @@ app_run <- function(...) {
       label = "Choose a range of cycles to pool:",
       choices = levels(nhanes_bp[[nhanes_key$time_var]]),
       selected = levels(nhanes_bp[[nhanes_key$time_var]])[c(6, 10)],
-      width = "90%"
+      width = "100%"
      )
     ),
 
-    pickerInput(
-     inputId = 'outcome',
-     label = 'Select an outcome',
-     choices = nhanes_key$variable_choices$outcome,
-     selected = NULL,
-     multiple = TRUE,
-     options = pickerOptions(maxOptions = 1, liveSearch = TRUE),
-     width = "95%"
+    introBox(
+     pickerInput(
+      inputId = 'outcome',
+      label = 'Select an outcome',
+      choices = nhanes_key$variable_choices$outcome,
+      selected = NULL,
+      multiple = TRUE,
+      options = pickerOptions(maxOptions = 1, liveSearch = TRUE),
+      width = "100%"
+     ),
+     data.step = 8,
+     data.intro = paste(
+      "the 'outcome' variable will be summarized in your results.",
+      "Once you select an outcome, a set of possible statistics to compute",
+      "will appear below this box. Also, if you are creating a figure, you",
+      "will be asked to pick a primary statistic to present in your figure."
+     )
     ),
-
 
     conditionalPanel(
      condition = 'input.outcome.length > 0',
@@ -145,58 +254,78 @@ app_run <- function(...) {
       label = glue('Select statistic(s) to compute'),
       choices = character(),
       selected = NULL,
-      width = "95%"
+      width = "100%"
      )
     ),
 
     conditionalPanel(
      "input.do == 'figure'",
-     pickerInput(
+     radioGroupButtons(
       inputId = 'geom',
       label = 'Select a plotting geometry',
-      choices = c("Bars" = "bar",
-                  "Points" = "scatter"),
+      choices = c("Bars" = "bar", "Points" = "scatter"),
       selected = "bar",
-      multiple = TRUE,
-      options = pickerOptions(maxOptions = 1),
-      width = "95%"
+      status = "primary",
+      width = "100%",
+      justified = TRUE,
+      checkIcon = list(yes = icon("ok", lib = "glyphicon"))
      )
+
     ),
 
     conditionalPanel(
-     "input.outcome.length > 0 &
-    (input.do == 'figure' | input.do == 'table')",
-    pickerInput(
-     inputId = 'statistic_primary',
-     label = 'Select a primary statistic',
-     choices = character(),
-     multiple = TRUE,
-     options = pickerOptions(maxOptions = 1),
-     width = "95%"
-    )
+     "input.outcome.length > 0 & (input.do == 'figure' | input.do == 'table')",
+     pickerInput(
+      inputId = 'statistic_primary',
+      label = 'Select a primary statistic',
+      choices = character(),
+      multiple = TRUE,
+      options = pickerOptions(maxOptions = 1),
+      width = "100%"
+     )
     ),
 
-    pickerInput("subset_n",
-                "How many exclusions to make?",
-                choices = c("None" = 0,
-                            "One" = 1,
-                            "Two" = 2,
-                            "Three" = 3,
-                            "Four" = 4,
-                            "Five" = 5),
-                selected = "None",
-                width = "95%"),
+    introBox(
+     pickerInput("subset_n",
+                 "How many exclusions to make?",
+                 choices = c("None" = 0,
+                             "One" = 1,
+                             "Two" = 2,
+                             "Three" = 3,
+                             "Four" = 4,
+                             "Five" = 5),
+                 selected = "None",
+                 width = "100%"),
+     data.step = 9,
+     data.intro = paste(
+      "You may restrict the analysis to subsets of survey participants using",
+      "exclusions. For each exclusion you request (up to 5), an additional",
+      "box will appear to select a variable that will define the exclusion.",
+      "When you select the variable, possible groups to include will appear."
+     )
+    ),
+
 
     uiOutput("subset_ui"),
 
-    pickerInput(
-     inputId = 'exposure',
-     label = 'Select an exposure',
-     choices = nhanes_key$variable_choices$exposure,
-     selected = NULL,
-     multiple = TRUE,
-     options = pickerOptions(maxOptions = 1),
-     width = "95%"
+    introBox(
+     pickerInput(
+      inputId = 'exposure',
+      label = 'Select an exposure',
+      choices = nhanes_key$variable_choices$exposure,
+      selected = NULL,
+      multiple = TRUE,
+      options = pickerOptions(maxOptions = 1),
+      width = "100%"
+     ),
+     data.step = 10,
+     data.intro = paste(
+      "Summarized values of the outcome will be presented among groups",
+      "defined by the 'exposure' variable. If you just want to look at",
+      "the outcome in the overall US population, don't select an exposure.",
+      "If you have already selected something, you can click it again to",
+      "deselect it."
+     )
     ),
 
     conditionalPanel(
@@ -211,7 +340,7 @@ app_run <- function(...) {
       selected = character(),
       multiple = TRUE,
       options = pickerOptions(maxOptions = 1),
-      width = "95%"
+      width = "100%"
      ),
 
      radioGroupButtons(
@@ -220,20 +349,34 @@ app_run <- function(...) {
       choices = c("Equal intervals" = 'interval',
                   "Equal size" = 'frequency'),
       justified = TRUE,
-      width = "90%",
+      width = "100%",
       checkIcon = list(
        yes = icon("ok", lib = "glyphicon"))
      )
     ),
 
-    pickerInput(
-     inputId = 'group',
-     label = 'Select a stratifying variable',
-     choices = nhanes_key$variable_choices$group,
-     selected = NULL,
-     multiple = TRUE,
-     options = pickerOptions(maxOptions = 1),
-     width = "95%"
+    introBox(
+
+     pickerInput(
+      inputId = 'group',
+      label = 'Select a stratifying variable',
+      choices = nhanes_key$variable_choices$group,
+      selected = NULL,
+      multiple = TRUE,
+      options = pickerOptions(maxOptions = 1),
+      width = "100%"
+     ),
+
+     data.step = 11,
+     data.intro = paste(
+      "You may compute results in different populations using the 'stratify'",
+      "variable. The difference between the 'stratifying' variable and the",
+      "'exposure' variable is that the stratifying variable creates one output",
+      "per group, while the exposure variable creates one output that contains",
+      "results for each group.",
+      "(Some exceptions apply for outcome variables with >2 categories)"
+     )
+
     )
 
    ),
@@ -329,7 +472,7 @@ app_run <- function(...) {
         selected = isolate(input[[new_id]]) %||% character(),
         multiple = TRUE,
         options = pickerOptions(maxOptions = 1),
-        width = "95%"
+        width = "100%"
        ),
 
        conditionalPanel(
@@ -345,7 +488,7 @@ app_run <- function(...) {
           value = isolate(input[[new_id_val_ctns]]) %||% c(0, 0),
           ticks = FALSE,
           step = 1,
-          width = '90%'
+          width = '100%'
          )
         )
        ),
@@ -359,7 +502,7 @@ app_run <- function(...) {
          label = 'Include these subsets:',
          choices = c(new_value_choices, 'Missing'),
          selected = isolate(input[[new_id_val_catg]]) %||% character(),
-         width = "95%"
+         width = "100%"
         )
        )
       )
@@ -668,7 +811,13 @@ app_run <- function(...) {
     exposure = input$exposure,
     group = input$group,
     pool_svy_years = input$pool == 'yes',
-    age_standardize = input$age_standardize
+    age_standardize = input$age_standardize,
+    age_wts = c(
+     input$age_wts_1,
+     input$age_wts_2,
+     input$age_wts_3,
+     input$age_wts_4
+    )
    )
 
   }) %>%
@@ -737,6 +886,10 @@ app_run <- function(...) {
     output$explore_output <- DT::renderDataTable(dt_explore(), server = FALSE)
    }
   )
+
+  # start introjs when button is pressed with custom options and events
+  observeEvent(input$help, introjs(session))
+
  }
 
  # Calling shinyapp --------------------------------------------------------

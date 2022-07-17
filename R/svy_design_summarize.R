@@ -23,6 +23,10 @@ svy_design_summarize <- function(
               group) %>%
   setdiff('None')
 
+ if(length(age_wts) != 4 || any(age_wts == 0)){
+  age_standardize <- FALSE
+ }
+
  if(age_standardize){
 
   over <- by_vars %>%

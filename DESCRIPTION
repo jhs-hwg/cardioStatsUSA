@@ -25,6 +25,7 @@ Imports:
     magrittr,
     plotly,
     purrr,
+    rintrojs,
     rlang,
     shiny,
     shinyWidgets,
