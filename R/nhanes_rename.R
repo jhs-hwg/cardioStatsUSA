@@ -44,6 +44,9 @@ nhanes_rename <- function(data){
   bp_control_jnc7           = jnc7_control,
   bp_control_accaha         = accaha_control,
 
+  dplyr::any_of(c("bp_uncontrolled_jnc7",
+                  "bp_uncontrolled_accaha")),
+
   # Hypertension ------------------------------------------------------------
   htn_jnc7             = jnc7htn,
   htn_accaha           = accahahtn,

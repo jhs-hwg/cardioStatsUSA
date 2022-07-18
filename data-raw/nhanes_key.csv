@@ -3,6 +3,7 @@ Survey,participant identifier,svy_id,svy,FALSE,FALSE,FALSE,FALSE
 Survey,sample weight,svy_weight,svy,FALSE,FALSE,FALSE,FALSE
 Survey,primary sampling unit,svy_psu,svy,FALSE,FALSE,FALSE,FALSE
 Survey,strata,svy_strata,svy,FALSE,FALSE,FALSE,FALSE
+Survey,Subpopulation for hypertension,svy_subpop,svy,FALSE,FALSE,FALSE,FALSE
 Survey,NHANES cycle,svy_year,time,FALSE,FALSE,FALSE,FALSE
 Demographics,"Age category, years",demo_age_cat,catg,FALSE,TRUE,TRUE,TRUE
 Demographics,Race,demo_race,catg,FALSE,TRUE,TRUE,TRUE
@@ -15,6 +16,8 @@ Blood pressure,Blood pressure category (not including antihypertensive medicatio
 Blood pressure,Blood pressure category (including antihypertensive medication use),bp_cat_meds_included,catg,TRUE,TRUE,TRUE,TRUE
 Blood pressure,Blood pressure control (SBP < 140 mm Hg and DBP < 90 mm Hg),bp_control_jnc7,bnry,TRUE,TRUE,TRUE,TRUE
 Blood pressure,Blood pressure control (SBP < 130 mm Hg and DBP < 80 mm Hg),bp_control_accaha,bnry,TRUE,TRUE,TRUE,TRUE
+Blood pressure,Uncontrolled blood pressure  (SBP >= 140 mm Hg or DBP >= 90 mm Hg),bp_uncontrolled_jnc7,bnry,TRUE,TRUE,TRUE,TRUE
+Blood pressure,Uncontrolled blood pressure  (SBP >= 130 mm Hg or DBP >= 80 mm Hg),bp_uncontrolled_accaha,bnry,TRUE,TRUE,TRUE,TRUE
 Antihypertensive medication,Self-reported antihypertensive medication use,bp_med_use,bnry,TRUE,TRUE,TRUE,TRUE
 Antihypertensive medication,Antihypertensive medications recommended by JNC7,bp_med_recommended_jnc7,bnry,FALSE,TRUE,TRUE,TRUE
 Antihypertensive medication,Antihypertensive medications recommended by ACC/AHA 2017,bp_med_recommended_accaha,bnry,FALSE,TRUE,TRUE,TRUE
@@ -22,7 +25,7 @@ Antihypertensive medication,Number of antihypertensive medication classes,bp_med
 Hypertension,Hypertension (JNC7 guideline definition),htn_jnc7,bnry,TRUE,TRUE,TRUE,TRUE
 Hypertension,Hypertension (2017 ACC/AHA blood pressure guideline definition),htn_accaha,bnry,TRUE,TRUE,TRUE,TRUE
 Hypertension,Awareness of hypertension,htn_aware,bnry,TRUE,TRUE,TRUE,TRUE
-Hypertension,Resistant hypertension - JNC7 guideline definition,htn_resistant_jnc7,bnry,TRUE,TRUE,TRUE,TRUE
+Hypertension,Resistant hypertension – JNC7 guideline definition,htn_resistant_jnc7,bnry,TRUE,TRUE,TRUE,TRUE
 Hypertension,Resistant hypertension – 2017 ACC/AHA BP guideline definition,htn_resistant_accaha,bnry,TRUE,TRUE,TRUE,TRUE
 Comorbidities,Smoking status,cc_smoke,catg,FALSE,TRUE,TRUE,TRUE
 Comorbidities,"Body mass index, kg/m2",cc_bmi,catg,TRUE,TRUE,TRUE,TRUE

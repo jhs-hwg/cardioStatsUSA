@@ -23,6 +23,7 @@ Imports:
     haven,
     here,
     magrittr,
+    pkgload,
     plotly,
     purrr,
     rintrojs,

@@ -23,7 +23,8 @@ svy_design_summarize <- function(
               group) %>%
   setdiff('None')
 
- if(length(age_wts) != 4 || any(age_wts == 0)){
+ if(length(age_wts) != length(levels(design$variables$demo_age_cat)) ||
+    any(age_wts == 0)){
   age_standardize <- FALSE
  }
 
@@ -86,7 +87,9 @@ svy_design_summarize <- function(
     # if(is_empty(lvls) || is.null(lvls))
     #  lvls <- sort(unique(design$variables[[outcome]]))
 
-    .out[, x := factor(x, levels = lvls), env = list(x = outcome)]
+    .out[[outcome]] <- factor(.out[[outcome]], levels = lvls)
+
+    # .out[, x := factor(x, levels = lvls), env = list(x = outcome)]
 
    }
 
@@ -94,7 +97,9 @@ svy_design_summarize <- function(
 
     lvls <- levels(design$variables[[exposure]])
 
-    .out[, x := factor(x, levels = lvls), env = list(x = exposure)]
+    .out[[exposure]] <- factor(.out[[exposure]], levels = lvls)
+
+    # .out[, x := factor(x, levels = lvls), env = list(x = exposure)]
 
    }
 
@@ -102,7 +107,8 @@ svy_design_summarize <- function(
 
     lvls <- levels(design$variables[[group]])
 
-    .out[, x := factor(x, levels = lvls), env = list(x = group)]
+    .out[[group]] <- factor(.out[[group]], levels = lvls)
+    # .out[, x := factor(x, levels = lvls), env = list(x = group)]
 
    }
 

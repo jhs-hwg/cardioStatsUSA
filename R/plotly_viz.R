@@ -23,10 +23,17 @@ plotly_viz <- function(data,
    exposure_label <- key$variables[[exposure]]$label
    env <- list(g = group, e = exposure)
 
-   data <- data %>%
-    .[, e := paste(exposure_label, e, sep = ' = '), env = env] %>%
-    .[, g := paste(g, e, sep = '; '), env = env] %>%
-    .[, e := NULL, env = env]
+   data[[exposure]] <- paste(exposure_label, data[[exposure]], sep = ' = ')
+
+   data[[group]] <- paste(data[[group]],
+                          data[[exposure]],
+                          sep = '; ')
+   data[[exposure]] <- NULL
+
+   # data <- data %>%
+   #  .[, e := paste(exposure_label, e, sep = ' = '), env = env] %>%
+   #  .[, g := paste(g, e, sep = '; '), env = env] %>%
+   #  .[, e := NULL, env = env]
 
    exposure <- NULL
 
@@ -47,8 +54,14 @@ plotly_viz <- function(data,
 
  }
 
- if(outcome_type == 'bnry')
-  data <- data[x == 'Yes', env = list(x = outcome)]
+ if(outcome_type == 'bnry'){
+
+  rows <- which(data[[outcome]] == 'Yes')
+  data <- data[rows, ]
+
+  # data <- data[x == 'Yes', env = list(x = outcome)]
+
+ }
 
  if(is_used(group)){
 
@@ -146,8 +159,12 @@ plotly_viz_worker <- function(data,
   exposure
 
  data_fig <- data_fig %>%
-  .[order(x), env = list(x = split_by)] %>%
+  setorderv(cols = split_by) %>%
   split(by = split_by)
+
+ # data_fig <- data_fig %>%
+ #  .[order(x), env = list(x = split_by)] %>%
+ #  split(by = split_by)
 
  fig <- plot_ly(height = 600)
 
@@ -262,7 +279,8 @@ plotly_viz_worker <- function(data,
    getElement('variables') %>%
    getElement(ifelse(stacked_and_pooled, outcome, exposure)) %>%
    getElement('label') %>%
-   str_replace_all(" ", "\n")
+   strwrap(width = 30) %>%
+   paste(collapse = '\n')
 
   legend_args$title <- list(
    text = glue("<b>{legend_title}</b>")

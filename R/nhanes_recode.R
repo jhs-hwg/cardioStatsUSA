@@ -68,6 +68,9 @@ nhanes_recode <- function(data = NULL){
     )
    ),
 
+   bp_uncontrolled_jnc7 = -1 * (jnc7_control-1),
+   bp_uncontrolled_accaha = -1 * (accaha_control-1),
+
    across(
     .cols = c(jnc7htn,
               accahahtn,
@@ -77,10 +80,13 @@ nhanes_recode <- function(data = NULL){
               newgdltx,
               jnc7_control,
               accaha_control,
+              bp_uncontrolled_jnc7,
+              bp_uncontrolled_accaha,
               rht_jnc7,
               rht_accaha),
     .fns = ~ factor(.x, labels = c("No", "Yes"))
    ),
+
 
 
 
@@ -110,9 +116,9 @@ nhanes_recode <- function(data = NULL){
     race_wbaho,
     levels = 1:5,
     labels = c(
-     "non-Hispanic White",
-     "non-Hispanic Black",
-     "non-Hispanic Asian",
+     "Non-Hispanic White",
+     "Non-Hispanic Black",
+     "Non-Hispanic Asian",
      "Hispanic",
      "Other"
     )

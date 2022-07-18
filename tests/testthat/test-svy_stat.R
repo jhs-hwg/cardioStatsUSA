@@ -1,7 +1,7 @@
 
 
 # Test our app's answers for prevalence of hypertension  ---------------------
-# Cohort: non-pregnant adults aged 18 and over,
+# Cohort: Non-pregnant adults aged 18 and over,
 # By: sex and age
 # Years: 2015-2016
 
@@ -92,17 +92,17 @@ for(i in seq(nrow(test_results))){
 
 test_data <- tribble(
  ~demo_race,          ~demo_gender, ~estimate, ~std_error,
- "non-Hispanic White", "Total",      27.8,      1.4,
- "non-Hispanic Black", "Total",      40.3,      2.0,
- "non-Hispanic Asian", "Total",      25.0,      1.7,
+ "Non-Hispanic White", "Total",      27.8,      1.4,
+ "Non-Hispanic Black", "Total",      40.3,      2.0,
+ "Non-Hispanic Asian", "Total",      25.0,      1.7,
  "Hispanic",           "Total",      27.8,      1.4,
- "non-Hispanic White", "Men",        29.7,      2.1,
- "non-Hispanic Black", "Men",        40.6,      2.2,
- "non-Hispanic Asian", "Men",        28.7,      2.6,
+ "Non-Hispanic White", "Men",        29.7,      2.1,
+ "Non-Hispanic Black", "Men",        40.6,      2.2,
+ "Non-Hispanic Asian", "Men",        28.7,      2.6,
  "Hispanic",           "Men",        27.3,      2.0,
- "non-Hispanic White", "Women",      25.6,      1.4,
- "non-Hispanic Black", "Women",      39.9,      2.1,
- "non-Hispanic Asian", "Women",      21.9,      2.2,
+ "Non-Hispanic White", "Women",      25.6,      1.4,
+ "Non-Hispanic Black", "Women",      39.9,      2.1,
+ "Non-Hispanic Asian", "Women",      21.9,      2.2,
  "Hispanic",           "Women",      28.0,      1.2
 ) %>%
  mutate(demo_race = factor(demo_race,
@@ -263,26 +263,26 @@ jama_etable_1 <- tribble(
  "2013-2014", "Male"              ,  72.6    ,  67.5    ,  77.8    ,
  "2015-2016", "Male"              ,  66.5    ,  61.1    ,  71.8    ,
  "2017-2018", "Male"              ,  67.1    ,  62.5    ,  71.8    ,
- "1999-2000", "non_Hispanic_White",  57.3    ,  51.9    ,  62.8    ,
- "2001-2002", "non_Hispanic_White",  61.3    ,  57.2    ,  65.4    ,
- "2003-2004", "non_Hispanic_White",  65.1    ,  60.6    ,  69.6    ,
- "2005-2006", "non_Hispanic_White",  67.1    ,  62.9    ,  71.2    ,
- "2007-2008", "non_Hispanic_White",  71.0    ,  68.3    ,  73.7    ,
- "2009-2010", "non_Hispanic_White",  73.4    ,  70.7    ,  76.1    ,
- "2011-2012", "non_Hispanic_White",  72.3    ,  68.5    ,  76.2    ,
- "2013-2014", "non_Hispanic_White",  75.4    ,  70.4    ,  80.4    ,
- "2015-2016", "non_Hispanic_White",  70.4    ,  65.6    ,  75.2    ,
- "2017-2018", "non_Hispanic_White",  68.2    ,  63.5    ,  72.9    ,
- "1999-2000", "non_Hispanic_Black",  44.3    ,  37.1    ,  51.5    ,
- "2001-2002", "non_Hispanic_Black",  48.6    ,  45.7    ,  51.6    ,
- "2003-2004", "non_Hispanic_Black",  55.6    ,  49.0    ,  62.2    ,
- "2005-2006", "non_Hispanic_Black",  57.9    ,  51.9    ,  63.9    ,
- "2007-2008", "non_Hispanic_Black",  61.1    ,  56.7    ,  65.6    ,
- "2009-2010", "non_Hispanic_Black",  60.1    ,  56.0    ,  64.1    ,
- "2011-2012", "non_Hispanic_Black",  64.2    ,  58.9    ,  69.4    ,
- "2013-2014", "non_Hispanic_Black",  60.4    ,  54.4    ,  66.5    ,
- "2015-2016", "non_Hispanic_Black",  58.1    ,  53.0    ,  63.2    ,
- "2017-2018", "non_Hispanic_Black",  53.2    ,  47.5    ,  58.9    ,
+ "1999-2000", "Non_Hispanic_White",  57.3    ,  51.9    ,  62.8    ,
+ "2001-2002", "Non_Hispanic_White",  61.3    ,  57.2    ,  65.4    ,
+ "2003-2004", "Non_Hispanic_White",  65.1    ,  60.6    ,  69.6    ,
+ "2005-2006", "Non_Hispanic_White",  67.1    ,  62.9    ,  71.2    ,
+ "2007-2008", "Non_Hispanic_White",  71.0    ,  68.3    ,  73.7    ,
+ "2009-2010", "Non_Hispanic_White",  73.4    ,  70.7    ,  76.1    ,
+ "2011-2012", "Non_Hispanic_White",  72.3    ,  68.5    ,  76.2    ,
+ "2013-2014", "Non_Hispanic_White",  75.4    ,  70.4    ,  80.4    ,
+ "2015-2016", "Non_Hispanic_White",  70.4    ,  65.6    ,  75.2    ,
+ "2017-2018", "Non_Hispanic_White",  68.2    ,  63.5    ,  72.9    ,
+ "1999-2000", "Non_Hispanic_Black",  44.3    ,  37.1    ,  51.5    ,
+ "2001-2002", "Non_Hispanic_Black",  48.6    ,  45.7    ,  51.6    ,
+ "2003-2004", "Non_Hispanic_Black",  55.6    ,  49.0    ,  62.2    ,
+ "2005-2006", "Non_Hispanic_Black",  57.9    ,  51.9    ,  63.9    ,
+ "2007-2008", "Non_Hispanic_Black",  61.1    ,  56.7    ,  65.6    ,
+ "2009-2010", "Non_Hispanic_Black",  60.1    ,  56.0    ,  64.1    ,
+ "2011-2012", "Non_Hispanic_Black",  64.2    ,  58.9    ,  69.4    ,
+ "2013-2014", "Non_Hispanic_Black",  60.4    ,  54.4    ,  66.5    ,
+ "2015-2016", "Non_Hispanic_Black",  58.1    ,  53.0    ,  63.2    ,
+ "2017-2018", "Non_Hispanic_Black",  53.2    ,  47.5    ,  58.9    ,
  "1999-2000", "Hispanic"          ,  48.8    ,  39.3    ,  58.3    ,
  "2001-2002", "Hispanic"          ,  61.7    ,  51.0    ,  72.4    ,
  "2003-2004", "Hispanic"          ,  54.5    ,  40.9    ,  68.1    ,
@@ -293,10 +293,10 @@ jama_etable_1 <- tribble(
  "2013-2014", "Hispanic"          ,  68.9    ,  61.8    ,  75.9    ,
  "2015-2016", "Hispanic"          ,  65.0    ,  58.8    ,  71.2    ,
  "2017-2018", "Hispanic"          ,  58.2    ,  48.7    ,  67.7    ,
- "2011-2012", "non_Hispanic_Asian",  72.5    ,  62.3    ,  82.6    ,
- "2013-2014", "non_Hispanic_Asian",  63.8    ,  57.2    ,  70.5    ,
- "2015-2016", "non_Hispanic_Asian",  54.1    ,  43.8    ,  64.4    ,
- "2017-2018", "non_Hispanic_Asian",  63.7    ,  58.9    ,  68.5    )
+ "2011-2012", "Non_Hispanic_Asian",  72.5    ,  62.3    ,  82.6    ,
+ "2013-2014", "Non_Hispanic_Asian",  63.8    ,  57.2    ,  70.5    ,
+ "2015-2016", "Non_Hispanic_Asian",  54.1    ,  43.8    ,  64.4    ,
+ "2017-2018", "Non_Hispanic_Asian",  63.7    ,  58.9    ,  68.5    )
 
 shiny_answers_etable_1_overall <- design_on_meds %>%
  svy_design_summarize(outcome = 'bp_control_jnc7',
@@ -338,10 +338,10 @@ shiny_answers_etable_1_by_race <- design_on_meds %>%
                       age_standardize = TRUE) %>%
  filter(bp_control_jnc7=='Yes') %>%
  mutate(group = recode(demo_race,
-                       "non-Hispanic White" = "non_Hispanic_White",
-                       "non-Hispanic Black" = "non_Hispanic_Black",
+                       "Non-Hispanic White" = "Non_Hispanic_White",
+                       "Non-Hispanic Black" = "Non_Hispanic_Black",
                        "Hispanic" = "Hispanic",
-                       "non-Hispanic Asian" = "non_Hispanic_Asian")) %>%
+                       "Non-Hispanic Asian" = "Non_Hispanic_Asian")) %>%
  filter(group != 'Other')
 
 shiny_answers_etable_1 <-

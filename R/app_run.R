@@ -745,16 +745,24 @@ app_run <- function(...) {
       # cut-points before creating the design object. Doing this
       # in the reverse order won't work b/c survey doesn't let you
       # modify the design object's data.
-      nhanes_bp <- nhanes_bp %>%
-       .[,
-         y := fifelse(x >= a & x <= b, 'yes', 'no'),
-         env = list(
-          a = input[[ss_val_ctns]][1],
-          b = input[[ss_val_ctns]][2],
-          x = input[[ss_var]],
-          y = paste(input[[ss_var]], 'tmp', sep='_')
-         )
-       ]
+
+      nhanes_bp[[ paste(input[[ss_var]], 'tmp', sep='_') ]] <-
+       fifelse(
+        nhanes_bp[[input[[ss_var]]]] %between% c(input[[ss_val_ctns]]),
+        yes = 'yes',
+        no = 'no'
+       )
+
+      # nhanes_bp <- nhanes_bp %>%
+      #  .[,
+      #    y := fifelse(x >= a & x <= b, 'yes', 'no'),
+      #    env = list(
+      #     a = input[[ss_val_ctns]][1],
+      #     b = input[[ss_val_ctns]][2],
+      #     x = input[[ss_var]],
+      #     y = paste(input[[ss_var]], 'tmp', sep='_')
+      #    )
+      #  ]
 
      }
 

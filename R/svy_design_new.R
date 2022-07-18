@@ -38,13 +38,18 @@ svy_design_new <- function(data,
 
  if(!is_empty(n_exposure_group)){
 
-  data_design <- data_design %>%
-   .[,
-     x := discretize(x,
-                     method = exposure_cut_type,
-                     breaks = n_exposure_group),
-     env = list(x = exposure)
-   ]
+  data_design[[exposure]] <-
+   discretize(data_design[[exposure]],
+              method = exposure_cut_type,
+              breaks = n_exposure_group)
+
+  # data_design <- data_design %>%
+  #  .[,
+  #    x := discretize(x,
+  #                    method = exposure_cut_type,
+  #                    breaks = n_exposure_group),
+  #    env = list(x = exposure)
+  #  ]
 
  }
 
