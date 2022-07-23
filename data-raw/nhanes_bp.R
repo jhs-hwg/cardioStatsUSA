@@ -1,7 +1,8 @@
 
 # make the data used in shiny app
 nhanes_bp <-
- nhanes_load(as = 'data.table') %>%
+ nhanes_load(fname = "nhanes_bp-raw.sas7bdat",
+             as = 'data.table') %>%
  nhanes_recode() %>%
  nhanes_rename()
 

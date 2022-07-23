@@ -5,29 +5,43 @@ Survey,primary sampling unit,svy_psu,svy,FALSE,FALSE,FALSE,FALSE
 Survey,strata,svy_strata,svy,FALSE,FALSE,FALSE,FALSE
 Survey,Subpopulation for hypertension,svy_subpop,svy,FALSE,FALSE,FALSE,FALSE
 Survey,NHANES cycle,svy_year,time,FALSE,FALSE,FALSE,FALSE
-Demographics,"Age category, years",demo_age_cat,catg,FALSE,TRUE,TRUE,TRUE
-Demographics,Race,demo_race,catg,FALSE,TRUE,TRUE,TRUE
+Demographics,"Age category, years",demo_age_cat,catg,TRUE,TRUE,TRUE,TRUE
+Demographics,Race,demo_race,catg,TRUE,TRUE,TRUE,TRUE
 Demographics,"Age, years",demo_age_years,ctns,TRUE,TRUE,TRUE,FALSE
-Demographics,Pregnant,demo_pregnant,bnry,FALSE,TRUE,TRUE,TRUE
-Demographics,Gender,demo_gender,bnry,FALSE,TRUE,TRUE,TRUE
+Demographics,Pregnant,demo_pregnant,bnry,TRUE,TRUE,TRUE,TRUE
+Demographics,Gender,demo_gender,bnry,TRUE,TRUE,TRUE,TRUE
 Blood pressure,"Systolic blood pressure, mm Hg",bp_sys_mean,ctns,TRUE,TRUE,TRUE,FALSE
 Blood pressure,"Diastolic blood pressure, mm Hg",bp_dia_mean,ctns,TRUE,TRUE,TRUE,FALSE
 Blood pressure,Blood pressure category (not including antihypertensive medication use),bp_cat_meds_excluded,catg,TRUE,TRUE,TRUE,TRUE
 Blood pressure,Blood pressure category (including antihypertensive medication use),bp_cat_meds_included,catg,TRUE,TRUE,TRUE,TRUE
 Blood pressure,Blood pressure control (SBP < 140 mm Hg and DBP < 90 mm Hg),bp_control_jnc7,bnry,TRUE,TRUE,TRUE,TRUE
 Blood pressure,Blood pressure control (SBP < 130 mm Hg and DBP < 80 mm Hg),bp_control_accaha,bnry,TRUE,TRUE,TRUE,TRUE
-Blood pressure,Uncontrolled blood pressure  (SBP >= 140 mm Hg or DBP >= 90 mm Hg),bp_uncontrolled_jnc7,bnry,TRUE,TRUE,TRUE,TRUE
-Blood pressure,Uncontrolled blood pressure  (SBP >= 130 mm Hg or DBP >= 80 mm Hg),bp_uncontrolled_accaha,bnry,TRUE,TRUE,TRUE,TRUE
+Blood pressure,Uncontrolled BP (SBP >= 140 mm Hg or DBP >= 90 mm Hg),bp_uncontrolled_jnc7,bnry,TRUE,TRUE,TRUE,TRUE
+Blood pressure,Uncontrolled BP (SBP >= 130 mm Hg or DBP >= 80 mm Hg),bp_uncontrolled_accaha,bnry,TRUE,TRUE,TRUE,TRUE
 Antihypertensive medication,Self-reported antihypertensive medication use,bp_med_use,bnry,TRUE,TRUE,TRUE,TRUE
-Antihypertensive medication,Antihypertensive medications recommended by JNC7,bp_med_recommended_jnc7,bnry,FALSE,TRUE,TRUE,TRUE
-Antihypertensive medication,Antihypertensive medications recommended by ACC/AHA 2017,bp_med_recommended_accaha,bnry,FALSE,TRUE,TRUE,TRUE
+Antihypertensive medication,Antihypertensive medications recommended by JNC7,bp_med_recommended_jnc7,bnry,TRUE,TRUE,TRUE,TRUE
+Antihypertensive medication,Antihypertensive medications recommended by ACC/AHA 2017,bp_med_recommended_accaha,bnry,TRUE,TRUE,TRUE,TRUE
 Antihypertensive medication,Number of antihypertensive medication classes,bp_med_n_class,catg,TRUE,TRUE,TRUE,TRUE
+Antihypertensive medication,ACE inhibitors,bp_med_ace,bnry,TRUE,TRUE,TRUE,TRUE
+Antihypertensive medication,Aldosterone antagonists,bp_med_aldo,bnry,TRUE,TRUE,TRUE,TRUE
+Antihypertensive medication,Alpha-1 blockers,bp_med_alpha,bnry,TRUE,TRUE,TRUE,TRUE
+Antihypertensive medication,Angiotensin receptor blockers,bp_med_angioten,bnry,TRUE,TRUE,TRUE,TRUE
+Antihypertensive medication,Beta blockers,bp_med_beta,bnry,TRUE,TRUE,TRUE,TRUE
+Antihypertensive medication,Central alpha1 agonist and other centrally acting agents,bp_med_central,bnry,TRUE,TRUE,TRUE,TRUE
+Antihypertensive medication,Calcium channel blockers,bp_med_ccb,bnry,TRUE,TRUE,TRUE,TRUE
+Antihypertensive medication,Potassium sparing diuretics,bp_med_diur_Ksparing,bnry,TRUE,TRUE,TRUE,TRUE
+Antihypertensive medication,Loop diuretics,bp_med_diur_loop,bnry,TRUE,TRUE,TRUE,TRUE
+Antihypertensive medication,Thiazide or thiazide-type diuretics,bp_med_diur_thz,bnry,TRUE,TRUE,TRUE,TRUE
+Antihypertensive medication,Direct renin inhibitors,bp_med_renin_inhibitors,bnry,TRUE,TRUE,TRUE,TRUE
+Antihypertensive medication,Direct vasodilators,bp_med_vasod,bnry,TRUE,TRUE,TRUE,TRUE
 Hypertension,Hypertension (JNC7 guideline definition),htn_jnc7,bnry,TRUE,TRUE,TRUE,TRUE
-Hypertension,Hypertension (2017 ACC/AHA blood pressure guideline definition),htn_accaha,bnry,TRUE,TRUE,TRUE,TRUE
+Hypertension,Hypertension (2017 ACC/AHA BP guideline definition),htn_accaha,bnry,TRUE,TRUE,TRUE,TRUE
 Hypertension,Awareness of hypertension,htn_aware,bnry,TRUE,TRUE,TRUE,TRUE
-Hypertension,Resistant hypertension – JNC7 guideline definition,htn_resistant_jnc7,bnry,TRUE,TRUE,TRUE,TRUE
-Hypertension,Resistant hypertension – 2017 ACC/AHA BP guideline definition,htn_resistant_accaha,bnry,TRUE,TRUE,TRUE,TRUE
-Comorbidities,Smoking status,cc_smoke,catg,FALSE,TRUE,TRUE,TRUE
+Hypertension,Resistant hypertension (JNC7 guideline definition),htn_resistant_jnc7,bnry,TRUE,TRUE,TRUE,TRUE
+Hypertension,Resistant hypertension (2017 ACC/AHA BP guideline definition),htn_resistant_accaha,bnry,TRUE,TRUE,TRUE,TRUE
+Hypertension,Resistant hypertension (JNC7 guideline definition requires thiazide diuretic),htn_resistant_accaha_thz,bnry,TRUE,TRUE,TRUE,TRUE
+Hypertension,Resistant hypertension (2017 ACC/AHA BP guideline definition requires thiazide diuretic) ,htn_resistant_jnc7_thz,bnry,TRUE,TRUE,TRUE,TRUE
+Comorbidities,Smoking status,cc_smoke,catg,TRUE,TRUE,TRUE,TRUE
 Comorbidities,"Body mass index, kg/m2",cc_bmi,catg,TRUE,TRUE,TRUE,TRUE
 Comorbidities,Prevalent diabetes,cc_diabetes,bnry,TRUE,TRUE,TRUE,TRUE
 Comorbidities,Prevalent chronic kidney disease,cc_ckd,bnry,TRUE,TRUE,TRUE,TRUE
