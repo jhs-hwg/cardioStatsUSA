@@ -24,6 +24,7 @@
 #' @importFrom shinyWidgets actionGroupButtons sliderTextInput
 #' @importFrom shinyWidgets radioGroupButtons updatePrettyCheckboxGroup
 #' @importFrom shinyWidgets updatePickerInput awesomeCheckbox
+#' @importFrom shinyWidgets updateAwesomeCheckbox
 #' @importFrom rintrojs introjsUI introjs introBox hintjs
 ## usethis namespace: end
 NULL

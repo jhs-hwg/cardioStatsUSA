@@ -1,4 +1,4 @@
-
+# make age standard conditional
 
 library(shiny)
 
@@ -111,13 +111,31 @@ app_run <- function(...) {
      )
     ),
 
+    conditionalPanel(
+     "input.do == 'figure'",
+     radioGroupButtons(
+      inputId = 'geom',
+      label = 'Select a plotting geometry',
+      choices = c("Bars" = "bar", "Points" = "scatter"),
+      selected = "bar",
+      status = "primary",
+      width = "100%",
+      justified = TRUE,
+      checkIcon = list(yes = icon("ok", lib = "glyphicon"))
+     )
+    ),
+
     introBox(
 
-     awesomeCheckbox(
-      inputId = "age_standardize",
-      label = "Age-adjustment by standardization?",
-      value = TRUE,
-      status = "primary"
+     conditionalPanel(
+      # if 'count' is not in the selected statistics
+      "input.statistic.indexOf('count') == -1",
+      awesomeCheckbox(
+       inputId = "age_standardize",
+       label = "Age-adjustment by standardization?",
+       value = TRUE,
+       status = "primary"
+      )
      ),
 
      introBox(
@@ -213,7 +231,7 @@ app_run <- function(...) {
       status = 'primary',
       fullwidth = TRUE
      ),
-     HTML("<br>")
+     br()
     ),
 
     conditionalPanel(
@@ -228,66 +246,8 @@ app_run <- function(...) {
     ),
 
     introBox(
-     pickerInput(
-      inputId = 'outcome',
-      label = 'Select an outcome',
-      choices = nhanes_key$variable_choices$outcome,
-      selected = NULL,
-      multiple = TRUE,
-      options = pickerOptions(maxOptions = 1,
-                              liveSearch = TRUE),
-      width = "100%"
-     ),
-     data.step = 8,
-     data.intro = paste(
-      "the 'outcome' variable will be summarized in your results.",
-      "Once you select an outcome, a set of possible statistics to compute",
-      "will appear below this box. Also, if you are creating a figure, you",
-      "will be asked to pick a primary statistic to present in your figure."
-     )
-    ),
-
-    conditionalPanel(
-     condition = 'input.outcome.length > 0',
-     prettyCheckboxGroup(
-      inputId = 'statistic',
-      label = glue('Select statistic(s) to compute'),
-      choices = character(),
-      selected = NULL,
-      width = "100%"
-     )
-    ),
-
-    conditionalPanel(
-     "input.do == 'figure'",
-     radioGroupButtons(
-      inputId = 'geom',
-      label = 'Select a plotting geometry',
-      choices = c("Bars" = "bar", "Points" = "scatter"),
-      selected = "bar",
-      status = "primary",
-      width = "100%",
-      justified = TRUE,
-      checkIcon = list(yes = icon("ok", lib = "glyphicon"))
-     )
-
-    ),
-
-    conditionalPanel(
-     "input.outcome.length > 0 & (input.do == 'figure' | input.do == 'table')",
-     pickerInput(
-      inputId = 'statistic_primary',
-      label = 'Select a primary statistic',
-      choices = character(),
-      multiple = TRUE,
-      options = pickerOptions(maxOptions = 1),
-      width = "100%"
-     )
-    ),
-
-    introBox(
      pickerInput("subset_n",
-                 "How many exclusions to make?",
+                 "How many exclusions do you want to make?",
                  choices = c("None" = 0,
                              "One" = 1,
                              "Two" = 2,
@@ -308,25 +268,135 @@ app_run <- function(...) {
 
     uiOutput("subset_ui"),
 
-    introBox(
-     pickerInput(
-      inputId = 'exposure',
-      label = 'Select an exposure',
-      choices = nhanes_key$variable_choices$exposure,
+    fluidRow(
+     introBox(
+      h3("Outcome",
+         style = "text-align: left; padding-left: 15px"),
+      column(
+       6,
+       style='padding-right: 2px;',
+       pickerInput(
+        inputId = 'outcome_class',
+        label = 'Select outcome type',
+        choices = names(nhanes_key$variable_choices$outcome),
+        selected = NULL,
+        multiple = TRUE,
+        options = pickerOptions(maxOptions = 1,
+                                liveSearch = TRUE),
+        width = '100%'
+       )
+      ),
+      column(
+       6,
+       style='padding-left: 2px;',
+       pickerInput(
+        inputId = 'outcome',
+        label = 'Select outcome variable',
+        choices = character(),
+        selected = NULL,
+        multiple = TRUE,
+        options = pickerOptions(maxOptions = 1,
+                                liveSearch = TRUE,
+                                noneSelectedText = 'Options depend on type'),
+        width = '100%'
+       )
+      ),
+      data.step = 8,
+      data.intro = paste(
+       "the 'outcome' variable will be summarized in your results.",
+       "Once you select an outcome, a set of possible statistics to compute",
+       "will appear below this box. Also, if you are creating a figure, you",
+       "will be asked to pick a primary statistic to present in your figure."
+      )
+     )
+    ),
+
+    conditionalPanel(
+     condition = 'input.outcome.length > 0',
+     prettyCheckboxGroup(
+      inputId = 'statistic',
+      label = glue('Select statistic(s) to compute'),
+      choices = character(),
       selected = NULL,
+      width = '100%'
+     )
+    ),
+
+    conditionalPanel(
+     "input.outcome.length > 0 & (input.do == 'figure' | input.do == 'table')",
+     pickerInput(
+      inputId = 'statistic_primary',
+      label = 'Select a primary statistic',
+      choices = character(),
       multiple = TRUE,
       options = pickerOptions(maxOptions = 1),
       width = "100%"
-     ),
-     data.step = 10,
-     data.intro = paste(
-      "Summarized values of the outcome will be presented among groups",
-      "defined by the 'exposure' variable. If you just want to look at",
-      "the outcome in the overall US population, don't select an exposure.",
-      "If you have already selected something, you can click it again to",
-      "deselect it."
      )
     ),
+
+    fluidRow(
+     introBox(
+      h3("Exposure",
+         style = "text-align: left; padding-left: 15px"),
+      column(
+       6,
+       style='padding-right: 2px;',
+       pickerInput(
+        inputId = 'exposure_class',
+        label = 'Select exposure type',
+        choices = names(nhanes_key$variable_choices$exposure),
+        selected = NULL,
+        multiple = TRUE,
+        options = pickerOptions(maxOptions = 1,
+                                liveSearch = TRUE),
+        width = '100%'
+       )
+      ),
+      column(
+       6,
+       style='padding-left: 2px;',
+       pickerInput(
+        inputId = 'exposure',
+        label = 'Select exposure variable',
+        choices = character(),
+        selected = NULL,
+        multiple = TRUE,
+        options = pickerOptions(maxOptions = 1,
+                                liveSearch = TRUE,
+                                noneSelectedText = 'Options depend on type'),
+        width = '100%'
+       )
+      ),
+      data.step = 10,
+      data.intro = paste(
+       "Summarized values of the outcome will be presented among groups",
+       "defined by the 'exposure' variable. If you just want to look at",
+       "the outcome in the overall US population, don't select an exposure.",
+       "If you have already selected something, you can click it again to",
+       "deselect it."
+      )
+     )
+    ),
+
+    # introBox(
+    #  pickerInput(
+    #   inputId = 'exposure',
+    #   label = 'Select an exposure',
+    #   choices = nhanes_key$variable_choices$exposure,
+    #   selected = NULL,
+    #   multiple = TRUE,
+    #   options = pickerOptions(maxOptions = 1),
+    #   width = "100%"
+    #  ),
+    #  data.step = 10,
+    #  data.intro = paste(
+    #   "Summarized values of the outcome will be presented among groups",
+    #   "defined by the 'exposure' variable. If you just want to look at",
+    #   "the outcome in the overall US population, don't select an exposure.",
+    #   "If you have already selected something, you can click it again to",
+    #   "deselect it."
+    #  )
+    # ),
 
     conditionalPanel(
      condition = jsc_write_cpanel(nhanes_key$data, 'ctns', 'exposure'),
@@ -355,29 +425,74 @@ app_run <- function(...) {
      )
     ),
 
-    introBox(
-
-     pickerInput(
-      inputId = 'group',
-      label = 'Select a stratifying variable',
-      choices = nhanes_key$variable_choices$group,
-      selected = NULL,
-      multiple = TRUE,
-      options = pickerOptions(maxOptions = 1),
-      width = "100%"
-     ),
-
-     data.step = 11,
-     data.intro = paste(
-      "You may compute results in different populations using the 'stratify'",
-      "variable. The difference between the 'stratifying' variable and the",
-      "'exposure' variable is that the stratifying variable creates one output",
-      "per group, while the exposure variable creates one output that contains",
-      "results for each group.",
-      "(Some exceptions apply for outcome variables with >2 categories)"
+    fluidRow(
+     introBox(
+      h3("Stratify results",
+         style = "text-align: left; padding-left: 15px"),
+      column(
+       6,
+       style='padding-right: 2px;',
+       pickerInput(
+        inputId = 'group_class',
+        label = 'Select stratify type',
+        choices = names(nhanes_key$variable_choices$group),
+        selected = NULL,
+        multiple = TRUE,
+        options = pickerOptions(maxOptions = 1,
+                                liveSearch = TRUE),
+        width = '100%'
+       )
+      ),
+      column(
+       6,
+       style='padding-left: 2px;',
+       pickerInput(
+        inputId = 'group',
+        label = 'Select stratify variable',
+        choices = character(),
+        selected = NULL,
+        multiple = TRUE,
+        options = pickerOptions(maxOptions = 1,
+                                liveSearch = TRUE,
+                                noneSelectedText = 'Options depend on type'),
+        width = '100%'
+       )
+      ),
+      data.step = 11,
+      data.intro = paste(
+       "You may compute results in different populations using the 'stratify'",
+       "variable. The difference between the 'stratifying' variable and the",
+       "'exposure' variable is that the stratifying variable creates one output",
+       "per group, while the exposure variable creates one output that contains",
+       "results for each group.",
+       "(Some exceptions apply for outcome variables with >2 categories)"
+      )
      )
+    ),
 
-    )
+    # introBox(
+    #
+    #  pickerInput(
+    #   inputId = 'group',
+    #   label = 'Select a stratifying variable',
+    #   choices = nhanes_key$variable_choices$group,
+    #   selected = NULL,
+    #   multiple = TRUE,
+    #   options = pickerOptions(maxOptions = 1),
+    #   width = "100%"
+    #  ),
+    #
+    #  data.step = 11,
+    #  data.intro = paste(
+    #   "You may compute results in different populations using the 'stratify'",
+    #   "variable. The difference between the 'stratifying' variable and the",
+    #   "'exposure' variable is that the stratifying variable creates one output",
+    #   "per group, while the exposure variable creates one output that contains",
+    #   "results for each group.",
+    #   "(Some exceptions apply for outcome variables with >2 categories)"
+    #  )
+    #
+    # )
 
    ),
 
@@ -463,11 +578,22 @@ app_run <- function(...) {
 
       }
 
+      ..x <- ""
+
+      if(input$subset_n > 1){
+       ..x <- switch(.x,
+                     '1' = "first ",
+                     '2' = "second ",
+                     '3' = "third ",
+                     '4' = "fourth ",
+                     '5' = "fifth ")
+      }
 
       tagList(
        pickerInput(
         inputId = new_id,
-        label = 'Select a subsetting variable',
+        label = paste0("Select the ", ..x,
+                      "variable to create your sub-population"),
         choices = nhanes_key$variable_choices$subset,
         selected = isolate(input[[new_id]]) %||% character(),
         multiple = TRUE,
@@ -499,7 +625,7 @@ app_run <- function(...) {
         ),
         prettyCheckboxGroup(
          inputId = new_id_val_catg,
-         label = 'Include these subsets:',
+         label = 'Include these participants:',
          choices = c(new_value_choices, 'Missing'),
          selected = isolate(input[[new_id_val_catg]]) %||% character(),
          width = "100%"
@@ -510,6 +636,36 @@ app_run <- function(...) {
     )
 
    })
+
+  observeEvent(input$outcome_class, {
+
+   updatePickerInput(
+    session = session,
+    inputId = 'outcome',
+    choices = nhanes_key$variable_choices$outcome[[input$outcome_class]]
+   )
+
+  })
+
+  observeEvent(input$exposure_class, {
+
+   updatePickerInput(
+    session = session,
+    inputId = 'exposure',
+    choices = nhanes_key$variable_choices$exposure[[input$exposure_class]]
+   )
+
+  })
+
+  observeEvent(input$group_class, {
+
+   updatePickerInput(
+    session = session,
+    inputId = 'group',
+    choices = nhanes_key$variable_choices$group[[input$group_class]]
+   )
+
+  })
 
   observeEvent(input$outcome, {
 
@@ -590,6 +746,15 @@ app_run <- function(...) {
     choices = input$statistic,
     selected = input$statistic[1]
    )
+
+   if('count' %in% input$statistic){
+
+    updateAwesomeCheckbox(session = session,
+                          inputId = 'age_standardize',
+                          value = FALSE)
+
+   }
+
 
   })
 

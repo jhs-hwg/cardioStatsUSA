@@ -17,7 +17,7 @@ nhanes_recode <- function(data = NULL){
   mutate(
 
    # temporary
-   newwt = wtmec2yr,
+   # newwt = wtmec2yr,
 
    # Blood pressure ----
 

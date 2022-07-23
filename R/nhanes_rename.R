@@ -14,12 +14,13 @@ nhanes_rename <- function(data){
   data,
 
   # Survey  -----------------------------------------------------------------
-  svy_id     = seqn,
-  svy_weight = newwt,
-  svy_psu    = sdmvpsu,
-  svy_strata = sdmvstra,
-  svy_year   = surveyyr,
-  svy_subpop = subpophtn,
+  svy_id         = seqn,
+  svy_weight     = newwt,
+  svy_weight_mec = wtmec2yr,
+  svy_psu        = sdmvpsu,
+  svy_strata     = sdmvstra,
+  svy_year       = surveyyr,
+  svy_subpop     = subpophtn,
 
   # Demographics ------------------------------------------------------------
   demo_age_cat   = agecat4,
