@@ -40,6 +40,19 @@ nhanes_rename <- function(data){
   bp_med_recommended_accaha = newgdltx,
   bp_med_n_class            = num_htn_class,
 
+  bp_med_ace = ace,
+  bp_med_aldo = aldo,
+  bp_med_alpha = alpha,
+  bp_med_angioten = angioten,
+  bp_med_beta = beta,
+  bp_med_central = central,
+  bp_med_ccb = ccb,
+  bp_med_diur_Ksparing = diur_ksparing,
+  bp_med_diur_loop = diur_loop,
+  bp_med_diur_thz = diur_thz,
+  bp_med_renin_inhibitors = renin_inhibitors,
+  bp_med_vasod = vasod,
+
   # bp_control, a sub-class of bp variables
   bp_control_jnc7           = jnc7_control,
   bp_control_accaha         = accaha_control,
@@ -55,6 +68,11 @@ nhanes_rename <- function(data){
   # htn_resistant, a sub-class of htn variables
   htn_resistant_jnc7   = rht_jnc7,
   htn_resistant_accaha = rht_accaha,
+  htn_resistant_jnc7_thz = rht_jnc7thz,
+  htn_resistant_accaha_thz = rht_accahathz,
+
+
+
 
   # Co-morbid conditions ----------------------------------------------------
   cc_smoke    = nfc_smoker,

@@ -13,7 +13,7 @@
 #' @noRd
 #'
 nhanes_load <- function(as = 'tibble',
-                        fname = 'small9920_07142022v2.sas7bdat'){
+                        fname){
 
  if(!file.exists(file.path(here::here(), 'data-raw', fname))){
   stop("the file \'", fname, "\' could not be found in data-raw/\n",
