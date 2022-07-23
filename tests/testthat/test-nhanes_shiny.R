@@ -5,7 +5,7 @@ library(haven)
 
 
 nhanes_sas <- here::here() %>%
- file.path('data-raw', 'small9920_07142022v2.sas7bdat') %>%
+ file.path('data-raw', 'nhanes_bp-raw.sas7bdat') %>%
  haven::read_sas() %>%
  nhanes_rename()
 

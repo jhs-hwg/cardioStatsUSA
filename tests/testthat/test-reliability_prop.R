@@ -13,7 +13,7 @@
 #  32.2631,	    1.1304,	   30.0343,	    34.554,	  1710.23,	    0.045197,	     14.0089,	       6.67245,	            1,	              1,	            0
 # )
 #
-# data <- nhanes_load(as = 'tibble', fname = 'small9920.sas7bdat')
+# data <- nhanes_load(as = 'tibble', fname = 'nhanes_bp-raw.sas7bdat')
 #
 # design <- svydesign(ids = ~ SDMVPSU,
 #                     strata = ~ SDMVSTRA,
@@ -34,3 +34,40 @@
 #  expect_equal(reliab_prop$p_staistical_SAS, reliab_prop$p_staistical)
 # }
 #
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

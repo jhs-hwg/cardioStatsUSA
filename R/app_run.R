@@ -213,7 +213,6 @@ app_run <- function(...) {
       status = 'primary',
       fullwidth = TRUE
      ),
-     HTML("<br>"),
      HTML("<br>")
     ),
 
@@ -235,7 +234,8 @@ app_run <- function(...) {
       choices = nhanes_key$variable_choices$outcome,
       selected = NULL,
       multiple = TRUE,
-      options = pickerOptions(maxOptions = 1, liveSearch = TRUE),
+      options = pickerOptions(maxOptions = 1,
+                              liveSearch = TRUE),
       width = "100%"
      ),
      data.step = 8,
