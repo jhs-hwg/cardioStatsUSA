@@ -13,11 +13,59 @@ nhanes_recode <- function(data = NULL){
  # make names lower case - don't want to remember which are caps.
  names(data) <- tolower(names(data))
 
- data %>%
+ # begin recoding ----
+ out <- data %>%
   mutate(
-
-   # temporary
+   # temporary things for debugging ----
    # newwt = wtmec2yr,
+   # Demographics ----
+
+   # Age categories
+   agecat4 = factor(
+    agecat4,
+    levels = 1:4,
+    labels = c(
+     "18 to 44",
+     "45 to 64",
+     "65 to 74",
+     "75+"
+    )
+   ),
+
+   # gender
+   riagendr = factor(
+    riagendr,
+    levels = 1:2,
+    labels = c("Men", "Women")
+   ),
+
+   # race
+   race_wbaho = factor(
+    race_wbaho,
+    levels = 1:5,
+    labels = c(
+     "Non-Hispanic White",
+     "Non-Hispanic Black",
+     "Non-Hispanic Asian",
+     "Hispanic",
+     "Other"
+    )
+   ),
+
+
+   # number of BP medication classes
+   num_htn_class = factor(
+    num_htn_class,
+    levels = 0:7,
+    labels = c("None",
+               "One",
+               "Two",
+               "Three",
+               "Four or more",
+               "Four or more",
+               "Four or more",
+               "Four or more")
+   ),
 
    # Blood pressure ----
 
@@ -104,53 +152,60 @@ nhanes_recode <- function(data = NULL){
 
 
 
-   # Demographics ----
+   # Cholesterol ----
 
-   # Age categories
-   agecat4 = factor(
-    agecat4,
-    levels = 1:4,
-    labels = c(
-     "18 to 44",
-     "45 to 64",
-     "65 to 74",
-     "75+"
-    )
-   ),
 
-   # gender
-   riagendr = factor(
-    riagendr,
-    levels = 1:2,
-    labels = c("Men", "Women")
-   ),
-
-   # race
-   race_wbaho = factor(
-    race_wbaho,
+   ldl_5cat = factor(
+    ldl_5cat,
     levels = 1:5,
     labels = c(
-     "Non-Hispanic White",
-     "Non-Hispanic Black",
-     "Non-Hispanic Asian",
-     "Hispanic",
-     "Other"
+     "< 70 mg/dL",
+     "70 to <100 mg/dL",
+     "100 to <130 mg/dL",
+     "130 to <190 mg/dL",
+     ">= 190 mg/dL" )
+   ),
+
+   nonhdl_5cat = factor(
+    nonhdl_5cat,
+    levels = 1:5,
+    labels = c(
+     "< 100 mg/dL",
+     "100 to <130 mg/dL",
+     "130 to <160 mg/dL",
+     "160 to <220 mg/dL",
+     ">= 220 mg/dL")
+   ),
+
+
+   time_cholmeas = factor(
+    time_cholmeas,
+    levels = 1:3,
+    labels = c(
+     "In the past year",
+     "1 to 5 years ago",
+     ">5 years ago (possibly never)"
     )
    ),
 
-   # number of BP medication classes
-   num_htn_class = factor(
-    num_htn_class,
-    levels = 0:7,
-    labels = c("None",
-               "One",
-               "Two",
-               "Three",
-               "Four or more",
-               "Four or more",
-               "Four or more",
-               "Four or more")
+   highriskcond = factor(
+    highriskcond,
+    levels = 0:9,
+    labels = c(
+     "3 or fewer",
+     "3 or fewer",
+     "3 or fewer",
+     "3 or fewer",
+     "4",
+     "5",
+     "6",
+     "7 or more",
+     "7 or more",
+     "7 or more"
+    )
    ),
+
+   # 0/1 indicators ----
 
    # tricky ones...
    across(
@@ -164,6 +219,14 @@ nhanes_recode <- function(data = NULL){
     .fns = ~ if_else(.x == 2, 0, .x)
    ),
 
+   cholmeas_never = factor(
+    cholmeas_never,
+    levels = c(0, 1),
+    labels = c(
+     "Cholesterol has been measured previously",
+     "Never had cholesterol measured"
+    )
+   ),
 
    across(
     .cols = c(pregnant,
@@ -174,13 +237,47 @@ nhanes_recode <- function(data = NULL){
               hxstroke,
               hxascvd,
               hxhf,
-              hxcvd_hf),
+              hxcvd_hf,
+              ldl_lt70,
+              ldl_gt70,
+              ldl_lt100,
+              ldl_gt100,
+              ldl_gt190,
+              nonh_lt100,
+              nonh_gt100,
+              nonh_gt220,
+              tg150pl,
+              lowhdl,
+              total_c200pl,
+              total_c240pl,
+              persistent_ldl,
+              vhr,
+              addontherapy,
+              recommended_ill,
+              llt_rec_2018,
+              toldcholmeds,
+              cholmeds_sr,
+              cholmeds,
+              statin,
+              ezetimibe,
+              pcsk9i,
+              bile,
+              fibric_acid,
+              atorvastatin,
+              simvastatin,
+              rosuvastatin,
+              pravastatin,
+              pitavastatin,
+              fluvastatin,
+              lovastatin,
+              other_chol),
     .fns = ~ factor(.x,
                     levels = c(0, 1),
                     labels = c("No", "Yes"))
    ),
 
    # Co-morbid conditions ----
+
    # Smoking
    nfc_smoker = factor(
     nfc_smoker,
@@ -205,4 +302,18 @@ nhanes_recode <- function(data = NULL){
    )
   )
 
+ # finish recoding ----
+
+ out
+
+
 }
+
+
+
+
+
+
+
+
+

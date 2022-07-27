@@ -17,7 +17,7 @@
 #' @importFrom arules discretize
 #' @importFrom purrr map map2 map_dfr map2_chr is_empty discard
 #' @importFrom dplyr filter mutate select pull across
-#' @importFrom dplyr if_else all_of .data recode
+#' @importFrom dplyr if_else all_of .data recode left_join
 #' @importFrom tidyr pivot_wider pivot_longer unite
 #' @importFrom stats confint
 #' @importFrom shinyWidgets pickerInput pickerOptions prettyCheckboxGroup

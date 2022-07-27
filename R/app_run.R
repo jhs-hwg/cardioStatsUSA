@@ -936,7 +936,16 @@ app_run <- function(...) {
 
    }
 
-   ds <- nhanes_bp[svy_subpop == 1] %>%
+   # browser()
+
+   type_subpop <- nhanes_key$data[variable == input$outcome, subpop]
+
+   colname_subpop <- paste('svy_subpop', type_subpop, sep = '_')
+   colname_weight <- paste('svy_weight', type_subpop, sep = '_')
+
+   ds <- nhanes_bp %>%
+    .[.[[colname_subpop]] == 1] %>%
+    .[, svy_weight := .[[colname_weight]]] %>%
     svy_design_new(
      exposure = input$exposure,
      n_exposure_group = as.numeric(input$n_exposure_group),

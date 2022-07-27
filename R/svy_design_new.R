@@ -23,7 +23,6 @@ svy_design_new <- function(data,
 
  stopifnot(is.data.table(data))
 
-
  fctrs <- data %>%
   sapply(is.factor) %>%
   which() %>%
