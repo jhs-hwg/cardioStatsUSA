@@ -15,7 +15,7 @@ You can install the development version of nhanesTrends from
 [GitHub](https://github.com/) with:
 
 ``` r
-# install.packages("devtools")
+# install.packages("remotes")
 remotes::install_github("jhs-hwg/nhanesShinyBP")
 ```
 
