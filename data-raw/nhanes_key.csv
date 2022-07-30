@@ -84,6 +84,7 @@ Cholesterol-lowering medication,Recommended add-on lipid-lowering therapy by the
 Cholesterol-lowering medication,Recommended a statin by the 2018 AHA/ACC guideline,chol_med_statin_recommended_ahaacc,bnry,TRUE,TRUE,TRUE,TRUE,chol
 Cholesterol-lowering medication,Ever been told to take cholesterol-lowering medication,chol_med_recommended_ever,bnry,TRUE,TRUE,TRUE,TRUE,chol
 Atherosclerotic CVD risk,Very high ASCVD risk according to the 2018 AHA/ACC guideline,ascvd_risk_vh_ahaacc,bnry,TRUE,TRUE,TRUE,TRUE,chol
+Comorbidities,Number of high risk conditions,cc_n_highrisk,catg,TRUE,TRUE,TRUE,TRUE,chol
 Comorbidities,Smoking status,cc_smoke,catg,TRUE,TRUE,TRUE,TRUE,htn
 Comorbidities,"Body mass index, kg/m2",cc_bmi,catg,TRUE,TRUE,TRUE,TRUE,htn
 Comorbidities,Prevalent diabetes,cc_diabetes,bnry,TRUE,TRUE,TRUE,TRUE,htn

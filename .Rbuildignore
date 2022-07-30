@@ -5,3 +5,5 @@
 SAS
 docs
 temp.R
+^logo
+^README\.Rmd$

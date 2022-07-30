@@ -936,8 +936,6 @@ app_run <- function(...) {
 
    }
 
-   # browser()
-
    type_subpop <- nhanes_key$data[variable == input$outcome, subpop]
 
    colname_subpop <- paste('svy_subpop', type_subpop, sep = '_')
