@@ -7,10 +7,10 @@
 svy_design_new(
   data,
   exposure,
-  n_exposure_group,
-  exposure_cut_type,
+  n_exposure_group = NULL,
+  exposure_cut_type = NULL,
   years,
-  pool
+  pool = "no"
 )
 }
 \arguments{

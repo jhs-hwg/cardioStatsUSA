@@ -15,7 +15,6 @@ nhanes_rename <- function(data){
 
   # Survey  -----------------------------------------------------------------
   svy_id          = seqn,
-  svy_weight      = newwt,
   svy_weight_mec  = wtmec2yr,  # uncalibrated
   svy_weight_af   = wtsaf2yr,  # uncalibrated
   svy_weight_htn  = newwt,     # used for the htn subpop

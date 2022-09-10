@@ -48,10 +48,11 @@ hexSticker::sticker(
  p_color = 'black',
  h_fill = 'white',
  h_color = 'grey',
- p_size = 18,
+ p_size = 35,
  s_x = 1,
  s_y = 0.85,
  s_width = 1.7,
  s_height = 0.75,
+ dpi = 600,
  filename = "logo.png"
 )

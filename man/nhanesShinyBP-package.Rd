@@ -6,6 +6,8 @@
 \alias{nhanesShinyBP-package}
 \title{nhanesShinyBP: Explore 20+ years of blood pressure data from NHANES}
 \description{
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
+
 Use a simple interface to generate summary data and figures from the continuous NHANES exam, beginning in 1999-2000 and continuing through 2017-2020. Save your results, either in the form of a dataset or as a figure saved to png format. All analyses account for the NHANES design weights and are tested for equivalence with CDC statistics and reports.
 }
 \author{

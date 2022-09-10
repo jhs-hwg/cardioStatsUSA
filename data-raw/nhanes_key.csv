@@ -1,6 +1,5 @@
 class,label,variable,type,outcome,exposure,subset,group,subpop
 Survey,participant identifier,svy_id,svy,FALSE,FALSE,FALSE,FALSE,none
-Survey,sample weight,svy_weight,svy,FALSE,FALSE,FALSE,FALSE,none
 Survey,primary sampling unit,svy_psu,svy,FALSE,FALSE,FALSE,FALSE,none
 Survey,strata,svy_strata,svy,FALSE,FALSE,FALSE,FALSE,none
 Survey,Subpopulation for hypertension,svy_subpop_htn,svy,FALSE,FALSE,FALSE,FALSE,none

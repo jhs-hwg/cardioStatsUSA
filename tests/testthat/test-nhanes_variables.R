@@ -4,9 +4,7 @@ library(haven)
 
 
 
-nhanes_sas <- here::here() %>%
- file.path('data-raw', 'nhanes_bp-raw.sas7bdat') %>%
- haven::read_sas() %>%
+nhanes_sas <- nhanes_load(as = 'tibble') %>%
  nhanes_rename()
 
 key <- nhanes_key$data
@@ -46,7 +44,7 @@ test_that(
    expect_equal(sum(is.na(nhanes_sas[[i]])),
                 sum(is.na(nhanes_bp[[i]])))
 
-   if(i != 'svy_weight' && i %in% names(nhanes_sas)){
+   if(!grepl('^svy_weight', x = i) && i %in% names(nhanes_sas)){
 
     if(type %in% c('ctns', 'svy') ){
 

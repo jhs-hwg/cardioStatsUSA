@@ -12,14 +12,16 @@
 #' @param pool are the results pooled across multiple NHANES cycles?
 #'  if so, say 'yes', o.w. say 'no'
 #'
+#' @export
+#'
 #' @return a `svydesign` object
 #'
 svy_design_new <- function(data,
                            exposure,
-                           n_exposure_group,
-                           exposure_cut_type,
+                           n_exposure_group = NULL,
+                           exposure_cut_type = NULL,
                            years,
-                           pool){
+                           pool = 'no'){
 
  stopifnot(is.data.table(data))
 

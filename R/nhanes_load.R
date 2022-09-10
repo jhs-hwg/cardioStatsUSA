@@ -26,9 +26,9 @@ nhanes_load <- function(fpath = file.path(here::here(), 'data-raw'),
 
  # data_lipids %>% filter(SEQN == 31720)
  # temporary fix
- out <- out %>%
-  dplyr::group_by(SEQN) %>%
-  dplyr::slice(1)
+ # out <- out %>%
+ #  dplyr::group_by(SEQN) %>%
+ #  dplyr::slice(1)
 
 
  switch(

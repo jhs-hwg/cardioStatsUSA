@@ -6,6 +6,7 @@
 # Years: 2015-2016
 
 nhanes_bp_test <- nhanes_bp %>%
+ as.data.table() %>%
  dplyr::mutate(
   demo_age_gteq_18 = dplyr::if_else(demo_age_years >= 18, 'Yes', 'No'),
   demo_age_cat = cut(demo_age_years,
@@ -55,7 +56,6 @@ test_data <- tibble::tribble(
 
 shiny_answers_by_age <- design %>%
  svy_design_summarize(outcome = 'htn_jnc7',
-                      key = nhanes_key,
                       user_calls = c('percentage'),
                       exposure = exposure) %>%
  dplyr::filter(htn_jnc7 == 'Yes') %>%
@@ -63,7 +63,6 @@ shiny_answers_by_age <- design %>%
 
 shiny_answers_by_age_sex <- design %>%
  svy_design_summarize(outcome = 'htn_jnc7',
-                      key = nhanes_key,
                       user_calls = c('percentage'),
                       exposure = exposure,
                       group = 'demo_gender') %>%

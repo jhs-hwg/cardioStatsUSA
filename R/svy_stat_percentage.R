@@ -2,7 +2,7 @@
 svy_stat_percentage <- function(outcome, design, ...) {
 
 
- if(is_discrete(outcome, nhanes_key)){
+ if(is_discrete(outcome)){
   design$variables[[outcome]] <- as.factor(design$variables[[outcome]])
  }
 

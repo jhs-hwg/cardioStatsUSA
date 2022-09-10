@@ -1,8 +1,26 @@
 
+
+
+#' Summarize a survey design
+#'
+#' @param design an object created by [svy_design_new]
+#' @param outcome (*character*) the outcome variable
+#' @param key should always be `nhanes_key`
+#' @param user_calls (*character vector*) which statistics to compute
+#' @param exposure (*character*) the exposure variable
+#' @param group (*character*) the group variable
+#' @param pool_svy_years (*logical*) `TRUE` in pool is 'yes', `FALSE` o.w.
+#' @param simplify_bnry_output not currently used
+#' @param quantiles (*numeric vector*) percentiles for stat summaries
+#' @param age_standardize (*logical*) standardize by age groups?
+#' @param age_wts (*numeric vector*) weights for age standardization.
+#'
+#' @return summaries
+#' @export
+#'
 svy_design_summarize <- function(
   design,
   outcome,
-  key,
   user_calls = c(),
   exposure = NULL,
   group = NULL,
@@ -12,6 +30,8 @@ svy_design_summarize <- function(
   age_standardize = FALSE,
   age_wts = c(0.155, 0.454, 0.215, 0.177)
 ){
+
+ key <- nhanesShinyBP::nhanes_key
 
  time_var <- ifelse(pool_svy_years, 'None', key$time_var)
 
@@ -78,7 +98,7 @@ svy_design_summarize <- function(
     .[, outcome := NULL]
 
 
-   if(is_discrete(outcome, key) && 'level' %in% names(.out)){
+   if(is_discrete(outcome) && 'level' %in% names(.out)){
 
     setnames(.out, old = 'level', new = outcome)
 

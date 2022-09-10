@@ -133,7 +133,7 @@ app_run <- function(...) {
       awesomeCheckbox(
        inputId = "age_standardize",
        label = "Age-adjustment by standardization?",
-       value = TRUE,
+       value = FALSE,
        status = "primary"
       )
      ),
@@ -986,7 +986,6 @@ app_run <- function(...) {
    svy_design_summarize(
     design = ds,
     outcome = input$outcome,
-    key = nhanes_key,
     user_calls = input$statistic,
     exposure = input$exposure,
     group = input$group,
