@@ -854,7 +854,7 @@ app_run <- function(...) {
 
    }
 
-   if(!is_continuous(input$exposure, nhanes_key)){
+   if(!is_continuous(input$exposure)){
 
     updatePickerInput(
      session = session,
@@ -904,7 +904,7 @@ app_run <- function(...) {
      ss_val_ctns <- paste('subset_value', i, 'ctns', sep = '_')
      ss_val_catg <- paste('subset_value', i, 'catg', sep = '_')
 
-     if(is_continuous(input[[ss_var]], key = nhanes_key)){
+     if(is_continuous(input[[ss_var]])){
 
       # need to create the subsetting variables based on continuous
       # cut-points before creating the design object. Doing this
@@ -967,7 +967,7 @@ app_run <- function(...) {
 
       subset_calls[[ input[[ss_var]] ]] <- input[[ss_val_catg]]
 
-      if(is_continuous(input[[ss_var]], key = nhanes_key)){
+      if(is_continuous(input[[ss_var]])){
 
        subset_calls[[ paste(input[[ss_var]], 'tmp', sep='_') ]] <- "yes"
 
@@ -986,7 +986,7 @@ app_run <- function(...) {
    svy_design_summarize(
     design = ds,
     outcome = input$outcome,
-    user_calls = input$statistic,
+    statistic = input$statistic,
     exposure = input$exposure,
     group = input$group,
     pool_svy_years = input$pool == 'yes',

@@ -1,12 +1,34 @@
 
-svy_stat_prop <- function(outcome, cat, design, ...) {
 
- if(is_discrete(outcome)){
-  design$variables[[outcome]] <- as.factor(design$variables[[outcome]])
- }
+svy_stat_proportion <- function(outcome, design, ...){
 
-svyciprop(~I(outcome==cat), design = design, method="beta") %>%
+ design$variables[[outcome]] %<>% as.factor()
+
+ lvls <- levels(design$variables[[outcome]])
+
+ glue::glue("I({outcome} == '{lvls}')") %>%
+  set_names(lvls) %>%
+  map(as_svy_formula) %>%
+  map(svyciprop, design = design) %>%
   svy_stat_adorn(stat_type = 'proportion',
                  stat_fun = 'stat')
+
 }
 
+svy_statby_proportion <- function(outcome, by_vars, design, ...){
+
+ design$variables[[outcome]] %<>% as.factor()
+
+ lvls <- levels(design$variables[[outcome]])
+
+ glue::glue("I({outcome} == '{lvls}')") %>%
+  as.character() %>%
+  set_names(lvls) %>%
+  map(svy_statby,
+      by_vars = by_vars,
+      design = design,
+      svy_stat_fun = svyciprop) %>%
+ svy_stat_adorn(stat_type = 'proportion',
+                 stat_fun = 'statby')
+
+}

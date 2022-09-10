@@ -18,7 +18,7 @@ smry <- ds %>%
  svy_design_summarize(outcome = 'bp_control_jnc7',
                       key = nhanes_key,
                       age_standardize = TRUE,
-                      user_calls = c('percentage')) %>%
+                      statistic = c('percentage')) %>%
  filter(bp_control_jnc7 == 'Yes')
 
 

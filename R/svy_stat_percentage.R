@@ -3,7 +3,7 @@ svy_stat_percentage <- function(outcome, design, ...) {
 
 
  if(is_discrete(outcome)){
-  design$variables[[outcome]] <- as.factor(design$variables[[outcome]])
+  design$variables[[outcome]] %<>% as.factor()
  }
 
  svymean(x = as_svy_formula(outcome),

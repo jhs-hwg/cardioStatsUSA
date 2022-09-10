@@ -6,7 +6,7 @@
 #' @param design an object created by [svy_design_new]
 #' @param outcome (*character*) the outcome variable
 #' @param key should always be `nhanes_key`
-#' @param user_calls (*character vector*) which statistics to compute
+#' @param statistic (*character vector*) which statistics to compute
 #' @param exposure (*character*) the exposure variable
 #' @param group (*character*) the group variable
 #' @param pool_svy_years (*logical*) `TRUE` in pool is 'yes', `FALSE` o.w.
@@ -21,7 +21,7 @@
 svy_design_summarize <- function(
   design,
   outcome,
-  user_calls = c(),
+  statistic = NULL,
   exposure = NULL,
   group = NULL,
   pool_svy_years = FALSE,
@@ -32,15 +32,14 @@ svy_design_summarize <- function(
 ){
 
  key <- nhanesShinyBP::nhanes_key
-
  time_var <- ifelse(pool_svy_years, 'None', key$time_var)
+ outcome_type <- key$variables[[outcome]]$type
 
- if(!is_used(exposure)) exposure <- 'None'
- if(!is_used(group)) group <- 'None'
+ statistic %<>% input_infer(key$svy_calls[[outcome_type]])
+ exposure  %<>% input_infer("None")
+ group     %<>% input_infer("None")
 
- by_vars <- c(time_var,
-              exposure,
-              group) %>%
+ by_vars <- c(time_var, exposure, group) %>%
   setdiff('None')
 
  if(length(age_wts) != length(levels(design$variables$demo_age_cat)) ||
@@ -70,14 +69,9 @@ svy_design_summarize <- function(
  svy_stat_fun_type <- is_empty(by_vars) %>%
   ifelse('svy_stat_fun', 'svy_statby_fun')
 
- key_svy_calls <- key$svy_calls[[key$variables[[outcome]]$type]]
-
- if(!is_empty(user_calls))
-  key_svy_calls %<>% intersect(user_calls)
-
  map_dfr(
 
-  .x = key_svy_calls,
+  .x = statistic,
 
   .f = ~ {
 
@@ -128,7 +122,6 @@ svy_design_summarize <- function(
     lvls <- levels(design$variables[[group]])
 
     .out[[group]] <- factor(.out[[group]], levels = lvls)
-    # .out[, x := factor(x, levels = lvls), env = list(x = group)]
 
    }
 

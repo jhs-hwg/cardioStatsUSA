@@ -1,7 +1,7 @@
 
 svy_statby_percentage <- function(outcome, by_vars, design, ...){
 
- if(is.integer(design$variables[[outcome]])){
+ if(is_discrete(outcome)){
   design$variables[[outcome]] <- as.factor(design$variables[[outcome]])
  }
 

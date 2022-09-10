@@ -8,6 +8,7 @@
 nhanes_bp_test <- nhanes_bp %>%
  as.data.table() %>%
  dplyr::mutate(
+  svy_weight = svy_weight_mec,
   demo_age_gteq_18 = dplyr::if_else(demo_age_years >= 18, 'Yes', 'No'),
   demo_age_cat = cut(demo_age_years,
                      breaks = c(18, 39, 59, Inf),
@@ -56,14 +57,14 @@ test_data <- tibble::tribble(
 
 shiny_answers_by_age <- design %>%
  svy_design_summarize(outcome = 'htn_jnc7',
-                      user_calls = c('percentage'),
+                      statistic = c('percentage'),
                       exposure = exposure) %>%
  dplyr::filter(htn_jnc7 == 'Yes') %>%
  dplyr::mutate(demo_gender = 'Overall')
 
 shiny_answers_by_age_sex <- design %>%
  svy_design_summarize(outcome = 'htn_jnc7',
-                      user_calls = c('percentage'),
+                      statistic = c('percentage'),
                       exposure = exposure,
                       group = 'demo_gender') %>%
  dplyr::filter(htn_jnc7 == 'Yes')
@@ -72,8 +73,8 @@ shiny_answers <- shiny_answers_by_age %>%
  dplyr::bind_rows(shiny_answers_by_age_sex) %>%
  dplyr::transmute(demo_gender,
                   demo_age_cat,
-                  shiny_estimate = estimate,
-                  shiny_std_error = std_error)
+                  shiny_estimate = round(estimate,1),
+                  shiny_std_error = round(std_error,1))
 
 test_results <-
  dplyr::left_join(test_data, shiny_answers,
@@ -118,8 +119,7 @@ design <- nhanes_bp_test %>%
 
 shiny_answers_total <- design %>%
  svy_design_summarize(outcome = 'htn_jnc7',
-                      key = nhanes_key,
-                      user_calls = c('percentage'),
+                      statistic = c('percentage'),
                       group = 'demo_race',
                       age_standardize = TRUE,
                       age_wts = c(0.420263, 0.357202, 0.222535)) %>%
@@ -127,8 +127,7 @@ shiny_answers_total <- design %>%
 
 shiny_answers_by_gender <- design %>%
  svy_design_summarize(outcome = 'htn_jnc7',
-                      key = nhanes_key,
-                      user_calls = c('percentage'),
+                      statistic = c('percentage'),
                       exposure = 'demo_gender',
                       group = 'demo_race',
                       age_standardize = TRUE,
@@ -165,7 +164,8 @@ test_that(
 # JAMA Trends in BP tests -------------------------------------------------
 
 nhanes_jama_all <- nhanes_bp %>%
- filter(svy_subpop == 1) %>%
+ mutate(svy_weight = svy_weight_mec) %>%
+ filter(svy_subpop_htn == 1) %>%
  filter(demo_pregnant == 'No' | is.na(demo_pregnant)) %>%
  filter(htn_jnc7 == 'Yes')
 
@@ -175,8 +175,6 @@ nhanes_jama_on_meds <- nhanes_jama_all %>%
 design_all <- nhanes_jama_all %>%
  svy_design_new(
   exposure = exposure,
-  n_exposure_group = as.numeric(character(0)),
-  exposure_cut_type = 'interval',
   years = levels(nhanes_jama_all$svy_year),
   pool = 'no'
  )
@@ -184,8 +182,6 @@ design_all <- nhanes_jama_all %>%
 design_on_meds <- nhanes_jama_on_meds %>%
  svy_design_new(
   exposure = exposure,
-  n_exposure_group = as.numeric(character(0)),
-  exposure_cut_type = 'interval',
   years = levels(nhanes_jama_all$svy_year),
   pool = 'no'
  )
@@ -299,17 +295,15 @@ jama_etable_1 <- tribble(
 
 shiny_answers_etable_1_overall <- design_on_meds %>%
  svy_design_summarize(outcome = 'bp_control_jnc7',
-                      key = nhanes_key,
-                      user_calls = c('percentage'),
+                      statistic = c('percentage'),
                       age_standardize = TRUE) %>%
  filter(bp_control_jnc7=='Yes') %>%
  mutate(group = 'Overall')
 
 shiny_answers_etable_1_by_age <- design_on_meds %>%
  svy_design_summarize(outcome = 'bp_control_jnc7',
-                      key = nhanes_key,
                       exposure = 'demo_age_cat',
-                      user_calls = c('percentage'),
+                      statistic = c('percentage'),
                       age_standardize = TRUE) %>%
  filter(bp_control_jnc7=='Yes') %>%
  mutate(group = recode(demo_age_cat,
@@ -320,9 +314,8 @@ shiny_answers_etable_1_by_age <- design_on_meds %>%
 
 shiny_answers_etable_1_by_sex <- design_on_meds %>%
  svy_design_summarize(outcome = 'bp_control_jnc7',
-                      key = nhanes_key,
                       exposure = 'demo_gender',
-                      user_calls = c('percentage'),
+                      statistic = c('percentage'),
                       age_standardize = TRUE) %>%
  filter(bp_control_jnc7=='Yes') %>%
  mutate(group = recode(demo_gender,
@@ -331,9 +324,8 @@ shiny_answers_etable_1_by_sex <- design_on_meds %>%
 
 shiny_answers_etable_1_by_race <- design_on_meds %>%
  svy_design_summarize(outcome = 'bp_control_jnc7',
-                      key = nhanes_key,
                       exposure = 'demo_race',
-                      user_calls = c('percentage'),
+                      statistic = c('percentage'),
                       age_standardize = TRUE) %>%
  filter(bp_control_jnc7=='Yes') %>%
  mutate(group = recode(demo_race,
@@ -435,8 +427,7 @@ jama_table_2 <- tribble(
 
 shiny_answers_table_2 <- design_all %>%
  svy_design_summarize(outcome = 'bp_cat_meds_excluded',
-                      key = nhanes_key,
-                      user_calls = c('percentage'),
+                      statistic = c('percentage'),
                       age_standardize = TRUE) %>%
  mutate(
   group = recode(
