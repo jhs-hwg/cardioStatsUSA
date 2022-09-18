@@ -4,6 +4,8 @@ is_used <- function(x = NULL) {
 
  if(is.null(x)) return(FALSE)
 
-  !(x == 'None' | is_empty(x))
+ if(is_empty(x)) return(FALSE)
+
+ !(x[1] == 'None')
 
 }

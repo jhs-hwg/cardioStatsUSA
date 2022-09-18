@@ -2,6 +2,7 @@
 
 library(shiny)
 
+# TODO: fix bug with pooled results: 2017-2020 through 2017-2020
 
 #' Run the NHANES BP application
 #'
@@ -20,7 +21,7 @@ app_run <- function(...) {
   introjsUI(),
 
   introBox(
-   titlePanel("NHANES BP"),
+   titlePanel("Cardiometabolic statistics for US adults"),
    data.step = 1,
    data.intro = paste(
     "This application analyzes blood pressure from",
@@ -1006,18 +1007,11 @@ app_run <- function(...) {
 
    if(input$do != 'figure') return(NULL)
 
-   outcome_type <- nhanes_key$variables[[input$outcome]]$type
-
-   stat_all <- nhanes_key$svy_calls[[outcome_type]]
-
    plotly_viz(
     data = smry(),
-    key = nhanes_key,
     outcome = input$outcome,
-    outcome_type = outcome_type,
     exposure = input$exposure,
     group = input$group,
-    stat_all = stat_all,
     statistic_primary = input$statistic_primary,
     geom = input$geom,
     years = years(),

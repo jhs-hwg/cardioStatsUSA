@@ -1,5 +1,5 @@
 
-#' @title Load the nhanes data
+#' Load the nhanes data
 #'
 #' No re-coding is applied.
 #'
@@ -9,7 +9,6 @@
 #' @return data set inheriting from `as`
 #'
 #' @noRd
-#'
 nhanes_load <- function(fpath = file.path(here::here(), 'data-raw'),
                         as = 'tibble'){
 

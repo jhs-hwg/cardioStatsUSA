@@ -7,8 +7,7 @@
 svy_design_summarize(
   design,
   outcome,
-  key,
-  user_calls = c(),
+  statistic = NULL,
   exposure = NULL,
   group = NULL,
   pool_svy_years = FALSE,
@@ -23,9 +22,7 @@ svy_design_summarize(
 
 \item{outcome}{(\emph{character}) the outcome variable}
 
-\item{key}{should always be \code{nhanes_key}}
-
-\item{user_calls}{(\emph{character vector}) which statistics to compute}
+\item{statistic}{(\emph{character vector}) which statistics to compute}
 
 \item{exposure}{(\emph{character}) the exposure variable}
 
@@ -40,6 +37,8 @@ svy_design_summarize(
 \item{age_standardize}{(\emph{logical}) standardize by age groups?}
 
 \item{age_wts}{(\emph{numeric vector}) weights for age standardization.}
+
+\item{key}{should always be \code{nhanes_key}}
 }
 \value{
 summaries

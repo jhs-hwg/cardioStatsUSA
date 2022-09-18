@@ -35,6 +35,7 @@ svy_design_summarize <- function(
  time_var <- ifelse(pool_svy_years, 'None', key$time_var)
  outcome_type <- key$variables[[outcome]]$type
 
+
  statistic %<>% input_infer(key$svy_calls[[outcome_type]])
  exposure  %<>% input_infer("None")
  group     %<>% input_infer("None")

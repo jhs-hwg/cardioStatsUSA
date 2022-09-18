@@ -1,16 +1,49 @@
 
+
+
+#' Visualize a summary of NHANES data
+#'
+#' Analyze the prevalence, mean, or quantiles of an outcome
+#'   over time.
+#'
+#' @param data a summary data frame produced by `svy_design_summarize`
+#' @param outcome (character) the outcome
+#' @param outcome_type (character) valid options are 'ctns', 'bnry', and 'catg'
+#' @param exposure (character; optional) the exposure variable
+#' @param group (character; optional)
+#' @param stat_all (character) a vector containing all the statistics that
+#'   are to be included in the plot The primary statistic determines the
+#'   geometric objects in the plot. All other statistics are presented in
+#'   hover boxes that appear on mouse-over for the relevant object.
+#' @param statistic_primary (character) the statistic that defines the
+#'   geometric objects in the plot.
+#' @param geom (character) can be 'bar' or 'points'
+#' @param years (character) the years to be displayed in the plot
+#' @param pool (character) 'yes' or 'no', is this a trend plot or a
+#'   pooled analysis?
+#' @param reorder_cats (logical) whether to re-order the categorical exposure
+#'   variable so that its levels are shown in increasing order by the expected
+#'   outcome.
+#'
+#' @return a `plotly` object
+#'
+#' @export
+#'
 plotly_viz <- function(data,
-                       key,
                        outcome,
-                       outcome_type,
-                       exposure,
-                       group,
-                       stat_all,
+                       exposure = NULL,
+                       group = NULL,
                        statistic_primary,
-                       geom,
+                       geom = 'bar',
                        years,
-                       pool,
-                       reorder_cats=FALSE){
+                       pool = 'no',
+                       reorder_cats=FALSE,
+                       width = NULL,
+                       height = 600){
+
+ key <- nhanesShinyBP::nhanes_key
+ outcome_type <- key$variables[[outcome]]$type
+ stat_all <- key$svy_calls[[outcome_type]]
 
  if(outcome_type == 'intg' && statistic_primary != 'quantile'){
   outcome_type <- 'catg'
@@ -87,7 +120,9 @@ plotly_viz <- function(data,
       statistic_primary = statistic_primary,
       geom = geom,
       pool = pool,
-      reorder_cats = reorder_cats)
+      reorder_cats = reorder_cats,
+      width = width,
+      height = height)
 
 }
 
@@ -102,7 +137,9 @@ plotly_viz_worker <- function(data,
                               statistic_primary,
                               geom,
                               pool,
-                              reorder_cats) {
+                              reorder_cats,
+                              width,
+                              height) {
 
  if(nrow(data) == 0) return(NULL)
 
@@ -166,7 +203,7 @@ plotly_viz_worker <- function(data,
  #  .[order(x), env = list(x = split_by)] %>%
  #  split(by = split_by)
 
- fig <- plot_ly(height = 600)
+ fig <- plot_ly(height = height, width = width)
 
  bumps <- c(0)
 
@@ -329,12 +366,13 @@ plotly_viz_worker <- function(data,
     l = 50,
     r = 50
    ),
-   annotations = list(x = 0.5,
-                      y = -0.25,
-                      text = "(Courtesy of Byron, Ligong, and Paul)",
-                      showarrow = F,
-                      xref='paper',
-                      yref='paper'),
+   # to add our names to the plot, uncomment this
+   # annotations = list(x = 0.5,
+   #                    y = -0.25,
+   #                    text = "(Courtesy of Byron, Ligong, and Paul)",
+   #                    showarrow = F,
+   #                    xref='paper',
+   #                    yref='paper'),
    xaxis = xaxis,
    yaxis = yaxis,
    legend = legend_args
