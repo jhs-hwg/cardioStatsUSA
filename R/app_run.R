@@ -939,12 +939,34 @@ app_run <- function(...) {
 
    type_subpop <- nhanes_key$data[variable == input$outcome, subpop]
 
+   # restrict the sample to the relevant sub-population
    colname_subpop <- paste('svy_subpop', type_subpop, sep = '_')
-   colname_weight <- paste('svy_weight', type_subpop, sep = '_')
 
-   ds <- nhanes_bp %>%
-    .[.[[colname_subpop]] == 1] %>%
-    .[, svy_weight := .[[colname_weight]]] %>%
+   nhanes_subpop <- nhanes_bp %>%
+    .[.[[colname_subpop]] == 1]
+
+   # colname_weight <- paste('svy_weight', type_subpop, sep = '_')
+
+   # if the count of a variable was requested, calibrate the
+   # weights so that the sum of observations in the sub-population
+   # matches the sum of weights
+   if('count' %in% input$statistic){
+
+    svy_data <- nhanes_calibrate(
+     nhanes_full = nhanes_bp,
+     nhanes_sub = nhanes_subpop
+    ) %>%
+     .[, svy_weight := svy_weight_cal]
+
+   } else {
+
+    svy_data <- nhanes_subpop %>%
+     .[, svy_weight := svy_weight_mec]
+
+   }
+
+
+   ds <- svy_data %>%
     svy_design_new(
      exposure = input$exposure,
      n_exposure_group = as.numeric(input$n_exposure_group),

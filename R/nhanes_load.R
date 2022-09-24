@@ -20,7 +20,7 @@ nhanes_load <- function(fpath = file.path(here::here(), 'data-raw'),
   file.path(fpath, 'nhanes_lipids-raw.sas7bdat')
  )
 
- out <- left_join(data_bp, data_lipids) %>%
+ out <- left_join(data_bp, data_lipids, by = c("SEQN", "WTSAF2YR")) %>%
   mutate(subpopldl = replace(subpopldl, is.na(subpopldl), 0))
 
  # data_lipids %>% filter(SEQN == 31720)
