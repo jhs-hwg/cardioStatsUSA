@@ -37,7 +37,11 @@ expect_equal(nrow(design$variables), 5504)
 # up to 0.15% of a difference in prevalence estimate is acceptable
 # (because rounding can be done differently)
 diff_tolerance <- 0.1
-
+# up to 1/2 of a percentage is acceptable for CI differences
+# the app uses svymean for CI's of percentages, which leads to
+# slightly more narrow intervals (this is done for efficiency
+# and also because the app's CIs are merely descriptive)
+ci_diff_tolerance <- 0.5
 
 # test results without age-adjustment -------------------------------------
 
@@ -362,11 +366,13 @@ test_that(
   expect_equal(test_results$estimate_jama,
                test_results$estimate_shiny)
 
-  # expect_equal(test_results_overall$ci_lower_jama,
-  #              test_results_overall$ci_lower_shiny)
+  expect_equal(test_results$ci_lower_jama,
+               test_results$ci_lower_shiny,
+               tolerance = ci_diff_tolerance)
 
-  # expect_equal(test_results_overall$ci_upper_jama,
-  #              test_results_overall$ci_upper_shiny)
+  expect_equal(test_results$ci_upper_jama,
+               test_results$ci_upper_shiny,
+               tolerance = ci_diff_tolerance)
 
  }
 )

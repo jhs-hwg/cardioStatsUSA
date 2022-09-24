@@ -41,6 +41,10 @@ app_run()
 
 ```
 
+## Weights
+
+if counts are requested, we re-calibrate weights.
+
 ## Validation of results from the shiny application
 
 We have replicated results from prior NHANES publications to verify that routines used to conduct analyses in this app are valid. Based on these tests, we have identified some cases where our app does not exactly match previously published articles, and we note those cases here.

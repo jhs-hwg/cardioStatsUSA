@@ -29,6 +29,10 @@ library(nhanesShinyBP)
 app_run()
 ```
 
+## Weights
+
+if counts are requested, we re-calibrate weights.
+
 ## Validation of results from the shiny application
 
 We have replicated results from prior NHANES publications to verify that

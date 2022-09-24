@@ -7,15 +7,15 @@
 plotly_viz(
   data,
   outcome,
-  outcome_type,
-  exposure,
-  group,
-  stat_all,
+  exposure = NULL,
+  group = NULL,
   statistic_primary,
-  geom,
+  geom = "bar",
   years,
-  pool,
-  reorder_cats = FALSE
+  pool = "no",
+  reorder_cats = FALSE,
+  width = NULL,
+  height = 600
 )
 }
 \arguments{
@@ -23,16 +23,9 @@ plotly_viz(
 
 \item{outcome}{(character) the outcome}
 
-\item{outcome_type}{(character) valid options are 'ctns', 'bnry', and 'catg'}
-
 \item{exposure}{(character; optional) the exposure variable}
 
 \item{group}{(character; optional)}
-
-\item{stat_all}{(character) a vector containing all the statistics that
-are to be included in the plot The primary statistic determines the
-geometric objects in the plot. All other statistics are presented in
-hover boxes that appear on mouse-over for the relevant object.}
 
 \item{statistic_primary}{(character) the statistic that defines the
 geometric objects in the plot.}
@@ -47,6 +40,13 @@ pooled analysis?}
 \item{reorder_cats}{(logical) whether to re-order the categorical exposure
 variable so that its levels are shown in increasing order by the expected
 outcome.}
+
+\item{outcome_type}{(character) valid options are 'ctns', 'bnry', and 'catg'}
+
+\item{stat_all}{(character) a vector containing all the statistics that
+are to be included in the plot The primary statistic determines the
+geometric objects in the plot. All other statistics are presented in
+hover boxes that appear on mouse-over for the relevant object.}
 }
 \value{
 a \code{plotly} object

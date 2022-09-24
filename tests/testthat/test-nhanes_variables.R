@@ -2,7 +2,13 @@
 library(testthat)
 library(haven)
 
-
+# pm_23sep2022 <- haven::read_sas('data-raw/final9920_0923022.sas7bdat')
+#
+# pm_23jul2022 <- haven::read_sas('data-raw/nhanes_bp-raw.sas7bdat')
+#
+# length(names(pm_23jul2022))
+#
+# setdiff(names(pm_23jul2022), names(pm_23sep2022))
 
 nhanes_sas <- nhanes_load(as = 'tibble') %>%
  nhanes_rename()
