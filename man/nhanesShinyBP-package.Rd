@@ -8,10 +8,20 @@
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-Use a simple interface to generate summary data and figures from the continuous NHANES exam, beginning in 1999-2000 and continuing through 2017-2020. Save your results, either in the form of a dataset or as a figure saved to png format. All analyses account for the NHANES design weights and are tested for equivalence with CDC statistics and reports.
+Analyze cardiometabolic outcomes among adults living in the United States of America using data from the National Health and Nutrition Examination Survey (NHANES). Save your results, either in the form of a dataset or as a figure. All analyses account for the NHANES design weights and are tested for equivalence with CDC statistics and prior papers.
 }
 \author{
-\strong{Maintainer}: First Last \email{first.last@example.com} (\href{https://orcid.org/YOUR-ORCID-ID}{ORCID})
+\strong{Maintainer}: Byron Jaeger \email{bjaeger@wakehealth.edu} (\href{https://orcid.org/0000-0001-7399-2299}{ORCID})
+
+Authors:
+\itemize{
+  \item Paul Muntner \email{pmuntner@uab.edu} [compiler, data contributor]
+}
+
+Other contributors:
+\itemize{
+  \item Ligong Chen \email{ligongc@uab.edu} [contributor]
+}
 
 }
 \keyword{internal}

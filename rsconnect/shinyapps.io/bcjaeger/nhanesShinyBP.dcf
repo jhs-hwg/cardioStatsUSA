@@ -5,10 +5,10 @@ account: bcjaeger
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 6653717
-bundleId: 6139980
+bundleId: 6338976
 url: https://bcjaeger.shinyapps.io/nhanesShinyBP/
-when: 1658958715.70162
-lastSyncTime: 1658958715.70162
+when: 1664200616.41327
+lastSyncTime: 1664200616.41327
 asMultiple: FALSE
 asStatic: FALSE
-ignoredFiles: docs/Instructions_NHANES_6_8_2022.docx|docs/MACRO to Demonstrate Data Presentation Standards for Proportions.pdf|docs/Survey Data Presentation Standards.pptx|docs/Yoon_HYPERTENSIONAHA.114.04012.pdf|SAS/test_svy_stat_funs.sas|tests/testthat/test-nhanes_shiny.R|tests/testthat/test-reliability_mean.R|tests/testthat/test-reliability_prop.R|tests/testthat/test-svy_stat.R|tests/testthat.R
+ignoredFiles: docs/Instructions_NHANES_6_8_2022.docx|docs/MACRO to Demonstrate Data Presentation Standards for Proportions.pdf|docs/Survey Data Presentation Standards.pptx|docs/Yoon_HYPERTENSIONAHA.114.04012.pdf|SAS/test_svy_stat_funs.sas

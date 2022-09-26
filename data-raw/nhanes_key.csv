@@ -9,7 +9,7 @@ Demographics,"Age category, years",demo_age_cat,catg,TRUE,TRUE,TRUE,TRUE,htn
 Demographics,Race,demo_race,catg,TRUE,TRUE,TRUE,TRUE,htn
 Demographics,"Age, years",demo_age_years,ctns,TRUE,TRUE,TRUE,FALSE,htn
 Demographics,Pregnant,demo_pregnant,bnry,TRUE,TRUE,TRUE,TRUE,htn
-Demographics,Gender,demo_gender,bnry,TRUE,TRUE,TRUE,TRUE,htn
+Demographics,Gender,demo_gender,catg,TRUE,TRUE,TRUE,TRUE,htn
 Blood pressure,"Systolic blood pressure, mm Hg",bp_sys_mean,ctns,TRUE,TRUE,TRUE,FALSE,htn
 Blood pressure,"Diastolic blood pressure, mm Hg",bp_dia_mean,ctns,TRUE,TRUE,TRUE,FALSE,htn
 Blood pressure,Blood pressure category (not including antihypertensive medication use),bp_cat_meds_excluded,catg,TRUE,TRUE,TRUE,TRUE,htn

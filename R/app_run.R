@@ -1,8 +1,4 @@
-# make age standard conditional
-
 library(shiny)
-
-# TODO: fix bug with pooled results: 2017-2020 through 2017-2020
 
 #' Run the NHANES BP application
 #'
@@ -12,6 +8,9 @@ library(shiny)
 #'
 #' @export
 #'
+
+# TODO: fix bug with pooled results: 2017-2020 through 2017-2020
+
 app_run <- function(...) {
 
  # User interface (UI) -----------------------------------------------------
@@ -919,17 +918,6 @@ app_run <- function(...) {
         no = 'no'
        )
 
-      # nhanes_bp <- nhanes_bp %>%
-      #  .[,
-      #    y := fifelse(x >= a & x <= b, 'yes', 'no'),
-      #    env = list(
-      #     a = input[[ss_val_ctns]][1],
-      #     b = input[[ss_val_ctns]][2],
-      #     x = input[[ss_var]],
-      #     y = paste(input[[ss_var]], 'tmp', sep='_')
-      #    )
-      #  ]
-
      }
 
     }
@@ -950,30 +938,6 @@ app_run <- function(...) {
    # if the count of a variable was requested, calibrate the
    # weights so that the sum of observations in the sub-population
    # matches the sum of weights
-   if('count' %in% input$statistic){
-
-    svy_data <- nhanes_calibrate(
-     nhanes_full = nhanes_bp,
-     nhanes_sub = nhanes_subpop
-    ) %>%
-     .[, svy_weight := svy_weight_cal]
-
-   } else {
-
-    svy_data <- nhanes_subpop %>%
-     .[, svy_weight := svy_weight_mec]
-
-   }
-
-
-   ds <- svy_data %>%
-    svy_design_new(
-     exposure = input$exposure,
-     n_exposure_group = as.numeric(input$n_exposure_group),
-     exposure_cut_type = input$exposure_cut_type,
-     years = years(),
-     pool = input$pool
-    )
 
    subset_calls <- list()
 
@@ -1000,27 +964,71 @@ app_run <- function(...) {
 
     }
 
+   }
 
+   smry_counts <- smry_no_counts <- NULL
+
+   stats <- input$statistic
+
+   if('count' %in% input$statistic){
+
+    smry_counts <- nhanes_bp %>%
+     nhanes_calibrate(nhanes_sub = nhanes_subpop) %>%
+     .[, svy_weight := svy_weight_cal] %>%
+     svy_design_new(
+      exposure = input$exposure,
+      n_exposure_group = as.numeric(input$n_exposure_group),
+      exposure_cut_type = input$exposure_cut_type,
+      years = years(),
+      pool = input$pool
+     ) %>%
+     svy_design_subset(subset_calls) %>%
+     svy_design_summarize(
+      outcome = input$outcome,
+      statistic = 'count',
+      exposure = input$exposure,
+      group = input$group,
+      age_standardize = input$age_standardize,
+      age_wts = c(
+       input$age_wts_1,
+       input$age_wts_2,
+       input$age_wts_3,
+       input$age_wts_4
+      )
+     )
+   }
+
+   stats_no_count <- setdiff(stats, 'count')
+
+   if(!is_empty(stats_no_count)){
+
+    smry_no_counts <- nhanes_subpop %>%
+     .[, svy_weight := svy_weight_mec] %>%
+      svy_design_new(
+       exposure = input$exposure,
+       n_exposure_group = as.numeric(input$n_exposure_group),
+       exposure_cut_type = input$exposure_cut_type,
+       years = years(),
+       pool = input$pool
+      ) %>%
+      svy_design_subset(subset_calls) %>%
+      svy_design_summarize(
+       outcome = input$outcome,
+       statistic = stats_no_count,
+       exposure = input$exposure,
+       group = input$group,
+       age_standardize = input$age_standardize,
+       age_wts = c(
+        input$age_wts_1,
+        input$age_wts_2,
+        input$age_wts_3,
+        input$age_wts_4
+       )
+      )
 
    }
 
-   ds %<>% svy_design_subset(subset_calls)
-
-   svy_design_summarize(
-    design = ds,
-    outcome = input$outcome,
-    statistic = input$statistic,
-    exposure = input$exposure,
-    group = input$group,
-    pool_svy_years = input$pool == 'yes',
-    age_standardize = input$age_standardize,
-    age_wts = c(
-     input$age_wts_1,
-     input$age_wts_2,
-     input$age_wts_3,
-     input$age_wts_4
-    )
-   )
+   bind_smry(smry_counts, smry_no_counts)
 
   }) %>%
    bindEvent(input$run)
@@ -1031,9 +1039,6 @@ app_run <- function(...) {
 
    plotly_viz(
     data = smry(),
-    outcome = input$outcome,
-    exposure = input$exposure,
-    group = input$group,
     statistic_primary = input$statistic_primary,
     geom = input$geom,
     years = years(),

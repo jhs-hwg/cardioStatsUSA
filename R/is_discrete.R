@@ -1,7 +1,8 @@
 
 
 is_var_type <- function(var_name, var_types){
-  nhanesShinyBP::nhanes_key$variables[[var_name]]$type %in% var_types
+ if(is.null(var_name)) return(FALSE)
+ nhanesShinyBP::nhanes_key$variables[[var_name]]$type %in% var_types
 }
 
 is_binary <- function(variable_name) {

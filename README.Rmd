@@ -17,6 +17,8 @@ knitr::opts_chunk$set(
 
 
 <!-- badges: start -->
+[![Codecov test coverage](https://codecov.io/gh/jhs-hwg/nhanes-shiny-bp/branch/main/graph/badge.svg)](https://app.codecov.io/gh/jhs-hwg/nhanes-shiny-bp?branch=main)
+[![R-CMD-check](https://github.com/jhs-hwg/nhanes-shiny-bp/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/jhs-hwg/nhanes-shiny-bp/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 Our goal is to provide a platform for exploration of the National Health and Nutrition Examination Survey (NHANES) data. 

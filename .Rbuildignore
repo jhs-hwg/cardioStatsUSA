@@ -7,3 +7,9 @@ docs
 temp.R
 ^logo
 ^README\.Rmd$
+^codecov\.yml$
+^app.R$
+manifest.json
+paper
+rsconnect
+^\.github$

@@ -1,0 +1,42 @@
+
+utils::globalVariables(
+ names = c(
+  c(
+   ".",
+   "CI_mean",
+   "CI_prop",
+   "V1",
+   "ci_lower",
+   "ci_upper",
+   "df",
+   "df_flag",
+   "estimate",
+   "kg_relw_p",
+   "kg_relw_q",
+   "kg_wdth",
+   "map2_dfr",
+   "n_eff",
+   "nhanes_bp",
+   "nhanes_key",
+   "p_reliable",
+   "partial",
+   "q_reliable",
+   "quant",
+   "ratio",
+   "rse",
+   "sep",
+   "stat_label",
+   "statistic",
+   "std_error",
+   "subpop",
+   "svy_weight",
+   "svy_weight_cal",
+   "svy_weight_mec",
+   "svy_year",
+   "total",
+   "type",
+   "variable"
+  )
+ )
+)
+

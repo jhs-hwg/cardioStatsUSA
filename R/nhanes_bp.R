@@ -1,49 +1,9 @@
 #' NHANES blood pressure data, 1999-2020
 #'
 #' A dataset containing variables that pertain to blood pressure from the
-#'   NHANES continuous examination cycles.
+#'   NHANES continuous examination cycles. The documenation of the variables
+#'   in this data are available online (TODO: add link)
 #'
-#' @format A data frame with 59799 rows and 35 variables:
-#' \describe{
-#'   \item{price}{price, in US dollars}
-#'   \item{carat}{weight of the diamond, in carats}
-#'   \item{svy_id}{survey id}
-#'   \item{svy_weight}{survey weight}
-#'   \item{svy_psu}{survey psu}
-#'   \item{svy_strata}{survey strata}
-#'   \item{svy_year}{survey year}
-#'   \item{demo_age_cat}{age category}
-#'   \item{demo_race}{race/ethnicity}
-#'   \item{demo_age_years}{age, years}
-#'   \item{demo_pregnant}{pregnancy, yes or no}
-#'   \item{demo_gender}{gender, male or female}
-#'   \item{bp_sys_mean}{systolic blood pressure, mm Hg}
-#'   \item{bp_dia_mean}{diastolic blood pressure, mm Hg}
-#'   \item{bp_cat_meds_excluded}{blood pressure category, excluding those using antihypertensive medication}
-#'   \item{bp_cat_meds_included}{blood pressure category, including those using antihypertensive medication}
-#'   \item{bp_med_use}{using antihypertensive medication, yes or no}
-#'   \item{bp_med_recommended_jnc7}{antihypertensive medication recommended by JNC7 guideline, yes or no}
-#'   \item{bp_med_recommended_accaha}{antihypertensive medication recommended by ACC/AHA 2017 guideline, yes or no}
-#'   \item{bp_med_n_class}{number of antihypertensive medication classes being used}
-#'   \item{bp_control_jnc7}{blood pressure control according to JNC7}
-#'   \item{bp_control_accaha}{blood pressure control according to ACC/AHA 2017 guideline}
-#'   \item{htn_jnc7}{hypertension according to JNC7}
-#'   \item{htn_accaha}{hypertension according to ACC/AHA 2017 guideline}
-#'   \item{htn_aware}{awareness of hypertenison}
-#'   \item{htn_resistant_jnc7}{resistant hypertension according to JNC7}
-#'   \item{htn_resistant_accaha}{resistant hypertension according to ACC/AHA 2017 guideline}
-#'   \item{cc_smoke}{smoking}
-#'   \item{cc_bmi}{body mass index, kg/m2}
-#'   \item{cc_diabetes}{prevalent diabetes, type 2}
-#'   \item{cc_ckd}{prevalent chronic kidney disease}
-#'   \item{cc_cvd_mi}{history of myocardial infarction}
-#'   \item{cc_cvd_chd}{history of coronary heart disease}
-#'   \item{cc_cvd_stroke}{history of stroke}
-#'   \item{cc_cvd_ascvd}{history of atherosclerotic cardiovascular disease}
-#'   \item{cc_cvd_hf}{history of heart failure}
-#'   \item{cc_cvd_any}{history of any cardiovascular disease}
-#'
-#' }
 #' @source \url{https://wwwn.cdc.gov/nchs/nhanes/continuousnhanes/default.aspx}
 "nhanes_bp"
 

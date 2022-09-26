@@ -27,23 +27,26 @@
 #'
 #' @return a `plotly` object
 #'
-#' @export
+#' @noRd
 #'
 plotly_viz <- function(data,
-                       outcome,
-                       exposure = NULL,
-                       group = NULL,
                        statistic_primary,
                        geom = 'bar',
-                       years,
+                       years = NULL,
                        pool = 'no',
                        reorder_cats=FALSE,
                        width = NULL,
                        height = 600){
 
  key <- nhanesShinyBP::nhanes_key
+
+ outcome <- attr(data, "outcome")
+ exposure <- attr(data, "exposure")
+ group <- attr(data, "group")
  outcome_type <- key$variables[[outcome]]$type
  stat_all <- key$svy_calls[[outcome_type]]
+
+ if(is.null(years)) years <- levels(data$svy_year)
 
  if(outcome_type == 'intg' && statistic_primary != 'quantile'){
   outcome_type <- 'catg'
@@ -80,7 +83,7 @@ plotly_viz <- function(data,
 
  }
 
- if( pool == 'yes' ){
+ if( pool == 'yes' && length(years) > 1){
 
   data[[key$time_var]] <-
    as.factor(glue("{years[1]} through {years[length(years)]}"))

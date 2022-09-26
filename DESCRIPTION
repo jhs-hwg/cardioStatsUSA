@@ -1,15 +1,26 @@
 Package: nhanesShinyBP
 Title: Explore 20+ years of blood pressure data from NHANES
 Version: 0.0.0.9000
-Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: Use a simple interface to generate summary data and figures
-  from the continuous NHANES exam, beginning in 1999-2000 and continuing 
-  through 2017-2020. Save your results, either in the form of a dataset
-  or as a figure saved to png format. All analyses account for the NHANES
-  design weights and are tested for equivalence with CDC statistics and 
-  reports.
+Authors@R: c(
+    person(given = "Byron",
+           family = "Jaeger",
+           role = c("aut", "cre"),
+           email = "bjaeger@wakehealth.edu",
+           comment = c(ORCID = "0000-0001-7399-2299")),
+    person(given = "Paul",
+           family = "Muntner",
+           role = c("aut", "com", "dtc"),
+           email = "pmuntner@uab.edu"),
+    person(given = "Ligong",
+           family = "Chen",
+           role = c("ctb"),
+           email = "ligongc@uab.edu")
+    )
+Description: Analyze cardiometabolic outcomes among adults living in the 
+  United States of America using data from the National Health and Nutrition 
+  Examination Survey (NHANES). Save your results, either in the form of a 
+  dataset or as a figure. All analyses account for the NHANES design weights 
+  and are tested for equivalence with CDC statistics and prior papers.
 License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
@@ -36,6 +47,7 @@ Imports:
     tibble,
     tidyr
 Suggests: 
+    covr,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Depends: 

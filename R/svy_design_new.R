@@ -2,7 +2,7 @@
 
 #' Make a new design object
 #'
-#' @param data nhanes data - should be recoded (see [nhanes_recode])
+#' @param data nhanes data - should be recoded
 #' @param years the years to be included in the analysis
 #' @param exposure the exposure variable
 #' @param n_exposure_group how many exposure groups? only applies to
@@ -12,7 +12,7 @@
 #' @param pool are the results pooled across multiple NHANES cycles?
 #'  if so, say 'yes', o.w. say 'no'
 #'
-#' @export
+#' @noRd
 #'
 #' @return a `svydesign` object
 #'
@@ -61,6 +61,9 @@ svy_design_new <- function(data,
                      weights = ~ svy_weight,
                      data = data_design,
                      nest = TRUE)
+
+ attr(design, 'pool') <- pool
+ attr(design, 'exposure') <- exposure
 
  design
 

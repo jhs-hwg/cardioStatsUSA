@@ -16,15 +16,15 @@
 #' @param age_wts (*numeric vector*) weights for age standardization.
 #'
 #' @return summaries
-#' @export
+#'
+#' @noRd
 #'
 svy_design_summarize <- function(
   design,
   outcome,
-  statistic = NULL,
   exposure = NULL,
+  statistic = NULL,
   group = NULL,
-  pool_svy_years = FALSE,
   simplify_bnry_output = TRUE,
   quantiles = c(0.25, 0.50, 0.75),
   age_standardize = FALSE,
@@ -32,6 +32,7 @@ svy_design_summarize <- function(
 ){
 
  key <- nhanesShinyBP::nhanes_key
+ pool_svy_years = attr(design, 'pool') == 'yes'
  time_var <- ifelse(pool_svy_years, 'None', key$time_var)
  outcome_type <- key$variables[[outcome]]$type
 
@@ -70,7 +71,7 @@ svy_design_summarize <- function(
  svy_stat_fun_type <- is_empty(by_vars) %>%
   ifelse('svy_stat_fun', 'svy_statby_fun')
 
- map_dfr(
+ smry_output <- map_dfr(
 
   .x = statistic,
 
@@ -148,4 +149,15 @@ svy_design_summarize <- function(
 
  )
 
+ attr(smry_output, "outcome") <- outcome
+ attr(smry_output, "exposure") <- exposure
+ attr(smry_output, "statistic") <- statistic
+ attr(smry_output, "group") <- group
+
+ smry_output
+
 }
+
+
+
+

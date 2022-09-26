@@ -1,9 +1,8 @@
 
 
-###################################Function for reliability of proportion################################
-#########################################################################################################
-is_reliable_prop <- function(data, design, smry)
- {
+# reliability of proportions
+
+is_reliable_prop <- function(data, design, smry) {
  Nobs <- get_obs_count(data)
  Npsu <- get_psu_count(design)
  Nstrata <- get_strata_count(design)
