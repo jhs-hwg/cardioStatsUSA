@@ -1,4 +1,4 @@
 library(testthat)
-library(nhanesShinyBP)
+library(cardioStats.USA)
 
-test_check("nhanesShinyBP")
+test_check("cardioStats.USA")

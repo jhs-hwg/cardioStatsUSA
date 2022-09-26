@@ -31,7 +31,7 @@ nhanes_visualize <- function(outcome,
                              width = NULL,
                              height = NULL){
 
- nhanes <- nhanesShinyBP::nhanes_bp
+ nhanes <- cardioStats.USA::nhanes_bp
 
  years <- switch(
   years[1],
@@ -50,10 +50,10 @@ nhanes_visualize <- function(outcome,
  if(is.null(statistic_primary)){
 
   outcome_type <-
-   nhanesShinyBP::nhanes_key$variables[[outcome]]$type
+   cardioStats.USA::nhanes_key$variables[[outcome]]$type
 
   statistic_primary <-
-   nhanesShinyBP::nhanes_key$svy_calls[[outcome_type]][1]
+   cardioStats.USA::nhanes_key$svy_calls[[outcome_type]][1]
 
  }
 

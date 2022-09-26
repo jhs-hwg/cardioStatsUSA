@@ -38,7 +38,7 @@ plotly_viz <- function(data,
                        width = NULL,
                        height = 600){
 
- key <- nhanesShinyBP::nhanes_key
+ key <- cardioStats.USA::nhanes_key
 
  outcome <- attr(data, "outcome")
  exposure <- attr(data, "exposure")

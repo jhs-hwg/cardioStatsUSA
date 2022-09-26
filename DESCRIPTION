@@ -1,5 +1,5 @@
-Package: nhanesShinyBP
-Title: Explore 20+ years of blood pressure data from NHANES
+Package: cardioStats.USA
+Title: Explore Cardiometabolic Outcomes Using NHANES
 Version: 0.0.0.9000
 Authors@R: c(
     person(given = "Byron",
