@@ -1,4 +1,4 @@
 library(testthat)
-library(cardioStats.USA)
+library(cardioStatsUSA)
 
-test_check("cardioStats.USA")
+test_check("cardioStatsUSA")

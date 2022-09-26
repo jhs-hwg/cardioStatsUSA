@@ -31,7 +31,7 @@ svy_design_summarize <- function(
   age_wts = c(0.155, 0.454, 0.215, 0.177)
 ){
 
- key <- cardioStats.USA::nhanes_key
+ key <- cardioStatsUSA::nhanes_key
  pool_svy_years = attr(design, 'pool') == 'yes'
  time_var <- ifelse(pool_svy_years, 'None', key$time_var)
  outcome_type <- key$variables[[outcome]]$type

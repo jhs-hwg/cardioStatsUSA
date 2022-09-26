@@ -20,7 +20,7 @@ You can install the development version of nhanesTrends from
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("jhs-hwg/cardioStats.USA")
+remotes::install_github("jhs-hwg/cardioStatsUSA")
 ```
 
 ## Example
@@ -29,7 +29,7 @@ The shiny application is hosted on a public server, but you can also run
 it locally:
 
 ``` r
-library(cardioStats.USA)
+library(cardioStatsUSA)
 app_run()
 ```
 

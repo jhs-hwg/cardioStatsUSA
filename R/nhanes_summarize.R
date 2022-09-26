@@ -45,8 +45,8 @@ nhanes_summarize <- function(outcome,
                              age_wts = NULL){
 
  # back-end objects
- key          <- cardioStats.USA::nhanes_key
- nhanes       <- cardioStats.USA::nhanes_bp
+ key          <- cardioStatsUSA::nhanes_key
+ nhanes       <- cardioStatsUSA::nhanes_bp
 
  # TODO check inputs
 

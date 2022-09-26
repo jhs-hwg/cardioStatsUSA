@@ -5,10 +5,10 @@ account: bcjaeger
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 6653717
-bundleId: 6338976
+bundleId: 6339633
 url: https://bcjaeger.shinyapps.io/nhanesShinyBP/
-when: 1664200616.41327
-lastSyncTime: 1664200616.41327
+when: 1664210037.02485
+lastSyncTime: 1664210037.02485
 asMultiple: FALSE
 asStatic: FALSE
-ignoredFiles: docs/Instructions_NHANES_6_8_2022.docx|docs/MACRO to Demonstrate Data Presentation Standards for Proportions.pdf|docs/Survey Data Presentation Standards.pptx|docs/Yoon_HYPERTENSIONAHA.114.04012.pdf|SAS/test_svy_stat_funs.sas
+ignoredFiles: .github/workflows/R-CMD-check.yaml|_pkgdown.yml|codecov.yml|docs/Instructions_NHANES_6_8_2022.docx|docs/MACRO to Demonstrate Data Presentation Standards for Proportions.pdf|docs/Survey Data Presentation Standards.pptx|docs/Yoon_HYPERTENSIONAHA.114.04012.pdf|logo.png|logo.R|NEWS.md|paper/cardio_stats_USA_outline-v1-09-24-2022.docx|paper/cardio_stats_USA_outline-v2-09-25-2022.docx|SAS/antihypertensive_NHANES_data_1999_2020_9_21_2022.sas|SAS/test_svy_stat_funs.sas
