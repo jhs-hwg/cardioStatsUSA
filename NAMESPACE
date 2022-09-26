@@ -2,6 +2,7 @@
 
 export(app_run)
 export(nhanes_summarize)
+export(nhanes_visualize)
 import(data.table)
 import(glue)
 import(here)

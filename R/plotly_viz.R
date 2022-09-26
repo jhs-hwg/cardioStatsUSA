@@ -83,10 +83,16 @@ plotly_viz <- function(data,
 
  }
 
- if( pool == 'yes' && length(years) > 1){
+ if( pool == 'yes'){
 
-  data[[key$time_var]] <-
-   as.factor(glue("{years[1]} through {years[length(years)]}"))
+  if(length(years) > 1){
+   data[[key$time_var]] <-
+    as.factor(glue("{years[1]} through {years[length(years)]}"))
+  } else {
+   data[[key$time_var]] <-
+    as.factor(years[1])
+  }
+
 
  }
 

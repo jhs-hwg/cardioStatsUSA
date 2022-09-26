@@ -55,7 +55,7 @@ nhanes_summarize <- function(outcome,
  stats        <- key$svy_calls[[outcome_type]]
 
  # silly conversion to make pool consistent w/the svy functions
- pool <- ifelse(pool, yes = 'yes', no = 'no')
+ if(is.logical(pool)) pool <- ifelse(pool, yes = 'yes', no = 'no')
 
  years <- switch(
   years[1],
