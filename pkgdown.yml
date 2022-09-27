@@ -1,0 +1,16 @@
+pandoc: 2.14.2
+pkgdown: 2.0.6
+pkgdown_sha: ~
+articles:
+  bp_control_accaha: bp_control_accaha.html
+  bp_control_jnc7: bp_control_jnc7.html
+  bp_levels: bp_levels.html
+  bp_meds: bp_meds.html
+  cardioStatsUSA: cardioStatsUSA.html
+  prev_htn_accaha: prev_htn_accaha.html
+  prev_htn_jnc7: prev_htn_jnc7.html
+last_built: 2022-09-27T16:17Z
+urls:
+  reference: https://jhs-hwg.github.io/cardioStatsUSA/reference
+  article: https://jhs-hwg.github.io/cardioStatsUSA/articles
+
