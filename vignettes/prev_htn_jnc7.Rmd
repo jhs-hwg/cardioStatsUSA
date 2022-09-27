@@ -10,17 +10,16 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  fig.height = 6,
+  fig.width = 7.9,
+  echo = FALSE
 )
 ```
 
 ```{r setup}
 library(cardioStatsUSA)
 ```
-
-## Hypertension (JNC7 guideline definition)
-
-### Prevalence by calendar year.
 
 ```{r}
 nhanes_visualize(outcome = 'htn_jnc7', 

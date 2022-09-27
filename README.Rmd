@@ -118,9 +118,11 @@ tbl_summary_design %>%
   )
  ) %>%
  modify_header(all_stat_cols() ~ "**{level}**") %>%
- modify_footnote(all_stat_cols() ~ NA) %>%
- as_gt() %>%
- tab_source_note("Table values are mean (standard deviation) or percent.")
+ modify_footnote(all_stat_cols() ~ NA)
+
+# %>%
+#  as_gt() %>%
+#  tab_source_note("Table values are mean (standard deviation) or percent.")
 
 ```
 
