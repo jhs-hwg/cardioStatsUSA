@@ -43,15 +43,85 @@ app_run()
 
 ```
 
-## Weights
+## Why we made this
+
+## Methods
+
+### Weights
 
 if counts are requested, we re-calibrate weights.
 
-## Validation of results from the shiny application
+### Validation of results from the shiny application
 
 We have replicated results from prior NHANES publications to verify that routines used to conduct analyses in this app are valid. Based on these tests, we have identified some cases where our app does not exactly match previously published articles, and we note those cases here.
 
 TO BE WRITTEN: notes on tests showing exact match with [Muntner et al](https://jamanetwork.com/journals/jama/fullarticle/2770254)
 
 TO BE WRITTEN: notes on discrepancies with results in [Carey et al.](https://www.ahajournals.org/doi/10.1161/HYPERTENSIONAHA.118.12191) 
+
+## Results
+
+### Participant characteristics
+
+```{r}
+
+suppressPackageStartupMessages({
+ library(cardioStatsUSA)
+ library(magrittr)
+ library(gtsummary)
+ library(tidyverse)
+ library(survey)
+ library(gt)
+})
+
+
+tbl_summary_data <- as_tibble(nhanes_bp) %>% 
+ filter(svy_subpop_htn == 1) %>% 
+ mutate(nobs = 1) %>% 
+ select(
+  svy_psu,
+  svy_strata,
+  svy_weight_mec,
+  svy_year,
+  nobs,
+  starts_with('demo'),
+  starts_with('bp'), - bp_cat_meds_excluded,
+  starts_with('htn'),
+  starts_with('cc')
+ ) 
+
+for(i in names(tbl_summary_data)){
+ attr(tbl_summary_data[[i]], 'label') <- nhanes_key$variables[[i]]$label
+}
+
+tbl_summary_design <- tbl_summary_data %>% 
+ svydesign(ids = ~ svy_psu,
+           strata = ~ svy_strata,
+           weights = ~ svy_weight_mec,
+           data = .,
+           nest = TRUE)
+
+tbl_summary_design %>% 
+ tbl_svysummary(
+  by = svy_year,
+  include = c(nobs, 
+              starts_with("demo"),
+              starts_with('bp'), 
+              starts_with('htn'),
+              starts_with('cc')),
+  missing = 'no',
+  label = list(nobs ~ "No. of Adults"),
+  statistic = list(
+   all_categorical() ~ "{p}",
+   all_continuous() ~ "{mean} ({sd})",
+   nobs ~ "{N_unweighted}"
+  )
+ ) %>%
+ modify_header(all_stat_cols() ~ "**{level}**") %>%
+ modify_footnote(all_stat_cols() ~ NA) %>%
+ as_gt() %>%
+ tab_source_note("Table values are mean (standard deviation) or percent.")
+
+```
+
 

@@ -14,11 +14,12 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
-library(cardioStatsUSA)
-```
+## Under construction
 
-```{r, fig.width=8, fig.height=6}
-nhanes_visualize(outcome = 'bp_sys_mean')[[1]]
-```
+This vignette will show
+
+1. How to make results using the shiny app (youtube tutorials maybe)
+
+1. How to make results using the R package
+
 
