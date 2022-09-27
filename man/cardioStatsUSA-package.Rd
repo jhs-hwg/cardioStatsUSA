@@ -10,6 +10,13 @@
 
 Analyze cardiometabolic outcomes among adults living in the United States of America using data from the National Health and Nutrition Examination Survey (NHANES). Save your results, either in the form of a dataset or as a figure. All analyses account for the NHANES design weights and are tested for equivalence with CDC statistics and prior papers.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://jhs-hwg.github.io/cardioStatsUSA/}
+}
+
+}
 \author{
 \strong{Maintainer}: Byron Jaeger \email{bjaeger@wakehealth.edu} (\href{https://orcid.org/0000-0001-7399-2299}{ORCID})
 

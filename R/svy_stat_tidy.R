@@ -7,6 +7,8 @@
 #'
 #' @return a data frame
 #'
+#' @noRd
+#'
 svy_stat_tidy <- function(x, outcome, by_vars) {
 
  tidy_fun <-  paste('svy', get_svy_stat_fun(x),

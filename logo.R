@@ -7,6 +7,7 @@ ds <- nhanes_bp %>%
  .[svy_subpop_htn == 1] %>%
  .[, svy_weight := svy_weight_mec] %>%
  svy_design_new(
+  exposure = NULL,
   n_exposure_group = numeric(),
   years = levels(nhanes_bp$svy_year),
   pool = 'no'
@@ -16,7 +17,6 @@ ds <- nhanes_bp %>%
 
 smry <- ds %>%
  svy_design_summarize(outcome = 'bp_control_jnc7',
-                      key = nhanes_key,
                       age_standardize = TRUE,
                       statistic = c('percentage')) %>%
  filter(bp_control_jnc7 == 'Yes')
@@ -44,7 +44,7 @@ p <- ggplot(smry, aes(x = svy_year, y = estimate)) +
 
 hexSticker::sticker(
  p,
- package = "nhanesTrends",
+ package = "cardioStatsUSA",
  p_color = 'black',
  h_fill = 'white',
  h_color = 'grey',

@@ -1,0 +1,52 @@
+---
+title: "Prevalence of hypertension, JNC7 definition"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Prevalence of hypertension, JNC7 definition}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(cardioStatsUSA)
+```
+
+## Hypertension (JNC7 guideline definition)
+
+### Prevalence by calendar year.
+
+```{r}
+nhanes_visualize(outcome = 'htn_jnc7', 
+                 years = 'all')[[1]]
+```
+
+### Prevalence by age group in 2017-2020.
+
+```{r}
+nhanes_visualize(outcome = 'htn_jnc7',
+                 exposure = 'demo_age_cat',
+                 years = 'most_recent')[[1]]
+```
+
+### Prevalence by sex in 2017-2020.
+
+```{r}
+nhanes_visualize(outcome = 'htn_jnc7',
+                 exposure = 'demo_gender',
+                 years = 'most_recent')[[1]]
+```
+
+### Prevalence by race/ethnicity in 2017-2020.
+
+```{r}
+nhanes_visualize(outcome = 'htn_jnc7',
+                 exposure = 'demo_race',
+                 years = 'most_recent')[[1]]
+```

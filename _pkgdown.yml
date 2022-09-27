@@ -1,4 +1,32 @@
-url: ~
+url: https://jhs-hwg.github.io/cardioStatsUSA/
 template:
   bootstrap: 5
+  bootswatch: sandstone
+navbar:
+  structure:
+    left:
+    - intro
+    - reference
+    - articles
+    - tutorials
+    - news
+    right:
+    - search
+    - github
+  components:
+    articles:
+      text: Results
+      menu:
+      - text: Prevalence of hypertension, ACC/AHA
+        href: articles/prev_htn_accaha.html
+      - text: Prevalence of hypertension, JNC7
+        href: articles/prev_htn_jnc7.html
+      - text: Blood pressure levels
+        href: articles/bp_levels.html
+      - text: Antihypertensive medication use
+        href: articles/bp_meds.html
+      - text: Blood pressure control, ACC/AHA
+        href: articles/bp_control_accaha.html
+      - text: Blood pressure control, JNC7
+        href: articles/bp_control_jnc7.html
 

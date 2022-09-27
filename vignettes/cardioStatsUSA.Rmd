@@ -1,0 +1,24 @@
+---
+title: "cardioStatsUSA"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{cardioStatsUSA}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(cardioStatsUSA)
+```
+
+```{r, fig.width=8, fig.height=6}
+nhanes_visualize(outcome = 'bp_sys_mean')[[1]]
+```
+
