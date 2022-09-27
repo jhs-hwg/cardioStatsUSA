@@ -76,9 +76,8 @@
 
 
 
-<script src="cardioStatsUSA_files/htmlwidgets-1.5.4/htmlwidgets.js"></script><script src="cardioStatsUSA_files/plotly-binding-4.10.0/plotly.js"></script><script src="cardioStatsUSA_files/typedarray-0.1/typedarray.min.js"></script><link href="cardioStatsUSA_files/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
-<script src="cardioStatsUSA_files/crosstalk-1.2.0/js/crosstalk.min.js"></script><link href="cardioStatsUSA_files/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet">
-<script src="cardioStatsUSA_files/plotly-main-2.5.1/plotly-latest.min.js"></script><div class="row">
+
+<div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>cardioStatsUSA</h1>
             
@@ -89,12 +88,16 @@
 
     
     
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jhs-hwg.github.io/cardioStatsUSA/">cardioStatsUSA</a></span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/nhanes_visualize.html">nhanes_visualize</a></span><span class="op">(</span>outcome <span class="op">=</span> <span class="st">'bp_sys_mean'</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span></code></pre></div>
-<div id="htmlwidget-de9c3de24ce70bb96a17" style="width:768px;height:576px;" class="plotly html-widget"></div>
-<script type="application/json" data-for="htmlwidget-de9c3de24ce70bb96a17">{"x":{"visdat":{"2eae15d3fd8c":["function () ","plotlyVisDat"]},"cur_data":"2eae15d3fd8c","attrs":{"2eae15d3fd8c":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar","x":["2009-2010","2011-2012","2013-2014","2015-2016","2017-2020"],"y":[120.487861168997,121.59705639051,121.431203341421,123.355949381776,123.131695503409],"text":["120","122","121","123","123"],"textposition":"top middle","name":"1","hoverinfo":"text","hovertext":["Mean: 120 (95% CI 120, 121)<br>Q25: 109 (95% CI 109, 111)<br>Q50: 118 (95% CI 117, 119)<br>Q75: 129 (95% CI 129, 131)","Mean: 122 (95% CI 120, 123)<br>Q25: 111 (95% CI 110, 112)<br>Q50: 119 (95% CI 119, 121)<br>Q75: 130 (95% CI 129, 131)","Mean: 121 (95% CI 121, 122)<br>Q25: 110 (95% CI 110, 111)<br>Q50: 119 (95% CI 119, 120)<br>Q75: 131 (95% CI 130, 132)","Mean: 123 (95% CI 122, 124)<br>Q25: 112 (95% CI 111, 113)<br>Q50: 121 (95% CI 120, 123)<br>Q75: 132 (95% CI 131, 133)","Mean: 123 (95% CI 122, 124)<br>Q25: 111 (95% CI 111, 112)<br>Q50: 121 (95% CI 120, 122)<br>Q75: 132 (95% CI 131, 134)"],"inherit":true}},"layout":{"margin":{"b":100,"l":50,"t":100,"r":50},"title":{"text":"Systolic blood pressure, mm Hg<br>","x":0.5},"font":{"size":16},"xaxis":{"domain":[0,1],"automargin":true,"showgrid":false,"showline":true,"title":"NHANES cycle","type":"category","categoryorder":"array","categoryarray":["2009-2010","2011-2012","2013-2014","2015-2016","2017-2020"]},"yaxis":{"domain":[0,1],"automargin":true,"showgrid":false,"showline":true,"ticks":"outside","title":{"class":"Blood pressure","label":"Systolic blood pressure, mm Hg","type":"ctns","outcome":true,"exposure":true,"subset":true,"group":false,"subpop":"htn"}},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"type":"bar","x":["2009-2010","2011-2012","2013-2014","2015-2016","2017-2020"],"y":[120.487861168997,121.59705639051,121.431203341421,123.355949381776,123.131695503409],"text":["120","122","121","123","123"],"textposition":["top middle","top middle","top middle","top middle","top middle"],"name":"1","hoverinfo":["text","text","text","text","text"],"hovertext":["Mean: 120 (95% CI 120, 121)<br>Q25: 109 (95% CI 109, 111)<br>Q50: 118 (95% CI 117, 119)<br>Q75: 129 (95% CI 129, 131)","Mean: 122 (95% CI 120, 123)<br>Q25: 111 (95% CI 110, 112)<br>Q50: 119 (95% CI 119, 121)<br>Q75: 130 (95% CI 129, 131)","Mean: 121 (95% CI 121, 122)<br>Q25: 110 (95% CI 110, 111)<br>Q50: 119 (95% CI 119, 120)<br>Q75: 131 (95% CI 130, 132)","Mean: 123 (95% CI 122, 124)<br>Q25: 112 (95% CI 111, 113)<br>Q50: 121 (95% CI 120, 123)<br>Q75: 132 (95% CI 131, 133)","Mean: 123 (95% CI 122, 124)<br>Q25: 111 (95% CI 111, 112)<br>Q50: 121 (95% CI 120, 122)<br>Q75: 132 (95% CI 131, 134)"],"marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script></main>
+<div class="section level2">
+<h2 id="under-construction">Under construction<a class="anchor" aria-label="anchor" href="#under-construction"></a>
+</h2>
+<p>This vignette will show</p>
+<ol style="list-style-type: decimal">
+<li><p>How to make results using the shiny app (youtube tutorials maybe)</p></li>
+<li><p>How to make results using the R package</p></li>
+</ol>
+</div>
+  </main>
 </div>
 
 
