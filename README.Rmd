@@ -25,7 +25,7 @@ Our goal is to provide a platform for exploration of the National Health and Nut
 
 ## Installation
 
-You can install the development version of nhanesTrends from [GitHub](https://github.com/) with:
+You can install the development version of cardioStatsUSA from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("remotes")
