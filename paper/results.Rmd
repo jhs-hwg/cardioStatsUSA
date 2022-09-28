@@ -1,0 +1,200 @@
+---
+title: "Tables and Figures"
+always_allow_html: true
+output: 
+  officedown::rdocx_document:
+    keep_md: true
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+ echo = FALSE,
+ message = FALSE,
+ warning = FALSE,
+ fig.width = 7,
+ fig.height = 4, 
+ dpi = 300
+)
+
+suppressPackageStartupMessages({
+ library(officer)
+ library(cardioStatsUSA)
+ library(magrittr)
+ library(gtsummary)
+ library(tidyverse)
+ library(survey)
+ library(flextable)
+ library(plotly)
+})
+
+```
+
+__Table 1__ Participant characteristics
+
+```{r, cache=TRUE}
+
+
+tbl_summary_data <- as_tibble(nhanes_bp) %>% 
+ filter(svy_subpop_htn == 1) %>% 
+ mutate(nobs = 1) %>% 
+ select(
+  svy_psu,
+  svy_strata,
+  svy_weight_mec,
+  svy_year,
+  nobs,
+  starts_with('demo'),
+  starts_with('bp'), - bp_cat_meds_excluded,
+  starts_with('htn'),
+  starts_with('cc')
+ ) 
+
+for(i in names(tbl_summary_data)){
+ attr(tbl_summary_data[[i]], 'label') <- nhanes_key$variables[[i]]$label
+}
+
+tbl_summary_design <- tbl_summary_data %>% 
+ svydesign(ids = ~ svy_psu,
+           strata = ~ svy_strata,
+           weights = ~ svy_weight_mec,
+           data = .,
+           nest = TRUE)
+
+tbl_gtsummary <- tbl_summary_design %>% 
+ tbl_svysummary(
+  by = svy_year,
+  include = c(nobs, 
+              starts_with("demo"),
+              starts_with('bp'), 
+              starts_with('htn'),
+              starts_with('cc')),
+  missing = 'no',
+  label = list(nobs ~ "No. of Adults"),
+  statistic = list(
+   all_categorical() ~ "{p}",
+   all_continuous() ~ "{mean} ({sd})",
+   nobs ~ "{N_unweighted}"
+  )
+ ) %>%
+ modify_header(all_stat_cols() ~ "**{level}**") %>%
+ modify_footnote(all_stat_cols() ~ NA)
+
+as_flex_table(tbl_gtsummary) %>% 
+ theme_box() %>% 
+ width(width = 0.90) %>% 
+ width(j = 1, width = 2) %>% 
+ align(align = 'center') %>% 
+ align(j = 1, align = 'left')
+
+
+```
+
+```{r}
+block_section(
+  prop_section(
+    page_size = page_size(orient = "landscape"),
+    page_margins = page_mar(bottom = 1/12, top = 1/12, 
+                            right = 1/8, left = 1/8),
+    type = "continuous"
+  )
+)
+```
+
+__Figure 1__ Prevalence of hypertension by calendar year
+
+```{r}
+
+subset_variables <- list("demo_pregnant")
+subset_values <- list(c("No", "Missing"))
+
+nhanes_visualize(outcome = 'htn_accaha', 
+                 subset_variables = subset_variables,
+                 subset_values = subset_values,
+                 years = 'all')[[1]] %>% 
+ layout(font = list(size = 40))
+
+```
+
+\newpage
+
+__Figure 2__ Antihypertensive medication use by calendar year among adults with hypertension
+
+```{r}
+
+nhanes_visualize(
+ outcome = 'bp_med_use', 
+ subset_variables = c(subset_variables, 'htn_accaha'),
+ subset_values = c(subset_values, 'Yes'),
+ years = 'all'
+)[[1]] %>% 
+ layout(font = list(size = 40))
+
+```
+
+\newpage
+
+__Figure 3__ Prevalence of resistant hypertension among adults with hypertension taking antihypertensive medication
+
+```{r}
+
+nhanes_visualize(
+ outcome = 'htn_resistant_accaha', 
+ subset_variables = c(subset_variables, 'htn_accaha', 'bp_med_use'),
+ subset_values = c(subset_values, 'Yes', 'Yes'),
+ years = 'all'
+)[[1]] %>% 
+ layout(font = list(size = 40))
+
+```
+
+\newpage
+
+__Figure S1__: Participants included in the current analysis
+
+\newpage
+
+__Figure S2__ Prevalence of hypertension by age group
+
+```{r}
+
+nhanes_visualize(outcome = 'htn_accaha', 
+                 exposure = 'demo_age_cat',
+                 subset_variables = subset_variables,
+                 subset_values = subset_values,
+                 years = 'most_recent')[[1]] %>% 
+ layout(font = list(size = 40))
+
+```
+
+\newpage
+
+__Figure S3__ Prevalence of hypertension by sex
+
+```{r}
+
+nhanes_visualize(outcome = 'htn_accaha', 
+                 exposure = 'demo_gender',
+                 subset_variables = subset_variables,
+                 subset_values = subset_values,
+                 years = 'most_recent')[[1]] %>% 
+ layout(font = list(size = 40))
+
+```
+
+\newpage
+
+__Figure S4__ Prevalence of hypertension by race/ethnicity
+
+```{r}
+
+nhanes_visualize(outcome = 'htn_accaha', 
+                 exposure = 'demo_race',
+                 subset_variables = subset_variables,
+                 subset_values = subset_values,
+                 years = 'most_recent')[[1]] %>% 
+ layout(font = list(size = 40))
+
+```
+
+
+

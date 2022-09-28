@@ -7,14 +7,14 @@ Authors@R: c(
            role = c("aut", "cre"),
            email = "bjaeger@wakehealth.edu",
            comment = c(ORCID = "0000-0001-7399-2299")),
+    person(given = "Ligong",
+           family = "Chen",
+           role = c("aut", "ctb"),
+           email = "ligongc@uab.edu"),
     person(given = "Paul",
            family = "Muntner",
            role = c("aut", "com", "dtc"),
-           email = "pmuntner@uab.edu"),
-    person(given = "Ligong",
-           family = "Chen",
-           role = c("ctb"),
-           email = "ligongc@uab.edu")
+           email = "pmuntner@uab.edu")
     )
 Description: Analyze cardiometabolic outcomes among adults living in the 
   United States of America using data from the National Health and Nutrition 

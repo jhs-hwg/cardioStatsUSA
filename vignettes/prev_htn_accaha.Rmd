@@ -21,7 +21,41 @@ knitr::opts_chunk$set(
 library(cardioStatsUSA)
 ```
 
+## By calendar year
+
+```{r}
+nhanes_visualize(outcome = 'htn_accaha', 
+                 years = 'all')[[1]]
+```
+
+## By age group in 2017-2020.
+
+```{r}
+nhanes_visualize(outcome = 'htn_accaha',
+                 exposure = 'demo_age_cat',
+                 years = 'most_recent')[[1]]
+```
+
+## By sex in 2017-2020.
+
+```{r}
+nhanes_visualize(outcome = 'htn_accaha',
+                 exposure = 'demo_gender',
+                 years = 'most_recent')[[1]]
+```
+
+
+## By race/ethnicity in 2017-2020.
+
+```{r}
+nhanes_visualize(outcome = 'htn_accaha',
+                 exposure = 'demo_race',
+                 years = 'most_recent')[[1]]
+```
+
 ## Who is included in this analysis
+
+`r cardioStatsUSA:::bp_subpop_inclusion()`
 
 ## Hypertension
 
@@ -33,32 +67,3 @@ The 2017 American College of Cardiology and American Heart Association (ACC/AHA)
 
 ### Prevalence by calendar year.
 
-```{r}
-nhanes_visualize(outcome = 'htn_accaha', 
-                 years = 'all')[[1]]
-```
-
-### Prevalence by age group in 2017-2020.
-
-```{r}
-nhanes_visualize(outcome = 'htn_accaha',
-                 exposure = 'demo_age_cat',
-                 years = 'most_recent')[[1]]
-```
-
-### Prevalence by sex in 2017-2020.
-
-```{r}
-nhanes_visualize(outcome = 'htn_accaha',
-                 exposure = 'demo_gender',
-                 years = 'most_recent')[[1]]
-```
-
-
-### Prevalence by race/ethnicity in 2017-2020.
-
-```{r}
-nhanes_visualize(outcome = 'htn_accaha',
-                 exposure = 'demo_race',
-                 years = 'most_recent')[[1]]
-```

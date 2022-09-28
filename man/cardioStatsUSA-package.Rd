@@ -22,12 +22,8 @@ Useful links:
 
 Authors:
 \itemize{
-  \item Paul Muntner \email{pmuntner@uab.edu} [compiler, data contributor]
-}
-
-Other contributors:
-\itemize{
   \item Ligong Chen \email{ligongc@uab.edu} [contributor]
+  \item Paul Muntner \email{pmuntner@uab.edu} [compiler, data contributor]
 }
 
 }
