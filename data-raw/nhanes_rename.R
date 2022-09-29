@@ -26,11 +26,12 @@ nhanes_rename <- function(data){
   svy_subpop_chol = subpopldl,
 
   # Demographics ------------------------------------------------------------
-  demo_age_cat   = agecat4,
-  demo_race      = race_wbaho,
-  demo_age_years = ridageyr,
-  demo_pregnant  = pregnant,
-  demo_gender    = riagendr,
+  demo_age_cat    = agecat4,
+  demo_race       = race_wbaho,
+  demo_race_black = race_black,
+  demo_age_years  = ridageyr,
+  demo_pregnant   = pregnant,
+  demo_gender     = riagendr,
 
   # Blood pressure ----------------------------------------------------------
   bp_sys_mean               = avgsbp,

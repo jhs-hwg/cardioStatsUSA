@@ -11,4 +11,12 @@ nhanes_bp <-
 
 setDT(nhanes_bp)
 
+nhanes_key <- cardioStatsUSA::nhanes_key
+
+for(i in names(nhanes_bp)){
+ if(is.null(attr(nhanes_bp[[i]], 'label'))){
+  attr(nhanes_bp[[i]], 'label') <- nhanes_key$variables[[i]]$label
+ }
+}
+
 usethis::use_data(nhanes_bp, overwrite = TRUE)

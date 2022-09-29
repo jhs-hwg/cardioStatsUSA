@@ -7,6 +7,7 @@ output:
 ---
 
 ```{r setup, include = FALSE}
+
 knitr::opts_chunk$set(
  echo = FALSE,
  message = FALSE,
@@ -29,7 +30,33 @@ suppressPackageStartupMessages({
 
 ```
 
-__Table 1__ Participant characteristics
+**RESULTS**
+
+A total of `r sum(nhanes_bp$svy_subpop_htn)` survey participants (mean age 46 years, 52% women, 68% non-Hispanic white) were included in the BP and hypertension cohort (**Table 1**). The estimated prevalence of hypertension was 45.9% (95% CI 43.1, 48.8) in 1999-2000, 43.8% (95% CI 41.1, 46.5) in 2009-2010, and 47.0% (95% CI 44.5, 49.5) in 2017-2020 (**Figure 1**). For US adults in 2017-2020, hypertension was estimated to be more prevalent among older versus younger adults (**Figure S2**), more prevalent among men versus women (**Figure S3**), and more prevalent among adults are non-Hispanic Black versus other race/ethnicity subgroups (**Figure S4**). 
+
+**Self-reported antihypertensive medication use**
+
+Among US adults with hypertension, the estimated percentage who self-reported using antihypertensive medication was 35.0% (95% CI 30.7, 39.7) in 1999-2000, 52.8% (95% CI 48.3, 57.2) in 2009-2010, and 51.3% (95% CI 48.7, 54.0) in 2017-2020 (**Figure 2**). For US adults with hypertension in 2017-2020, adults aged 65 to 74 years had a higher estimated percentage who self-report using antihypertensive medication versus other age groups (**Figure S5**), women had a higher estimated percentage who self-report using antihypertensive medication compared to men (**Figure S6**), and Hispanic adults had a lower estimated percentage who self-report using antihypertensive medication versus other race/ethnicity subgroups (**Figure S7**).
+
+**Classes of antihypertensive medication**
+
+Among US adults with hypertension, the estimated percentage using one or more classes of antihypertensive medication was 38.5% (95% CI 34.5, 42.4) in 1999-2000, 54.3% (95% CI 50.1, 58.5) in 2009-2010, and 55.4% (95% CI 54.0, 57.8) in 2017-2020 (**Figure 3**). For US adults with hypertension in 2017-2020, adults aged 75+ had a higher estimated percentage using one or more antihypertensive medication class versus other age groups (**Figure S8**), women a higher estimated percentage using one or more antihypertensive medication class versus men (**Figure S9**), and non-Hispanic white adults a higher estimated percentage using one or more classes of antihypertensive medication versus other race/ethnicity groups (**Figure S10**).
+
+**Resistant hypertension**
+
+Among US adults with hypertension using three or more classes of antihypertensive medication, the estimated prevalence of resistant hypertension was 70.6 (95% CI 62.8, 78.3) in 1999-2000, 62.7 (95% CI 58.6, 66.7) in 2009-2010, and 66.0 (95% CI 61.9, 70.1) in 2017-2020 (**Figure 4**). For US adults with hypertension using three or more classes of antihypertensive medication in 2017-2020, adults aged 18 to 44 years had a higher estimated prevalence of resistant hypertension versus other age groups (**Figure S11**), men a higher estimated prevalence versus women (**Figure S12**), and non-Hispanic Black adults a higher estimated prevalence versus other race/ethnicity groups (**Figure S13**).
+
+```{r}
+block_section(
+  prop_section(
+    page_size = page_size(orient = "portrait"),
+    type = "continuous"
+  )
+)
+```
+
+
+__Table 1__ Characteristics of participants included in the blood pressure and hypertension cohort of the online platform.
 
 ```{r, cache=TRUE}
 
@@ -50,7 +77,8 @@ tbl_summary_data <- as_tibble(nhanes_bp) %>%
  ) 
 
 for(i in names(tbl_summary_data)){
- attr(tbl_summary_data[[i]], 'label') <- nhanes_key$variables[[i]]$label
+ attr(tbl_summary_data[[i]], 'label') <-
+  nhanes_key$variables[[i]]$label
 }
 
 tbl_summary_design <- tbl_summary_data %>% 
@@ -65,7 +93,7 @@ tbl_gtsummary <- tbl_summary_design %>%
   by = svy_year,
   include = c(nobs, 
               starts_with("demo"),
-              starts_with('bp'), 
+              starts_with('bp'),
               starts_with('htn'),
               starts_with('cc')),
   missing = 'no',
@@ -77,11 +105,12 @@ tbl_gtsummary <- tbl_summary_design %>%
   )
  ) %>%
  modify_header(all_stat_cols() ~ "**{level}**") %>%
+ add_overall(last = FALSE, col_label = "**Overall**") %>% 
  modify_footnote(all_stat_cols() ~ NA)
 
 as_flex_table(tbl_gtsummary) %>% 
  theme_box() %>% 
- width(width = 0.90) %>% 
+ width(width = 0.8) %>% 
  width(j = 1, width = 2) %>% 
  align(align = 'center') %>% 
  align(j = 1, align = 'left')
@@ -100,7 +129,7 @@ block_section(
 )
 ```
 
-__Figure 1__ Prevalence of hypertension by calendar year
+__Figure 1__ Prevalence of hypertension by calendar year.
 
 ```{r}
 
@@ -117,7 +146,7 @@ nhanes_visualize(outcome = 'htn_accaha',
 
 \newpage
 
-__Figure 2__ Antihypertensive medication use by calendar year among adults with hypertension
+__Figure 2__ Antihypertensive medication use by calendar year among adults with hypertension.
 
 ```{r}
 
@@ -133,14 +162,14 @@ nhanes_visualize(
 
 \newpage
 
-__Figure 3__ Prevalence of resistant hypertension among adults with hypertension taking antihypertensive medication
+__Figure 3__ Number of antihypertensive medication classes by calendar period among adults with hypertension.
 
 ```{r}
 
 nhanes_visualize(
- outcome = 'htn_resistant_accaha', 
- subset_variables = c(subset_variables, 'htn_accaha', 'bp_med_use'),
- subset_values = c(subset_values, 'Yes', 'Yes'),
+ outcome = 'bp_med_n_class', 
+ subset_variables = c(subset_variables, 'htn_accaha'),
+ subset_values = c(subset_values, 'Yes'),
  years = 'all'
 )[[1]] %>% 
  layout(font = list(size = 40))
@@ -149,11 +178,31 @@ nhanes_visualize(
 
 \newpage
 
-__Figure S1__: Participants included in the current analysis
+__Figure 4__ Prevalence of resistant hypertension among adults with hypertension taking three or more classes of antihypertensive medication.
+
+```{r}
+
+nhanes_visualize(
+ outcome = 'htn_resistant_accaha',
+ subset_variables = c(subset_variables, 
+                      'htn_accaha', 
+                      'bp_med_n_class'),
+ subset_values = c(subset_values, 
+                   'Yes', 
+                   list(c('Three', 'Four or more'))),
+ years = 'all'
+)[[1]] %>%
+ layout(font = list(size = 40))
+
+```
 
 \newpage
 
-__Figure S2__ Prevalence of hypertension by age group
+__Figure S1__: Participants included in the current analysis.
+
+\newpage
+
+__Figure S2__ Prevalence of hypertension by age group in 2017-2020.
 
 ```{r}
 
@@ -168,7 +217,7 @@ nhanes_visualize(outcome = 'htn_accaha',
 
 \newpage
 
-__Figure S3__ Prevalence of hypertension by sex
+__Figure S3__ Prevalence of hypertension by sex in 2017-2020.
 
 ```{r}
 
@@ -183,7 +232,7 @@ nhanes_visualize(outcome = 'htn_accaha',
 
 \newpage
 
-__Figure S4__ Prevalence of hypertension by race/ethnicity
+__Figure S4__ Prevalence of hypertension by race/ethnicity in 2017-2020.
 
 ```{r}
 
@@ -196,5 +245,178 @@ nhanes_visualize(outcome = 'htn_accaha',
 
 ```
 
+\newpage
+
+__Figure S5__ Antihypertensive medication use by age category in 2017-2020 among adults with hypertension.
+
+```{r}
+
+nhanes_visualize(
+ outcome = 'bp_med_use', 
+ exposure = 'demo_age_cat',
+ subset_variables = c(subset_variables, 'htn_accaha'),
+ subset_values = c(subset_values, 'Yes'),
+ years = 'most_recent'
+)[[1]] %>% 
+ layout(font = list(size = 40))
+
+```
 
 
+
+\newpage
+
+__Figure S6__ Antihypertensive medication use by sex in 2017-2020 among adults with hypertension.
+
+```{r}
+
+nhanes_visualize(
+ outcome = 'bp_med_use', 
+ exposure = 'demo_gender',
+ subset_variables = c(subset_variables, 'htn_accaha'),
+ subset_values = c(subset_values, 'Yes'),
+ years = 'most_recent'
+)[[1]] %>% 
+ layout(font = list(size = 40))
+
+```
+
+
+
+\newpage
+
+__Figure S7__ Antihypertensive medication use by race/ethnicity in 2017-2020 among adults with hypertension.
+
+```{r}
+
+nhanes_visualize(
+ outcome = 'bp_med_use', 
+ exposure = 'demo_race',
+ subset_variables = c(subset_variables, 'htn_accaha'),
+ subset_values = c(subset_values, 'Yes'),
+ years = 'most_recent'
+)[[1]] %>% 
+ layout(font = list(size = 40))
+
+```
+
+
+\newpage
+
+__Figure S8__ Number of antihypertensive medication classes by age category in 2017-2020 among adults with hypertension.
+
+```{r, fig.height = 5}
+
+margin <- list(l = 50, r = 50, b = 50, t = 300)
+
+nhanes_visualize(
+ outcome = 'bp_med_n_class', 
+ exposure = 'demo_age_cat',
+ subset_variables = c(subset_variables, 'htn_accaha'),
+ subset_values = c(subset_values, 'Yes'),
+ years = 'most_recent',
+ pool = TRUE
+)[[1]] %>% 
+ layout(font = list(size = 40), margin = margin)
+
+```
+
+\newpage
+
+__Figure S9__ Number of antihypertensive medication classes by sex in 2017-2020 among adults with hypertension.
+
+```{r, fig.height = 5}
+
+nhanes_visualize(
+ outcome = 'bp_med_n_class', 
+ exposure = 'demo_gender',
+ subset_variables = c(subset_variables, 'htn_accaha'),
+ subset_values = c(subset_values, 'Yes'),
+ years = 'most_recent',
+ pool = TRUE
+)[[1]] %>% 
+ layout(font = list(size = 40), margin = margin)
+
+```
+
+\newpage
+
+__Figure S10__ Number of antihypertensive medication classes by race/ethnicity in 2017-2020 among adults with hypertension.
+
+```{r, fig.height = 5}
+
+nhanes_visualize(
+ outcome = 'bp_med_n_class', 
+ exposure = 'demo_race',
+ subset_variables = c(subset_variables, 'htn_accaha'),
+ subset_values = c(subset_values, 'Yes'),
+ years = 'most_recent',
+ pool = TRUE
+)[[1]] %>% 
+ layout(font = list(size = 40), margin = margin)
+
+```
+
+\newpage
+
+__Figure S11__ Prevalence of resistant hypertension by age category in 2017-2020 among adults with hypertension taking three or more classes of antihypertensive medication.
+
+```{r}
+
+nhanes_visualize(
+ outcome = 'htn_resistant_accaha',
+ exposure = 'demo_age_cat',
+ subset_variables = c(subset_variables, 
+                      'htn_accaha', 
+                      'bp_med_n_class'),
+ subset_values = c(subset_values, 
+                   'Yes', 
+                   list(c('Three', 'Four or more'))),
+ years = 'most_recent'
+)[[1]] %>%
+ layout(font = list(size = 40))
+
+
+```
+
+\newpage
+
+__Figure S12__ Prevalence of resistant hypertension by sex in 2017-2020 among adults with hypertension taking three or more classes of antihypertensive medication.
+
+```{r}
+
+nhanes_visualize(
+ outcome = 'htn_resistant_accaha',
+ exposure = 'demo_gender',
+ subset_variables = c(subset_variables, 
+                      'htn_accaha', 
+                      'bp_med_n_class'),
+ subset_values = c(subset_values, 
+                   'Yes', 
+                   list(c('Three', 'Four or more'))),
+ years = 'most_recent'
+)[[1]] %>%
+ layout(font = list(size = 40))
+
+```
+
+\newpage
+
+__Figure S13__ Prevalence of resistant hypertension by race/ethnicity in 2017-2020 among adults with hypertension taking three or more classes of antihypertensive medication.
+
+```{r}
+
+nhanes_visualize(
+ outcome = 'htn_resistant_accaha',
+ exposure = 'demo_race',
+ subset_variables = c(subset_variables, 
+                      'htn_accaha', 
+                      'bp_med_n_class'),
+ subset_values = c(subset_values, 
+                   'Yes', 
+                   list(c('Three', 'Four or more'))),
+ years = 'most_recent'
+)[[1]] %>%
+ layout(font = list(size = 40))
+
+```

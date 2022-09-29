@@ -8,7 +8,8 @@ nhanes_calibrate <- function(nhanes_full,
                              nhanes_sub,
                              calib_by = c('svy_year',
                                           'demo_age_cat',
-                                          'demo_gender')){
+                                          'demo_gender',
+                                          'demo_race_black')){
 
 
  # find total sum of weights across all combinations of the by groups

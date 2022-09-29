@@ -334,8 +334,20 @@ plotly_viz_worker <- function(data,
 
  }
 
- if(stacked_and_pooled) title_addon <- c(levels(data[[key$time_var]]),title_addon) %>%
-   paste(collapse=", ")
+ if(stacked_and_pooled) {
+
+  # this occurs when there are no title addons to worry about
+  if(title_addon[1] == ""){
+   title_addon <- levels(data[[key$time_var]])
+  } else {
+   # if there are title addons, split them across each year
+   title_addon <- c(levels(data[[key$time_var]]),title_addon) %>%
+    paste(collapse=", ")
+  }
+
+
+ }
+
 
  if(stacked_and_pooled && !exposure_used){
   tick_vals <- unique(as.numeric(data[[key$time_var]]))

@@ -9,7 +9,8 @@
 # validate calibration in subgroups defined by:
 variables <- c('svy_year',
                'demo_age_cat',
-               'demo_gender')
+               'demo_gender',
+               'demo_race_black')
 
 nhanes_htn <- nhanes_calibrate(nhanes_full = nhanes_bp,
                                nhanes_sub = nhanes_bp[svy_subpop_htn == 1])

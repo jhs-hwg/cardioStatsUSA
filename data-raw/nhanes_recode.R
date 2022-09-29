@@ -53,6 +53,11 @@ nhanes_recode <- function(data = NULL){
     )
    ),
 
+   race_black = factor(
+    if_else(race_wbaho == "Non-Hispanic Black", "Yes", "No"),
+    levels = c("No", "Yes")
+   ),
+
 
    # number of BP medication classes
    num_htn_class = factor(

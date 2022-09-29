@@ -5,7 +5,7 @@
 \alias{nhanes_bp}
 \title{NHANES blood pressure data, 1999-2020}
 \format{
-An object of class \code{data.table} (inherits from \code{data.frame}) with 63041 rows and 99 columns.
+An object of class \code{data.table} (inherits from \code{data.frame}) with 63041 rows and 100 columns.
 }
 \source{
 \url{https://wwwn.cdc.gov/nchs/nhanes/continuousnhanes/default.aspx}
