@@ -11,7 +11,9 @@ coverage](https://codecov.io/gh/jhs-hwg/nhanes-shiny-bp/branch/main/graph/badge.
 <!-- badges: end -->
 
 Our goal is to provide a platform for exploration of the National Health
-and Nutrition Examination Survey (NHANES) data.
+and Nutrition Examination Survey (NHANES) data. You can find the online
+application for exploratory data here:
+<https://bcjaeger.shinyapps.io/nhanesShinyBP/>
 
 ## Installation
 

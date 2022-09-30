@@ -198,6 +198,28 @@ nhanes_visualize(
 
 \newpage
 
+__Table S1__ Variable definitions for the online platform.
+
+```{r}
+
+library(tidyverse)
+library(flextable)
+
+nhanes_key$data %>% 
+ as_tibble() %>%
+ select(class, label, source, description) %>% 
+ as_grouped_data(groups = 'class') %>% 
+ as_flextable(hide_grouplabel = TRUE) %>% 
+ theme_box() %>% 
+ width(width = 1) %>% 
+ width(j = 1, width = 2.5)
+ 
+
+```
+
+
+\newpage
+
 __Figure S1__: Participants included in the current analysis.
 
 \newpage
