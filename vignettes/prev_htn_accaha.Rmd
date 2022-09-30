@@ -55,7 +55,10 @@ nhanes_visualize(outcome = 'htn_accaha',
 
 ## Who is included in this analysis
 
-`r cardioStatsUSA:::bp_subpop_inclusion()`
+```{r}
+# cardioStatsUSA:::bp_subpop_inclusion()
+
+```
 
 ## Hypertension
 
