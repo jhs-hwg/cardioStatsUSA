@@ -1,0 +1,442 @@
+---
+title: "Cardiometabolic statistics for US adults: an open source web application for exploratory analysis"
+always_allow_html: true
+output: 
+  officedown::rdocx_document:
+    reference_docx: style_manuscript_times_new_roman.docx
+    keep_md: true
+---
+
+```{r setup, include = FALSE}
+
+knitr::opts_chunk$set(
+ echo = FALSE,
+ message = FALSE,
+ warning = FALSE,
+ fig.width = 10.5,
+ fig.height = 4, 
+ dpi = 300
+)
+
+suppressPackageStartupMessages({
+ library(officer)
+ library(cardioStatsUSA)
+ library(magrittr)
+ library(gtsummary)
+ library(tidyverse)
+ library(survey)
+ library(flextable)
+ library(plotly)
+})
+
+# default is double space 
+# single spacing for title page, abstract, captions
+single_par <- fp_par(line_spacing=1)
+
+```
+
+Byron C. Jaeger, PhD,^1^ 
+Ligong Chen, PhD,^2^
+Adam P. Bress, PharmD, MS,^3,4^ 
+YOUR NAME, DEGREE,^x^
+Bharat Poudel, MSPH,^2^
+Ashley Christenson, BS,^2^ 
+Lisandro D. Colantonio, PhD,^2^
+Paul Muntner, PhD,^2^
+
+^1^Department of Biostatistics and Data Science, Wake Forest School of Medicine, Winston-Salem, NC. `r single_par`
+^2^Department of Epidemiology, University of Alabama at Birmingham. `r single_par`
+^3^Informatics, Decision-Enhancement, and Analytic Sciences (IDEAS) Center, Veterans Affairs, Salt Lake City Health Care System, Salt Lake City, UT. `r single_par`
+^4^Department of Population Health Sciences, University of Utah School of Medicine, Salt Lake City, UT. `r single_par`
+^x^ YOUR AFFILIATION
+
+\newpage
+
+**ABSTRACT**
+
+\newpage
+
+The National Health and Nutrition Examination Survey (NHANES) is a program conducted by the US National Center for Health Statistics (NCHS) of the Centers for Disease Control and Prevention (CDC) and is designed to assess the health and nutritional status of the US population. The NHANES program was initiated in the early 1960s and beginning in 1999 has been conducted continuously, in two-year cycles. 
+NHANES data are collected through participant interviews and physical examinations, each conducted following standardized protocols. The NHANES interview includes questions about prior diagnoses of hypertension and self-reported antihypertensive medication use and a medication inventory where containers for prescription medications are reviewed and recorded. The physical examination includes blood pressure (BP) measurements by trained and certified physicians.
+
+NHANES data have been used to provide estimates of the proportion of US adults with hypertension, aware they had hypertension, taking antihypertensive medication and with controlled BP. Data from NHANES have been used to estimate the impact of the lower BP levels used to define hypertension and controlled BP in the 2017 American College of Cardiology/American Heart Association (ACC/AHA) BP guideline versus the Seventh Joint National Committee (JNC7) BP guideline on the proportion and number of US adults with hypertension, recommended antihypertensive medication and with uncontrolled BP.  Additionally, NHANES data have been used to track the proportion of US adults with controlled BP, which were included in a Call-to-Action to Control BP from the US Surgeon General.
+
+NHANES data are publically available and easily accessible through the CDC website. However, analyzing NHANES data may be challenging for many people due to the complexity of its study design. The NHANES program uses a multi-stage sampling design to select participants for enrollment and data analysis requires specific programming commands to provide valid statistical estimates. Also, each NHANES cycle includes over 50 data files, each of which has detailed informational material. NHANES data collection protocols have changed over time for certain variables, and these differences should be accounted for when analyzing data. To address the barriers to analyzing NHANES data, we developed an open-access web-based application that allows users to obtain BP and hypertension statistics for US adults using NHANES data. The goal of the application is to increase the usage of NHANES data for BP and hypertension research and policy decision making with a focus on ensuring results are valid and transparent. In this manuscript, we review the design of the application, show some results of NHANES analyses using the application, and provide a tutorial on how people can use the application.
+
+**METHODS**
+
+The open-access web-based application uses data from 10 NHANES cycles, specifically NHANES 1999-2000 through NHANES 2017- March 2020, prior to the COVID-19 pandemic.  In each NHANES cycle, potential participants were identified using a multi-stage sampling process.  The protocols for each NHANES cycle were approved by the NCHS Institutional Review Board. Written informed consent was obtained from each participant.
+
+NHANES data were collected through in-home interviews and study examinations conducted at mobile examination centers. Data elements included in the application, along with their definitions, are listed in Supplemental Table 1. Information on age, sex, race/ethnicity, pregnancy status for women, cigarette smoking, a prior diagnosis of diabetes, use of insulin or oral glucose-lowering medication, a prior diagnosis of hypertension, self-reported antihypertensive medication use, and history of coronary heart disease, myocardial infarction, stroke, and heart failure were obtained by self-report during the in-home interview.  During the in-home interview, the labels of medications that participants reported taking in the preceding 30 days were recorded. For the application, we categorized antihypertensive medications by class as defined in the 2017 ACC/AHA BP guideline. Data on medication dosages are not available in NHANES.
+
+During the study examination, height and weight were measured and used to calculate body mass index. Systolic and diastolic BP (SBP and DBP, respectively) were measured three times, and blood and spot urine samples were collected.  BP was measured using a mercury sphygmomanometer from 1999-2000 through 2015-2016 and using an oscillometric device in 2017-2020.  The oscillometric BP values were calibrated to the mercury device as described previously. Blood was used to measure total and high-density lipoprotein (HDL) cholesterol, glycated hemoglobin and serum creatinine.  Spot urine was used to measure albumin and creatinine and to conduct a pregnancy test.  
+
+Overall, 107,622 US individuals participated in NHANES 1999-2000 to 2017- March 2020.  As statistics for hypertension and SBP and DBP levels in children and adolescents are markedly different than for adults, we restricted the data in the application to adults ≥ 18 years of age.  We further restricted the application to participants who completed the in-home interview and study examination, with one or more SBP and DBP measurement and who had data on self-reported antihypertensive medication use.  After these exclusions were applied, the application included data from 56,035 participants (Figure S1).
+
+*Statistical analysis*
+
+The application was created using Shiny, an open-source software package for creating web applications using the R programming language. Shiny translates R programming code into HTML, CSS, or JavaScript commands and creates a website interface. The statistical analyses that are used on the application are conducted with R programming language packages that account for the non-random selection of NHANES participants.  All statistical analyses on the application are weighted to provide estimates for the non-institutionalized US population. Following CDC recommendations, the application automatically suppresses statistics which are unreliable due to being based on a small sample size. 
+
+The application can be used to estimate characteristics of the population which are relevant when investigating BP and hypertension data (Table 1, top panel).  The application also allows users to estimate statistics for a number of hypertension-related variables (Table 1, bottom panel).  
+
+The application was designed with a number of options so that analyses can be customized to the user’s specifications. Results can be presented as figures or in tables. Figures can be made with the data represented as bars or points.  The 10 NHANES cycles can be analyzed separately or multiple cycles can be pooled together, which provides a larger sample size leading to more stable statistical estimates. The analyses can be done crude or with age-adjustment using direct standardization in four age groups (18-44, 45-64, 65-74 and ≥75 years of age).  Users can select the age distribution to be used as the standard population.  Analyses can be done in sub-groups and stratified by participant characteristics. 
+
+To demonstrate the features and utility of the application, we conducted a series of statistical analyses. We estimated the crude and age-adjusted mean SBP and prevalence of hypertension for US adults by NHANES cycle from 1999-2000 through 2017-2020. We estimated the age-adjusted prevalence of hypertension by NHANES cycle for individuals with and without chronic kidney disease, separately.  For age adjustment in these analyses, we used the estimated age distribution of US adults from 1999 to 2020 as the standard (49.3%, 33.6%, 10.1% and 7.0% being 18 to 44, 45 to 64, 65 to 74 and ≥75 years of age, respectively).  Also, we estimated the absolute number of US adults with hypertension from 1999-2000 through 2017-2020. For the estimation of absolute counts of US adults, the application recalibrates the statistical weights to account for participants being excluded due to missing information on SBP, DBP or self-reported antihypertensive medication use.  Weights are recalibrated within age, sex, race/ethnicity groups and NHANES cycle.  
+
+The age-adjusted distribution of the number of antihypertensive medication classes being taken was estimated for US adults with hypertension in each NHANES cycle, overall and among those who self-reported taking antihypertensive medication and had at least one antihypertensive drug class identified in their medication inventory. The age-adjusted proportion of US adults with controlled BP, defined using the 2017 ACC/AHA BP guideline, was estimated by NHANES cycle among US adults with hypertension and who self-reported taking antihypertensive medication.   The age-adjusted prevalence of resistant hypertension was estimated by NHANES cycle for US adults with hypertension taking antihypertensive medication and among those with hypertension taking ≥ 3 classes of antihypertensive medication.  For the analyses of number of antihypertensive medication classes being taken, resistant hypertension and BP control, we set the age distribution for the standard population to represent US adults with hypertension from 1999 to 2020: 26.4%, 43.4%, 17.0% and 13.2% being 18 to 44 years, 45 to 64, 65 to 74, and ≥75 years of age, respectively.  Using the stratification option in the application, we estimated the prevalence of hypertension in NHANES 2017-2020 by age group, sex, and race-ethnicity. Using the data pooling option in the application, we grouped the NHANES 2011-2020 cycles to estimate the proportion of pregnant women who had uncontrolled BP according to the 2017 ACC/AHA BP guideline, SBP ≥ 130 mm Hg or DBP ≥ 80 mm Hg.   
+
+
+**RESULTS**
+
+The estimated crude mean SBP for all US adults was 123 mm Hg in 1999-2000, 120 mm Hg in 2009-2010, and 123 mm Hg in 2017-2020 (Figure 1; panel A). The estimated age-adjusted mean SBP was 124, 120, and 122 mm Hg in 1999-2000, 2009-2010 and 2017-2020, respectively (Figure 1; panel B). The estimated crude prevalence of hypertension among US adults was lowest in 2009-2010 (43.3%) and highest in 2017-2020 (46.6%) (Figure 2; panel A). After age-adjustment, the prevalence of hypertension was highest in 1999-2000 (47.9%), lowest in 2009-2010 and 2013-2014 (43.0%) and was 44.7% in 2017-2020. (Figure 2; panel B). The number of US adults with hypertension increased from 89.8 million in 1999-2000 to 115.3 million US adults in 2017-2020 (Figure 3). The age adjusted mean SBP was 140 in 1999-2000, 134 in 2009-2010, and 136 in 2017-2020 among US adults with hypertension and 117 in 1999-2000, 115 in 2009-2010, and 117 in 2017-2020 among US adults without hypertension (Figure S2). In each NHANES cycle, the age-adjusted estimated mean SBP was 18 to 23 mm Hg higher among US adults with versus without hypertension.  In 2017-2020, a higher percentage of US adults with versus without hypertension were non-Hispanic Black (13.5% versus 9.3%) while a lower percentage of US adults with versus without hypertension were Hispanic (12.3% versus 18.1%) (Table 1). In each NHANES cycle, the estimated age-adjusted prevalence of hypertension among US adults with CKD was higher versus their counterparts without CKD (Figure S3).
+
+Among US adults with hypertension, 61.5% were not taking antihypertensive medication in 1999-2020 compared with 44.6% in 2017-2020. (Figure 4; panel A). Among US adults who self-reported taking antihypertensive medication, the percentage taking four or more classes of antihypertensive medication increased from 3.5% in 1999-2000 to 7.6% in 2017-2020 (Figure 4; panel B). The age-adjusted estimated prevalence of BP control among US adults with hypertension was 10.2%, 25.8%, and 23.8% in 1999-2000, 2009-2010, and 2017-2020, respectively (Figure 5; panel A). For adults who self-report taking antihypertensive medication, 26.2%, 44.1%, and 43.3% had controlled BP in 1999-2000, 2009-2010, and 2017-2020, respectively (Figure 5; panel B).
+
+Among US adults with hypertension who self-reported taking antihypertensive medication, the prevalence of resistant hypertension was 13.7% in 1999-2000, 17.7% in 2009-2010, and 16.2% in 2017-2020 (Figure S4; panel A). Among those who were taking three or more classes of antihypertensive medication, the prevalence of resistant hypertension was 73.5%, 64.1%, and 67.9% in 1999-2000, 2009-2010, and 2017-2020, respectively (Figure S4; panel B).
+
+In 2017-2020, the prevalence of hypertension was higher at progressively older age (Figure S5),  among men versus women (Figure S6), and among non-Hispanic Black adults versus non-Hispanic White adults, non-Hispanic Asian adults, Hispanic adults and adults from other race/ethnic groups (Figure S7).
+
+**DISCUSSION**
+
+In the current manuscript, we describe the development of an open-access web-based application that allows the calculation of nationally representative estimates for a number of BP-related outcomes using publicly available data from NHANES. Using this app, we generated statistics for some of these BP-related outcomes over time, both crude and adjusted by age. We also generated statistics stratified by characteristics of US adults (e.g., CKD), and by pooling multiple NHANES cycles to obtain more precise estimates when working with small group sizes. Researchers, stakeholders, and the public in general interested in BP-related outcomes can now use the current app to accomplish a variety of purposes. 
+
+NHANES is a program specifically designed to obtain nationally representative estimates of the health and nutrition status of non-institutionalized US adults. Therefore, NHANES represents the ideal data source to obtain valid and reliable statistic on BP-related outcomes among US adults. Although NHANES data are publicly available, working with these data is not exempt of challenges. Examples of challenges that may face working with NHANES data include the need to download multiple files, even for a single NHANES cycle; combining multiple NHANES variables to create the measurement of interest, which may require dealing with missing data and questionnaire skip patterns; harmonizing definitions across multiple NHANES cycles; and the analyses of complex survey design data. NHANES has been conducted over many cycles and some of the methods have been updated over time. For example, NHANES switched from using sphygmomanometer devices to oscillometric devices to measure BP in 2017-2018. NHANES data users need to be careful when analyzing data across multiple cycles. Reducing barriers to using NHANES data will facilitate the use of these data to inform BP-related public health decisions and future research.
+
+Several design decisions have been incorporated into the app.  We required participants to have only a single SBP and DBP to be included. This approach is consistent with several analyses conducted by CDC investigators (cite pmid 26633197, 29155682). However, mean BP and the prevalence of high BP would be lower if we required multiple BP measurements (cite pmid 23126346). Any bias resulting from this decision is likely to be small as over 95% of adult NHANES participants within one SBP and DBP measurement had three SBP and DBP measurements.  We re-calibrated the NHANES weights for the calculation of population counts (cite pmid 12500213). When estimating population counts, participants missing data on SBP, DBP or antihypertensive medication use cannot have BP or hypertension-related outcomes.  Weights were not recalibrated when estimating portions as participants missing data are removed from the numerator and denominator.  Medication classes were coded using generic names and the drug classes in the 2017 ACC/AHA BP guideline.  We recognize the NCHS recommends using Lexicon Plus®, a proprietary database, to categorize medication classes.  While the categorization of most medications is identical using generic drug names and Lexicon Plus®, some differences exist.  Many additional decisions were made regarding the definitions of variables, inclusion of study participants, and analytic approach.  We sought to make decisions that would be acceptable to people who use the app and transparent to ensure the results could be described accurately.
+
+We were able to replicate several prior manuscripts using the app.  However, some results could not be replicated.  For example, a prior manuscript reported the prevalence of resistant hypertension defined by the 2017 ACC/AHA BP guideline to be 19.7% in 2009-2014.  When estimated by the app, the prevalence of resistant hypertension was 17.7%, 16.5% and 17.2% in 2009-2010, 2011-2012, and 2013-2014, respectively (cite pmid 30580690).  The difference in the prevalence estimates can be attributed to the approach used to categorize medication into classes. For example, the prior publication used Lexicon Plus®, which counted spironolactone as two drug classes, a potassium-sparing diuretic and an aldosterone antagonist.  Additionally, Lexicon Plus®includes Sotalol as a beta blocker and nitroglycerine as a direct vasodilator and we did not include these drugs as antihypertensive medications as they are not listed in the 2017 ACC/AHA BP guideline.  The differences in results between the app and this previously published manuscript emphasize two important points. First, while we encourage users to check results when using the app with prior publications, it may not be possible to always generate results that are identical to prior publications. Second, users should be aware of the choices made in defining variables. 
+
+The web application has a number of complementary features that allow users to complete various analysis tasks. In particular, users can generate descriptive summaries of the US population spanning over 20 years, including summaries of characteristics and cardiometabolic outcomes. The flexibility of inclusion criteria paired with the large set of outcomes and stratifying variables available allow an enormous number of hypotheses to be explored. Outputs from the app can be included in scientific proposals, presentations, or articles, citing the application's publicly available documentation to contextualize results. With the ability to download summary data from the application, users can visualize or tabulate results with aesthetics and software of their choosing. The web application can also be used for educational purposes, as teachers can use it to analyze health outcomes for US adults interactively with students.
+
+With an open-source software license and publicly available documentation and data, the web application we developed is designed to be extended. The Shiny interface and R codes supporting this application can support general sub-populations of NHANES participants, such as a sub-population of participants with cholesterol data or a sub-population of pediatric survey participants. As the current analysis demonstrates creation and analysis of a sub-population of participants with BP measurements, others can use it as a template for developing extensions of the web application that engage with new sub-populations. In addition to including new sub-populations of NHANES participants, the application may be extended to include inferential statistics and hypothesis testing, and may also incorporate new cycles of NHANES data as they become available.
+
+\newpage
+
+```{r}
+block_section(
+  prop_section(
+    page_size = page_size(orient = "portrait"),
+    type = "continuous"
+  )
+)
+```
+
+**Table 1**:	Race/ethnicity distribution of the population with and without hypertension in 2017-2020
+
+```{r}
+
+library(table.glue)
+
+nhanes_summarize(outcome = 'demo_race', 
+                 years = 'most_recent', 
+                 group = 'htn_accaha') %>%
+ mutate(across(where(is.numeric), table_value)) %>% 
+ filter(statistic == 'percentage') %>% 
+ flextable() %>% 
+ theme_box() %>% 
+ width(width = 1) %>% 
+ align(align = 'center', part = 'all') %>% 
+ align(j = 1, align = 'center', part = 'all')
+
+```
+
+\newpage
+
+**Figure 1** Mean systolic blood pressure for US adults by calendar year
+
+A. Without age adjustment
+```{r, fig.height=3.75}
+
+fig_print <- function(x){
+ x[[1]] %>% 
+  layout(font = list(size = 40))
+}
+
+p1 <- nhanes_visualize(outcome = 'bp_sys_mean',
+                       years = 'all', 
+                       geom = 'bar')
+
+age_wts_overall <- c(49.3, 33.6, 10.1, 7)
+
+p2 <- nhanes_visualize(outcome = 'bp_sys_mean',
+                       years = 'all', 
+                       age_wts = age_wts_overall, 
+                       geom = 'bar')
+
+fig_print(p1)
+
+```
+
+B. With age adjustment through direct standardization.
+```{r, fig.height=3.75}
+fig_print(p2)
+```
+
+\newpage
+
+**Figure 2** Prevalence of hypertension for US adults by calendar year
+
+A. Without age adjustment
+```{r, fig.height=3.75}
+
+p1 <- nhanes_visualize(outcome = 'htn_accaha',
+                       years = 'all', 
+                       geom = 'bar')
+
+p2 <- nhanes_visualize(outcome = 'htn_accaha',
+                       years = 'all', 
+                       age_wts = age_wts_overall, 
+                       geom = 'bar')
+
+fig_print(p1)
+
+```
+
+B. With age adjustment through direct standardization.
+```{r, fig.height=3.75}
+fig_print(p2)
+```
+
+
+```{r}
+
+nhanes_visualize(outcome = 'htn_accaha',
+                 years = 'all',
+                 exposure = 'cc_ckd',
+                 age_wts = age_wts_overall, 
+                 geom = 'point') %>% 
+ fig_print()
+
+```
+
+\newpage
+
+**Figure 3** Number of US adults with hypertension
+
+```{r}
+
+nhanes_visualize(outcome = 'htn_accaha',
+                 years = 'all',
+                 statistic_primary = 'count',
+                 geom = 'bar') %>% 
+ fig_print()
+
+```
+
+\newpage
+
+**Figure 4** Distribution of the number of antihypertensive medication classes being taken among those with hypertension by calendar period
+
+A. Among those with hypertension
+```{r, fig.height=3.75}
+
+p1 <- nhanes_visualize(outcome = 'bp_med_n_class',
+                       subset_variables = list('htn_accaha'),
+                       subset_values = list("Yes"),
+                       years = 'all', 
+                       geom = 'bar')
+
+p2 <- nhanes_visualize(outcome = 'bp_med_n_class',
+                       subset_variables = list('htn_accaha', 'bp_med_use'),
+                       subset_values = list("Yes", "Yes"),
+                       years = 'all', 
+                       geom = 'bar')
+
+fig_print(p1)
+
+```
+
+B. Among those with hypertension who self-report taking antihypertensive medication 
+```{r, fig.height=3.75}
+fig_print(p2)
+```
+
+
+\newpage
+
+**Figure 5** Blood pressure control by calendar year
+
+A. Age-adjusted among those with hypertension
+```{r, fig.height=3.75}
+
+age_wts_htn <- c(26.4, 43.5, 17.0, 13.2)
+
+p1 <- nhanes_visualize(outcome = 'bp_control_accaha',
+                       subset_variables = list('htn_accaha'),
+                       subset_values = list("Yes"),
+                       age_wts = age_wts_htn,
+                       years = 'all', 
+                       geom = 'bar')
+
+p2 <- nhanes_visualize(outcome = 'bp_control_accaha',
+                       subset_variables = list('htn_accaha',
+                                               'bp_med_use'),
+                       subset_values = list("Yes", 
+                                            "Yes"),
+                       age_wts = age_wts_htn,
+                       years = 'all', 
+                       geom = 'bar')
+
+
+
+fig_print(p1)
+
+```
+
+B. Age-adjusted among those who self-report taking antihypertensive medication 
+```{r, fig.height=3.75}
+fig_print(p2)
+```
+
+\newpage
+
+**Figure S1** Application of inclusion and exclusion criteria for the application of NHANES hypertension data.
+
+```{r}
+
+data.frame(
+ check.names = FALSE,
+ ` ` = c(
+  "Participants",
+  "\u2265 18 years old",
+  "Completed interview and examination",
+  "Had SBP and DBP measurements",
+  "Had self-reported information on antihypertensive medication",
+  "Final Sample size"
+ ),
+ Overall = c(107622, 63041, 59799, 56286, 56035, 56035),
+ `1999-2000` = c(9965, 5448, 4976, 4755, 4694,   4694),
+ `2001-2002` = c(11039, 5993, 5592, 5251, 5184,  5184),
+ `2003-2004` = c(10122, 5620, 5303, 4902, 4838,  4838),
+ `2005-2006` = c(10348, 5563, 5334, 5028, 5015,  5015),
+ `2007-2008` = c(10149, 6228, 5995, 5670, 5665,  5665),
+ `2009-2010` = c(10537, 6527, 6360, 6053, 6043,  6043),
+ `2011-2012` = c(9756, 5864, 5615, 5436, 5337,   5337),
+ `2013-2014` = c(10175, 6113, 5924, 5700, 5694,  5694),
+ `2015-2016` = c(9971, 5992, 5735, 5557, 5552,   5552),
+ `2017-2020` = c(15560, 9693, 8965, 8024, 8013,  8013)
+) %>% 
+ flextable() %>% 
+ theme_box() %>% 
+ width(width = 0.8) %>% 
+ width(j = 1, width = 1) %>% 
+ align(align = 'center', part = 'all') %>% 
+ align(j = 1, part = 'all')
+
+```
+
+
+\newpage
+
+**Figure S2**:	Age-adjusted mean systolic blood pressure among people with and without hypertension
+
+```{r}
+
+nhanes_visualize(outcome = 'bp_sys_mean',
+                 years = 'all',
+                 exposure = 'htn_jnc7',
+                 age_wts = age_wts_overall, 
+                 geom = 'bar') %>% 
+fig_print()
+
+```
+
+\newpage
+
+**Figure S3**: Age-adjusted prevalence of hypertension among US adults with and without chronic kidney disease
+\newpage
+
+**Figure S4**: Prevalence of resistant hypertension by calendar year 
+
+A. Among those with hypertension who self report taking antihypertensive medication 
+```{r, fig.height=3.75}
+
+p1 <- nhanes_visualize(outcome = 'htn_resistant_accaha',
+                       subset_variables = list('htn_accaha', 'bp_med_use'),
+                       subset_values = list("Yes", "Yes"),
+                       years = 'all', 
+                       geom = 'bar')
+
+p2 <- nhanes_visualize(outcome = 'htn_resistant_accaha',
+                       subset_variables = list('htn_accaha', 
+                                               'bp_med_use',
+                                               'bp_med_n_class'),
+                       subset_values = list("Yes", 
+                                            "Yes",
+                                            c('Three', 'Four or more')),
+                       years = 'all', 
+                       geom = 'bar')
+
+fig_print(p1)
+
+```
+
+B. Among those with hypertension who self report and are taking 3+ classes of antihypertensive medication
+```{r, fig.height=3.75}
+fig_print(p2)
+```
+\newpage
+
+**Figure S5** Prevalence of hypertension by age categories in 2017-2020
+
+```{r}
+nhanes_visualize(outcome = 'htn_accaha',
+                 exposure = 'demo_age_cat',
+                 years = 'most_recent',
+                 geom = 'bar') %>% 
+ fig_print()
+```
+\newpage
+
+**Figure S6** Prevalence of hypertension by sex in 2017-2020
+
+```{r}
+nhanes_visualize(outcome = 'htn_accaha',
+                 exposure = 'demo_gender',
+                 years = 'most_recent',
+                 geom = 'bar') %>% 
+ fig_print()
+```
+
+\newpage
+
+**Figure S7** Prevalence of hypertension by race/ethnicity in 2017-2020
+
+```{r}
+nhanes_visualize(outcome = 'htn_accaha',
+                 exposure = 'demo_race',
+                 years = 'most_recent',
+                 geom = 'bar') %>% 
+ fig_print()
+```
+
+\newpage
+
+**Figure S8** Prevalence of uncontrolled blood pressure among pregnant women from 2011-2012 through 2017-2020.
+
+```{r}
+
+nhanes_visualize(outcome = 'bp_uncontrolled_accaha',
+                 years = c("2011-2012", 
+                           "2013-2014",
+                           "2015-2016",
+                           "2017-2020"),
+                 pool = TRUE,
+                 subset_variables = list('demo_pregnant'),
+                 subset_values = list("Yes"),
+                 geom = 'bar') %>% 
+ fig_print()
+
+```
+
+```{r}
+block_section(
+  prop_section(
+    page_size = page_size(orient = "landscape"),
+    page_margins = page_mar(bottom = 1/8, top = 1/8, 
+                            right = 1/4, left = 1/4),
+    type = "continuous"
+  )
+)
+```
+

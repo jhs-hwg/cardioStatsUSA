@@ -325,7 +325,20 @@ plotly_viz_worker <- function(data,
    getElement('variables') %>%
    getElement(ifelse(stacked_and_pooled, outcome, exposure)) %>%
    getElement('label') %>%
-   strwrap(width = 30) %>%
+   strwrap(width = 20) %>%
+   paste(collapse = '\n')
+
+  legend_args$title <- list(
+   text = glue("<b>{legend_title}</b>")
+  )
+
+ } else if (outcome_type == 'catg'){
+
+  legend_title <- key %>%
+   getElement('variables') %>%
+   getElement(outcome) %>%
+   getElement('label') %>%
+   strwrap(width = 20) %>%
    paste(collapse = '\n')
 
   legend_args$title <- list(

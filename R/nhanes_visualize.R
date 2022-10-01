@@ -57,6 +57,8 @@ nhanes_visualize <- function(outcome,
 
  }
 
+ if(geom == 'point' | geom == 'points') geom <- 'scatter'
+
  plotly_viz(
   data = smry,
   statistic_primary = statistic_primary,

@@ -10,8 +10,8 @@ Demographics,demo_race,Race,DEMO,TBD,catg,TRUE,TRUE,TRUE,TRUE,htn
 Demographics,demo_age_years,"Age, years",DEMO,TBD,ctns,TRUE,TRUE,TRUE,FALSE,htn
 Demographics,demo_pregnant,Pregnant,DEMO,TBD,bnry,TRUE,TRUE,TRUE,TRUE,htn
 Demographics,demo_gender,Gender,DEMO,TBD,catg,TRUE,TRUE,TRUE,TRUE,htn
-Blood pressure,bp_sys_mean,"Systolic blood pressure, mm Hg",BPX,TBD,ctns,TRUE,TRUE,TRUE,FALSE,htn
-Blood pressure,bp_dia_mean,"Diastolic blood pressure, mm Hg",BPX,TBD,ctns,TRUE,TRUE,TRUE,FALSE,htn
+Blood pressure,bp_sys_mean,"Systolic blood pressure, mm Hg",Derived,TBD,ctns,TRUE,TRUE,TRUE,FALSE,htn
+Blood pressure,bp_dia_mean,"Diastolic blood pressure, mm Hg",Derived,TBD,ctns,TRUE,TRUE,TRUE,FALSE,htn
 Blood pressure,bp_cat_meds_excluded,Blood pressure category (not including antihypertensive medication use),Derived,TBD,catg,TRUE,TRUE,TRUE,TRUE,htn
 Blood pressure,bp_cat_meds_included,Blood pressure category (including antihypertensive medication use),Derived,TBD,catg,TRUE,TRUE,TRUE,TRUE,htn
 Blood pressure,bp_control_jnc7,Blood pressure control (SBP < 140 mm Hg and DBP < 90 mm Hg),Derived,TBD,bnry,TRUE,TRUE,TRUE,TRUE,htn

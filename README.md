@@ -35,15 +35,18 @@ library(cardioStatsUSA)
 app_run()
 ```
 
-## Why we made this
+## TODO list
 
-## Methods
+-   Write vignettes for tests of the app
+-   Write vignette for medication data
+-   Replication with AB’s group
+-   Incorporate suppression of unreliable estimates
+-   Documentation/demos for R functions used in the app
+-   Definitions/notes for all BP variables (table S1 in manuscript)
+-   Tutorial videos
+-   Do we need to use AF weights?
 
-### Weights
-
-if counts are requested, we re-calibrate weights.
-
-### Validation of results from the shiny application
+## Validation of results from the shiny application
 
 We have replicated results from prior NHANES publications to verify that
 routines used to conduct analyses in this app are valid. Based on these

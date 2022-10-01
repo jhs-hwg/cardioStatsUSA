@@ -17,13 +17,18 @@
 #' @return a `svydesign` object
 #'
 svy_design_new <- function(data,
-                           exposure,
+                           exposure = NULL,
                            n_exposure_group = NULL,
                            exposure_cut_type = NULL,
-                           years,
+                           years = NULL,
                            pool = 'no'){
 
  stopifnot(is.data.table(data))
+
+ if(is.null(years)) years <- levels(data$svy_year)
+ if(is.null(years)) years <- unique(data$svy_year)
+
+ if(is.null(exposure)) exposure <- "None"
 
  fctrs <- data %>%
   sapply(is.factor) %>%
@@ -33,6 +38,12 @@ svy_design_new <- function(data,
  divide_by <- length(years)
 
  if(pool == 'no') divide_by <- 1
+
+ # this happens if sub-population was not considered
+ # prior to making the design object
+ if(!("svy_weight" %in% names(data))){
+  data[, svy_weight := svy_weight_mec]
+ }
 
  data_design <- data[svy_year %in% years] %>%
   .[, svy_weight := svy_weight / divide_by]

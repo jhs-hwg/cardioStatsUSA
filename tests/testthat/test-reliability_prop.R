@@ -1,3 +1,16 @@
+
+
+ds <- nhanes_bp %>%
+ filter(svy_subpop_htn==1) %>%
+ nhanes_calibrate(nhanes_full = nhanes_bp, nhanes_sub = .) %>%
+ .[, svy_weight := svy_weight_cal] %>%
+ svy_design_new()
+
+smry <- svy_design_summarize(ds, outcome = 'htn_jnc7') %>%
+ reliability_prop(design = ds)
+
+
+
 # TODO
 # smry <- tribble(
 #  ~estimate,	~std_error, ~ci_lower, 	~ci_upper,	~n_eff_SAS,	~kg_wdth_SAS,	~kg_relw_p_SAS,	~kg_relw_q_SAS,	~p_reliable_SAS,	~q_reliable_SAS,	~p_staistical_SAS,
