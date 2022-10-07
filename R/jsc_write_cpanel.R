@@ -27,3 +27,8 @@ jsc_write_cpanel <- function(key_data, var_type, var_role){
  glue("input.{var_role}.length > 0 & ({c_init})")
 
 }
+
+
+
+
+

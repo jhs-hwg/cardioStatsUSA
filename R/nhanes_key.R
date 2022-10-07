@@ -1,6 +1,6 @@
 #' One-stop shop for variable names, roles, labels, and functions
 #'
-#' A list with various elements pertaining the `nhanes_bp`
+#' A list with various elements pertaining the `nhanes_data`
 #'
 #' @format A data frame with 59799 rows and 35 variables:
 #' \describe{

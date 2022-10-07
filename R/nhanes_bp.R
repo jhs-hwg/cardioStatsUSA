@@ -5,6 +5,6 @@
 #'   in this data are available online (TODO: add link)
 #'
 #' @source \url{https://wwwn.cdc.gov/nchs/nhanes/continuousnhanes/default.aspx}
-"nhanes_bp"
+"nhanes_data"
 
 

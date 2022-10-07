@@ -16,7 +16,7 @@ utils::globalVariables(
    "kg_wdth",
    "map2_dfr",
    "n_eff",
-   "nhanes_bp",
+   "nhanes_data",
    "nhanes_key",
    "p_reliable",
    "partial",

@@ -22,6 +22,6 @@ A data frame with 59799 rows and 35 variables:
 nhanes_key
 }
 \description{
-A list with various elements pertaining the \code{nhanes_bp}
+A list with various elements pertaining the \code{nhanes_data}
 }
 \keyword{datasets}

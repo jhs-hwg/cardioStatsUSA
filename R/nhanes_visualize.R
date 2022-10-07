@@ -17,10 +17,16 @@
 #'
 #' @export
 #'
-nhanes_visualize <- function(outcome,
-                             exposure = NULL,
-                             group = NULL,
-                             years = 'last_5',
+nhanes_visualize <- function(data,
+                             key,
+                             outcome_variable,
+                             outcome_quantiles = NULL,
+                             group_variable = NULL,
+                             group_cut_n = NULL,
+                             group_cut_type = NULL,
+                             stratify_variable = NULL,
+                             time_variable = 'svy_year',
+                             time_values = NULL,
                              pool = FALSE,
                              subset_variables = list(),
                              subset_values = list(),
@@ -29,45 +35,38 @@ nhanes_visualize <- function(outcome,
                              geom = 'bar',
                              reorder_cats = FALSE,
                              width = NULL,
-                             height = NULL){
+                             height = NULL,
+                             size_point = NULL,
+                             size_error = NULL){
 
- nhanes <- cardioStatsUSA::nhanes_bp
+ if(geom %in% c('point', 'points')) geom <- 'scatter'
 
- years <- switch(
-  years[1],
-  'all' = levels(nhanes$svy_year),
-  'last_5' = last(levels(nhanes$svy_year), n = 5),
-  'most_recent' = last(levels(nhanes$svy_year), n = 1),
-  years
- )
+ smry <- nhanes_summarize(data = data,
+                          key = key,
+                          outcome_variable = outcome_variable,
+                          outcome_quantiles = outcome_quantiles,
+                          group_variable = group_variable,
+                          group_cut_n = group_cut_n,
+                          group_cut_type = group_cut_type,
+                          stratify_variable = stratify_variable,
+                          time_variable = time_variable,
+                          time_values = time_values,
+                          pool = pool,
+                          subset_variables = subset_variables,
+                          subset_values = subset_values,
+                          age_wts = age_wts,
+                          simplify_output = FALSE)
 
- # silly conversion to make pool consistent w/the svy functions
- if(is.logical(pool)) pool <- ifelse(pool, yes = 'yes', no = 'no')
 
- smry <- nhanes_summarize(outcome, exposure, group, years, pool,
-                          subset_variables, subset_values, age_wts)
-
- if(is.null(statistic_primary)){
-
-  outcome_type <-
-   cardioStatsUSA::nhanes_key$variables[[outcome]]$type
-
-  statistic_primary <-
-   cardioStatsUSA::nhanes_key$svy_calls[[outcome_type]][1]
-
- }
-
- if(geom == 'point' | geom == 'points') geom <- 'scatter'
-
- plotly_viz(
-  data = smry,
+ nhanes_design_viz(
+  smry,
   statistic_primary = statistic_primary,
   geom = geom,
-  years = years,
-  pool = pool,
   reorder_cats = reorder_cats,
   width = width,
-  height = height
+  height = height,
+  size_point = size_point,
+  size_error = size_error
  )
 
 }

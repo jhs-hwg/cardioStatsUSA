@@ -1,0 +1,93 @@
+
+nhanes_design_summarize <- function(x,
+                                    stats = x$stats,
+                                    simplify_output = FALSE){
+
+ use_statby <- !is.null(x$by_variables)
+
+ smry_output <- purrr::map_dfr(
+
+  .x = x$stats[x$stats %in% stats],
+
+  .f = ~ {
+
+   stat_string <- if(use_statby) 'statby' else 'stat'
+
+   # identify the function to call
+   # if you want to use svy_stat_proportion instead of svy_stat_percentage,
+   # uncomment the line below
+   # if(.x == 'percentage') .x <- 'proportion'
+
+   svy_stat_fun <- paste("svy", stat_string, .x,  sep = '_')
+   svy_suppress_fun <- paste('svy_stat_suppress', x$outcome$type, sep = '_')
+
+   .out <- do.call(what = svy_stat_fun,
+                   args = list(outcome = x$outcome$variable,
+                               by_vars = x$by_variables,
+                               design = x$design,
+                               quantiles = x$outcome$quantiles)) %>%
+    svy_stat_tidy(outcome = x$outcome$variable,
+                  by_vars = x$by_variables) %>%
+    svy_stat_suppress(type = x$outcome$type,
+                      stat = .x,
+                      n_obs = get_obs_count(x$design),
+                      n_psu = get_psu_count(x$design),
+                      n_strata = get_strata_count(x$design))
+
+    .out[, outcome := NULL]
+
+
+   if(outcome_is_discrete(x) && 'level' %in% names(.out)){
+
+    setnames(.out, old = 'level', new = x$outcome$variable)
+
+    lvls <- levels(x$design$variables[[x$outcome$variable]])
+    .out[[x$outcome$variable]] %<>% factor(levels = lvls)
+
+   }
+
+   if(has_group(x)){
+
+    lvls <- levels(x$design$variables[[x$group$variable]])
+
+    .out[[x$group$variable]] %<>% factor(levels = lvls)
+
+   }
+
+   if(has_stratify(x)){
+
+    lvls <- levels(x$design$variables[[x$stratify$variable]])
+
+    .out[[x$stratify$variable]] %<>% factor(levels = lvls)
+
+   }
+
+
+   neworder <- c(x$time$variable,
+                 x$group$variable,
+                 x$stratify$variable,
+                 x$outcome$variable,
+                 'statistic',
+                 'estimate',
+                 'std_error',
+                 'ci_lower',
+                 'ci_upper') %>%
+    intersect(names(.out))
+
+   setcolorder(.out, neworder = neworder)
+
+   if(!is_empty(x$by_variables)) setorderv(.out, cols = x$by_variables)
+
+   .out
+
+  }
+
+ )
+
+ if(simplify_output) return(smry_output)
+
+ x$results <- smry_output
+
+ x
+
+}

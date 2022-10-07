@@ -4,7 +4,10 @@
 \alias{app_run}
 \title{Run the NHANES BP application}
 \usage{
-app_run(...)
+app_run(
+  nhanes_data = cardioStatsUSA::nhanes_data,
+  nhanes_key = cardioStatsUSA::nhanes_key
+)
 }
 \arguments{
 \item{...}{currently not used}

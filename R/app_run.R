@@ -9,9 +9,40 @@ library(shiny)
 #' @export
 #'
 
-# TODO: fix bug with pooled results: 2017-2020 through 2017-2020
+app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
+                    nhanes_key = cardioStatsUSA::nhanes_key) {
 
-app_run <- function(...) {
+ time_variable <- nhanes_key$variable[nhanes_key$type == 'time']
+ time_values <- levels(nhanes_data[[time_variable]])
+
+ variable_choices <- list(
+  outcome  = nhanes_key[outcome  == TRUE, .(class, label, variable)],
+  group    = nhanes_key[group    == TRUE, .(class, label, variable)],
+  subset   = nhanes_key[subset   == TRUE, .(class, label, variable)],
+  stratify = nhanes_key[stratify == TRUE, .(class, label, variable)]
+ ) %>%
+  purrr::map(
+  .f = ~ .x %>%
+   split(by = 'class', keep.by = FALSE) %>%
+   purrr::map(deframe)
+ )
+
+ ctns_variables <- nhanes_key[type == 'ctns', variable]
+
+ boundaries <- ctns_variables %>%
+  purrr::set_names(ctns_variables) %>%
+  purrr::map(
+   ~ nhanes_data[[.x]] %>%
+    range(na.rm = TRUE) %>%
+    as.list() %>%
+    purrr::set_names(nm = c('min', 'max'))
+  )
+
+ ctns_group_variables <- ctns_variables %>%
+  intersect(unlist(variable_choices$group))
+
+ ctns_subset_variables <- ctns_variables %>%
+  intersect(unlist(variable_choices$subset))
 
  # User interface (UI) -----------------------------------------------------
 
@@ -23,12 +54,8 @@ app_run <- function(...) {
    titlePanel("Cardiometabolic statistics for US adults"),
    data.step = 1,
    data.intro = paste(
-    "This application analyzes blood pressure from",
-    "1999 through 2020 using data from the National Health and",
-    "Nutrition Examination Survey (NHANES). It includes survey",
-    "participants who attended their NHANES interview and examination,",
-    "who provided information on antihypertensive medication use, and",
-    "who had complete data on systolic and diastolic blood pressure."
+    "This application analyzes data from the",
+    "National Health and Nutrition Examination Survey (NHANES)."
    )
   ),
 
@@ -218,7 +245,7 @@ app_run <- function(...) {
       label = "Select NHANES cycle(s)",
       inline = TRUE,
       selected = NULL,
-      choices = levels(nhanes_bp[[nhanes_key$time_var]]),
+      choices = time_values,
       width = "100%"
      ),
      actionGroupButtons(
@@ -239,8 +266,8 @@ app_run <- function(...) {
      sliderTextInput(
       inputId = "year_pool",
       label = "Choose a range of cycles to pool:",
-      choices = levels(nhanes_bp[[nhanes_key$time_var]]),
-      selected = levels(nhanes_bp[[nhanes_key$time_var]])[c(6, 10)],
+      choices = time_values,
+      selected = c(time_values[1], last(time_values)),
       width = "100%"
      )
     ),
@@ -278,7 +305,7 @@ app_run <- function(...) {
        pickerInput(
         inputId = 'outcome_class',
         label = 'Select outcome type',
-        choices = names(nhanes_key$variable_choices$outcome),
+        choices = names(variable_choices$outcome),
         selected = NULL,
         multiple = TRUE,
         options = pickerOptions(maxOptions = 1,
@@ -336,15 +363,15 @@ app_run <- function(...) {
 
     fluidRow(
      introBox(
-      h3("Exposure",
+      h3("Group",
          style = "text-align: left; padding-left: 15px"),
       column(
        6,
        style='padding-right: 2px;',
        pickerInput(
-        inputId = 'exposure_class',
-        label = 'Select exposure type',
-        choices = names(nhanes_key$variable_choices$exposure),
+        inputId = 'group_class',
+        label = 'Select group type',
+        choices = names(variable_choices$group),
         selected = NULL,
         multiple = TRUE,
         options = pickerOptions(maxOptions = 1,
@@ -356,8 +383,8 @@ app_run <- function(...) {
        6,
        style='padding-left: 2px;',
        pickerInput(
-        inputId = 'exposure',
-        label = 'Select exposure variable',
+        inputId = 'group',
+        label = 'Select group variable',
         choices = character(),
         selected = NULL,
         multiple = TRUE,
@@ -370,36 +397,16 @@ app_run <- function(...) {
       data.step = 10,
       data.intro = paste(
        "Summarized values of the outcome will be presented among groups",
-       "defined by the 'exposure' variable. If you just want to look at",
-       "the outcome in the overall US population, don't select an exposure.",
+       "defined by the 'group' variable. If you just want to look at",
+       "the outcome in the overall US population, don't select a group",
        "If you have already selected something, you can click it again to",
        "deselect it."
       )
      )
     ),
 
-    # introBox(
-    #  pickerInput(
-    #   inputId = 'exposure',
-    #   label = 'Select an exposure',
-    #   choices = nhanes_key$variable_choices$exposure,
-    #   selected = NULL,
-    #   multiple = TRUE,
-    #   options = pickerOptions(maxOptions = 1),
-    #   width = "100%"
-    #  ),
-    #  data.step = 10,
-    #  data.intro = paste(
-    #   "Summarized values of the outcome will be presented among groups",
-    #   "defined by the 'exposure' variable. If you just want to look at",
-    #   "the outcome in the overall US population, don't select an exposure.",
-    #   "If you have already selected something, you can click it again to",
-    #   "deselect it."
-    #  )
-    # ),
-
     conditionalPanel(
-     condition = jsc_write_cpanel(nhanes_key$data, 'ctns', 'exposure'),
+     condition = jsc_write_cpanel(nhanes_key, 'ctns', 'group'),
 
      pickerInput(
       inputId = 'n_exposure_group',
@@ -435,7 +442,7 @@ app_run <- function(...) {
        pickerInput(
         inputId = 'group_class',
         label = 'Select stratify type',
-        choices = names(nhanes_key$variable_choices$group),
+        choices = names(variable_choices$stratify),
         selected = NULL,
         multiple = TRUE,
         options = pickerOptions(maxOptions = 1,
@@ -447,7 +454,7 @@ app_run <- function(...) {
        6,
        style='padding-left: 2px;',
        pickerInput(
-        inputId = 'group',
+        inputId = 'stratify',
         label = 'Select stratify variable',
         choices = character(),
         selected = NULL,
@@ -462,38 +469,13 @@ app_run <- function(...) {
       data.intro = paste(
        "You may compute results in different populations using the 'stratify'",
        "variable. The difference between the 'stratifying' variable and the",
-       "'exposure' variable is that the stratifying variable creates one output",
-       "per group, while the exposure variable creates one output that contains",
+       "'group' variable is that the stratifying variable creates one output",
+       "per group, while the 'group' variable creates one output that contains",
        "results for each group.",
        "(Some exceptions apply for outcome variables with >2 categories)"
       )
      )
     ),
-
-    # introBox(
-    #
-    #  pickerInput(
-    #   inputId = 'group',
-    #   label = 'Select a stratifying variable',
-    #   choices = nhanes_key$variable_choices$group,
-    #   selected = NULL,
-    #   multiple = TRUE,
-    #   options = pickerOptions(maxOptions = 1),
-    #   width = "100%"
-    #  ),
-    #
-    #  data.step = 11,
-    #  data.intro = paste(
-    #   "You may compute results in different populations using the 'stratify'",
-    #   "variable. The difference between the 'stratifying' variable and the",
-    #   "'exposure' variable is that the stratifying variable creates one output",
-    #   "per group, while the exposure variable creates one output that contains",
-    #   "results for each group.",
-    #   "(Some exceptions apply for outcome variables with >2 categories)"
-    #  )
-    #
-    # )
-
    ),
 
    # Main panel --------------------------------------------------------------
@@ -509,7 +491,6 @@ app_run <- function(...) {
  # Server ------------------------------------------------------------------
  server <- function(input, output, session) {
 
-  nhanes_cycles <- levels(nhanes_bp[[nhanes_key$time_var]])
   n_exclusion_max <- 5
 
   # UI updating -------------------------------------------------------------
@@ -517,17 +498,17 @@ app_run <- function(...) {
   observeEvent(input$select_all_years, {
    updatePrettyCheckboxGroup(
     inputId = 'year_stratify',
-    selected = nhanes_cycles
+    selected = time_values
    )
   })
 
   observeEvent(input$select_last_5, {
 
-   fifth_or_last <- min(length(nhanes_cycles), 5)
+   fifth_or_last <- min(length(time_values), 5)
 
    updatePrettyCheckboxGroup(
     inputId = 'year_stratify',
-    selected = rev(nhanes_cycles)[seq(fifth_or_last)]
+    selected = rev(time_values)[seq(fifth_or_last)]
    )
   })
 
@@ -549,17 +530,13 @@ app_run <- function(...) {
       new_id_val_catg <- paste('subset_value', .x, 'catg', sep = '_')
       new_id_val_ctns <- paste('subset_value', .x, 'ctns', sep = '_')
 
-
-      jsc_ctns_subset_variable <- glue(
-       "input.{new_id}.length > 0 &
-             (input.{new_id} == 'demo_age_years' |
-              input.{new_id} == 'bp_sys_mean'    |
-              input.{new_id} == 'bp_dia_mean'    )")
+      ss_var_is_ctns<-
+       jsc_write_subset_ctns(new_id, ctns_subset_variables)
 
       new_value_choices <- input[[new_id]] %||% character()
 
       if(!is_empty(new_value_choices)){
-       new_value_choices <- levels(nhanes_bp[[new_value_choices]])
+       new_value_choices <- levels(nhanes_data[[new_value_choices]])
       }
 
       new_min <- 0
@@ -567,12 +544,10 @@ app_run <- function(...) {
 
       if(!is.null(input[[new_id]])){
 
-       if(input[[new_id]] %in% c('demo_age_years',
-                                 'bp_sys_mean',
-                                 'bp_dia_mean')){
+       if(input[[new_id]] %in% ctns_subset_variables){
 
-        new_min <- nhanes_key$minimum_values[[ input[[new_id]] ]]
-        new_max <- nhanes_key$maximum_values[[ input[[new_id]] ]]
+        new_min <- boundaries[[input[[new_id]]]]$min
+        new_max <- boundaries[[input[[new_id]]]]$max
 
        }
 
@@ -594,7 +569,7 @@ app_run <- function(...) {
         inputId = new_id,
         label = paste0("Select the ", ..x,
                       "variable to create your sub-population"),
-        choices = nhanes_key$variable_choices$subset,
+        choices = variable_choices$subset,
         selected = isolate(input[[new_id]]) %||% character(),
         multiple = TRUE,
         options = pickerOptions(maxOptions = 1),
@@ -603,7 +578,7 @@ app_run <- function(...) {
 
        conditionalPanel(
         condition = as.character(
-         glue('input.{new_id}.length > 0 & {jsc_ctns_subset_variable}')
+         glue('input.{new_id}.length > 0 & {ss_var_is_ctns}')
         ),
         suppressWarnings(
          sliderInput(
@@ -621,7 +596,7 @@ app_run <- function(...) {
 
        conditionalPanel(
         condition = as.character(
-         glue('input.{new_id}.length > 0 & !({jsc_ctns_subset_variable})')
+         glue('input.{new_id}.length > 0 & !({ss_var_is_ctns})')
         ),
         prettyCheckboxGroup(
          inputId = new_id_val_catg,
@@ -642,17 +617,7 @@ app_run <- function(...) {
    updatePickerInput(
     session = session,
     inputId = 'outcome',
-    choices = nhanes_key$variable_choices$outcome[[input$outcome_class]]
-   )
-
-  })
-
-  observeEvent(input$exposure_class, {
-
-   updatePickerInput(
-    session = session,
-    inputId = 'exposure',
-    choices = nhanes_key$variable_choices$exposure[[input$exposure_class]]
+    choices = variable_choices$outcome[[input$outcome_class]]
    )
 
   })
@@ -662,29 +627,41 @@ app_run <- function(...) {
    updatePickerInput(
     session = session,
     inputId = 'group',
-    choices = nhanes_key$variable_choices$group[[input$group_class]]
+    choices = variable_choices$group[[input$group_class]]
+   )
+
+  })
+
+  observeEvent(input$stratify_class, {
+
+   updatePickerInput(
+    session = session,
+    inputId = 'stratify',
+    choices = variable_choices$stratify[[input$stratify_class]]
    )
 
   })
 
   observeEvent(input$outcome, {
 
+   outcome_type <- nhanes_key[variable==input$outcome, type]
+   outcome_stats <- get_outcome_stats(outcome_type)
+
    updatePrettyCheckboxGroup(
     session = session,
     inputId = 'statistic',
-    choices = nhanes_key$svy_calls[[nhanes_key$variables[[input$outcome]]$type]],
-    selected = nhanes_key$svy_calls[[nhanes_key$variables[[input$outcome]]$type]][1]
+    choices = outcome_stats,
+    selected = outcome_stats[1]
    )
 
+   if(!is.null(input$group)){
 
-   if(!is.null(input$exposure)){
-
-    if(input$outcome == input$exposure){
+    if(input$outcome == input$group){
 
      updatePickerInput(
       session = session,
-      inputId = 'exposure',
-      choices = nhanes_key$variable_choices$exposure,
+      inputId = 'group',
+      choices = nhanes_key$variable_choices$group,
       selected = character(0)
      )
 
@@ -705,14 +682,14 @@ app_run <- function(...) {
       updatePickerInput(
        session = session,
        inputId = ss_var,
-       choices = nhanes_key$variable_choices$exposure,
+       choices = nhanes_key$variable_choices$group,
        selected = character(0)
       )
 
       updatePickerInput(
        session = session,
        inputId = ss_var,
-       choices = nhanes_key$variable_choices$exposure,
+       choices = nhanes_key$variable_choices$group,
        selected = character(0)
       )
 
@@ -723,8 +700,10 @@ app_run <- function(...) {
 
       updateSliderInput(
        inputId = ss_val_ctns,
-       value = c(nhanes_key$minimum_values[[input[[ss_var]]]],
-                 nhanes_key$maximum_values[[input[[ss_var]]]])
+       value = c(0,0)
+       # TODO: fix
+       # value = c(min(nhanes_data[[input[[ss_var]]]], na.rm = TRUE),
+       #           max(nhanes_data[[input[[ss_var]]]], na.rm = TRUE))
       )
 
      }
@@ -768,14 +747,10 @@ app_run <- function(...) {
 
     observeEvent(input[[ss_var]], {
 
-     ctns_subset_variable <- input[[ss_var]]  %in% c('demo_age_years',
-                                                     'bp_sys_mean',
-                                                     'bp_dia_mean')
+     if(input[[ss_var]]  %in% ctns_subset_variables){
 
-     if(ctns_subset_variable){
-
-      .min <- nhanes_key$minimum_values[[input[[ss_var]]]]
-      .max <- nhanes_key$maximum_values[[input[[ss_var]]]]
+      .min <- boundaries[[input[[ss_var]]]]$min
+      .max <- boundaries[[input[[ss_var]]]]$max
 
       updateSliderInput(inputId = ss_val_ctns,
                         min = .min,
@@ -784,17 +759,17 @@ app_run <- function(...) {
 
      } else {
 
-      miss_add <- NULL
+      miss_add <- "Missing"
 
-      if(any(is.na(nhanes_bp[[ input[[ss_var]] ]]))){
-       miss_add <- "Missing"
-      }
+      # if(any(is.na(nhanes_data[[ input[[ss_var]] ]]))){
+      #  miss_add <- "Missing"
+      # }
 
       updatePrettyCheckboxGroup(
        inputId = ss_val_catg,
        choices =
-        levels(nhanes_bp[[ input[[ss_var]] ]]) %||%
-        sort(unique(na.omit(nhanes_bp[[ input[[ss_var]] ]]))) %>%
+        levels(nhanes_data[[ input[[ss_var]] ]]) %||%
+        sort(unique(na.omit(nhanes_data[[ input[[ss_var]] ]]))) %>%
         c(miss_add),
        selected = character(0) #subset_value_selected
       )
@@ -830,11 +805,11 @@ app_run <- function(...) {
    }
   )
 
-  observeEvent(input$exposure, {
+  observeEvent(input$group, {
 
    if(!is.null(input$outcome)){
 
-    if(input$outcome == input$exposure){
+    if(input$outcome == input$group){
 
      updatePickerInput(
       session = session,
@@ -854,7 +829,7 @@ app_run <- function(...) {
 
    }
 
-   if(!is_continuous(input$exposure)){
+   if(!is_continuous(input$group)){
 
     updatePickerInput(
      session = session,
@@ -869,26 +844,38 @@ app_run <- function(...) {
 
   # Stat summary ------------------------------------------------------------
 
-  years <- reactive({
+  smry <- reactive({
 
-   if(input$pool == 'yes'){
+   pool <- input$pool == 'yes'
 
-    year_levels <- levels(nhanes_bp[[nhanes_key$time_var]])
-    year_start <- which(year_levels == input$year_pool[1])
-    year_end   <- which(year_levels == input$year_pool[2])
+   age_wts <- NULL
 
-    return(year_levels[seq(year_start, year_end)])
+   if(input$age_standardize){
+    age_wts <- c(input$age_wts_1,
+                 input$age_wts_2,
+                 input$age_wts_3,
+                 input$age_wts_4)
+   }
+
+   outcome_variable  <- input_infer(input$outcome,  default = NULL)
+   group_variable    <- input_infer(input$group,    default = NULL)
+   stratify_variable <- input_infer(input$stratify, default = NULL)
+
+   time_values_selected <- if(pool){
+
+     time_start <- which(time_values == input$year_pool[1])
+     time_end   <- which(time_values == input$year_pool[2])
+
+     return(time_values[seq(time_start, time_end)])
+
+   } else {
+
+    input$year_stratify
 
    }
 
-   input$year_stratify
-
-
-  })
-
-  smry <- reactive({
-
    subset_indices <- c()
+   subset_calls <- list()
 
    if(input$subset_n > 0){
     # as.integer b/c subset_n is a character value
@@ -901,63 +888,25 @@ app_run <- function(...) {
 
     if(is_used(input[[ss_var]])){
 
-     ss_val_ctns <- paste('subset_value', i, 'ctns', sep = '_')
-     ss_val_catg <- paste('subset_value', i, 'catg', sep = '_')
+     ss_type <- get_variable_type(nhanes_key, input[[ss_var]])
 
-     if(is_continuous(input[[ss_var]])){
+     # the inputs defined in the UI only allow ctns or catg
+     if(ss_type %in% c('bnry', 'intg')) ss_type <- 'catg'
 
-      # need to create the subsetting variables based on continuous
-      # cut-points before creating the design object. Doing this
-      # in the reverse order won't work b/c survey doesn't let you
-      # modify the design object's data.
+     ss_val <- paste('subset_value', i, ss_type, sep = '_')
 
-      nhanes_bp[[ paste(input[[ss_var]], 'tmp', sep='_') ]] <-
-       fifelse(
-        nhanes_bp[[input[[ss_var]]]] %between% c(input[[ss_val_ctns]]),
-        yes = 'yes',
-        no = 'no'
-       )
+     if(ss_type == 'ctns'){
+
+      if(!all(input[[ss_val]] == 0)){
+       subset_calls[[ input[[ss_var]] ]] <- input[[ss_val]]
+      }
 
      }
 
-    }
+     if(ss_type == 'catg'){
 
-
-   }
-
-   type_subpop <- nhanes_key$data[variable == input$outcome, subpop]
-
-   # restrict the sample to the relevant sub-population
-   colname_subpop <- paste('svy_subpop', type_subpop, sep = '_')
-
-   nhanes_subpop <- nhanes_bp %>%
-    .[.[[colname_subpop]] == 1]
-
-   # colname_weight <- paste('svy_weight', type_subpop, sep = '_')
-
-   # if the count of a variable was requested, calibrate the
-   # weights so that the sum of observations in the sub-population
-   # matches the sum of weights
-
-   subset_calls <- list()
-
-   for(i in subset_indices){
-
-    ss_var <- paste('subset_variable', i, sep = '_')
-
-    if(is_used(input[[ss_var]])){
-
-     ss_val_ctns <- paste('subset_value', i, 'ctns', sep = '_')
-     ss_val_catg <- paste('subset_value', i, 'catg', sep = '_')
-
-     if(!is_empty(input[[ss_val_catg]]) | !all(input[[ss_val_ctns]] == 0)){
-
-      subset_calls[[ input[[ss_var]] ]] <- input[[ss_val_catg]]
-
-      if(is_continuous(input[[ss_var]])){
-
-       subset_calls[[ paste(input[[ss_var]], 'tmp', sep='_') ]] <- "yes"
-
+      if (!is_empty(input[[ss_val]])){
+       subset_calls[[ input[[ss_var]] ]] <- input[[ss_val]]
       }
 
      }
@@ -966,69 +915,20 @@ app_run <- function(...) {
 
    }
 
-   smry_counts <- smry_no_counts <- NULL
-
-   stats <- input$statistic
-
-   if('count' %in% input$statistic){
-
-    smry_counts <- nhanes_bp %>%
-     nhanes_calibrate(nhanes_sub = nhanes_subpop) %>%
-     .[, svy_weight := svy_weight_cal] %>%
-     svy_design_new(
-      exposure = input$exposure,
-      n_exposure_group = as.numeric(input$n_exposure_group),
-      exposure_cut_type = input$exposure_cut_type,
-      years = years(),
-      pool = input$pool
-     ) %>%
-     svy_design_subset(subset_calls) %>%
-     svy_design_summarize(
-      outcome = input$outcome,
-      statistic = 'count',
-      exposure = input$exposure,
-      group = input$group,
-      age_standardize = input$age_standardize,
-      age_wts = c(
-       input$age_wts_1,
-       input$age_wts_2,
-       input$age_wts_3,
-       input$age_wts_4
-      )
-     )
-   }
-
-   stats_no_count <- setdiff(stats, 'count')
-
-   if(!is_empty(stats_no_count)){
-
-    smry_no_counts <- nhanes_subpop %>%
-     .[, svy_weight := svy_weight_mec] %>%
-      svy_design_new(
-       exposure = input$exposure,
-       n_exposure_group = as.numeric(input$n_exposure_group),
-       exposure_cut_type = input$exposure_cut_type,
-       years = years(),
-       pool = input$pool
-      ) %>%
-      svy_design_subset(subset_calls) %>%
-      svy_design_summarize(
-       outcome = input$outcome,
-       statistic = stats_no_count,
-       exposure = input$exposure,
-       group = input$group,
-       age_standardize = input$age_standardize,
-       age_wts = c(
-        input$age_wts_1,
-        input$age_wts_2,
-        input$age_wts_3,
-        input$age_wts_4
-       )
-      )
-
-   }
-
-   bind_smry(smry_counts, smry_no_counts)
+   nhanes_summarize(data = nhanes_data,
+                    key = nhanes_key,
+                    outcome_variable = outcome_variable,
+                    outcome_quantiles = c(0.25, 0.50, 0.75),
+                    group_variable = group_variable,
+                    group_cut_n = input$n_exposure_group,
+                    group_cut_type = input$exposure_cut_type,
+                    stratify_variable = stratify_variable,
+                    time_variable = time_variable,
+                    time_values = time_values_selected,
+                    pool = pool,
+                    subset_calls = subset_calls,
+                    age_wts = age_wts,
+                    simplify_output = FALSE)
 
   }) %>%
    bindEvent(input$run)
@@ -1037,12 +937,10 @@ app_run <- function(...) {
 
    if(input$do != 'figure') return(NULL)
 
-   plotly_viz(
-    data = smry(),
+   smry() %>%
+    nhanes_design_viz(
     statistic_primary = input$statistic_primary,
-    geom = input$geom,
-    years = years(),
-    pool = input$pool
+    geom = input$geom
    )
 
   }) %>%
@@ -1053,6 +951,7 @@ app_run <- function(...) {
    if(input$do != 'data') return(NULL)
 
    smry() %>%
+    getElement("results")
     datatable(
      options = list(
       lengthMenu = list(c(5,15,20), c('5','15','20')),
@@ -1094,6 +993,6 @@ app_run <- function(...) {
 
  # Calling shinyapp --------------------------------------------------------
 
- shinyApp(ui, server, ...)
+ shinyApp(ui, server)
 
 }

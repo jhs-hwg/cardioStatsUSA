@@ -1,18 +1,16 @@
 
-plotly_viz_make_hover <- function(data, stat_all, exposure, key) {
+plotly_viz_make_hover <- function(data, stat_all, group, group_label) {
 
  numeric_cols <- get_numeric_colnames(data)
 
  stat_cols <- intersect(stat_all, unique(data$statistic))
 
- data$exposure_label <- ""
+ data$group_label <- ""
  label_sep <- ""
 
- if(is_used(exposure)){
-  data$exposure_label <- key$variables %>%
-   getElement(exposure) %>%
-   getElement('label') %>%
-   paste(data[[exposure]], sep = ': ')
+ if(is_used(group)){
+  data$group_label <- group_label %>%
+   paste(data[[group]], sep = ': ')
   label_sep <- "\n"
  }
 
@@ -20,15 +18,34 @@ plotly_viz_make_hover <- function(data, stat_all, exposure, key) {
   as_tibble() %>%
   mutate(across(all_of(numeric_cols), table_value)) %>%
   mutate(
+   stat_show = if_else(
+    review_needed,
+    paste0(" -Review needed-<br>  Reasons: ", review_reason),
+    ""
+   ),
+   stat_show = if_else(
+    unreliable_status,
+    paste0(" -Unreliable-<br>  Reasons: ", unreliable_reason),
+    stat_show
+   ),
+   stat_show = if_else(
+    stat_show == "",
+    as.character(glue("{estimate} (95% CI {ci_lower}, {ci_upper})")),
+    stat_show
+   ),
    stat_label = glue(
-    "{str_to_title(statistic)}: \\
-    {estimate} (95% CI {ci_lower}, {ci_upper})"
+    "{str_to_title(statistic)}: {stat_show}"
    )
   ) %>%
-  select(-all_of(numeric_cols)) %>%
+  select(-all_of(numeric_cols),
+         -c(unreliable_reason,
+            unreliable_status,
+            review_reason,
+            review_needed,
+            stat_show)) %>%
   pivot_wider(names_from = statistic, values_from = stat_label) %>%
   unite(col = 'hover', !!!stat_cols, sep = '<br>') %>%
-  mutate(hover = glue("{exposure_label}{label_sep}{hover}")) %>%
+  mutate(hover = glue("{group_label}{label_sep}{hover}")) %>%
   as.data.table()
 
 }

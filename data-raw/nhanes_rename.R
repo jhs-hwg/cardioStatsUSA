@@ -17,8 +17,8 @@ nhanes_rename <- function(data){
   svy_id          = seqn,
   svy_weight_mec  = wtmec2yr,  # uncalibrated
   svy_weight_af   = wtsaf2yr,  # uncalibrated
-  svy_weight_htn  = newwt,     # used for the htn subpop
-  svy_weight_chol = newwtldl,  # used for the chol subpop
+  # svy_weight_htn  = newwt,     # dropped for auto-calibrated wts
+  # svy_weight_chol = newwtldl,  # dropped for auto-calibrated wts
   svy_psu         = sdmvpsu,
   svy_strata      = sdmvstra,
   svy_year        = surveyyr,

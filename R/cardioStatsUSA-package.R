@@ -15,7 +15,7 @@
 #' @importFrom rlang parse_expr %||%
 #' @importFrom plotly plot_ly add_trace layout
 #' @importFrom arules discretize
-#' @importFrom purrr map map2 map_dfr map2_chr is_empty discard
+#' @importFrom purrr map map2 map_dfr map2_chr map2_dfr is_empty discard
 #' @importFrom dplyr filter mutate select pull across
 #' @importFrom dplyr if_else all_of .data recode left_join
 #' @importFrom tidyr pivot_wider pivot_longer unite

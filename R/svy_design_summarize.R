@@ -91,6 +91,9 @@ svy_design_summarize <- function(
                                quantiles = quantiles)) %>%
     svy_stat_tidy(outcome = outcome,
                   by_vars = by_vars) %>%
+    svy_stat_suppress(n_obs = get_obs_count(design),
+                      n_psu = get_psu_count(design),
+                      n_strata = get_strata_count(design)) %>%
     .[, outcome := NULL]
 
 

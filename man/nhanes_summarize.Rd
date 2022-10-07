@@ -5,17 +5,27 @@
 \title{Generate summaries of NHANES}
 \usage{
 nhanes_summarize(
-  outcome,
-  exposure = NULL,
-  group = NULL,
-  years = "last_5",
+  data,
+  key,
+  outcome_variable,
+  outcome_quantiles = NULL,
+  group_variable = NULL,
+  group_cut_n = NULL,
+  group_cut_type = NULL,
+  stratify_variable = NULL,
+  time_variable = "svy_year",
+  time_values = NULL,
   pool = FALSE,
-  subset_variables = list(),
-  subset_values = list(),
-  age_wts = NULL
+  subset_calls = list(),
+  age_wts = NULL,
+  simplify_output = TRUE
 )
 }
 \arguments{
+\item{pool}{(\emph{logical}; length 1; default = \code{FALSE})}
+
+\item{age_wts}{(\emph{numeric}; length 4; default is none)}
+
 \item{outcome}{(\emph{character}; length 1; no default)
 The variable to be summarized.}
 
@@ -31,13 +41,9 @@ Valid options are
 \item 'most_recent' (include the most recent NHANES cycle)
 }}
 
-\item{pool}{(\emph{logical}; length 1; default = \code{FALSE})}
-
 \item{subset_variables}{(\emph{list}; length may vary)}
 
 \item{subset_values}{(\emph{list}; length must match \code{subset_variables})}
-
-\item{age_wts}{(\emph{numeric}; length 4; default is none)}
 }
 \value{
 a \code{data.table} with summarized values

@@ -5,10 +5,16 @@
 \title{Visualize summaries of NHANES}
 \usage{
 nhanes_visualize(
-  outcome,
-  exposure = NULL,
-  group = NULL,
-  years = "last_5",
+  data,
+  key,
+  outcome_variable,
+  outcome_quantiles = NULL,
+  group_variable = NULL,
+  group_cut_n = NULL,
+  group_cut_type = NULL,
+  stratify_variable = NULL,
+  time_variable = "svy_year",
+  time_values = NULL,
   pool = FALSE,
   subset_variables = list(),
   subset_values = list(),
@@ -17,25 +23,12 @@ nhanes_visualize(
   geom = "bar",
   reorder_cats = FALSE,
   width = NULL,
-  height = NULL
+  height = NULL,
+  size_point = NULL,
+  size_error = NULL
 )
 }
 \arguments{
-\item{outcome}{(\emph{character}; length 1; no default)
-The variable to be summarized.}
-
-\item{exposure}{(\emph{character}; length 1; default is none)}
-
-\item{group}{(\emph{character}; length 1; default is none)}
-
-\item{years}{(\emph{character}; length may vary; default = 'all')
-Valid options are
-\itemize{
-\item 'all' (includes all NHANES cycles)
-\item 'last_5' (includes the last 5 most recent NHANES cycles)
-\item 'most_recent' (include the most recent NHANES cycle)
-}}
-
 \item{pool}{(\emph{logical}; length 1; default = \code{FALSE})}
 
 \item{subset_variables}{(\emph{list}; length may vary)}

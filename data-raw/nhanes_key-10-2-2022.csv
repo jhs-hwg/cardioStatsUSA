@@ -1,0 +1,98 @@
+﻿class,variable,label,source,description,type,outcome,group,subset,stratify,subpop
+Survey,svy_id,participant identifier,DEMO,TBD,svy,FALSE,FALSE,FALSE,FALSE,none
+Survey,svy_psu,primary sampling unit,DEMO,TBD,svy,FALSE,FALSE,FALSE,FALSE,none
+Survey,svy_strata,strata,DEMO,TBD,svy,FALSE,FALSE,FALSE,FALSE,none
+Survey,svy_weight_mec,Mobile examination center weights,DEMO,TBD,svy,FALSE,FALSE,FALSE,FALSE,none
+Survey,svy_weight_cal,Calibrated mobile examination center weights,Derived,TBD,svy,FALSE,FALSE,FALSE,FALSE,none
+Survey,svy_subpop_htn,Subpopulation for hypertension,Derived,TBD,svy,FALSE,FALSE,FALSE,FALSE,none
+Survey,svy_year,NHANES cycle,DEMO,TBD,time,FALSE,FALSE,FALSE,FALSE,none
+Demographics,demo_age_cat,"Age category, years",DEMO,TBD,catg,TRUE,TRUE,TRUE,TRUE,htn
+Demographics,demo_race,Race,DEMO,TBD,catg,TRUE,TRUE,TRUE,TRUE,htn
+Demographics,demo_age_years,"Age, years",DEMO,TBD,ctns,TRUE,TRUE,TRUE,FALSE,htn
+Demographics,demo_pregnant,Pregnant,DEMO,TBD,bnry,TRUE,TRUE,TRUE,TRUE,htn
+Demographics,demo_gender,Gender,DEMO,TBD,catg,TRUE,TRUE,TRUE,TRUE,htn
+Blood pressure,bp_sys_mean,"Systolic blood pressure, mm Hg",Derived,TBD,ctns,TRUE,TRUE,TRUE,FALSE,htn
+Blood pressure,bp_dia_mean,"Diastolic blood pressure, mm Hg",Derived,TBD,ctns,TRUE,TRUE,TRUE,FALSE,htn
+Blood pressure,bp_cat_meds_excluded,Blood pressure category (not including antihypertensive medication use),Derived,TBD,catg,TRUE,TRUE,TRUE,TRUE,htn
+Blood pressure,bp_cat_meds_included,Blood pressure category (including antihypertensive medication use),Derived,TBD,catg,TRUE,TRUE,TRUE,TRUE,htn
+Blood pressure,bp_control_jnc7,Blood pressure control (SBP < 140 mm Hg and DBP < 90 mm Hg),Derived,TBD,bnry,TRUE,TRUE,TRUE,TRUE,htn
+Blood pressure,bp_control_accaha,Blood pressure control (SBP < 130 mm Hg and DBP < 80 mm Hg),Derived,TBD,bnry,TRUE,TRUE,TRUE,TRUE,htn
+Blood pressure,bp_uncontrolled_jnc7,Uncontrolled BP (SBP >= 140 mm Hg or DBP >= 90 mm Hg),Derived,TBD,bnry,TRUE,TRUE,TRUE,TRUE,htn
+Blood pressure,bp_uncontrolled_accaha,Uncontrolled BP (SBP >= 130 mm Hg or DBP >= 80 mm Hg),Derived,TBD,bnry,TRUE,TRUE,TRUE,TRUE,htn
+Antihypertensive medication,bp_med_use,Self-reported antihypertensive medication use,BPQ,TBD,bnry,TRUE,TRUE,TRUE,TRUE,htn
+Antihypertensive medication,bp_med_recommended_jnc7,Antihypertensive medications recommended by JNC7,Derived,TBD,bnry,TRUE,TRUE,TRUE,TRUE,htn
+Antihypertensive medication,bp_med_recommended_accaha,Antihypertensive medications recommended by ACC/AHA 2017,Derived,TBD,bnry,TRUE,TRUE,TRUE,TRUE,htn
+Antihypertensive medication,bp_med_n_class,Number of antihypertensive medication classes,Derived,TBD,catg,TRUE,TRUE,TRUE,TRUE,htn
+Antihypertensive medication,bp_med_ace,ACE inhibitors,RXQ,TBD,bnry,TRUE,TRUE,TRUE,TRUE,htn
+Antihypertensive medication,bp_med_aldo,Aldosterone antagonists,RXQ,TBD,bnry,TRUE,TRUE,TRUE,TRUE,htn
+Antihypertensive medication,bp_med_alpha,Alpha-1 blockers,RXQ,TBD,bnry,TRUE,TRUE,TRUE,TRUE,htn
+Antihypertensive medication,bp_med_angioten,Angiotensin receptor blockers,RXQ,TBD,bnry,TRUE,TRUE,TRUE,TRUE,htn
+Antihypertensive medication,bp_med_beta,Beta blockers,RXQ,TBD,bnry,TRUE,TRUE,TRUE,TRUE,htn
+Antihypertensive medication,bp_med_central,Central alpha1 agonist and other centrally acting agents,RXQ,TBD,bnry,TRUE,TRUE,TRUE,TRUE,htn
+Antihypertensive medication,bp_med_ccb,Calcium channel blockers,RXQ,TBD,bnry,TRUE,TRUE,TRUE,TRUE,htn
+Antihypertensive medication,bp_med_diur_Ksparing,Potassium sparing diuretics,RXQ,TBD,bnry,TRUE,TRUE,TRUE,TRUE,htn
+Antihypertensive medication,bp_med_diur_loop,Loop diuretics,RXQ,TBD,bnry,TRUE,TRUE,TRUE,TRUE,htn
+Antihypertensive medication,bp_med_diur_thz,Thiazide or thiazide-type diuretics,RXQ,TBD,bnry,TRUE,TRUE,TRUE,TRUE,htn
+Antihypertensive medication,bp_med_renin_inhibitors,Direct renin inhibitors,RXQ,TBD,bnry,TRUE,TRUE,TRUE,TRUE,htn
+Antihypertensive medication,bp_med_vasod,Direct vasodilators,RXQ,TBD,bnry,TRUE,TRUE,TRUE,TRUE,htn
+Hypertension,htn_jnc7,Hypertension (JNC7 guideline definition),Derived,TBD,bnry,TRUE,TRUE,TRUE,TRUE,htn
+Hypertension,htn_accaha,Hypertension (2017 ACC/AHA BP guideline definition),Derived,TBD,bnry,TRUE,TRUE,TRUE,TRUE,htn
+Hypertension,htn_aware,Awareness of hypertension,BPQ,TBD,bnry,TRUE,TRUE,TRUE,TRUE,htn
+Hypertension,htn_resistant_jnc7,Resistant hypertension (JNC7 guideline definition),Derived,TBD,bnry,TRUE,TRUE,TRUE,TRUE,htn
+Hypertension,htn_resistant_accaha,Resistant hypertension (2017 ACC/AHA BP guideline definition),Derived,TBD,bnry,TRUE,TRUE,TRUE,TRUE,htn
+Hypertension,htn_resistant_accaha_thz,Resistant hypertension (JNC7 guideline definition requires thiazide diuretic),Derived,TBD,bnry,TRUE,TRUE,TRUE,TRUE,htn
+Hypertension,htn_resistant_jnc7_thz,Resistant hypertension (2017 ACC/AHA BP guideline definition requires thiazide diuretic) ,Derived,TBD,bnry,TRUE,TRUE,TRUE,TRUE,htn
+Comorbidities,cc_n_highrisk,Number of high risk conditions,Derived,TBD,catg,TRUE,TRUE,TRUE,TRUE,chol
+Comorbidities,cc_smoke,Smoking status,SMQ,TBD,catg,TRUE,TRUE,TRUE,TRUE,htn
+Comorbidities,cc_bmi,"Body mass index, kg/m2",WHQ,TBD,catg,TRUE,TRUE,TRUE,TRUE,htn
+Comorbidities,cc_diabetes,Prevalent diabetes,DIQ,TBD,bnry,TRUE,TRUE,TRUE,TRUE,htn
+Comorbidities,cc_ckd,Prevalent chronic kidney disease,Derived,TBD,bnry,TRUE,TRUE,TRUE,TRUE,htn
+Comorbidities,cc_cvd_mi,History of myocardial infarction,MCQ,TBD,bnry,TRUE,TRUE,TRUE,TRUE,htn
+Comorbidities,cc_cvd_chd,History of coronary heart disease,MCQ,TBD,bnry,TRUE,TRUE,TRUE,TRUE,htn
+Comorbidities,cc_cvd_stroke,History of stroke,MCQ,TBD,bnry,TRUE,TRUE,TRUE,TRUE,htn
+Comorbidities,cc_cvd_ascvd,History of ASCVD,MCQ,TBD,bnry,TRUE,TRUE,TRUE,TRUE,htn
+Comorbidities,cc_cvd_hf,History of heart failure,MCQ,TBD,bnry,TRUE,TRUE,TRUE,TRUE,htn
+Comorbidities,cc_cvd_any,History of CVD,MCQ,TBD,bnry,TRUE,TRUE,TRUE,TRUE,htn
+Survey,svy_subpop_chol,Subpopulation for cholesterol,Derived,TBD,svy,FALSE,FALSE,FALSE,FALSE,none
+Cholesterol,chol_measured_never,Cholesterol has never been measured,BPQ,TBD,bnry,TRUE,TRUE,TRUE,TRUE,chol
+Cholesterol,chol_measured_last,Time since having their cholesterol measured,BPQ,TBD,catg,TRUE,TRUE,TRUE,TRUE,chol
+Cholesterol,chol_total,"Total cholesterol, mg/dL",TCHOL,TBD,ctns,TRUE,TRUE,TRUE,TRUE,chol
+Cholesterol,chol_total_gteq_200,Total cholesterol >= 200 mg/dL ,Derived,TBD,bnry,TRUE,TRUE,TRUE,TRUE,chol
+Cholesterol,chol_total_gteq_240,Total cholesterol >= 240 mg/dL ,Derived,TBD,bnry,TRUE,TRUE,TRUE,TRUE,chol
+Cholesterol,chol_trig,"Triglycerides, mg/dL",TRIGLY,TBD,ctns,TRUE,TRUE,TRUE,TRUE,chol
+Cholesterol,chol_trig_gteq_150,Triglycerides >= 150 mg/dL ,Derived,TBD,bnry,TRUE,TRUE,TRUE,TRUE,chol
+HDL Cholesterol,chol_hdl,"HDL cholesterol, mg/dL",HDL,TBD,ctns,TRUE,TRUE,TRUE,TRUE,chol
+HDL Cholesterol,chol_hdl_low,HDL cholesterol <40 mg/dL in women (<50 mg/dL in men),Derived,TBD,bnry,TRUE,TRUE,TRUE,TRUE,chol
+LDL Cholesterol,chol_ldl,"LDL cholesterol, mg/dL",TRIGLY,TBD,ctns,TRUE,TRUE,TRUE,TRUE,chol
+LDL Cholesterol,chol_ldl_5cat,LDL cholesterol categories,Derived,TBD,catg,TRUE,TRUE,TRUE,TRUE,chol
+LDL Cholesterol,chol_ldl_lt_70,LDL cholesterol < 70 mg/dL,Derived,TBD,bnry,TRUE,TRUE,TRUE,TRUE,chol
+LDL Cholesterol,chol_ldl_gteq_70,LDL cholesterol >= 70 mg/dL,Derived,TBD,bnry,TRUE,TRUE,TRUE,TRUE,chol
+LDL Cholesterol,chol_ldl_lt_100,LDL cholesterol < 100 mg/dL,Derived,TBD,bnry,TRUE,TRUE,TRUE,TRUE,chol
+LDL Cholesterol,chol_ldl_gteq_100,LDL cholesterol >= 100 mg/dL,Derived,TBD,bnry,TRUE,TRUE,TRUE,TRUE,chol
+LDL Cholesterol,chol_ldl_gteq_190,LDL cholesterol >= 190 mg/dL,Derived,TBD,bnry,TRUE,TRUE,TRUE,TRUE,chol
+LDL Cholesterol,chol_ldl_persistent,LDL persistently elevated (LDL >= 100 mg/dL while taking a statin),Derived,TBD,bnry,TRUE,TRUE,TRUE,TRUE,chol
+Non-HDL Cholesterol,chol_nonhdl,"Non-HDL cholesterol, mg/dL",Derived,TBD,ctns,TRUE,TRUE,TRUE,TRUE,chol
+Non-HDL Cholesterol,chol_nonhdl_5cat,Non-HDL cholesterol categories,Derived,TBD,catg,TRUE,TRUE,TRUE,TRUE,chol
+Non-HDL Cholesterol,chol_nonhdl_lt_100,Non-HDL cholesterol < 100 mg/dL,Derived,TBD,bnry,TRUE,TRUE,TRUE,TRUE,chol
+Non-HDL Cholesterol,chol_nonhdl_gteq_100,Non-HDL cholesterol >= 100 mg/dL,Derived,TBD,bnry,TRUE,TRUE,TRUE,TRUE,chol
+Non-HDL Cholesterol,chol_nonhdl_gteq_220,Non-HDL cholesterol >= 220 mg/dL,Derived,TBD,bnry,TRUE,TRUE,TRUE,TRUE,chol
+Cholesterol-lowering medication,chol_med_use,Taking a cholesterol-lowering medication,RXQ (???),TBD,bnry,TRUE,TRUE,TRUE,TRUE,chol
+Cholesterol-lowering medication,chol_med_use_sr,Self-reported cholesterol-lowering medication use,BPQ,TBD,bnry,TRUE,TRUE,TRUE,TRUE,chol
+Cholesterol-lowering medication,chol_med_statin,Taking a statin ,RXQ,TBD,bnry,TRUE,TRUE,TRUE,TRUE,chol
+Cholesterol-lowering medication,chol_med_ezetimibe,Taking ezetimibe  ,RXQ,TBD,bnry,TRUE,TRUE,TRUE,TRUE,chol
+Cholesterol-lowering medication,chol_med_pcsk9i,Taking a PCSK9 inhibitor,RXQ,TBD,bnry,TRUE,TRUE,TRUE,TRUE,chol
+Cholesterol-lowering medication,chol_med_bile,Taking a bile acid sequestrant   ,RXQ,TBD,bnry,TRUE,TRUE,TRUE,TRUE,chol
+Cholesterol-lowering medication,chol_med_fibric_acid,Taking a fibrate  ,RXQ,TBD,bnry,TRUE,TRUE,TRUE,TRUE,chol
+Cholesterol-lowering medication,chol_med_atorvastatin,Taking atorvastatin  ,RXQ,TBD,bnry,TRUE,TRUE,TRUE,TRUE,chol
+Cholesterol-lowering medication,chol_med_simvastatin,Taking simvastatin  ,RXQ,TBD,bnry,TRUE,TRUE,TRUE,TRUE,chol
+Cholesterol-lowering medication,chol_med_rosuvastatin,Taking rosuvastatin ,RXQ,TBD,bnry,TRUE,TRUE,TRUE,TRUE,chol
+Cholesterol-lowering medication,chol_med_pravastatin,Taking pravastatin  ,RXQ,TBD,bnry,TRUE,TRUE,TRUE,TRUE,chol
+Cholesterol-lowering medication,chol_med_pitavastatin,Taking pitavastatin,RXQ,TBD,bnry,TRUE,TRUE,TRUE,TRUE,chol
+Cholesterol-lowering medication,chol_med_fluvastatin,Taking fluvastatin,RXQ,TBD,bnry,TRUE,TRUE,TRUE,TRUE,chol
+Cholesterol-lowering medication,chol_med_lovastatin,Taking lovastatin  ,RXQ,TBD,bnry,TRUE,TRUE,TRUE,TRUE,chol
+Cholesterol-lowering medication,chol_med_other,Taking other cholesterol-lowering medication,RXQ,TBD,bnry,TRUE,TRUE,TRUE,TRUE,chol
+Cholesterol-lowering medication,chol_med_addon_use,Taking add-on lipid-lowering therapy (ezetimibe or PCSK9 inhibitor),RXQ,TBD,bnry,TRUE,TRUE,TRUE,TRUE,chol
+Cholesterol-lowering medication,chol_med_addon_recommended_ahaacc,Recommended add-on lipid-lowering therapy by the 2018 AHA/ACC guideline,Derived,TBD,bnry,TRUE,TRUE,TRUE,TRUE,chol
+Cholesterol-lowering medication,chol_med_statin_recommended_ahaacc,Recommended a statin by the 2018 AHA/ACC guideline,Derived,TBD,bnry,TRUE,TRUE,TRUE,TRUE,chol
+Cholesterol-lowering medication,chol_med_recommended_ever,Ever been told to take cholesterol-lowering medication,BPQ,TBD,bnry,TRUE,TRUE,TRUE,TRUE,chol
+Atherosclerotic CVD risk,ascvd_risk_vh_ahaacc,Very high ASCVD risk according to the 2018 AHA/ACC guideline,Derived,TBD,bnry,TRUE,TRUE,TRUE,TRUE,chol

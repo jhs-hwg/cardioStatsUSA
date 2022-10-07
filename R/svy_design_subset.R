@@ -17,11 +17,11 @@ svy_design_subset <- function(
 
  subset_arg <- map(
   .x = subset_calls,
-  .f = parse_subset_values
+  .f = ~ paste(parse_subset_value(.x), collapse = ", ")
  ) %>%
   map2_chr(
    .y = names(subset_calls),
-   .f = ~ glue("{.y} %in% c({.x})") # \"{.x}\"
+   .f = ~ glue("{.y} %in% c({.x})")
   ) %>%
   paste(collapse = ' & ') %>%
   parse_expr()
@@ -30,13 +30,3 @@ svy_design_subset <- function(
 
 }
 
-# only used above
-
-parse_subset_values <- function(x){
- paste(parse_subset_value(x), collapse = ", ")
-}
-
-parse_subset_value <- function(x){
- paste("\'", x, "\'", sep = '') %>%
-  stringr::str_replace("\'Missing\'", "NA")
-}

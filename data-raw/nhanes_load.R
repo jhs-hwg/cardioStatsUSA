@@ -13,7 +13,7 @@ nhanes_load <- function(fpath = file.path(here::here(), 'data-raw'),
                         as = 'tibble'){
 
  data_bp <- haven::read_sas(
-  file.path(fpath, 'nhanes_bp-raw.sas7bdat')
+  file.path(fpath, 'nhanes_data-raw.sas7bdat')
  )
 
  data_lipids <- haven::read_sas(

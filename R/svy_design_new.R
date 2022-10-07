@@ -65,8 +65,6 @@ svy_design_new <- function(data,
 
  }
 
-  # .[, (fctrs) := lapply(.SD, fctr_dots_add), .SDcols = fctrs]
-
  design <- svydesign(ids = ~ svy_psu,
                      strata = ~ svy_strata,
                      weights = ~ svy_weight,
@@ -81,10 +79,5 @@ svy_design_new <- function(data,
 }
 
 
-fctr_dots_add <- function(fctr){
 
- levels(fctr) <- paste('..f..', levels(fctr), sep = '')
 
- fctr
-
-}

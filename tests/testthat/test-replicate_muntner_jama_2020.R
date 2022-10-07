@@ -1,194 +1,69 @@
 
-
-# Test our app's answers for prevalence of hypertension  ---------------------
-# Cohort: Non-pregnant adults aged 18 and over,
-# By: sex and age
-# Years: 2015-2016
-
-nhanes_bp_test <- nhanes_bp %>%
- as.data.table() %>%
- dplyr::mutate(
-  svy_weight = svy_weight_mec,
-  demo_age_gteq_18 = dplyr::if_else(demo_age_years >= 18, 'Yes', 'No'),
-  demo_age_cat = cut(demo_age_years,
-                     breaks = c(18, 39, 59, Inf),
-                     labels = c("18-39", "40-59", "60+"),
-                     include.lowest = TRUE)
- ) %>%
- dplyr::filter(
-  demo_pregnant == 'No' | is.na(demo_pregnant),
-  !(is.na(bp_dia_mean) & is.na(bp_sys_mean))
- )
-
-exposure <- 'demo_age_cat'
-
-design <- nhanes_bp_test %>%
- svy_design_new(
-  exposure = exposure,
-  n_exposure_group = as.numeric(character(0)),
-  exposure_cut_type = 'interval',
-  years = "2015-2016",
-  pool = 'yes'
- )
-
-# cohort size should match the CDC brief cohort size
-expect_equal(nrow(design$variables), 5504)
-
-# up to 0.15% of a difference in prevalence estimate is acceptable
-# (because rounding can be done differently)
-diff_tolerance <- 0.1
-# up to 1/2 of a percentage is acceptable for CI differences
-# the app uses svymean for CI's of percentages, which leads to
-# slightly more narrow intervals (this is done for efficiency
-# and also because the app's CIs are merely descriptive)
-ci_diff_tolerance <- 0.5
-
-# test results without age-adjustment -------------------------------------
-
-# SOURCE: https://www.cdc.gov/nchs/data/databriefs/db289.pdf, Figure 1
-test_data <- tibble::tribble(
- ~demo_gender, ~demo_age_cat, ~estimate, ~std_error,
- "Overall",       "18-39",       7.5,       1.0,
- "Men",           "18-39",       9.2,       1.4,
- "Women",         "18-39",       5.6,       1.1,
- "Overall",       "40-59",       33.2,      1.7,
- "Men",           "40-59",       37.2,      2.9,
- "Women",         "40-59",       29.4,      2.0,
- "Overall",       "60+",         63.1,      2.1,
- "Men",           "60+",         58.5,      2.2,
- "Women",         "60+",         66.8,      2.6
-)
-
-shiny_answers_by_age <- design %>%
- svy_design_summarize(outcome = 'htn_jnc7',
-                      statistic = c('percentage'),
-                      exposure = exposure) %>%
- dplyr::filter(htn_jnc7 == 'Yes') %>%
- dplyr::mutate(demo_gender = 'Overall')
-
-shiny_answers_by_age_sex <- design %>%
- svy_design_summarize(outcome = 'htn_jnc7',
-                      statistic = c('percentage'),
-                      exposure = exposure,
-                      group = 'demo_gender') %>%
- dplyr::filter(htn_jnc7 == 'Yes')
-
-shiny_answers <- shiny_answers_by_age %>%
- dplyr::bind_rows(shiny_answers_by_age_sex) %>%
- dplyr::transmute(demo_gender,
-                  demo_age_cat,
-                  shiny_estimate = round(estimate,1),
-                  shiny_std_error = round(std_error,1))
-
-test_results <-
- dplyr::left_join(test_data, shiny_answers,
-                  by = c("demo_gender", "demo_age_cat")) %>%
- mutate(estimate_diffs = abs(estimate - shiny_estimate),
-        std_error_diffs = abs(std_error - shiny_std_error))
-
-
-for(i in seq(nrow(test_results))){
- expect_lte(test_results$estimate_diffs[i], diff_tolerance)
- expect_lte(test_results$std_error_diffs[i], diff_tolerance)
-}
-
-# test age-adjusted results -----------------------------------------------
-
-test_data <- tribble(
- ~demo_race,          ~demo_gender, ~estimate, ~std_error,
- "Non-Hispanic White", "Total",      27.8,      1.4,
- "Non-Hispanic Black", "Total",      40.3,      2.0,
- "Non-Hispanic Asian", "Total",      25.0,      1.7,
- "Hispanic",           "Total",      27.8,      1.4,
- "Non-Hispanic White", "Men",        29.7,      2.1,
- "Non-Hispanic Black", "Men",        40.6,      2.2,
- "Non-Hispanic Asian", "Men",        28.7,      2.6,
- "Hispanic",           "Men",        27.3,      2.0,
- "Non-Hispanic White", "Women",      25.6,      1.4,
- "Non-Hispanic Black", "Women",      39.9,      2.1,
- "Non-Hispanic Asian", "Women",      21.9,      2.2,
- "Hispanic",           "Women",      28.0,      1.2
-) %>%
- mutate(demo_race = factor(demo_race,
-                           levels = levels(nhanes_bp$demo_race)))
-
-design <- nhanes_bp_test %>%
- svy_design_new(
-  exposure = exposure,
-  n_exposure_group = as.numeric(character(0)),
-  exposure_cut_type = 'interval',
-  years = "2015-2016",
-  pool = 'yes'
- )
-
-shiny_answers_total <- design %>%
- svy_design_summarize(outcome = 'htn_jnc7',
-                      statistic = c('percentage'),
-                      group = 'demo_race',
-                      age_standardize = TRUE,
-                      age_wts = c(0.420263, 0.357202, 0.222535)) %>%
- mutate(demo_gender = 'Total')
-
-shiny_answers_by_gender <- design %>%
- svy_design_summarize(outcome = 'htn_jnc7',
-                      statistic = c('percentage'),
-                      exposure = 'demo_gender',
-                      group = 'demo_race',
-                      age_standardize = TRUE,
-                      age_wts = c(0.420263, 0.357202, 0.222535))
-
-shiny_answers <- shiny_answers_total %>%
- dplyr::bind_rows(shiny_answers_by_gender) %>%
- dplyr::filter(htn_jnc7 == 'Yes') %>%
- dplyr::transmute(demo_gender,
-                  demo_race,
-                  shiny_estimate  = round(estimate, 1),
-                  shiny_std_error = round(std_error, 1))
-
-test_results <-
- dplyr::left_join(test_data, shiny_answers,
-                  by = c("demo_gender", "demo_race"))
-
-test_that(
- desc = 'Shiny app matches CDC report, age standardized',
- code = {
-
-  expect_equal(
-   test_results$estimate, test_results$shiny_estimate
-  )
-
-  expect_equal(
-   test_results$std_error, test_results$shiny_std_error
-  )
-
- }
-)
-
-
 # JAMA Trends in BP tests -------------------------------------------------
 
-nhanes_jama_all <- nhanes_bp %>%
- mutate(svy_weight = svy_weight_mec) %>%
- filter(svy_subpop_htn == 1) %>%
- filter(demo_pregnant == 'No' | is.na(demo_pregnant)) %>%
- filter(htn_jnc7 == 'Yes')
+# TODO: do you need to subset before standardize? should make an error if so.
 
-nhanes_jama_on_meds <- nhanes_jama_all %>%
- filter(bp_med_use == 'Yes')
+wts <- c(15.5, 45.4, 21.5, 17.7)
 
-design_all <- nhanes_jama_all %>%
- svy_design_new(
-  exposure = exposure,
-  years = levels(nhanes_jama_all$svy_year),
-  pool = 'no'
- )
+ds_init <- nhanes_design(
+ data = nhanes_data[svy_subpop_htn == 1],
+ key = nhanes_key,
+ outcome_variable = 'bp_control_jnc7'
+)
 
-design_on_meds <- nhanes_jama_on_meds %>%
- svy_design_new(
-  exposure = exposure,
-  years = levels(nhanes_jama_all$svy_year),
-  pool = 'no'
- )
+ds_all <- ds_init %>%
+ nhanes_design_subset(
+  (demo_pregnant == 'No' | is.na(demo_pregnant)) &
+   htn_jnc7 == 'Yes'
+ ) %>%
+ nhanes_design_standardize(standard_weights = wts)
+
+ds_meds <- ds_init %>%
+ nhanes_design_subset(
+  (demo_pregnant == 'No' | is.na(demo_pregnant)) &
+   htn_jnc7 == 'Yes' &
+   bp_med_use == 'Yes'
+ ) %>%
+ nhanes_design_standardize(standard_weights = wts)
+
+
+shiny_answers_etable_1_overall <- ds_meds %>%
+ nhanes_design_summarize(stats = 'percentage',
+                         simplify_output = TRUE) %>%
+ filter(bp_control_jnc7=='Yes') %>%
+ mutate(group = 'Overall')
+
+shiny_answers_etable_1_by_age <- ds_meds %>%
+ nhanes_design_update(group_variable = 'demo_age_cat') %>%
+ nhanes_design_summarize(stats = 'percentage',
+                         simplify_output = TRUE) %>%
+ filter(bp_control_jnc7=='Yes') %>%
+ mutate(group = recode(demo_age_cat,
+                       "18 to 44" = "18_to_44",
+                       "45 to 64" = "45_to_64",
+                       "65 to 74" = "65_to_74",
+                       "75+" = "gteq_75"))
+
+shiny_answers_etable_1_by_sex <- ds_meds %>%
+ nhanes_design_update(group_variable = 'demo_gender') %>%
+ nhanes_design_summarize(stats = 'percentage',
+                         simplify_output = TRUE) %>%
+ filter(bp_control_jnc7=='Yes') %>%
+ mutate(group = recode(demo_gender,
+                       "Men" = "Male",
+                       "Women" = "Female"))
+
+shiny_answers_etable_1_by_race <- ds_meds %>%
+ nhanes_design_update(group_variable = 'demo_race') %>%
+ nhanes_design_summarize(stats = 'percentage',
+                         simplify_output = TRUE) %>%
+ filter(bp_control_jnc7=='Yes') %>%
+ mutate(group = recode(demo_race,
+                       "Non-Hispanic White" = "Non_Hispanic_White",
+                       "Non-Hispanic Black" = "Non_Hispanic_Black",
+                       "Hispanic" = "Hispanic",
+                       "Non-Hispanic Asian" = "Non_Hispanic_Asian")) %>%
+ filter(group != 'Other')
 
 jama_etable_1 <- tribble(
  ~svy_year,   ~group              , ~estimate, ~ci_lower, ~ci_upper,
@@ -297,48 +172,6 @@ jama_etable_1 <- tribble(
  "2015-2016", "Non_Hispanic_Asian",  54.1    ,  43.8    ,  64.4    ,
  "2017-2018", "Non_Hispanic_Asian",  63.7    ,  58.9    ,  68.5    )
 
-shiny_answers_etable_1_overall <- design_on_meds %>%
- svy_design_summarize(outcome = 'bp_control_jnc7',
-                      statistic = c('percentage'),
-                      age_standardize = TRUE) %>%
- filter(bp_control_jnc7=='Yes') %>%
- mutate(group = 'Overall')
-
-shiny_answers_etable_1_by_age <- design_on_meds %>%
- svy_design_summarize(outcome = 'bp_control_jnc7',
-                      exposure = 'demo_age_cat',
-                      statistic = c('percentage'),
-                      age_standardize = TRUE) %>%
- filter(bp_control_jnc7=='Yes') %>%
- mutate(group = recode(demo_age_cat,
-                       "18 to 44" = "18_to_44",
-                       "45 to 64" = "45_to_64",
-                       "65 to 74" = "65_to_74",
-                       "75+" = "gteq_75"))
-
-shiny_answers_etable_1_by_sex <- design_on_meds %>%
- svy_design_summarize(outcome = 'bp_control_jnc7',
-                      exposure = 'demo_gender',
-                      statistic = c('percentage'),
-                      age_standardize = TRUE) %>%
- filter(bp_control_jnc7=='Yes') %>%
- mutate(group = recode(demo_gender,
-                       "Men" = "Male",
-                       "Women" = "Female"))
-
-shiny_answers_etable_1_by_race <- design_on_meds %>%
- svy_design_summarize(outcome = 'bp_control_jnc7',
-                      exposure = 'demo_race',
-                      statistic = c('percentage'),
-                      age_standardize = TRUE) %>%
- filter(bp_control_jnc7=='Yes') %>%
- mutate(group = recode(demo_race,
-                       "Non-Hispanic White" = "Non_Hispanic_White",
-                       "Non-Hispanic Black" = "Non_Hispanic_Black",
-                       "Hispanic" = "Hispanic",
-                       "Non-Hispanic Asian" = "Non_Hispanic_Asian")) %>%
- filter(group != 'Other')
-
 shiny_answers_etable_1 <-
  dplyr::bind_rows(
   shiny_answers_etable_1_overall,
@@ -358,6 +191,10 @@ test_results <-
         svy_year != '2017-2020') %>%
  pivot_wider(names_from = source,
              values_from = c(estimate, ci_lower, ci_upper))
+
+# This is a relative tolerance, unless the differences are very small.
+# I.e., A / B < 0.01, not A - B < 0.01
+ci_diff_tolerance <- 0.01
 
 test_that(
  desc = "shiny app matches eTable 1 of JAMA paper",
@@ -431,10 +268,10 @@ jama_table_2 <- tribble(
  "2017-2018", "gt_160_100",   14.6     ,  11.7    ,  17.5
 )
 
-shiny_answers_table_2 <- design_all %>%
- svy_design_summarize(outcome = 'bp_cat_meds_excluded',
-                      statistic = c('percentage'),
-                      age_standardize = TRUE) %>%
+shiny_answers_table_2 <- ds_all %>%
+ nhanes_design_update(outcome_variable = 'bp_cat_meds_excluded') %>%
+ nhanes_design_summarize(stats = 'percentage',
+                         simplify_output = TRUE) %>%
  mutate(
   group = recode(
    bp_cat_meds_excluded,
@@ -465,11 +302,13 @@ test_that(
   expect_equal(test_results$estimate_jama,
                test_results$estimate_shiny)
 
-  # expect_equal(test_results_overall$ci_lower_jama,
-  #              test_results_overall$ci_lower_shiny)
+  expect_equal(test_results$ci_lower_jama,
+               test_results$ci_lower_shiny,
+               tolerance = ci_diff_tolerance)
 
-  # expect_equal(test_results_overall$ci_upper_jama,
-  #              test_results_overall$ci_upper_shiny)
+  expect_equal(test_results$ci_upper_jama,
+               test_results$ci_upper_shiny,
+               tolerance = ci_diff_tolerance)
 
  }
 )

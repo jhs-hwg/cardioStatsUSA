@@ -3,13 +3,13 @@ devtools::load_all()
 
 library(ggplot2)
 
-ds <- nhanes_bp %>%
+ds <- nhanes_data %>%
  .[svy_subpop_htn == 1] %>%
  .[, svy_weight := svy_weight_mec] %>%
  svy_design_new(
   exposure = NULL,
   n_exposure_group = numeric(),
-  years = levels(nhanes_bp$svy_year),
+  years = levels(nhanes_data$svy_year),
   pool = 'no'
  ) %>%
  subset(demo_pregnant == 'No' | is.na(demo_pregnant)) %>%
