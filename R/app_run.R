@@ -363,16 +363,18 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
      )
     ),
 
+    h3("Stratify results"),
+
     fluidRow(
      introBox(
-      h3("Group",
+      h4("Stratification on the same panel",
          style = "text-align: left; padding-left: 15px"),
       column(
        6,
        style='padding-right: 2px;',
        pickerInput(
         inputId = 'group_class',
-        label = 'Select group type',
+        label = 'Select stratification type',
         choices = names(variable_choices$group),
         selected = NULL,
         multiple = TRUE,
@@ -386,7 +388,7 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
        style='padding-left: 2px;',
        pickerInput(
         inputId = 'group',
-        label = 'Select group variable',
+        label = 'Select stratification variable',
         choices = character(),
         selected = NULL,
         multiple = TRUE,
@@ -436,14 +438,14 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
 
     fluidRow(
      introBox(
-      h3("Stratify results",
+      h4("Stratification on separate panels",
          style = "text-align: left; padding-left: 15px"),
       column(
        6,
        style='padding-right: 2px;',
        pickerInput(
         inputId = 'stratify_class',
-        label = 'Select stratify type',
+        label = 'Select stratification type',
         choices = names(variable_choices$stratify),
         selected = NULL,
         multiple = TRUE,
@@ -457,7 +459,7 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
        style='padding-left: 2px;',
        pickerInput(
         inputId = 'stratify',
-        label = 'Select stratify variable',
+        label = 'Select stratification variable',
         choices = character(),
         selected = NULL,
         multiple = TRUE,
