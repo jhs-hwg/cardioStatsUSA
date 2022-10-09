@@ -8,6 +8,33 @@
 #' @param n_strata
 svy_stat_suppress <- function(dt, type, stat, n_obs, n_psu, n_strata) {
 
+ # fails <- is.nan(dt$std_error) | dt$std_error == 0
+ #
+ # if(any(fails)){
+ #
+ #  first_offense <- min(which(fails))
+ #
+ #  stat_label <- switch(
+ #   dt$statistic[first_offense],
+ #   "q25" = "25th percentile",
+ #   "q50" = "50th percentile",
+ #   "q75" = "75th percentile",
+ #   dt$statistic[first_offense]
+ #  )
+ #
+ #  outcome_label <- dt$outcome[first_offense]
+ #
+ #  if(type != 'ctns')
+ #   outcome_label <- paste(outcome_label,
+ #                          dt$level[first_offense], sep = ' = ')
+ #
+ #  stop("could not estimate a standard error for the ",
+ #       stat_label, " of ", outcome_label, ". ",
+ #       "This is probably occurring due to an insufficient ",
+ #       "number of observations in the requested data.",
+ #       call. = FALSE)
+ # }
+
  suppress_fun <- paste('svy_stat_suppress', type, sep = '_')
 
  dt$unreliable_status <- rep(FALSE, nrow(dt))
@@ -15,7 +42,7 @@ svy_stat_suppress <- function(dt, type, stat, n_obs, n_psu, n_strata) {
  dt$review_needed <- rep(FALSE, nrow(dt))
  dt$review_reason <- rep(NA_character_, nrow(dt))
 
- if(stat %in% c('count', 'quantile', 'mean')) return(dt)
+ if(stat %in% c('count')) suppress_fun <- 'svy_stat_suppress_ctns'
 
  out <- do.call(suppress_fun,
                 args = list(dt = dt,
@@ -26,7 +53,40 @@ svy_stat_suppress <- function(dt, type, stat, n_obs, n_psu, n_strata) {
 }
 
 svy_stat_suppress_ctns <- function(dt, n_obs, n_psu, n_strata){
+
+
+ # rse: relative standard error
+ rse <- dt$std_error / dt$estimate
+
+ if( any(is.nan(rse)) ) rse[is.nan(rse)] <- -Inf
+
+ if(any(rse >= 0.3)){
+
+  dt$unreliable_status[rse >= 0.3] <- TRUE
+  dt$unreliable_reason %<>% insert_text(which(rse >= 0.3),
+                                        "Relative SE >= 0.30")
+
+ }
+
+ if(any(dt$n_obs < 30)){
+
+  dt$unreliable_status[dt$n_obs < 30] <- TRUE
+  dt$unreliable_reason %<>% insert_text(which(dt$n_obs < 30),
+                                        "Sample size < 30")
+
+ }
+
+
+ if(any(is.infinite(rse))){
+
+  dt$unreliable_status[is.infinite(rse)] <- TRUE
+  dt$unreliable_reason %<>% insert_text(which(is.infinite(rse)),
+                                        "SE unestimable")
+
+ }
+
  dt
+
 }
 
 svy_stat_suppress_intg <- function(dt, n_obs, n_psu, n_strata){
@@ -77,6 +137,8 @@ svy_stat_suppress_bnry <- function(dt, n_obs, n_psu, n_strata){
 
 
  ci_width <- with(dt, (ci_upper - ci_lower) / 100)
+
+ if( any(is.nan(ci_width)) ) rse[is.nan(ci_width)] <- Inf
 
  # Large absolute confidence interval width
  # If the absolute confidence interval width is greater than or

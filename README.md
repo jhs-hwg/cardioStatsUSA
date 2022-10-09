@@ -41,7 +41,6 @@ app_run()
 <!-- - Replication with AB's group -->
 <!-- - Incorporate suppression of unreliable estimates -->
 <!-- - Documentation/demos for R functions used in the app -->
-<!-- - Definitions/notes for all BP variables (table S1 in manuscript) -->
 <!-- - Tutorial videos -->
 <!-- - Do we need to use AF weights? -->
 

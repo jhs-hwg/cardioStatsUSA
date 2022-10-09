@@ -3,6 +3,41 @@ nhanes_design_summarize <- function(x,
                                     stats = x$stats,
                                     simplify_output = FALSE){
 
+ check_nobs(x)
+ # check_group_counts(x)
+
+ counts <- NULL
+ count_vars <- c(x$by_variables)
+
+ if(x$outcome$type != 'ctns'){
+  count_vars <- c(x$outcome$variable, count_vars)
+ }
+
+ if(!is_empty(count_vars)){
+
+  count_vars_combn <- paste(count_vars, collapse = ', ')
+
+  count_expr <- glue::glue(
+   "x$design$variables[,data.table(table({count_vars_combn}))]"
+  ) %>%
+   rlang::parse_expr()
+
+  counts <- rlang::eval_bare(count_expr)
+
+  for(i in count_vars){
+   counts[[i]] %<>% factor(levels = levels(x$design$variables[[i]]))
+  }
+
+  setnames(counts, old = 'N', new = 'n_obs')
+
+  counts[['outcome']] <- x$outcome$variable
+
+  if(x$outcome$type != 'ctns') setnames(counts,
+                                        old = x$outcome$variable,
+                                        new = 'level')
+
+ }
+
  use_statby <- !is.null(x$by_variables)
 
  smry_output <- purrr::map_dfr(
@@ -27,7 +62,11 @@ nhanes_design_summarize <- function(x,
                                design = x$design,
                                quantiles = x$outcome$quantiles)) %>%
     svy_stat_tidy(outcome = x$outcome$variable,
-                  by_vars = x$by_variables) %>%
+                  by_vars = x$by_variables)
+
+   if(!is.null(counts)) .out %<>% merge(counts, sort = FALSE)
+
+   .out <- .out %>%
     svy_stat_suppress(type = x$outcome$type,
                       stat = .x,
                       n_obs = get_obs_count(x$design),

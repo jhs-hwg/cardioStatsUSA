@@ -6,7 +6,7 @@ svy_stat_tidy_quantile <- function(x, ...){
  quant_names <- rownames(x_data) %>%
   as.numeric() %>%
   multiply_by(100) %>%
-  paste("q", ., sep = '_')
+  paste("q", ., sep = '')
 
  data.table(outcome = names(x),
             statistic = quant_names,

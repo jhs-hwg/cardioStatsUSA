@@ -1,4 +1,11 @@
 
+# what happens if the subset is empty?
+
+ds <- nhanes_design(data = nhanes_data,
+                    key = nhanes_key,
+                    time_values = 'most_recent',
+                    outcome_variable = 'bp_sys_mean')
+
 
 # subsets -----------------------------------------------------------------
 

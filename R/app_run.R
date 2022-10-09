@@ -9,6 +9,8 @@ library(shiny)
 #' @export
 #'
 
+# TODO: drop lipids, fix pool, and drop grps with few obs
+
 app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
                     nhanes_key = cardioStatsUSA::nhanes_key) {
 
@@ -142,7 +144,7 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
      "input.do == 'figure'",
      radioGroupButtons(
       inputId = 'geom',
-      label = 'Select a plotting geometry',
+      label = 'Select figure type',
       choices = c("Bars" = "bar", "Points" = "scatter"),
       selected = "bar",
       status = "primary",
@@ -440,7 +442,7 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
        6,
        style='padding-right: 2px;',
        pickerInput(
-        inputId = 'group_class',
+        inputId = 'stratify_class',
         label = 'Select stratify type',
         choices = names(variable_choices$stratify),
         selected = NULL,
@@ -675,40 +677,41 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
     ss_val_ctns <- paste('subset_value', i, 'ctns', sep = '_')
     ss_val_catg <- paste('subset_value', i, 'catg', sep = '_')
 
-    if(!is.null(input[[ss_var]])){
-
-     if(input$outcome == input[[ss_var]]){
-
-      updatePickerInput(
-       session = session,
-       inputId = ss_var,
-       choices = nhanes_key$variable_choices$group,
-       selected = character(0)
-      )
-
-      updatePickerInput(
-       session = session,
-       inputId = ss_var,
-       choices = nhanes_key$variable_choices$group,
-       selected = character(0)
-      )
-
-      updatePrettyCheckboxGroup(
-       inputId = ss_val_catg,
-       selected = character(0)
-      )
-
-      updateSliderInput(
-       inputId = ss_val_ctns,
-       value = c(0,0)
-       # TODO: fix
-       # value = c(min(nhanes_data[[input[[ss_var]]]], na.rm = TRUE),
-       #           max(nhanes_data[[input[[ss_var]]]], na.rm = TRUE))
-      )
-
-     }
-
-    }
+    # I don't think this is necessary anymore
+    # if(!is.null(input[[ss_var]])){
+    #
+    #  if(input$outcome == input[[ss_var]]){
+    #
+    #   updatePickerInput(
+    #    session = session,
+    #    inputId = ss_var,
+    #    choices = nhanes_key$variable_choices$group,
+    #    selected = character(0)
+    #   )
+    #
+    #   updatePickerInput(
+    #    session = session,
+    #    inputId = ss_var,
+    #    choices = nhanes_key$variable_choices$group,
+    #    selected = character(0)
+    #   )
+    #
+    #   updatePrettyCheckboxGroup(
+    #    inputId = ss_val_catg,
+    #    selected = character(0)
+    #   )
+    #
+    #   updateSliderInput(
+    #    inputId = ss_val_ctns,
+    #    value = c(0,0)
+    #    # TODO: fix
+    #    # value = c(min(nhanes_data[[input[[ss_var]]]], na.rm = TRUE),
+    #    #           max(nhanes_data[[input[[ss_var]]]], na.rm = TRUE))
+    #   )
+    #
+    #  }
+    #
+    # }
 
 
    }
@@ -760,10 +763,6 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
      } else {
 
       miss_add <- "Missing"
-
-      # if(any(is.na(nhanes_data[[ input[[ss_var]] ]]))){
-      #  miss_add <- "Missing"
-      # }
 
       updatePrettyCheckboxGroup(
        inputId = ss_val_catg,
@@ -829,7 +828,8 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
 
    }
 
-   if(!is_continuous(input$group)){
+   # continuous group variable
+   if(input$group %in% ctns_variables){
 
     updatePickerInput(
      session = session,
@@ -866,7 +866,7 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
      time_start <- which(time_values == input$year_pool[1])
      time_end   <- which(time_values == input$year_pool[2])
 
-     return(time_values[seq(time_start, time_end)])
+     time_values[seq(time_start, time_end)]
 
    } else {
 
@@ -915,20 +915,43 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
 
    }
 
-   nhanes_summarize(data = nhanes_data,
-                    key = nhanes_key,
-                    outcome_variable = outcome_variable,
-                    outcome_quantiles = c(0.25, 0.50, 0.75),
-                    group_variable = group_variable,
-                    group_cut_n = input$n_exposure_group,
-                    group_cut_type = input$exposure_cut_type,
-                    stratify_variable = stratify_variable,
-                    time_variable = time_variable,
-                    time_values = time_values_selected,
-                    pool = pool,
-                    subset_calls = subset_calls,
-                    age_wts = age_wts,
-                    simplify_output = FALSE)
+   smry <- try(
+    expr = nhanes_data %>%
+     nhanes_summarize(
+      key = nhanes_key,
+      outcome_variable = outcome_variable,
+      outcome_quantiles = c(0.25, 0.50, 0.75),
+      outcome_stats = input$statistic,
+      group_variable = group_variable,
+      group_cut_n = input$n_exposure_group,
+      group_cut_type = input$exposure_cut_type,
+      stratify_variable = stratify_variable,
+      time_variable = time_variable,
+      time_values = time_values_selected,
+      pool = pool,
+      subset_calls = subset_calls,
+      age_wts = age_wts,
+      simplify_output = FALSE
+     ),
+    silent = TRUE
+   )
+
+   if(is_nhanes_design(smry)){
+
+    return(smry)
+
+   } else {
+
+    shinyalert::shinyalert(title = "Error",
+                           text = gsub(pattern = 'Error : ',
+                                       replacement = '',
+                                       x = smry[1],
+                                       fixed = TRUE),
+                           type = "error")
+
+   }
+
+
 
   }) %>%
    bindEvent(input$run)
@@ -936,6 +959,7 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
   plots <- reactive({
 
    if(input$do != 'figure') return(NULL)
+   if(!is_nhanes_design(smry())) return(NULL)
 
    smry() %>%
     nhanes_design_viz(
@@ -949,9 +973,22 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
   dt_explore <- reactive({
 
    if(input$do != 'data') return(NULL)
+   if(!is_nhanes_design(smry())) return(NULL)
 
-   smry() %>%
-    getElement("results")
+   results <- smry()$results
+
+   colnames <- names(results)
+
+   for(i in seq_along(colnames)){
+
+    label_index <- match(colnames[i], nhanes_key$variable)
+
+    if(!is.na(label_index)){
+     colnames[i] <- nhanes_key$label[label_index]
+    }
+   }
+
+   results %>%
     datatable(
      options = list(
       lengthMenu = list(c(5,15,20), c('5','15','20')),
@@ -966,9 +1003,9 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
      style = 'bootstrap',
      class = 'cell-border stripe',
      rownames = FALSE,
-     colnames = recode(names(smry()), !!!nhanes_key$recoder)
+     colnames = colnames
     ) %>%
-    formatRound(columns = get_numeric_colnames(smry()), digits=3)
+    formatRound(columns = get_numeric_colnames(results), digits = 2)
   }) %>%
    bindEvent(smry())
 

@@ -75,11 +75,23 @@ nhanes_design <- function(data,
 
  # subset and pool the weights (if needed) ----
 
- divide_by <- if(pool) length(time_values) else 1
+ design_data <- dt_data[dt_data[[time_variable]] %in% time_values]
 
- design_data <- dt_data %>%
-  .[.[[time_variable]] %in% time_values] %>%
-  .[, svy_weight_mec := svy_weight_mec / divide_by]
+ if(pool){
+
+  divide_by <- length(time_values)
+
+  design_data[, svy_weight_mec := svy_weight_mec / divide_by]
+
+  if('svy_weight_cal' %in% names(design_data)){
+
+   design_data[, svy_weight_cal := svy_weight_cal / divide_by]
+
+  }
+
+ }
+
+
 
  # group variable ----
 
@@ -98,7 +110,7 @@ nhanes_design <- function(data,
        j = group_variable,
        value = discretize(design_data[[group_variable]],
                           method = group_cut_type,
-                          breaks = group_cut_n))
+                          breaks = as.numeric(group_cut_n)))
 
    group_info$cut_n <- group_cut_n
    group_info$cut_type <- group_cut_type
@@ -301,6 +313,29 @@ print.nhanes_design <- function(x, ...){
 
  }
 
+
+ cat_pretty(
+  "\n",
+  paste_pretty("N observations"),
+  "\n"
+ )
+
+ cat_pretty(
+  paste_pretty(
+   "- Unweighted: ",
+   table.glue::table_value(
+    get_obs_count(x$design, weighted = FALSE)
+   )
+  ),
+  "\n",
+  paste_pretty(
+   "- Weighted: ",
+   table.glue::table_value(
+    get_obs_count(x$design, weighted = TRUE)
+   ), "\n"
+  )
+ )
+
  cat(footer)
 
  invisible(x)
@@ -331,3 +366,6 @@ is_subsetted <- function(x){
  !is.null(x$subset_rows)
 }
 
+is_nhanes_design <- function(x){
+ inherits(x, 'nhanes_design')
+}

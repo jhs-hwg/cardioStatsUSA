@@ -39,6 +39,7 @@ nhanes_summarize <- function(data,
                              key,
                              outcome_variable,
                              outcome_quantiles = NULL,
+                             outcome_stats = NULL,
                              group_variable = NULL,
                              group_cut_n = NULL,
                              group_cut_type = NULL,
@@ -49,7 +50,6 @@ nhanes_summarize <- function(data,
                              subset_calls = list(),
                              age_wts = NULL,
                              simplify_output = TRUE){
-
 
  if(missing(data)) data <- cardioStatsUSA::nhanes_data
  if(missing(key)) key <- cardioStatsUSA::nhanes_key
@@ -72,6 +72,7 @@ nhanes_summarize <- function(data,
   # re-calibrate weights to match the total in nhanes_data
   nhanes_calibrate(nhanes_full = dt_data)
 
+ # browser()
 
  ds <- nhanes_design(data = dt_sub,
                      key = dt_key,
@@ -93,6 +94,7 @@ nhanes_summarize <- function(data,
   )
  }
 
+
  if(!is.null(age_wts)){
   ds %<>% nhanes_design_standardize(
    standard_variable = 'demo_age_cat',
@@ -100,6 +102,8 @@ nhanes_summarize <- function(data,
   )
  }
 
- nhanes_design_summarize(ds, simplify_output = simplify_output)
+ nhanes_design_summarize(ds,
+                         stats = outcome_stats %||% ds$stats,
+                         simplify_output = simplify_output)
 
 }

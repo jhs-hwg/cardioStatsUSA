@@ -8,7 +8,7 @@ plotly_viz_make_hover <- function(data, stat_all, group, group_label) {
  data$group_label <- ""
  label_sep <- ""
 
- if(is_used(group)){
+ if(is_used(group) && group != 'fake_._group'){
   data$group_label <- group_label %>%
    paste(data[[group]], sep = ': ')
   label_sep <- "\n"

@@ -103,6 +103,11 @@ nhanes_design_viz <- function(x,
 
  }
 
+ if(!group_used){
+  group <- 'fake_._group'
+  data[[group]] <- 1
+ }
+
  if(stratify_used){
 
   data_figs <- split(data, by = stratify) %>%
@@ -139,17 +144,14 @@ nhanes_design_viz <- function(x,
   stacked_and_pooled <- outcome_type == 'catg' && pool
   stacked_stratified_noexp <- outcome_type == 'catg' && !pool && !group_used
 
+  # if(j==2) browser()
+
   data_hovertext <- data_fig %>%
    plotly_viz_make_hover(
     stat_all = stat_all,
     group = if(stacked_stratified_noexp) outcome else group,
     group_label = if(stacked_stratified_noexp) x$outcome$label else x$group$label
    )
-
-  if(!group_used){
-   group <- 'fake_._group'
-   data_fig[[group]] <- 1
-  }
 
   join_names <- intersect(names(data_fig), names(data_hovertext))
 
@@ -278,9 +280,9 @@ nhanes_design_viz <- function(x,
   yaxis$ticks = "outside"
 
   if(geom == 'scatter'){
-   tick_vals <- unique(as.numeric(data_fig[[time_variable]]))
+   tick_vals <- unique(as.numeric(data[[time_variable]]))
    xaxis$tickvals <- tick_vals
-   xaxis$ticktext <- levels(data_fig[[time_variable]])[tick_vals]
+   xaxis$ticktext <- levels(data[[time_variable]])[tick_vals]
    xaxis$tickmode <- 'array'
   }
 
