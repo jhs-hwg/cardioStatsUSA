@@ -2,7 +2,7 @@
 % Please edit documentation in R/nhanes_design.R
 \name{nhanes_design}
 \alias{nhanes_design}
-\title{Title}
+\title{Survey Design for NHANES Data}
 \usage{
 nhanes_design(
   data,
@@ -20,15 +20,334 @@ nhanes_design(
 )
 }
 \arguments{
-\item{run_checks}{}
+\item{data}{[data.frame]
+A set of NHANES data with one row per survey participant and one column per variable.
+See Details for specific requirements.
+See \link{nhanes_data} for an example.}
+
+\item{key}{[data.frame]
+A data set with one row per variable and with columns that indicate how this variable should be used in the Shiny application.
+See Details for specific requirements.
+See \link{nhanes_key} for an example.}
+
+\item{outcome_variable}{[character(1)]
+The name of the outcome variable to be summarized.}
+
+\item{outcome_quantiles}{[numeric(1+)]
+The quantiles to be summarized for a continuous outcome. The default is
+\code{c(0.25, 0.50, 0.75)}. For example,
+\itemize{
+\item \code{outcome_quantiles = c(.5)} will compute the 50th percentile
+(i.e., the median)
+\item \code{outcome_quantiles = c(.25, .5, .75)} will compute the 25th, 50th,
+and 75th percentile.
+\item \code{outcome_quantiles = seq(.1, .9, by = .1)} will compute every 10th
+percentile, except for the 0th and 100th
+}}
+
+\item{group_variable}{[character(1)]
+The name of the group variable. See Details for a description of
+the group variable and the stratify variable.}
+
+\item{group_cut_n}{[integer(1)]
+The number of groups to form using the group variable. This is only
+relevant if the group variable is continuous, and can be omitted.
+Default is 3}
+
+\item{group_cut_type}{[character(1)]
+The method used to create groups with the grouping variable. This is only
+relevant i fthe group variable is continuous, and can be omitted.
+Valid options are:
+\itemize{
+\item "interval": equal interval width, e.g., three groups with ages of
+0 to <10, 10 to <20, and 20 to < 30 years.
+\item "frequency": equal frequency, e.g., three groups with ages of
+0 to <q, q to <p, and p to <r, where q, p, and r are selected
+so that roughly the same number of people are in each group.
+}}
+
+\item{stratify_variable}{[character(1)]
+the name of the stratify variable. See Details for a description of
+the group variable and the stratify variable.}
+
+\item{time_variable}{[character(1)]
+The name of the time variable. The default, \code{svy_year}, corresponds to
+the variable in \code{nhanes_data} that indicates which 2 year NHANES cycle
+an observation was collected in.}
+
+\item{time_values}{[character(1+)]
+The time values that will be included in this design object.
+The default is to include all time values present in \code{data}.
+Valid options are:
+\itemize{
+\item \code{'most_recent'}: includes the most recent time value.
+\item \code{'last_5'}: includes the 5 most recent time values.
+\item \code{'all'}: includes all time values present in \code{data}.
+\item You can also give a vector of specific time values, e.g.,
+\code{c("2009-2010", "2011-2012", "2013-2014")}, if these values are
+present in the time_variable column (they are for \code{nhanes_data}).
+}}
+
+\item{pool}{[logical(1)]
+If \code{FALSE} (the default), results are presented for individual times,
+separately. If \code{TRUE}, data from each time value are pooled together.
+Note that only contiguous cycles should be pooled together, e.g.,
+using \code{pool = TRUE} with \code{time_values = 'last_5'} is okay, but
+using \code{pool = TRUE} with \code{time_values = c("2009-2010", "2013-2014")} is
+not recommended (that would be a strange result to interpret).}
+
+\item{run_checks}{[logical(1)]
+
+If \code{TRUE} (the default), inputs will be checked for validity. If \code{FALSE},
+checks of inputs are skipped.}
+}
+\value{
+an \code{nhanes_design} object.
 }
 \description{
-Title
+NHANES design objects are the data structure used in
+the \code{cardioStatsUSA} package for analysis of NHANES data.
 }
-\examples{
+\details{
+\subsection{Requirements for data}{
 
-x <- nhanes_design(data = nhanes_data,
-                   key = nhanes_key,
-                   outcome_variable = 'bp_sys_mean')
+\code{data} should include at a minimum the following variables:
+\itemize{
+\item \code{svy_weight_mec}: mobile examination center weights
+\item \code{svy_psu}: primary sampling unit
+\item \code{svy_strata}: strata
+\item \code{svy_year}: NHANES cycle
+}
+}
+
+\subsection{Requirements for key}{
+
+The key data should have all of the required columns, and should not
+have any column that is not listed below.\if{html}{\out{
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+Column name
+</th>
+<th style="text-align:left;">
+Column type
+</th>
+<th style="text-align:left;">
+Is this column required?
+</th>
+<th style="text-align:left;">
+The purpose of this column
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+class
+</td>
+<td style="text-align:left;">
+character
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+divide variables into classes
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+variable
+</td>
+<td style="text-align:left;">
+character
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+variable name in NHANES data
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+label
+</td>
+<td style="text-align:left;">
+character
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+label to present in results
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+source
+</td>
+<td style="text-align:left;">
+character
+</td>
+<td style="text-align:left;">
+FALSE
+</td>
+<td style="text-align:left;">
+indicate where this variable is from
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+type
+</td>
+<td style="text-align:left;">
+character
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+variable type impacts summary results
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+outcome
+</td>
+<td style="text-align:left;">
+logical
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+indicate if variable is an outcome
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+group
+</td>
+<td style="text-align:left;">
+logical
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+indicate if variable is a grouper
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+subset
+</td>
+<td style="text-align:left;">
+logical
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+indicate if variable is a subsetter
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stratify
+</td>
+<td style="text-align:left;">
+logical
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+indicate if variable is a stratifier
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+module
+</td>
+<td style="text-align:left;">
+character
+</td>
+<td style="text-align:left;">
+FALSE
+</td>
+<td style="text-align:left;">
+indicate what module this variable belongs to
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+description
+</td>
+<td style="text-align:left;">
+character
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+describe the variable in detail
+</td>
+</tr>
+</tbody>
+</table>
+}}
 
 }
+
+\subsection{Group and stratify}{
+
+The group variable and the stratify variable are both used to summarize
+an outcome within subgroups. If the summary is returned as a table, then
+the group and stratify variables can be considered interchangeable. If
+the summary is returned as a plot, then the subgroups defined by the
+group variable are shown on the same graph, while the subgroups defined
+by the stratify variable are shown on different graphs (i.e., one graph
+per strata). For example, if you wanted to estimate the race and sex
+specific prevalence of hypertension with one graph for men and one
+graphs for women, you would use \code{group = 'demo_race'} and
+\code{stratify = 'demo_gender'}
+}
+}
+\section{Examples}{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{library(cardioStatsUSA)
+
+ds <- nhanes_design(data = nhanes_data,
+                    key = nhanes_key, 
+                    time_values = 'most_recent',
+                    outcome_variable = 'bp_sys_mean')
+
+print(ds)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## ----------------------------- NHANES design -----------------------------
+## 
+## Outcome variable: bp_sys_mean
+## - label: Systolic blood pressure, mm Hg
+## - type: continuous
+## - description: Mean systolic blood pressure in mm Hg. This is based on
+##     the average of up to 3 readings.  Overall, >95\% of participants with at
+##     least one systolic blood pressure reading had three readings.  From
+##     1999-2000 through 2015-2016, systolic blood pressure was measured using a
+##     mercury sphygmomanometer.  In 2017-2020, systolic blood pressure was
+##     measured using an oscillometric device.  The systolic blood pressure in
+##     2017-2020 was calibrated to the mercury device by adding 1.5 mm Hg to the
+##     mean measured value.
+## 
+## Group variable: None
+## Stratify variable: None
+## 
+## N observations
+## - Unweighted: 9,693
+## - Weighted: 247,835,696
+## --------------------------------------------------------------------------
+}\if{html}{\out{</div>}}
+}
+

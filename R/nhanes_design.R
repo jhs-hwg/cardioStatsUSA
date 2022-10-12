@@ -1,25 +1,98 @@
 
-#' Title
+#' Survey Design for NHANES Data
 #'
-#' @param data
-#' @param key
-#' @param outcome
-#' @param group
-#' @param group_cut_n
-#' @param group_cut_type
-#' @param stratify
-#' @param time_values
-#' @param pool
-#' @param run_checks
+#' @description NHANES design objects are the data structure used in
+#'   the `cardioStatsUSA` package for analysis of NHANES data.
 #'
-#' @return
+#' @param data \[data.frame\]
+#' `r describe_nhanes_data_input()`
+#'  See Details for specific requirements.
+#'  See [nhanes_data] for an example.
+#'
+#' @param key \[data.frame\]
+#' `r describe_nhanes_key_input()`
+#'  See Details for specific requirements.
+#'  See [nhanes_key] for an example.
+#'
+#' @param outcome_variable \[character(1)\]
+#' The name of the outcome variable to be summarized.
+#'
+#' @param outcome_quantiles \[numeric(1+)\]
+#' The quantiles to be summarized for a continuous outcome. The default is
+#'   `c(0.25, 0.50, 0.75)`. For example,
+#'
+#' - `outcome_quantiles = c(.5)` will compute the 50th percentile
+#'   (i.e., the median)
+#'
+#' - `outcome_quantiles = c(.25, .5, .75)` will compute the 25th, 50th,
+#'    and 75th percentile.
+#'
+#' - `outcome_quantiles = seq(.1, .9, by = .1)` will compute every 10th
+#'   percentile, except for the 0th and 100th
+#'
+#' @param group_variable \[character(1)\]
+#' The name of the group variable. See Details for a description of
+#'   the group variable and the stratify variable.
+#'
+#' @param group_cut_n \[integer(1)\]
+#'  The number of groups to form using the group variable. This is only
+#'    relevant if the group variable is continuous, and can be omitted.
+#'    Default is 3
+#'
+#' @param group_cut_type \[character(1)\]
+#'  The method used to create groups with the grouping variable. This is only
+#'    relevant i fthe group variable is continuous, and can be omitted.
+#'    Valid options are:
+#'
+#'    - "interval": equal interval width, e.g., three groups with ages of
+#'      0 to <10, 10 to <20, and 20 to < 30 years.
+#'
+#'    - "frequency": equal frequency, e.g., three groups with ages of
+#'      0 to <q, q to <p, and p to <r, where q, p, and r are selected
+#'      so that roughly the same number of people are in each group.
+#'
+#' @param stratify_variable \[character(1)\]
+#' the name of the stratify variable. See Details for a description of
+#'   the group variable and the stratify variable.
+#'
+#' @param time_variable \[character(1)\]
+#' The name of the time variable. The default, `svy_year`, corresponds to
+#'   the variable in `nhanes_data` that indicates which 2 year NHANES cycle
+#'   an observation was collected in.
+#'
+#' @param time_values \[character(1+)\]
+#' The time values that will be included in this design object.
+#'   The default is to include all time values present in `data`.
+#'   Valid options are:
+#'
+#'   - `'most_recent'`: includes the most recent time value.
+#'
+#'   - `'last_5'`: includes the 5 most recent time values.
+#'
+#'   - `'all'`: includes all time values present in `data`.
+#'
+#'   - You can also give a vector of specific time values, e.g.,
+#'   `c("2009-2010", "2011-2012", "2013-2014")`, if these values are
+#'   present in the time_variable column (they are for `nhanes_data`).
+#'
+#' @param pool \[logical(1)\]
+#' If `FALSE` (the default), results are presented for individual times,
+#'   separately. If `TRUE`, data from each time value are pooled together.
+#'   Note that only contiguous cycles should be pooled together, e.g.,
+#'   using `pool = TRUE` with `time_values = 'last_5'` is okay, but
+#'   using `pool = TRUE` with `time_values = c("2009-2010", "2013-2014")` is
+#'   not recommended (that would be a strange result to interpret).
+#'
+#' @param run_checks \[logical(1)\]
+#'
+#' If `TRUE` (the default), inputs will be checked for validity. If `FALSE`,
+#'  checks of inputs are skipped.
+#'
+#' @return an `nhanes_design` object.
+#'
 #' @export
 #'
-#' @examples
-#'
-#' x <- nhanes_design(data = nhanes_data,
-#'                    key = nhanes_key,
-#'                    outcome_variable = 'bp_sys_mean')
+#' @includeRmd rmd/nhanes_design.Rmd
 #'
 nhanes_design <- function(data,
                           key,
@@ -91,8 +164,6 @@ nhanes_design <- function(data,
 
  }
 
-
-
  # group variable ----
 
  group_info <- NULL
@@ -110,7 +181,7 @@ nhanes_design <- function(data,
        j = group_variable,
        value = discretize(design_data[[group_variable]],
                           method = group_cut_type,
-                          breaks = as.numeric(group_cut_n)))
+                          n_group = as.numeric(group_cut_n)))
 
    group_info$cut_n <- group_cut_n
    group_info$cut_type <- group_cut_type
@@ -172,22 +243,17 @@ nhanes_design <- function(data,
 
 }
 
-
-#' Title
+#' Modify an NHANES design
 #'
-#' @param x
-#' @param outcome_variable
-#' @param group_variable
-#' @param group_cut_n
-#' @param group_cut_type
-#' @param stratify_varible
-#' @param time_values
-#' @param pool
+#' @param x an [nhanes_design] object
+#' @inheritParams nhanes_design
 #'
-#' @return
+#' @return a modified [nhanes_design] object.
+#'
 #' @export
 #'
-#' @examples
+#' @includeRmd rmd/nhanes_design_update.Rmd
+#'
 nhanes_design_update <- function(x,
                                  outcome_variable = NULL,
                                  group_variable = NULL,
@@ -229,15 +295,15 @@ nhanes_design_update <- function(x,
 }
 
 
-#' Title
+#' Print an NHANES design
 #'
-#' @param x
-#' @param ...
+#' @param x an [nhanes_design] object
+#' @param ... currently not used
 #'
-#' @return
-#' @export
+#' @return the design object, invisibly.
 #'
-#' @examples
+#' @includeRmd rmd/nhanes_design_print.Rmd
+#'
 print.nhanes_design <- function(x, ...){
 
  current_width <- getOption("width") - 1

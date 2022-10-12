@@ -26,15 +26,12 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.1
 Imports: 
-    arules,
     data.table,
     dplyr,
     DT,
     glue,
-    haven,
-    here,
+    table.glue,
     magrittr,
-    pkgload,
     plotly,
     purrr,
     rintrojs,
@@ -44,14 +41,14 @@ Imports:
     shinyWidgets,
     stringr,
     survey,
-    table.glue,
     tibble,
     tidyr
 Suggests: 
     covr,
     knitr,
+    pkgload,
     rmarkdown,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
 Config/testthat/edition: 3
 Depends: 
     R (>= 2.10)

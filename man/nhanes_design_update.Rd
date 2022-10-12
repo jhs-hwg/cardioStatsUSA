@@ -2,7 +2,7 @@
 % Please edit documentation in R/nhanes_design.R
 \name{nhanes_design_update}
 \alias{nhanes_design_update}
-\title{Title}
+\title{Modify an NHANES design}
 \usage{
 nhanes_design_update(
   x,
@@ -16,8 +16,169 @@ nhanes_design_update(
 )
 }
 \arguments{
-\item{pool}{}
+\item{x}{an \link{nhanes_design} object}
+
+\item{outcome_variable}{[character(1)]
+The name of the outcome variable to be summarized.}
+
+\item{group_variable}{[character(1)]
+The name of the group variable. See Details for a description of
+the group variable and the stratify variable.}
+
+\item{group_cut_n}{[integer(1)]
+The number of groups to form using the group variable. This is only
+relevant if the group variable is continuous, and can be omitted.
+Default is 3}
+
+\item{group_cut_type}{[character(1)]
+The method used to create groups with the grouping variable. This is only
+relevant i fthe group variable is continuous, and can be omitted.
+Valid options are:
+\itemize{
+\item "interval": equal interval width, e.g., three groups with ages of
+0 to <10, 10 to <20, and 20 to < 30 years.
+\item "frequency": equal frequency, e.g., three groups with ages of
+0 to <q, q to <p, and p to <r, where q, p, and r are selected
+so that roughly the same number of people are in each group.
+}}
+
+\item{stratify_variable}{[character(1)]
+the name of the stratify variable. See Details for a description of
+the group variable and the stratify variable.}
+
+\item{time_values}{[character(1+)]
+The time values that will be included in this design object.
+The default is to include all time values present in \code{data}.
+Valid options are:
+\itemize{
+\item \code{'most_recent'}: includes the most recent time value.
+\item \code{'last_5'}: includes the 5 most recent time values.
+\item \code{'all'}: includes all time values present in \code{data}.
+\item You can also give a vector of specific time values, e.g.,
+\code{c("2009-2010", "2011-2012", "2013-2014")}, if these values are
+present in the time_variable column (they are for \code{nhanes_data}).
+}}
+
+\item{pool}{[logical(1)]
+If \code{FALSE} (the default), results are presented for individual times,
+separately. If \code{TRUE}, data from each time value are pooled together.
+Note that only contiguous cycles should be pooled together, e.g.,
+using \code{pool = TRUE} with \code{time_values = 'last_5'} is okay, but
+using \code{pool = TRUE} with \code{time_values = c("2009-2010", "2013-2014")} is
+not recommended (that would be a strange result to interpret).}
+}
+\value{
+a modified \link{nhanes_design} object.
 }
 \description{
-Title
+Modify an NHANES design
 }
+\section{Examples}{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{library(cardioStatsUSA)
+
+ds <- nhanes_design(data = nhanes_data,
+                    key = nhanes_key, 
+                    time_values = 'most_recent',
+                    outcome_variable = 'bp_sys_mean')
+
+print(ds)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## ----------------------------- NHANES design -----------------------------
+## 
+## Outcome variable: bp_sys_mean
+## - label: Systolic blood pressure, mm Hg
+## - type: continuous
+## - description: Mean systolic blood pressure in mm Hg. This is based on
+##     the average of up to 3 readings.  Overall, >95\% of participants with at
+##     least one systolic blood pressure reading had three readings.  From
+##     1999-2000 through 2015-2016, systolic blood pressure was measured using a
+##     mercury sphygmomanometer.  In 2017-2020, systolic blood pressure was
+##     measured using an oscillometric device.  The systolic blood pressure in
+##     2017-2020 was calibrated to the mercury device by adding 1.5 mm Hg to the
+##     mean measured value.
+## 
+## Group variable: None
+## Stratify variable: None
+## 
+## N observations
+## - Unweighted: 9,693
+## - Weighted: 247,835,696
+## --------------------------------------------------------------------------
+}\if{html}{\out{</div>}}
+
+There are a few ways the design can be updated. For example, we can add
+a group variable:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{nhanes_design_update(ds, group_variable = 'demo_gender')
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## ----------------------------- NHANES design -----------------------------
+## 
+## Outcome variable: bp_sys_mean
+## - label: Systolic blood pressure, mm Hg
+## - type: continuous
+## - description: Mean systolic blood pressure in mm Hg. This is based on
+##     the average of up to 3 readings.  Overall, >95\% of participants with at
+##     least one systolic blood pressure reading had three readings.  From
+##     1999-2000 through 2015-2016, systolic blood pressure was measured using a
+##     mercury sphygmomanometer.  In 2017-2020, systolic blood pressure was
+##     measured using an oscillometric device.  The systolic blood pressure in
+##     2017-2020 was calibrated to the mercury device by adding 1.5 mm Hg to the
+##     mean measured value.
+## 
+## Group variable: demo_gender
+## - label: Gender
+## - type: categorical
+## - description: Self-reported gender
+## 
+## Stratify variable: None
+## 
+## N observations
+## - Unweighted: 9,693
+## - Weighted: 247,835,696
+## --------------------------------------------------------------------------
+}\if{html}{\out{</div>}}
+
+Pipes and multiple modifications are allowed:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{ds \%>\% 
+ nhanes_design_update(group_variable = 'demo_gender',
+                      stratify_variable = 'demo_race')
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## ----------------------------- NHANES design -----------------------------
+## 
+## Outcome variable: bp_sys_mean
+## - label: Systolic blood pressure, mm Hg
+## - type: continuous
+## - description: Mean systolic blood pressure in mm Hg. This is based on
+##     the average of up to 3 readings.  Overall, >95\% of participants with at
+##     least one systolic blood pressure reading had three readings.  From
+##     1999-2000 through 2015-2016, systolic blood pressure was measured using a
+##     mercury sphygmomanometer.  In 2017-2020, systolic blood pressure was
+##     measured using an oscillometric device.  The systolic blood pressure in
+##     2017-2020 was calibrated to the mercury device by adding 1.5 mm Hg to the
+##     mean measured value.
+## 
+## Group variable: demo_gender
+## - label: Gender
+## - type: categorical
+## - description: Self-reported gender
+## 
+## Stratify variable: demo_race
+## - label: Race
+## - type: categorical
+## - description: Self-reported race/ethnicity. From 1999-2000 through
+##     2009-2010 this was available as non-Hispanic White, non-Hispanic Black,
+##     Hispanic and other. From 2011-2012 through 2017-2020 this was available
+##     as non-Hispanic White, non-Hispanic Black, non-Hispanic Asian, Hispanic
+##     and other.
+## 
+## N observations
+## - Unweighted: 9,693
+## - Weighted: 247,835,696
+## --------------------------------------------------------------------------
+}\if{html}{\out{</div>}}
+}
+

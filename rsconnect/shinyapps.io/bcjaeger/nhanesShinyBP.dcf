@@ -5,10 +5,10 @@ account: bcjaeger
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 6653717
-bundleId: 6383741
+bundleId: 6388021
 url: https://bcjaeger.shinyapps.io/nhanesShinyBP/
-when: 1665284702.49818
-lastSyncTime: 1665284702.49818
+when: 1665414197.62417
+lastSyncTime: 1665414197.62417
 asMultiple: FALSE
 asStatic: FALSE
-ignoredFiles: .github/workflows/R-CMD-check.yaml|_pkgdown.yml|codecov.yml|logo.png|logo.R|NEWS.md|SAS/antihypertensive_NHANES_data_1999_2020_9_21_2022.sas|SAS/test_svy_stat_funs.sas|docs|man|paper|pkgdown|tests|vignettes
+ignoredFiles: .github/workflows/R-CMD-check.yaml|_pkgdown.yml|codecov.yml|logo.png|logo.R|NEWS.md|SAS/antihypertensive_NHANES_data_1999_2020_9_21_2022.sas|SAS/test_svy_stat_funs.sas|data-raw|docs|man|paper|pkgdown|tests|vignettes

@@ -1,0 +1,28 @@
+
+
+```{r child='aaa.Rmd'}
+
+```
+
+## Requirements for data
+
+```{r child='nhanes_data_requirements.Rmd'}
+
+```
+
+## Requirements for key
+
+```{r child='nhanes_key_requirements.Rmd'}
+
+```
+
+## Group and stratify
+
+```{r child='group_versus_stratify.Rmd'}
+
+```
+
+# Examples
+
+```{r child='make_simple_nhanes_design.Rmd'}
+

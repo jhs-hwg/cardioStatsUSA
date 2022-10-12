@@ -1,0 +1,11 @@
+```{r child = 'aaa.Rmd'}
+
+```
+
+
+# Examples
+
+```{r child='make_simple_nhanes_design.Rmd'}
+
+```
+

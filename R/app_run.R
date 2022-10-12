@@ -1,16 +1,26 @@
+
+# nocov start
+
 library(shiny)
 
-#' Run the NHANES BP application
+#' Run the NHANES application
 #'
-#' @param ... currently not used
+#' `r describe_nhanes_app()`
+#'
+#' @param nhanes_data \[data.frame\] the data used by the application.
+#' @param nhanes_key \[data.frame\] the key used to analyze `nhanes_data`.
+#'
+#' @details
+#'
+#' The default values of `nhanes_data` and `nhanes_key` are provided
+#'   to make the app run out-of-the-box, but are also good examples
+#'   for extending the app to work with your own data. For more
+#'   details on extending the app, please see (TODO: EXTEND VIGNETTE)
 #'
 #' @return runs a shiny application locally
-#'
 #' @export
 #'
-
-# TODO: drop lipids, fix pool, and drop grps with few obs
-
+#' @examples
 app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
                     nhanes_key = cardioStatsUSA::nhanes_key) {
 
@@ -56,8 +66,10 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
    titlePanel("Cardiometabolic statistics for US adults"),
    data.step = 1,
    data.intro = paste(
-    "This application analyzes data from the",
-    "National Health and Nutrition Examination Survey (NHANES)."
+    "Welcome! These instructions will teach you",
+    "how to use the \"Cardiometabolic statistics for US adults\" website,",
+    "an open-source application for analysis and visualization of",
+    "National Health and Nutrition Examination Survey (NHANES) data."
    )
   ),
 
@@ -97,16 +109,11 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
      ),
      data.step = 2,
      data.intro = paste(
-      "If this button is blue, all the required inputs have been filled in",
-      "and you can generate results by clicking the button. If it is grey,",
-      "at least one required input is unspecified. Required inputs are:",
-      "(1) How to present results,",
-      "(2) Pool results or stratify by cycle,",
-      "(3) select cycles to include,",
-      "(4) Select an outcome, and",
-      "(5) Statistic(s) to compute. Remember that you need to press",
-      "this button to make things appear in the main window AND to update",
-      "the results that you see in the main window."
+      "Click on this button to compute your statistics.",
+      "This button is blue when you have entered enough" ,
+      "information to calculate statistics. If you still",
+      "need to provide more information, this button will",
+      "be grey and cannot be clicked."
      )
     ),
 
@@ -134,9 +141,10 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
      ),
      data.step = 3,
      data.intro = paste(
-      "You can select whether to generate a table with summary data",
-      "or a figure that visualizes the summary data. Both options",
-      "give output that can be saved and used outside of the application."
+      "You can choose to see your results as a figure or in a dataset.",
+      "The dataset will provide one row for each statistic (e.g., one",
+      "row for each age group for age-stratified statistics).  It is",
+      "similar to a table but the data can be sorted in the dataset."
      )
     ),
 
@@ -167,54 +175,33 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
       )
      ),
 
-     introBox(
-      conditionalPanel(
-       condition = "input.age_standardize == true",
-       h5("Weights for each age group (must be >0)"),
+     conditionalPanel(
+      condition = "input.age_standardize == true",
+      h5("Weights for each age group (must be >0)"),
 
-       introBox(
-        splitLayout(
-         numericInput(inputId="age_wts_1",
-                      label="18-44",
-                      value = 49.3,
-                      min = 5),
-         numericInput(inputId="age_wts_2",
-                      label="45-64",
-                      value = 33.6,
-                      min = 5),
-         numericInput(inputId="age_wts_3",
-                      label="65-74",
-                      value = 10.1,
-                      min = 5),
-         numericInput(inputId="age_wts_4",
-                      label="75+",
-                      value = 7.0,
-                      min = 5),
-         cellWidths = "24.25%"
-        ),
-        data.step = 6,
-        data.intro = paste(
-         "IMPORTANT: each weight value for each age group should be >0.",
-         "If any of them aren't, then the app won't do age standardization.",
-         "Do they have to add up to 100? No, but it is more interpretable",
-         "if they do."
-        )
-
-       )
-
-      ),
-      data.step = 5,
-      data.intro = paste(
-       "Default weights are from doi:10.1001/jama.2020.14545,",
-       "with the standard being all adults with hypertension",
-       "across 1999 through 2018"
+      splitLayout(
+       numericInput(inputId="age_wts_1",
+                    label="18-44",
+                    value = 49.3,
+                    min = 5),
+       numericInput(inputId="age_wts_2",
+                    label="45-64",
+                    value = 33.6,
+                    min = 5),
+       numericInput(inputId="age_wts_3",
+                    label="65-74",
+                    value = 10.1,
+                    min = 5),
+       numericInput(inputId="age_wts_4",
+                    label="75+",
+                    value = 7.0,
+                    min = 5),
+       cellWidths = "24.25%"
       )
      ),
      data.step = 4,
      data.intro = paste(
-      "Adjustment for age with direct standardization can be used",
-      "if you want to examine age-adjusted trends over time.",
-      "To opt-out of age-adjustment, uncheck the age-adjustment box."
+      "Results can be presented crude or age-adjusted."
      )
     ),
 
@@ -231,11 +218,10 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
       width = "100%"
      ),
 
-     data.step = 7,
+     data.step = 5,
      data.intro = paste(
-      "To look at results over time, select 'stratify by cycle'.",
-      "To stack all of the data together and summarize a contiguous",
-      "time period of your choice, select 'pool results'"
+      "Data can be presented for individual",
+      "cycles or multiple cycles pooled together."
      )
 
     ),
@@ -285,12 +271,14 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
                              "Five" = 5),
                  selected = "None",
                  width = "100%"),
-     data.step = 9,
+     data.step = 6,
      data.intro = paste(
-      "You may restrict the analysis to subsets of survey participants using",
-      "exclusions. For each exclusion you request (up to 5), an additional",
-      "box will appear to select a variable that will define the exclusion.",
-      "When you select the variable, possible groups to include will appear."
+      "You can restrict your analytic population to participants",
+      "meeting certain criteria.<br><br>For example, you may want to",
+      "restrict the population to non-pregnant individuals. To do this,",
+      "select \"one\" from the drop-down menu, select \"pregnant\" and",
+      "participants to include (e.g., check the box next to no). Up to",
+      "five exclusion criteria can be applied."
      )
     ),
 
@@ -330,12 +318,15 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
         width = '100%'
        )
       ),
-      data.step = 8,
+      data.step = 7,
       data.intro = paste(
-       "the 'outcome' variable will be summarized in your results.",
-       "Once you select an outcome, a set of possible statistics to compute",
-       "will appear below this box. Also, if you are creating a figure, you",
-       "will be asked to pick a primary statistic to present in your figure."
+       "The outcome variable you select will be summarized in your results.",
+       "There are two boxes: \"Select outcome type\" and \"Select outcome",
+       "variable\". This was done to avoid having a long list of variables.",
+       "<br><br>For example, the outcome variables that can be selected when",
+       "outcome type is \"Hypertension\" include hypertension defined",
+       "by the JNC7 and 2017 ACC/AHA BP guidelines, awareness of",
+       "hypertension, and resistant hypertension."
       )
      )
     ),
@@ -363,7 +354,14 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
      )
     ),
 
-    h3("Stratify results"),
+    introBox(
+     h3("Stratify results"),
+     data.step = 8,
+     data.intro = paste(
+      "You can present results in sub-groups",
+      "defined by a stratifying variable"
+     )
+    ),
 
     fluidRow(
      introBox(
@@ -398,13 +396,11 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
         width = '100%'
        )
       ),
-      data.step = 10,
+      data.step = 9,
       data.intro = paste(
-       "Summarized values of the outcome will be presented among groups",
-       "defined by the 'group' variable. If you just want to look at",
-       "the outcome in the overall US population, don't select a group",
-       "If you have already selected something, you can click it again to",
-       "deselect it."
+       "This produces results for sub-groups on the same graph.",
+       "If there are too many bars/data points, the results will",
+       "be presented on multiple graphs."
       )
      )
     ),
@@ -469,14 +465,9 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
         width = '100%'
        )
       ),
-      data.step = 11,
+      data.step = 10,
       data.intro = paste(
-       "You may compute results in different populations using the 'stratify'",
-       "variable. The difference between the 'stratifying' variable and the",
-       "'group' variable is that the stratifying variable creates one output",
-       "per group, while the 'group' variable creates one output that contains",
-       "results for each group.",
-       "(Some exceptions apply for outcome variables with >2 categories)"
+       "This produces results for sub-groups in separate panels."
       )
      )
     ),
@@ -1011,8 +1002,6 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
   }) %>%
    bindEvent(smry())
 
-
-
   observeEvent(
    plots(), {
     output$visualize_output <- renderUI(plots())
@@ -1028,6 +1017,8 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
   # start introjs when button is pressed with custom options and events
   observeEvent(input$help, introjs(session))
 
+  exportTestValues(smry = smry())
+
  }
 
  # Calling shinyapp --------------------------------------------------------
@@ -1035,3 +1026,5 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
  shinyApp(ui, server)
 
 }
+
+# nocov end

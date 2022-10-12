@@ -1,0 +1,22 @@
+
+# Examples
+
+```{r child='make_simple_nhanes_design.Rmd'}
+
+```
+
+There are a few ways the design can be updated. For example, we can add a group variable:
+
+```{r}
+nhanes_design_update(ds, group_variable = 'demo_gender')
+```
+
+Pipes and multiple modifications are allowed:
+
+```{r}
+ds %>% 
+ nhanes_design_update(group_variable = 'demo_gender',
+                      stratify_variable = 'demo_race')
+```
+
+

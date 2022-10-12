@@ -1037,7 +1037,7 @@ nhanes_variables <- data.table::data.table(
 
 variable_description <- tibble::tribble(
  ~variable, ~description,
- "svy_id", "NHANES participant’s unique identifier.",
+ "svy_id", "NHANES participant unique identifier.",
  "svy_psu", "Population sampling unit. This variable is used to account for the non-random selection of study participants for NHANES",
  "svy_strata", "Population stratification. This variable is used to account for the non-random selection of study participants for NHANES",
  "svy_weight_mec", "Weight applied to produce statistical estimates for the non-institutionalized US population. This weight is used for calculating means and proportions.",
@@ -1046,7 +1046,7 @@ variable_description <- tibble::tribble(
  "svy_year", "NHANES survey cycle: 1999-2000, 2001-2002, 2003-2004, 2005-2006, 2007-2008, 2009-2010, 2011-2012, 2013-2014, 2015-2016, 2017-2020",
  "demo_age_cat", "Age grouping: 18-44, 45-64, 65-74, \u2265 75 years",
  "demo_race", "Self-reported race/ethnicity. From 1999-2000 through 2009-2010 this was available as non-Hispanic White, non-Hispanic Black, Hispanic and other. From 2011-2012 through 2017-2020 this was available as non-Hispanic White, non-Hispanic Black, non-Hispanic Asian, Hispanic and other.",
- "demo_age_years", "Participants’ age in years.  Participants > 80 years of age are given an age of 80 years.",
+ "demo_age_years", "Participant age in years.  Participants > 80 years of age are given an age of 80 years.",
  "demo_pregnant", "Pregnancy status. This is defined by either self-report of being pregnant or a positive pregnancy test conducted during the study visit.",
  "demo_gender", "Self-reported gender",
  "bp_sys_mean", "Mean systolic blood pressure in mm Hg. This is based on the average of up to 3 readings.  Overall, >95% of participants with at least one systolic blood pressure reading had three readings.  From 1999-2000 through 2015-2016, systolic blood pressure was measured using a mercury sphygmomanometer.  In 2017-2020, systolic blood pressure was measured using an oscillometric device.  The systolic blood pressure in 2017-2020 was calibrated to the mercury device by adding 1.5 mm Hg to the mean measured value.",
@@ -1083,7 +1083,7 @@ variable_description <- tibble::tribble(
  "cc_n_highrisk", "Self-reported history of coronary heart disease, myocardial infarction, stroke or heart failure or 10-year predicted risk \u2265 10% estimated by the pooled cohort risk equations",
  "cc_smoke", "Self-reported current cigarette smoking",
  "cc_bmi", "Body mass index in kg/m2, estimated using the height and weight measured during the study examination.",
- "cc_diabetes", "HbA1c \u22756.5% or self-report of a prior diagnosis of diabetes with use of insulin or oral glucose-lowering medications.",
+ "cc_diabetes", "HbA1c \u2265 6.5% or self-report of a prior diagnosis of diabetes with use of insulin or oral glucose-lowering medications.",
  "cc_ckd", "Estimated glomerular filtration rate < 60 ml/min/1.73 m2 or albumin-to-creatinine > 30 mg/g. Estimated glomerular filtration rate was calculated using the 2021 serum creatinine-based equation.",
  "cc_cvd_mi", "Self-reported history of myocardial infarction",
  "cc_cvd_chd", "Self-reported history of myocardial infarction or coronary heart disease",

@@ -9,6 +9,7 @@ nhanes_summarize(
   key,
   outcome_variable,
   outcome_quantiles = NULL,
+  outcome_stats = NULL,
   group_variable = NULL,
   group_cut_n = NULL,
   group_cut_type = NULL,

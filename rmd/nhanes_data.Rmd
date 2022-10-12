@@ -1,0 +1,45 @@
+
+```{r child = 'aaa.Rmd'}
+
+```
+
+
+```{r, echo=FALSE, results='asis'}
+
+classes <-
+ list("Survey" = "In each NHANES cycle, potential participants were identified using a multi-stage sampling process. The variables below are based on this process.",
+      "Demographics" = "The NHANES in-home interview included questions about participant demographics, including age, sex, race/ethnicity, and pregnancy status",
+      "Blood pressure" = "Systolic and diastolic BP (SBP and DBP, respectively) were measured three times by trained and certified physicians. BP was measured using a mercury sphygmomanometer from 1999-2000 through 2015-2016 and using an oscillometric device in 2017-2020. The oscillometric SBP and DBP values were calibrated to the mercury device. Mean SBP and DBP levels were computed over all available",
+      "Hypertension" = "These variables are derived according to the 2017 American College of Cardiology/American Heart Association (ACC/AHA) BP guideline and the Seventh Joint National Committee (JNC7) BP guideline." ,
+      "Antihypertensive medication" = "During the interview, the labels of medications that participants reported taking in the preceding 30 days were recorded.",
+      "Comorbidities" = "These variables describe comorbid conditions.")
+
+data_to_doc <- nhanes_key %>% 
+ .[class %in% names(classes)] %>%
+ .[variable != 'svy_subpop_chol'] %>% 
+ .[variable != 'svy_weight_cal'] %>% 
+ .[, class := factor(class, levels = names(classes))] %>% 
+ .[order(class)] %>% 
+ droplevels()
+
+data_to_doc$description %<>% stringr::str_replace_all('\u2265', '>=')
+data_to_doc$label %<>% stringr::str_replace_all('\u2265', '>=')
+
+key_classes <- split(data_to_doc, f = data_to_doc$class)
+
+for(i in seq_along(key_classes)){
+ 
+ cat("#", names(key_classes)[i], "variables", "\n")
+ 
+ cat(classes[[names(key_classes)[i]]], "\n\n")
+ 
+ for(j in seq_along(key_classes[[i]]$variable)){
+  cat("##", key_classes[[i]]$variable[j], "\n")
+  cat("- Label: ", key_classes[[i]]$label[j], "\n")
+  cat("- Description: ", key_classes[[i]]$description[j], "\n\n")
+ }
+ 
+}
+
+```
+

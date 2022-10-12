@@ -1,0 +1,40 @@
+```{r, include=FALSE}
+
+library(cardioStatsUSA)
+knitr::opts_chunk$set(echo = TRUE)
+
+abbrvs <- list(
+  "CI"   = 'confidence interval',
+  "BP"   = "blood pressure",
+  "SBP"  = "systolic blood pressure",
+  "DBP"  = "diastolic blood pressure",
+  "SD"   = 'standard deviation',
+  "IQR"  = 'interquartile range',
+  "JNC7" = "Seventh Joint National Committee",
+  "ACC"  = "American College of Cardiology",
+  "AHA"  = "American Heart Association",
+  "CVD"  = 'cardiovascular disease'
+)
+
+abbrvs_paste <- function(strings){
+  
+  front <- 'Abbreviations'
+  
+  matter <- glue::glue_collapse(strings, sep = '; ', last = '; and ')
+  
+  paste(front, matter, sep = ': ')
+  
+}
+
+abbrvs_write <- function(abbr){
+  
+  sorted <- abbr[sort(names(abbr))]
+  
+  strings <- map2_chr(names(sorted), sorted, paste, sep = ' = ')
+  
+  abbrvs_paste(strings)
+  
+}
+
+```
+

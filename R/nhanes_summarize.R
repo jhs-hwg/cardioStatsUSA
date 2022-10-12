@@ -54,16 +54,44 @@ nhanes_summarize <- function(data,
  if(missing(data)) data <- cardioStatsUSA::nhanes_data
  if(missing(key)) key <- cardioStatsUSA::nhanes_key
 
- type_subpop <- key[variable == outcome_variable, module]
+ if(is_used(stratify_variable) && is_used(group_variable)){
 
- dt_data <- as.data.table(data)
+  if(stratify_variable == group_variable){
+   stop("The two stratification variables should not be the same. However, ",
+        key[variable == stratify_variable, label],
+        " is selected for both variables.", call. = FALSE)
+  }
+
+ }
+
+ dt_sub <- dt_data <- as.data.table(data)
  dt_key <- as.data.table(key)
 
- colname_subpop <- paste('svy_subpop', type_subpop, sep = '_')
+ if('module' %in% names(dt_key)){
 
- dt_sub <- dt_data %>%
-  # restrict the sample to the relevant sub-population
-  .[.[[colname_subpop]] == 1] %>%
+  type_subpop <- dt_key[variable == outcome_variable, module]
+  colname_subpop <- paste('svy_subpop', type_subpop, sep = '_')
+
+  if(colname_subpop %in% names(dt_data)){
+
+   dt_sub <- dt_data %>%
+    # restrict the sample to the relevant sub-population
+    .[.[[colname_subpop]] == 1]
+
+  } else {
+
+   stop("Module ", type_subpop, " was found in the supplied key, ",
+        "but the variable ", colname_subpop, " was not found in the ",
+        "supplied NHANES data. ", colname_subpop, " should be present ",
+        "with values of 0 for omitting and 1 for including ",
+        "participants into the sub-population.",
+        call. = FALSE)
+
+  }
+
+ }
+
+  dt_sub <- dt_sub %>%
   # restrict to observations where analysis variables are non-missing.
   na.omit(cols = c(time_variable,
                    outcome_variable,
@@ -71,8 +99,6 @@ nhanes_summarize <- function(data,
                    stratify_variable)) %>%
   # re-calibrate weights to match the total in nhanes_data
   nhanes_calibrate(nhanes_full = dt_data)
-
- # browser()
 
  ds <- nhanes_design(data = dt_sub,
                      key = dt_key,

@@ -10,6 +10,8 @@ check_nobs <- function(x, min_size = 30){
 
 }
 
+
+# nocov start
 check_group_counts <- function(x, min_size = 5){
 
  count_vars <- c(x$by_variables)
@@ -57,3 +59,56 @@ check_group_counts <- function(x, min_size = 5){
  }
 
 }
+# nocov end
+
+
+check_key <- function(nhanes_key){
+
+ required_names <- key_guide$name[key_guide$required]
+
+ if(!all(required_names %in% names(nhanes_key))){
+
+  missing_names <- required_names %>%
+   setdiff(names(nhanes_key)) %>%
+   paste(collapse = ', ')
+
+  stop("required columns are not present in NHANES key: ",
+       missing_names,
+       call. = FALSE)
+
+ }
+
+ extra_names <- setdiff(names(nhanes_key), key_guide$name)
+
+ if(!is_empty(extra_names)){
+
+  stop("unrecognized names in NHANES key: ",
+       paste(extra_names, collapse = ', '),
+       call. = FALSE)
+
+ }
+
+ key_types <- vapply(nhanes_key, typeof, character(1))
+
+ for(i in names(key_types)){
+  if(key_types[i] != key_guide$type[key_guide$name == i]){
+   stop("NHANES key column ", i, " should have type ",
+        key_guide$type[key_guide$name == i], " but instead ",
+        "has type ", key_types[i])
+  }
+ }
+
+ invisible(nhanes_key)
+
+}
+
+
+
+
+
+
+
+
+
+
+

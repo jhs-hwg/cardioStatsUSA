@@ -1,0 +1,3 @@
+
+
+The group variable and the stratify variable are both used to summarize an outcome within subgroups. If the summary is returned as a table, then the group and stratify variables can be considered interchangeable. If the summary is returned as a plot, then the subgroups defined by the group variable are shown on the same graph, while the subgroups defined by the stratify variable are shown on different graphs (i.e., one graph per strata). For example, if you wanted to estimate the race and sex specific prevalence of hypertension with one graph for men and one graphs for women, you would use `group = 'demo_race'` and `stratify = 'demo_gender'`

@@ -2,13 +2,53 @@
 % Please edit documentation in R/nhanes_design.R
 \name{print.nhanes_design}
 \alias{print.nhanes_design}
-\title{Title}
+\title{Print an NHANES design}
 \usage{
 \method{print}{nhanes_design}(x, ...)
 }
 \arguments{
-\item{...}{}
+\item{x}{an \link{nhanes_design} object}
+
+\item{...}{currently not used}
+}
+\value{
+the design object, invisibly.
 }
 \description{
-Title
+Print an NHANES design
 }
+\section{Examples}{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{library(cardioStatsUSA)
+
+ds <- nhanes_design(data = nhanes_data,
+                    key = nhanes_key, 
+                    time_values = 'most_recent',
+                    outcome_variable = 'bp_sys_mean')
+
+print(ds)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## ----------------------------- NHANES design -----------------------------
+## 
+## Outcome variable: bp_sys_mean
+## - label: Systolic blood pressure, mm Hg
+## - type: continuous
+## - description: Mean systolic blood pressure in mm Hg. This is based on
+##     the average of up to 3 readings.  Overall, >95\% of participants with at
+##     least one systolic blood pressure reading had three readings.  From
+##     1999-2000 through 2015-2016, systolic blood pressure was measured using a
+##     mercury sphygmomanometer.  In 2017-2020, systolic blood pressure was
+##     measured using an oscillometric device.  The systolic blood pressure in
+##     2017-2020 was calibrated to the mercury device by adding 1.5 mm Hg to the
+##     mean measured value.
+## 
+## Group variable: None
+## Stratify variable: None
+## 
+## N observations
+## - Unweighted: 9,693
+## - Weighted: 247,835,696
+## --------------------------------------------------------------------------
+}\if{html}{\out{</div>}}
+}
+

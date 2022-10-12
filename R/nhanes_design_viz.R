@@ -21,8 +21,6 @@
 #  nhanes_design_summarize(simplify_output = FALSE) %>%
 #  nhanes_design_viz()
 
-#'
-#'
 nhanes_design_viz <- function(x,
                               statistic_primary = NULL,
                               geom = 'bar',
@@ -134,11 +132,18 @@ nhanes_design_viz <- function(x,
   stat_all <- x$stats
 
   if('quantile' %in% stat_all){
-   stat_all <- c(stat_all, 'q25', 'q50', 'q75')
+   stats_in_x <- unique(data$statistic)
+   stats_not_quantile <- setdiff(get_outcome_stats('ctns'), 'quantile')
+   stats_quantile <- setdiff(stats_in_x, stats_not_quantile)
+   stat_all <- c(stat_all, stats_quantile)
   }
 
   if(statistic_primary == 'quantile'){
-   statistic_primary <- 'q50'
+   n_quantiles <- length(stats_quantile)
+   if(n_quantiles %% 2 == 0)
+    statistic_primary <- stats_quantile[n_quantiles/2]
+   else
+    statistic_primary <- stats_quantile[(n_quantiles+1)/2]
   }
 
   stacked_and_pooled <- outcome_type == 'catg' && pool
@@ -382,7 +387,6 @@ nhanes_design_viz <- function(x,
  output
 
 }
-
 
 
 

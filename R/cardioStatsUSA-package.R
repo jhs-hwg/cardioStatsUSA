@@ -8,7 +8,6 @@
 #' @import glue
 #' @import table.glue
 #' @import magrittr
-#' @import here
 #' @import tibble
 #' @importFrom stringr str_replace str_remove str_replace_all str_to_title
 #' @importFrom DT datatable DTOutput formatRound

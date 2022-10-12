@@ -2,7 +2,7 @@
 % Please edit documentation in R/app_run.R
 \name{app_run}
 \alias{app_run}
-\title{Run the NHANES BP application}
+\title{Run the NHANES application}
 \usage{
 app_run(
   nhanes_data = cardioStatsUSA::nhanes_data,
@@ -10,11 +10,19 @@ app_run(
 )
 }
 \arguments{
-\item{...}{currently not used}
+\item{nhanes_data}{[data.frame] the data used by the application.}
+
+\item{nhanes_key}{[data.frame] the key used to analyze \code{nhanes_data}.}
 }
 \value{
 runs a shiny application locally
 }
 \description{
-Run the NHANES BP application
+This application allows you to analyze NHANES data interactively. You can select NHANES cycles from 1999-2000 to 2017-2020 to be analyzed. Contiguous cycles can be combined to increase precision. Estimates are weighted to represent the non-institutionalized US population and you may incorporate age-adjustment through direct standardization to account for the changing age of the US population. Count estimates are calibrated to match the estimated total number of US adults. You can visualize summaries of outcomes for the overall population and in subgroups defined by stratifying variables. All figures and datasets you create can be saved. Following CDC recommendations, unreliable statistical estimates are automatically suppressed.
+}
+\details{
+The default values of \code{nhanes_data} and \code{nhanes_key} are provided
+to make the app run out-of-the-box, but are also good examples
+for extending the app to work with your own data. For more
+details on extending the app, please see (TODO: EXTEND VIGNETTE)
 }

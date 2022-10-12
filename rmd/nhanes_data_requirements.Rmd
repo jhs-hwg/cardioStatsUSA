@@ -1,0 +1,7 @@
+
+`data` should include at a minimum the following variables:
+
+- `svy_weight_mec`: `r tolower(get_variable_label(key = nhanes_key, 'svy_weight_mec'))`
+- `svy_psu`: `r get_variable_label(key = nhanes_key, 'svy_psu')`
+- `svy_strata`: `r get_variable_label(key = nhanes_key, 'svy_strata')`
+- `svy_year`: `r get_variable_label(key = nhanes_key, 'svy_year')`

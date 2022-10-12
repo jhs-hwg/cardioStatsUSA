@@ -1,0 +1,11 @@
+
+The key data should have all of the required columns, and should not have any column that is not listed below.
+
+```{r echo=FALSE, results='markup'}
+
+knitr::kable(key_guide, col.names = c("Column name", 
+                                      "Column type", 
+                                      "Is this column required?",
+                                      "The purpose of this column"))
+
+```

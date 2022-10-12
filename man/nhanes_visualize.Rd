@@ -16,8 +16,7 @@ nhanes_visualize(
   time_variable = "svy_year",
   time_values = NULL,
   pool = FALSE,
-  subset_variables = list(),
-  subset_values = list(),
+  subset_calls = list(),
   age_wts = NULL,
   statistic_primary = NULL,
   geom = "bar",
@@ -30,10 +29,6 @@ nhanes_visualize(
 }
 \arguments{
 \item{pool}{(\emph{logical}; length 1; default = \code{FALSE})}
-
-\item{subset_variables}{(\emph{list}; length may vary)}
-
-\item{subset_values}{(\emph{list}; length must match \code{subset_variables})}
 
 \item{age_wts}{(\emph{numeric}; length 4; default is none)}
 
