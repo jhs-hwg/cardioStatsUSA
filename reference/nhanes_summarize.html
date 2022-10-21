@@ -37,12 +37,8 @@ How is the summary computed
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-results">Results</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-results">
-    <a class="dropdown-item" href="../articles/prev_htn_accaha.html">Prevalence of hypertension, ACC/AHA</a>
-    <a class="dropdown-item" href="../articles/prev_htn_jnc7.html">Prevalence of hypertension, JNC7</a>
-    <a class="dropdown-item" href="../articles/bp_levels.html">Blood pressure levels</a>
-    <a class="dropdown-item" href="../articles/bp_meds.html">Antihypertensive medication use</a>
-    <a class="dropdown-item" href="../articles/bp_control_accaha.html">Blood pressure control, ACC/AHA</a>
-    <a class="dropdown-item" href="../articles/bp_control_jnc7.html">Blood pressure control, JNC7</a>
+    <a class="dropdown-item" href="../articles/bp_control.html">Blood pressure control</a>
+    <a class="dropdown-item" href="../articles/hypertension.html">Hypertension</a>
   </div>
 </li>
 <li class="nav-item">
@@ -72,20 +68,35 @@ How is the summary computed
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">nhanes_summarize</span><span class="op">(</span></span>
-<span>  <span class="va">outcome</span>,</span>
-<span>  exposure <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  group <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  years <span class="op">=</span> <span class="st">"last_5"</span>,</span>
+<span>  <span class="va">data</span>,</span>
+<span>  <span class="va">key</span>,</span>
+<span>  <span class="va">outcome_variable</span>,</span>
+<span>  outcome_quantiles <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  outcome_stats <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  group_variable <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  group_cut_n <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  group_cut_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  stratify_variable <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  time_variable <span class="op">=</span> <span class="st">"svy_year"</span>,</span>
+<span>  time_values <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  pool <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  subset_variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  subset_values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  age_wts <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  subset_calls <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  age_wts <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  simplify_output <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt>outcome</dt>
+    <dl><dt>pool</dt>
+<dd><p>(<em>logical</em>; length 1; default = <code>FALSE</code>)</p></dd>
+
+
+<dt>age_wts</dt>
+<dd><p>(<em>numeric</em>; length 4; default is none)</p></dd>
+
+
+<dt>outcome</dt>
 <dd><p>(<em>character</em>; length 1; no default)
 The variable to be summarized.</p></dd>
 
@@ -106,20 +117,12 @@ Valid options are</p><ul><li><p>'all' (includes all NHANES cycles)</p></li>
 </ul></dd>
 
 
-<dt>pool</dt>
-<dd><p>(<em>logical</em>; length 1; default = <code>FALSE</code>)</p></dd>
-
-
 <dt>subset_variables</dt>
 <dd><p>(<em>list</em>; length may vary)</p></dd>
 
 
 <dt>subset_values</dt>
 <dd><p>(<em>list</em>; length must match <code>subset_variables</code>)</p></dd>
-
-
-<dt>age_wts</dt>
-<dd><p>(<em>numeric</em>; length 4; default is none)</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -132,28 +135,29 @@ Valid options are</p><ul><li><p>'all' (includes all NHANES cycles)</p></li>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">nhanes_summarize</span><span class="op">(</span><span class="st">"bp_sys_mean"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      svy_year statistic estimate std_error ci_lower ci_upper</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1: 2009-2010      mean 120.4879 0.4809511 119.5452 121.4305</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2: 2011-2012      mean 121.5971 0.6503415 120.3224 122.8717</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3: 2013-2014      mean 121.4312 0.3176115 120.8087 122.0537</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  4: 2015-2016      mean 123.3559 0.4613295 122.4518 124.2601</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  5: 2017-2020      mean 123.1317 0.3701747 122.4062 123.8572</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  6: 2009-2010       q25 109.3333 0.4717192 108.6667 110.6667</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  7: 2009-2010       q50 118.0000 0.4717192 117.3333 119.3333</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  8: 2009-2010       q75 129.3333 0.6289589 128.6667 131.3333</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  9: 2011-2012       q25 110.6667 0.4739751 110.0000 112.0000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10: 2011-2012       q50 119.3333 0.4739751 118.6667 120.6667</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11: 2011-2012       q75 130.0000 0.4739751 129.3333 131.3333</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12: 2013-2014       q25 110.0000 0.3127762 110.0000 111.3333</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13: 2013-2014       q50 118.6667 0.3127762 118.6667 120.0000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14: 2013-2014       q75 130.6667 0.4691643 130.0000 132.0000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15: 2015-2016       q25 112.0000 0.4691643 111.3333 113.3333</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16: 2015-2016       q50 120.6667 0.6255524 120.0000 122.6667</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17: 2015-2016       q75 132.0000 0.4691643 131.3333 133.3333</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18: 2017-2020       q25 111.1667 0.2427728 110.8333 111.8333</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19: 2017-2020       q50 120.8333 0.2427728 120.5000 121.5000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20: 2017-2020       q75 132.1667 0.5664699 131.1667 133.5000</span>
+<span class="r-in"><span><span class="fu">nhanes_summarize</span><span class="op">(</span><span class="va">nhanes_data</span>, <span class="va">nhanes_key</span>, outcome_variable <span class="op">=</span> <span class="st">"bp_sys_mean"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      svy_year statistic estimate std_error ci_lower ci_upper n_obs</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1: 1999-2000      mean 122.7799 0.7232809 121.3623 124.1975  4694</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2: 2001-2002      mean 122.5121 0.4686655 121.5935 123.4306  5184</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3: 2003-2004      mean 122.6792 0.4833259 121.7319 123.6265  4838</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4: 2005-2006      mean 122.2487 0.4693504 121.3288 123.1687  5015</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5: 2007-2008      mean 121.5426 0.3779148 120.8019 122.2833  5665</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  6: 2009-2010      mean 120.4879 0.4809511 119.5452 121.4305  6043</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7: 2011-2012      mean 121.5971 0.6503415 120.3224 122.8717  5337</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8: 2013-2014      mean 121.4312 0.3176115 120.8087 122.0537  5694</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9: 2015-2016      mean 123.3559 0.4613295 122.4518 124.2601  5552</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10: 2017-2020      mean 123.1317 0.3701747 122.4062 123.8572  8013</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     unreliable_status unreliable_reason review_needed review_reason</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1:             FALSE              &lt;NA&gt;         FALSE          &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2:             FALSE              &lt;NA&gt;         FALSE          &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3:             FALSE              &lt;NA&gt;         FALSE          &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4:             FALSE              &lt;NA&gt;         FALSE          &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5:             FALSE              &lt;NA&gt;         FALSE          &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  6:             FALSE              &lt;NA&gt;         FALSE          &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7:             FALSE              &lt;NA&gt;         FALSE          &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8:             FALSE              &lt;NA&gt;         FALSE          &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9:             FALSE              &lt;NA&gt;         FALSE          &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10:             FALSE              &lt;NA&gt;         FALSE          &lt;NA&gt;</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

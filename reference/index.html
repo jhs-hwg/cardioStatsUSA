@@ -27,12 +27,8 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-results">Results</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-results">
-    <a class="dropdown-item" href="../articles/prev_htn_accaha.html">Prevalence of hypertension, ACC/AHA</a>
-    <a class="dropdown-item" href="../articles/prev_htn_jnc7.html">Prevalence of hypertension, JNC7</a>
-    <a class="dropdown-item" href="../articles/bp_levels.html">Blood pressure levels</a>
-    <a class="dropdown-item" href="../articles/bp_meds.html">Antihypertensive medication use</a>
-    <a class="dropdown-item" href="../articles/bp_control_accaha.html">Blood pressure control, ACC/AHA</a>
-    <a class="dropdown-item" href="../articles/bp_control_jnc7.html">Blood pressure control, JNC7</a>
+    <a class="dropdown-item" href="../articles/bp_control.html">Blood pressure control</a>
+    <a class="dropdown-item" href="../articles/hypertension.html">Hypertension</a>
   </div>
 </li>
 <li class="nav-item">
@@ -52,9 +48,30 @@
     </div>
 
     <div class="section level2">
-      <h2 id="all-functions">All functions<a class="anchor" aria-label="anchor" href="#all-functions"></a></h2>
+      <h2 id="nhanes-data">NHANES data<a class="anchor" aria-label="anchor" href="#nhanes-data"></a></h2>
+      
+      <p class="section-desc"></p><p>NHANES data include in-home interviews and study examinations conducted at mobile examination centers.</p>
+
+      
+    </div><div id="" class="section level2">
       
       
+      
+
+      <dl><dt>
+          
+          <code><a href="nhanes_data.html">nhanes_data</a></code> 
+        </dt>
+        <dd>NHANES data, 1999-2020</dd>
+      </dl><dl><dt>
+          
+          <code><a href="nhanes_key.html">nhanes_key</a></code> 
+        </dt>
+        <dd>NHANES Variables: Names, Roles, and Descriptions</dd>
+      </dl></div><div class="section level2">
+      <h2 id="nhanes-web-application">NHANES web application<a class="anchor" aria-label="anchor" href="#nhanes-web-application"></a></h2>
+      
+      <p class="section-desc"></p><p>Analyze NHANES data interactively</p>
 
       
     </div><div id="" class="section level2">
@@ -66,18 +83,19 @@
           
           <code><a href="app_run.html">app_run()</a></code> 
         </dt>
-        <dd>Run the NHANES BP application</dd>
-      </dl><dl><dt>
-          
-          <code><a href="nhanes_bp.html">nhanes_bp</a></code> 
-        </dt>
-        <dd>NHANES blood pressure data, 1999-2020</dd>
-      </dl><dl><dt>
-          
-          <code><a href="nhanes_key.html">nhanes_key</a></code> 
-        </dt>
-        <dd>One-stop shop for variable names, roles, labels, and functions</dd>
-      </dl><dl><dt>
+        <dd>Run the NHANES application</dd>
+      </dl></div><div class="section level2">
+      <h2 id="nhanes-summary-functions">NHANES summary functions<a class="anchor" aria-label="anchor" href="#nhanes-summary-functions"></a></h2>
+      
+      <p class="section-desc"></p><p>Simple and direct functions to summarize or visualize an outcome using NHANES data.</p>
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
           
           <code><a href="nhanes_summarize.html">nhanes_summarize()</a></code> 
         </dt>
@@ -87,8 +105,65 @@
           <code><a href="nhanes_visualize.html">nhanes_visualize()</a></code> 
         </dt>
         <dd>Visualize summaries of NHANES</dd>
+      </dl></div><div class="section level2">
+      <h2 id="nhanes-design-functions">NHANES design functions<a class="anchor" aria-label="anchor" href="#nhanes-design-functions"></a></h2>
+      
+      <p class="section-desc"></p><p>Back-end functions for NHANES summary functions.</p>
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="nhanes_design.html">nhanes_design()</a></code> 
+        </dt>
+        <dd>Survey Design for NHANES Data</dd>
+      </dl><dl><dt>
+          
+          <code><a href="nhanes_design_standardize.html">nhanes_design_standardize()</a></code> 
+        </dt>
+        <dd>Standardize an NHANES design</dd>
+      </dl><dl><dt>
+          
+          <code><a href="nhanes_design_subset.html">nhanes_design_subset()</a></code> 
+        </dt>
+        <dd>Subset an NHANES design object</dd>
+      </dl><dl><dt>
+          
+          <code><a href="nhanes_design_summarize.html">nhanes_design_summarize()</a></code> 
+        </dt>
+        <dd>Summarize an NHANES design</dd>
+      </dl><dl><dt>
+          
+          <code><a href="nhanes_design_update.html">nhanes_design_update()</a></code> 
+        </dt>
+        <dd>Modify an NHANES design</dd>
+      </dl><dl><dt>
+          
+          <code><a href="nhanes_design_viz.html">nhanes_design_viz()</a></code> 
+        </dt>
+        <dd>Visualize a summary of NHANES data</dd>
+      </dl><dl><dt>
+          
+          <code><a href="nhanes_calibrate.html">nhanes_calibrate()</a></code> 
+        </dt>
+        <dd>Calibration of NHANES weights</dd>
+      </dl><dl><dt>
+          
+          <code><a href="print.nhanes_design.html">print(<i>&lt;nhanes_design&gt;</i>)</a></code> 
+        </dt>
+        <dd>Print an NHANES design</dd>
+      </dl><dl><dt>
+          
+          <code><a href="get_var_info.html">get_var_info()</a></code> <code><a href="get_var_info.html">get_variable_class()</a></code> <code><a href="get_var_info.html">get_variable_label()</a></code> <code><a href="get_var_info.html">get_variable_source()</a></code> <code><a href="get_var_info.html">get_variable_description()</a></code> <code><a href="get_var_info.html">get_variable_type()</a></code> <code><a href="get_var_info.html">get_variable_module()</a></code> 
+        </dt>
+        <dd>Title</dd>
       </dl></div>
-  </main></div>
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside></div>
 
 
     <footer><div class="pkgdown-footer-left">

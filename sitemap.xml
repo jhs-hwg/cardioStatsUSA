@@ -7,28 +7,19 @@
     <loc>https://jhs-hwg.github.io/cardioStatsUSA/LICENSE.html</loc>
   </url>
   <url>
-    <loc>https://jhs-hwg.github.io/cardioStatsUSA/articles/bp_control_accaha.html</loc>
-  </url>
-  <url>
-    <loc>https://jhs-hwg.github.io/cardioStatsUSA/articles/bp_control_jnc7.html</loc>
-  </url>
-  <url>
-    <loc>https://jhs-hwg.github.io/cardioStatsUSA/articles/bp_levels.html</loc>
-  </url>
-  <url>
-    <loc>https://jhs-hwg.github.io/cardioStatsUSA/articles/bp_meds.html</loc>
+    <loc>https://jhs-hwg.github.io/cardioStatsUSA/articles/bp_control.html</loc>
   </url>
   <url>
     <loc>https://jhs-hwg.github.io/cardioStatsUSA/articles/cardioStatsUSA.html</loc>
   </url>
   <url>
+    <loc>https://jhs-hwg.github.io/cardioStatsUSA/articles/hypertension.html</loc>
+  </url>
+  <url>
     <loc>https://jhs-hwg.github.io/cardioStatsUSA/articles/index.html</loc>
   </url>
   <url>
-    <loc>https://jhs-hwg.github.io/cardioStatsUSA/articles/prev_htn_accaha.html</loc>
-  </url>
-  <url>
-    <loc>https://jhs-hwg.github.io/cardioStatsUSA/articles/prev_htn_jnc7.html</loc>
+    <loc>https://jhs-hwg.github.io/cardioStatsUSA/articles/modules.html</loc>
   </url>
   <url>
     <loc>https://jhs-hwg.github.io/cardioStatsUSA/authors.html</loc>
@@ -46,10 +37,34 @@
     <loc>https://jhs-hwg.github.io/cardioStatsUSA/reference/cardioStatsUSA-package.html</loc>
   </url>
   <url>
+    <loc>https://jhs-hwg.github.io/cardioStatsUSA/reference/get_var_info.html</loc>
+  </url>
+  <url>
     <loc>https://jhs-hwg.github.io/cardioStatsUSA/reference/index.html</loc>
   </url>
   <url>
-    <loc>https://jhs-hwg.github.io/cardioStatsUSA/reference/nhanes_bp.html</loc>
+    <loc>https://jhs-hwg.github.io/cardioStatsUSA/reference/nhanes_calibrate.html</loc>
+  </url>
+  <url>
+    <loc>https://jhs-hwg.github.io/cardioStatsUSA/reference/nhanes_data.html</loc>
+  </url>
+  <url>
+    <loc>https://jhs-hwg.github.io/cardioStatsUSA/reference/nhanes_design.html</loc>
+  </url>
+  <url>
+    <loc>https://jhs-hwg.github.io/cardioStatsUSA/reference/nhanes_design_standardize.html</loc>
+  </url>
+  <url>
+    <loc>https://jhs-hwg.github.io/cardioStatsUSA/reference/nhanes_design_subset.html</loc>
+  </url>
+  <url>
+    <loc>https://jhs-hwg.github.io/cardioStatsUSA/reference/nhanes_design_summarize.html</loc>
+  </url>
+  <url>
+    <loc>https://jhs-hwg.github.io/cardioStatsUSA/reference/nhanes_design_update.html</loc>
+  </url>
+  <url>
+    <loc>https://jhs-hwg.github.io/cardioStatsUSA/reference/nhanes_design_viz.html</loc>
   </url>
   <url>
     <loc>https://jhs-hwg.github.io/cardioStatsUSA/reference/nhanes_key.html</loc>
@@ -59,5 +74,8 @@
   </url>
   <url>
     <loc>https://jhs-hwg.github.io/cardioStatsUSA/reference/nhanes_visualize.html</loc>
+  </url>
+  <url>
+    <loc>https://jhs-hwg.github.io/cardioStatsUSA/reference/print.nhanes_design.html</loc>
   </url>
 </urlset>

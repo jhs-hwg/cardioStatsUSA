@@ -27,12 +27,8 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-results">Results</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-results">
-    <a class="dropdown-item" href="../articles/prev_htn_accaha.html">Prevalence of hypertension, ACC/AHA</a>
-    <a class="dropdown-item" href="../articles/prev_htn_jnc7.html">Prevalence of hypertension, JNC7</a>
-    <a class="dropdown-item" href="../articles/bp_levels.html">Blood pressure levels</a>
-    <a class="dropdown-item" href="../articles/bp_meds.html">Antihypertensive medication use</a>
-    <a class="dropdown-item" href="../articles/bp_control_accaha.html">Blood pressure control, ACC/AHA</a>
-    <a class="dropdown-item" href="../articles/bp_control_jnc7.html">Blood pressure control, JNC7</a>
+    <a class="dropdown-item" href="../articles/bp_control.html">Blood pressure control</a>
+    <a class="dropdown-item" href="../articles/hypertension.html">Hypertension</a>
   </div>
 </li>
 <li class="nav-item">
@@ -60,55 +56,35 @@
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">nhanes_visualize</span><span class="op">(</span></span>
-<span>  <span class="va">outcome</span>,</span>
-<span>  exposure <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  group <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  years <span class="op">=</span> <span class="st">"last_5"</span>,</span>
+<span>  <span class="va">data</span>,</span>
+<span>  <span class="va">key</span>,</span>
+<span>  <span class="va">outcome_variable</span>,</span>
+<span>  outcome_quantiles <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  outcome_stats <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  group_variable <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  group_cut_n <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  group_cut_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  stratify_variable <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  time_variable <span class="op">=</span> <span class="st">"svy_year"</span>,</span>
+<span>  time_values <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  pool <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  subset_variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  subset_values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  subset_calls <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  age_wts <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  statistic_primary <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  title <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  geom <span class="op">=</span> <span class="st">"bar"</span>,</span>
 <span>  reorder_cats <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  width <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  height <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  height <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  size_point <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  size_error <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt>outcome</dt>
-<dd><p>(<em>character</em>; length 1; no default)
-The variable to be summarized.</p></dd>
-
-
-<dt>exposure</dt>
-<dd><p>(<em>character</em>; length 1; default is none)</p></dd>
-
-
-<dt>group</dt>
-<dd><p>(<em>character</em>; length 1; default is none)</p></dd>
-
-
-<dt>years</dt>
-<dd><p>(<em>character</em>; length may vary; default = 'all')
-Valid options are</p><ul><li><p>'all' (includes all NHANES cycles)</p></li>
-<li><p>'last_5' (includes the last 5 most recent NHANES cycles)</p></li>
-<li><p>'most_recent' (include the most recent NHANES cycle)</p></li>
-</ul></dd>
-
-
-<dt>pool</dt>
+    <dl><dt>pool</dt>
 <dd><p>(<em>logical</em>; length 1; default = <code>FALSE</code>)</p></dd>
-
-
-<dt>subset_variables</dt>
-<dd><p>(<em>list</em>; length may vary)</p></dd>
-
-
-<dt>subset_values</dt>
-<dd><p>(<em>list</em>; length must match <code>subset_variables</code>)</p></dd>
 
 
 <dt>age_wts</dt>
@@ -116,16 +92,20 @@ Valid options are</p><ul><li><p>'all' (includes all NHANES cycles)</p></li>
 
 
 <dt>statistic_primary</dt>
-<dd><p>(character) the statistic that defines the
-geometric objects in the plot.</p></dd>
+<dd><p>[character(1)]</p>
+<p>the statistic that defines the geometric objects in the plot.</p></dd>
 
 
 <dt>geom</dt>
-<dd><p>(character) can be 'bar' or 'points'</p></dd>
+<dd><p>[character(1)]</p>
+<p>What type of plot to create. Valid options are</p><ul><li><p><code>'bar'</code> A bar plot will be created</p></li>
+<li><p><code>'point'</code> A scatter plot will be created</p></li>
+</ul></dd>
 
 
 <dt>reorder_cats</dt>
-<dd><p>(logical) whether to re-order the categorical exposure
+<dd><p>[logical(1)]</p>
+<p>whether to re-order the categorical exposure
 variable so that its levels are shown in increasing order by the expected
 outcome.</p></dd>
 
@@ -137,6 +117,14 @@ outcome.</p></dd>
 <dt>height</dt>
 <dd><p>height of the plot, in pixels</p></dd>
 
+
+<dt>size_point</dt>
+<dd><p>the size of points in the plot (only relevant if <code>geom = 'point'</code>)</p></dd>
+
+
+<dt>size_error</dt>
+<dd><p>the size of error bars in the plot (only relevant if <code>geom = 'point'</code>)</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -145,6 +133,16 @@ outcome.</p></dd>
 <p>a plotly visualization</p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Plotly objects do not render for example R code. Please see vignettes</span></span></span>
+<span class="r-in"><span><span class="co"># for examples of nhanes_visualize. TODO: ADD LINK</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
 
