@@ -33,7 +33,7 @@
 #'
 #' @examples
 #'
-#' nhanes_summarize("bp_sys_mean")
+#' nhanes_summarize(nhanes_data, nhanes_key, outcome_variable = "bp_sys_mean")
 #'
 nhanes_summarize <- function(data,
                              key,
@@ -64,8 +64,19 @@ nhanes_summarize <- function(data,
 
  }
 
- dt_sub <- dt_data <- as.data.table(data)
- dt_key <- as.data.table(key)
+ if(!is.data.table(data)){
+  dt_sub <- dt_data <- as.data.table(data)
+ } else {
+  dt_sub <- dt_data <- data
+ }
+
+ if(!is.data.table(key)){
+  dt_key <- as.data.table(key)
+ } else {
+  dt_key <- key
+ }
+
+
 
  if('module' %in% names(dt_key)){
 
@@ -129,7 +140,7 @@ nhanes_summarize <- function(data,
  }
 
  nhanes_design_summarize(ds,
-                         stats = outcome_stats %||% ds$stats,
+                         stats = outcome_stats %||% ds$stats[1],
                          simplify_output = simplify_output)
 
 }

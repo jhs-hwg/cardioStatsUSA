@@ -20,9 +20,12 @@ library(shiny)
 #' @return runs a shiny application locally
 #' @export
 #'
-#' @examples
 app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
                     nhanes_key = cardioStatsUSA::nhanes_key) {
+
+ # coerce inputs to data.tables but don't copy them.
+ if(!is.data.table(nhanes_data)) setDT(nhanes_data)
+ if(!is.data.table(nhanes_key))  setDT(nhanes_data)
 
  time_variable <- nhanes_key$variable[nhanes_key$type == 'time']
  time_values <- levels(nhanes_data[[time_variable]])
@@ -56,6 +59,16 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
  ctns_subset_variables <- ctns_variables %>%
   intersect(unlist(variable_choices$subset))
 
+ compute_ready <-
+  "((input.pool == 'no' & input.year_stratify.length > 0) |
+   input.pool == 'yes')
+    & (
+   input.outcome.length > 0
+  )
+    & (
+   input.statistic.length > 0
+  )"
+
  # User interface (UI) -----------------------------------------------------
 
  ui <- fluidPage(
@@ -87,9 +100,9 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
 
     introBox(
      conditionalPanel(
-      condition = compute_ready(),
-      actionButton(
-       inputId =  "run",
+      condition = compute_ready,
+  actionButton(
+   inputId =  "run",
        label = "Compute results",
        icon = icon("cog"),
        width = "100%",
@@ -98,7 +111,7 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
      ),
 
      conditionalPanel(
-      condition = paste("!(", compute_ready(), ")", sep = ''),
+      condition = paste("!(", compute_ready, ")", sep = ''),
       actionButton(
        inputId =  "wont_do_computation",
        label = "Compute results",
@@ -164,15 +177,22 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
 
     introBox(
 
-     conditionalPanel(
-      # if 'count' is not in the selected statistics
-      "input.statistic.indexOf('count') == -1",
-      awesomeCheckbox(
-       inputId = "age_standardize",
-       label = "Age-adjustment by standardization?",
-       value = FALSE,
-       status = "primary"
-      )
+     # conditionalPanel(
+     #  # if 'count' is not in the selected statistics
+     #  "input.statistic.indexOf('count') == -1",
+     #  awesomeCheckbox(
+     #   inputId = "age_standardize",
+     #   label = "Age-adjustment by standardization?",
+     #   value = FALSE,
+     #   status = "primary"
+     #  )
+     # ),
+
+     awesomeCheckbox(
+      inputId = "age_standardize",
+      label = "Age-adjustment by standardization?",
+      value = FALSE,
+      status = "primary"
      ),
 
      conditionalPanel(
@@ -715,25 +735,42 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
 
   observeEvent(input$statistic, {
 
+
+   outcome_type <- nhanes_key[variable==input$outcome, type]
+   outcome_stats <- get_outcome_stats(outcome_type)
+   stat_primary_choices <- outcome_stats[match(input$statistic, outcome_stats)]
+
+   if(is_used(input$statistic_primary)){
+
+    selected <- if(input$statistic_primary %in% stat_primary_choices){
+     input$statistic_primary
+    } else {
+     stat_primary_choices[1]
+    }
+
+   } else {
+    selected <- stat_primary_choices[1]
+   }
+
    updatePickerInput(
     session = session,
     inputId = 'statistic_primary',
-    choices = input$statistic,
-    selected = input$statistic[1]
+    choices = stat_primary_choices,
+    selected = selected
    )
 
-   if('count' %in% input$statistic){
-
-    updateAwesomeCheckbox(session = session,
-                          inputId = 'age_standardize',
-                          value = FALSE)
-
-   }
+   # if('count' %in% input$statistic){
+   #
+   #  updateAwesomeCheckbox(session = session,
+   #                        inputId = 'age_standardize',
+   #                        value = FALSE)
+   #
+   # }
 
 
   })
 
-  map(
+  purrr::map(
    .x = seq(n_exclusion_max),
    .f = ~ {
 
@@ -839,95 +876,101 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
 
   smry <- reactive({
 
-   pool <- input$pool == 'yes'
+   withProgress(message = "Doing summary computations", expr = {
 
-   age_wts <- NULL
+    pool <- input$pool == 'yes'
 
-   if(input$age_standardize){
-    age_wts <- c(input$age_wts_1,
-                 input$age_wts_2,
-                 input$age_wts_3,
-                 input$age_wts_4)
-   }
+    age_wts <- NULL
 
-   outcome_variable  <- input_infer(input$outcome,  default = NULL)
-   group_variable    <- input_infer(input$group,    default = NULL)
-   stratify_variable <- input_infer(input$stratify, default = NULL)
+    if(input$age_standardize){
+     age_wts <- c(input$age_wts_1,
+                  input$age_wts_2,
+                  input$age_wts_3,
+                  input$age_wts_4)
+    }
 
-   time_values_selected <- if(pool){
+    outcome_variable  <- input_infer(input$outcome,  default = NULL)
+    group_variable    <- input_infer(input$group,    default = NULL)
+    stratify_variable <- input_infer(input$stratify, default = NULL)
+
+    time_values_selected <- if(pool){
 
      time_start <- which(time_values == input$year_pool[1])
      time_end   <- which(time_values == input$year_pool[2])
 
      time_values[seq(time_start, time_end)]
 
-   } else {
+    } else {
 
-    input$year_stratify
+     input$year_stratify
 
-   }
+    }
 
-   subset_indices <- c()
-   subset_calls <- list()
+    subset_indices <- c()
+    subset_calls <- list()
 
-   if(input$subset_n > 0){
-    # as.integer b/c subset_n is a character value
-    subset_indices <- seq(as.integer(input$subset_n))
-   }
+    if(as.numeric(input$subset_n) > 0){
+     # as.integer b/c subset_n is a character value
+     subset_indices <- seq(as.integer(input$subset_n))
+    }
 
-   for(i in subset_indices){
+    for(i in subset_indices){
 
-    ss_var <- paste('subset_variable', i, sep = '_')
+     ss_var <- paste('subset_variable', i, sep = '_')
 
-    if(is_used(input[[ss_var]])){
+     if(is_used(input[[ss_var]])){
 
-     ss_type <- get_variable_type(nhanes_key, input[[ss_var]])
+      ss_type <- get_variable_type(input[[ss_var]], nhanes_key)
 
-     # the inputs defined in the UI only allow ctns or catg
-     if(ss_type %in% c('bnry', 'intg')) ss_type <- 'catg'
+      # the inputs defined in the UI only allow ctns or catg
+      if(ss_type %in% c('bnry', 'intg')) ss_type <- 'catg'
 
-     ss_val <- paste('subset_value', i, ss_type, sep = '_')
+      ss_val <- paste('subset_value', i, ss_type, sep = '_')
 
-     if(ss_type == 'ctns'){
+      if(ss_type == 'ctns'){
 
-      if(!all(input[[ss_val]] == 0)){
-       subset_calls[[ input[[ss_var]] ]] <- input[[ss_val]]
+       if(!all(input[[ss_val]] == 0)){
+        subset_calls[[ input[[ss_var]] ]] <- input[[ss_val]]
+       }
+
       }
 
-     }
+      if(ss_type == 'catg'){
 
-     if(ss_type == 'catg'){
+       if (!is_empty(input[[ss_val]])){
+        subset_calls[[ input[[ss_var]] ]] <- input[[ss_val]]
+       }
 
-      if (!is_empty(input[[ss_val]])){
-       subset_calls[[ input[[ss_var]] ]] <- input[[ss_val]]
       }
 
      }
 
     }
 
-   }
+    smry <- try(
+     expr = nhanes_data %>%
+      nhanes_summarize(
+       key = nhanes_key,
+       outcome_variable = outcome_variable,
+       outcome_quantiles = c(0.25, 0.50, 0.75),
+       outcome_stats = input$statistic,
+       group_variable = group_variable,
+       group_cut_n = input$n_exposure_group,
+       group_cut_type = input$exposure_cut_type,
+       stratify_variable = stratify_variable,
+       time_variable = time_variable,
+       time_values = time_values_selected,
+       pool = pool,
+       subset_calls = subset_calls,
+       age_wts = age_wts,
+       simplify_output = FALSE
+      ),
+     silent = TRUE
+    )
 
-   smry <- try(
-    expr = nhanes_data %>%
-     nhanes_summarize(
-      key = nhanes_key,
-      outcome_variable = outcome_variable,
-      outcome_quantiles = c(0.25, 0.50, 0.75),
-      outcome_stats = input$statistic,
-      group_variable = group_variable,
-      group_cut_n = input$n_exposure_group,
-      group_cut_type = input$exposure_cut_type,
-      stratify_variable = stratify_variable,
-      time_variable = time_variable,
-      time_values = time_values_selected,
-      pool = pool,
-      subset_calls = subset_calls,
-      age_wts = age_wts,
-      simplify_output = FALSE
-     ),
-    silent = TRUE
-   )
+    incProgress(1)
+
+   })
 
    if(is_nhanes_design(smry)){
 
@@ -954,11 +997,19 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
    if(input$do != 'figure') return(NULL)
    if(!is_nhanes_design(smry())) return(NULL)
 
-   smry() %>%
-    nhanes_design_viz(
-    statistic_primary = input$statistic_primary,
-    geom = input$geom
-   )
+   withProgress(message = "Preparing plots", expr = {
+
+    plot_out <- smry() %>%
+     nhanes_design_viz(
+      statistic_primary = input$statistic_primary,
+      geom = input$geom
+     )
+
+    incProgress(1)
+
+   })
+
+   plot_out
 
   }) %>%
    bindEvent(smry())
@@ -998,7 +1049,7 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
      rownames = FALSE,
      colnames = colnames
     ) %>%
-    formatRound(columns = get_numeric_colnames(results), digits = 2)
+    formatRound(columns = get_numeric_colnames(results), digits = 1)
   }) %>%
    bindEvent(smry())
 
@@ -1017,7 +1068,8 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
   # start introjs when button is pressed with custom options and events
   observeEvent(input$help, introjs(session))
 
-  exportTestValues(smry = smry())
+  # for testing, maybe?
+  # exportTestValues(smry = smry())
 
  }
 

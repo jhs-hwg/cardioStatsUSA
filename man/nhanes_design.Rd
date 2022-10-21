@@ -21,12 +21,12 @@ nhanes_design(
 }
 \arguments{
 \item{data}{[data.frame]
-A set of NHANES data with one row per survey participant and one column per variable.
+A set of NHANES data with one row per survey participant and one column per variable. See \link{nhanes_data} for more details
 See Details for specific requirements.
 See \link{nhanes_data} for an example.}
 
 \item{key}{[data.frame]
-A data set with one row per variable and with columns that indicate how this variable should be used in the Shiny application.
+A data set with one row per variable and with columns that describe the variable. See \link{nhanes_key} for more details
 See Details for specific requirements.
 See \link{nhanes_key} for an example.}
 
@@ -102,7 +102,7 @@ If \code{TRUE} (the default), inputs will be checked for validity. If \code{FALS
 checks of inputs are skipped.}
 }
 \value{
-an \code{nhanes_design} object.
+an \link{nhanes_design} object.
 }
 \description{
 NHANES design objects are the data structure used in
@@ -123,182 +123,20 @@ the \code{cardioStatsUSA} package for analysis of NHANES data.
 \subsection{Requirements for key}{
 
 The key data should have all of the required columns, and should not
-have any column that is not listed below.\if{html}{\out{
-<table>
-<thead>
-<tr>
-<th style="text-align:left;">
-Column name
-</th>
-<th style="text-align:left;">
-Column type
-</th>
-<th style="text-align:left;">
-Is this column required?
-</th>
-<th style="text-align:left;">
-The purpose of this column
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-class
-</td>
-<td style="text-align:left;">
-character
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:left;">
-divide variables into classes
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-variable
-</td>
-<td style="text-align:left;">
-character
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:left;">
-variable name in NHANES data
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-label
-</td>
-<td style="text-align:left;">
-character
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:left;">
-label to present in results
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-source
-</td>
-<td style="text-align:left;">
-character
-</td>
-<td style="text-align:left;">
-FALSE
-</td>
-<td style="text-align:left;">
-indicate where this variable is from
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-type
-</td>
-<td style="text-align:left;">
-character
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:left;">
-variable type impacts summary results
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-outcome
-</td>
-<td style="text-align:left;">
-logical
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:left;">
-indicate if variable is an outcome
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-group
-</td>
-<td style="text-align:left;">
-logical
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:left;">
-indicate if variable is a grouper
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-subset
-</td>
-<td style="text-align:left;">
-logical
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:left;">
-indicate if variable is a subsetter
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-stratify
-</td>
-<td style="text-align:left;">
-logical
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:left;">
-indicate if variable is a stratifier
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-module
-</td>
-<td style="text-align:left;">
-character
-</td>
-<td style="text-align:left;">
-FALSE
-</td>
-<td style="text-align:left;">
-indicate what module this variable belongs to
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-description
-</td>
-<td style="text-align:left;">
-character
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:left;">
-describe the variable in detail
-</td>
-</tr>
-</tbody>
-</table>
-}}
+have any column that is not listed below.\tabular{llll}{
+   Column name \tab Column type \tab Is this column required? \tab The purpose of this column \cr
+   class \tab character \tab TRUE \tab divide variables into classes \cr
+   variable \tab character \tab TRUE \tab variable name in NHANES data \cr
+   label \tab character \tab TRUE \tab label to present in results \cr
+   source \tab character \tab FALSE \tab indicate where this variable is from \cr
+   type \tab character \tab TRUE \tab variable type impacts summary results \cr
+   outcome \tab logical \tab TRUE \tab indicate if variable is an outcome \cr
+   group \tab logical \tab TRUE \tab indicate if variable is a grouper \cr
+   subset \tab logical \tab TRUE \tab indicate if variable is a subsetter \cr
+   stratify \tab logical \tab TRUE \tab indicate if variable is a stratifier \cr
+   module \tab character \tab FALSE \tab indicate what module this variable belongs to \cr
+   description \tab character \tab TRUE \tab describe the variable in detail \cr
+}
 
 }
 
@@ -325,29 +163,26 @@ ds <- nhanes_design(data = nhanes_data,
                     outcome_variable = 'bp_sys_mean')
 
 print(ds)
-}\if{html}{\out{</div>}}
-
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## ----------------------------- NHANES design -----------------------------
-## 
-## Outcome variable: bp_sys_mean
-## - label: Systolic blood pressure, mm Hg
-## - type: continuous
-## - description: Mean systolic blood pressure in mm Hg. This is based on
-##     the average of up to 3 readings.  Overall, >95\% of participants with at
-##     least one systolic blood pressure reading had three readings.  From
-##     1999-2000 through 2015-2016, systolic blood pressure was measured using a
-##     mercury sphygmomanometer.  In 2017-2020, systolic blood pressure was
-##     measured using an oscillometric device.  The systolic blood pressure in
-##     2017-2020 was calibrated to the mercury device by adding 1.5 mm Hg to the
-##     mean measured value.
-## 
-## Group variable: None
-## Stratify variable: None
-## 
-## N observations
-## - Unweighted: 9,693
-## - Weighted: 247,835,696
-## --------------------------------------------------------------------------
+#> -------------------------------- NHANES design --------------------------------
+#> 
+#> Outcome variable: bp_sys_mean
+#> - label: Systolic blood pressure, mm Hg
+#> - type: continuous
+#> - description: Mean systolic blood pressure in mm Hg. This is based on the
+#>     average of up to 3 readings.  Overall, >95\% of participants with at least one
+#>     systolic blood pressure reading had three readings.  From 1999-2000 through
+#>     2015-2016, systolic blood pressure was measured using a mercury
+#>     sphygmomanometer.  In 2017-2020, systolic blood pressure was measured using an
+#>     oscillometric device.  The systolic blood pressure in 2017-2020 was calibrated
+#>     to the mercury device by adding 1.5 mm Hg to the mean measured value.
+#> 
+#> Group variable: None
+#> Stratify variable: None
+#> 
+#> N observations
+#> - Unweighted: 9,693
+#> - Weighted: 247,835,696
+#> ---------------------------------------------------------------------------------
 }\if{html}{\out{</div>}}
 }
 

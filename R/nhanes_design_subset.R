@@ -1,13 +1,25 @@
-#' Title
+#' Subset an NHANES design object
 #'
-#' @param x
-#' @param subset
+#' @param x \[nhanes_design\]
+#'
+#' `r document_nhanes_design()`
+#'
+#' @param subset \[expression\]
+#'
+#' An expression indicating what rows to keep.
+#'   Missing values are taken as false.
+#'
 #' @param ...
 #'
-#' @return
+#' Currently not used.
+#'
+#' @return an [nhanes_design] object.
+#'
 #' @export
 #'
-#' @examples
+#' @includeRmd rmd/nhanes_design_subset.Rmd
+
+
 nhanes_design_subset <- function(x, subset){
 
  if(missing(subset)) return(x)

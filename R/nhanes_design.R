@@ -88,7 +88,7 @@
 #' If `TRUE` (the default), inputs will be checked for validity. If `FALSE`,
 #'  checks of inputs are skipped.
 #'
-#' @return an `nhanes_design` object.
+#' @return an [nhanes_design] object.
 #'
 #' @export
 #'
@@ -115,8 +115,33 @@ nhanes_design <- function(data,
                 'module',
                 'description')
 
- dt_data <- as.data.table(data)
- dt_key <- as.data.table(key)
+ if(!is.data.table(data))
+  dt_data <- as.data.table(data)
+ else
+  dt_data <- data
+
+ if(!is.data.table(key))
+  dt_key <- as.data.table(key)
+ else
+  dt_key <- key
+
+ if(run_checks){
+
+  check_key(dt_key)
+
+  check_vars_in_data(outcome_variable = outcome_variable,
+                     group_variable = group_variable,
+                     stratify_variable = stratify_variable,
+                     data_names = names(dt_data),
+                     data_label = 'data')
+
+  check_vars_in_data(outcome_variable = outcome_variable,
+                     group_variable = group_variable,
+                     stratify_variable = stratify_variable,
+                     data_names = dt_key$variable,
+                     data_label = 'key')
+
+ }
 
  # outcome variable ----
 
@@ -301,6 +326,8 @@ nhanes_design_update <- function(x,
 #' @param ... currently not used
 #'
 #' @return the design object, invisibly.
+#'
+#' @export
 #'
 #' @includeRmd rmd/nhanes_design_print.Rmd
 #'

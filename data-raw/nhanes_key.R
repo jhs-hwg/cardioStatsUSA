@@ -228,15 +228,15 @@ nhanes_variables <- data.table::data.table(
   "Gender", # demo_gender
   "Systolic blood pressure, mm Hg", # bp_sys_mean
   "Diastolic blood pressure, mm Hg", # bp_dia_mean
-  "Blood pressure category (not including antihypertensive medication use)", # bp_cat_meds_excluded
+  "Blood pressure category", # bp_cat_meds_excluded
   "Blood pressure category (including antihypertensive medication use)", # bp_cat_meds_included
-  "Blood pressure control (SBP < 140 mm Hg and DBP < 90 mm Hg)", # bp_control_jnc7
-  "Blood pressure control (SBP < 130 mm Hg and DBP < 80 mm Hg)", # bp_control_accaha
-  "Uncontrolled BP (SBP \u2265 140 mm Hg or DBP \u2265 90 mm Hg)", # bp_uncontrolled_jnc7
-  "Uncontrolled BP (SBP \u2265 130 mm Hg or DBP \u2265 80 mm Hg)", # bp_uncontrolled_accaha
+  "Blood pressure control (JNC7 guideline)", # bp_control_jnc7
+  "Blood pressure control (2017 ACC/AHA BP guideline)", # bp_control_accaha
+  "Uncontrolled BP (JNC7 guideline)", # bp_uncontrolled_jnc7
+  "Uncontrolled BP (2017 ACC/AHA BP guideline)", # bp_uncontrolled_accaha
   "Self-reported antihypertensive medication use", # bp_med_use
-  "Antihypertensive medications recommended by JNC7", # bp_med_recommended_jnc7
-  "Antihypertensive medications recommended by ACC/AHA 2017", # bp_med_recommended_accaha
+  "Antihypertensive medications recommended (JNC7 guideline)", # bp_med_recommended_jnc7
+  "Antihypertensive medications recommended (2017 ACC/AHA BP guideline)", # bp_med_recommended_accaha
   "Number of antihypertensive medication classes", # bp_med_n_class
   "ACE inhibitors", # bp_med_ace
   "Aldosterone antagonists", # bp_med_aldo
@@ -250,13 +250,13 @@ nhanes_variables <- data.table::data.table(
   "Thiazide or thiazide-type diuretics", # bp_med_diur_thz
   "Direct renin inhibitors", # bp_med_renin_inhibitors
   "Direct vasodilators", # bp_med_vasod
-  "Hypertension (JNC7 guideline definition)", # htn_jnc7
-  "Hypertension (2017 ACC/AHA BP guideline definition)", # htn_accaha
+  "Hypertension (JNC7 guideline)", # htn_jnc7
+  "Hypertension (2017 ACC/AHA BP guideline)", # htn_accaha
   "Awareness of hypertension", # htn_aware
   "Resistant hypertension (JNC7 guideline definition)", # htn_resistant_jnc7
-  "Resistant hypertension (2017 ACC/AHA BP guideline definition)", # htn_resistant_accaha
-  "Resistant hypertension (JNC7 guideline definition requires thiazide diuretic)", # htn_resistant_accaha_thz
-  "Resistant hypertension (2017 ACC/AHA BP guideline definition requires thiazide diuretic)", # htn_resistant_jnc7_thz
+  "Resistant hypertension (2017 ACC/AHA BP guideline)", # htn_resistant_accaha
+  "Resistant hypertension (JNC7 guideline, requires thiazide diuretic)", # htn_resistant_accaha_thz
+  "Resistant hypertension (2017 ACC/AHA BP guideline, requires thiazide diuretic)", # htn_resistant_jnc7_thz
   "Number of high risk conditions", # cc_n_highrisk
   "Smoking status", # cc_smoke
   "Body mass index, kg/m2", # cc_bmi
@@ -1051,12 +1051,12 @@ variable_description <- tibble::tribble(
  "demo_gender", "Self-reported gender",
  "bp_sys_mean", "Mean systolic blood pressure in mm Hg. This is based on the average of up to 3 readings.  Overall, >95% of participants with at least one systolic blood pressure reading had three readings.  From 1999-2000 through 2015-2016, systolic blood pressure was measured using a mercury sphygmomanometer.  In 2017-2020, systolic blood pressure was measured using an oscillometric device.  The systolic blood pressure in 2017-2020 was calibrated to the mercury device by adding 1.5 mm Hg to the mean measured value.",
  "bp_dia_mean", "Mean diastolic blood pressure in mm Hg. This is based on the average of up to 3 readings.  Overall, >95% of participants with at least one diastolic blood pressure reading had three readings.  From 1999-2000 through 2015-2016, diastolic blood pressure was measured using a mercury sphygmomanometer.  In 2017-2020, diastolic blood pressure was measured using an oscillometric device.  The diastolic blood pressure in 2017-2020 was calibrated to the mercury device by subtracting 1.0 mm Hg to the mean measured value.",
- "bp_cat_meds_excluded", "Systolic/diastolic blood pressure <120/80, 120-129/<80, 130-139/80-89, 140-159/90-99, \u2265160/100. Participants were placed in the category associated with higher blood pressure (e.g., someone with systolic blood pressure of 150 mm Hg and diastolic blood pressure of 76 mm Hg was placed in the \u2265 140/90 mm Hg category)",
- "bp_cat_meds_included", "Systolic/diastolic blood pressure <120/80, 120-129/<80, 130-139/80-89, 140-159/90-99, \u2265160/100. Participants taking antihypertensive medication were placed in a separate category.  Participants were placed in the category associated with higher blood pressure (e.g., someone with systolic blood pressure of 150 mm Hg and diastolic blood pressure of 76 mm Hg was placed in the \u2265 140/90 mm Hg category)",
+ "bp_cat_meds_excluded", "Systolic/diastolic blood pressure <120/80, 120-129/<80, 130-139/80-89, 140-159/90-99, \u2265 160/100. Participants were placed in the category associated with higher blood pressure (e.g., someone with systolic blood pressure of 150 mm Hg and diastolic blood pressure of 76 mm Hg was placed in the \u2265 140/90 mm Hg category)",
+ "bp_cat_meds_included", "Systolic/diastolic blood pressure <120/80, 120-129/<80, 130-139/80-89, 140-159/90-99, \u2265 160/100. Participants taking antihypertensive medication were placed in a separate category.  Participants were placed in the category associated with higher blood pressure (e.g., someone with systolic blood pressure of 150 mm Hg and diastolic blood pressure of 76 mm Hg was placed in the \u2265 140/90 mm Hg category)",
  "bp_control_jnc7", "Systolic and diastolic blood pressure controlled to the levels recommended in the JNC7 guideline, systolic blood pressure < 140 mm Hg and diastolic blood pressure < 90 mm Hg.",
- "bp_control_accaha", "Systolic and diastolic blood pressure controlled to the levels recommended in the 2017 ACC/AHA BP guideline, systolic blood pressure < 130 mm Hg and diastolic blood pressure < 80 mm Hg except for those \u2265 65 years of age without diabetes, chronic kidney disease, history of cardiovascular disease or 10-year predicted ASCVD risk \u226510%. For this group, blood pressure control was defined as systolic blood pressure < 130 mm Hg",
+ "bp_control_accaha", "Systolic and diastolic blood pressure controlled to the levels recommended in the 2017 ACC/AHA BP guideline, systolic blood pressure < 130 mm Hg and diastolic blood pressure < 80 mm Hg except for those \u2265 65 years of age without diabetes, chronic kidney disease, history of cardiovascular disease or 10-year predicted ASCVD risk \u2265 10%. For this group, blood pressure control was defined as systolic blood pressure < 130 mm Hg",
  "bp_uncontrolled_jnc7", "Systolic blood pressure \u2265 140 mm Hg or diastolic blood pressure \u2265 90 mm Hg",
- "bp_uncontrolled_accaha", "Systolic blood pressure \u2265 130 mm Hg or diastolic blood pressure \u2265 80 mm Hg except for individuals without diabetes, chronic kidney disease, history of cardiovascular disease or 10-year predicted ASCVD risk \u226510%. For this group, uncontrolled blood pressure was defined as systolic blood pressure \u2265 130 mm Hg",
+ "bp_uncontrolled_accaha", "Systolic blood pressure \u2265 130 mm Hg or diastolic blood pressure \u2265 80 mm Hg except for individuals without diabetes, chronic kidney disease, history of cardiovascular disease or 10-year predicted ASCVD risk \u2265 10%. For this group, uncontrolled blood pressure was defined as systolic blood pressure \u2265 130 mm Hg",
  "bp_med_use", "Self-reported use of antihypertensive medication",
  "bp_med_recommended_jnc7", "Systolic blood pressure \u2265 140 mm Hg or diastolic blood pressure \u2265 90 mm Hg; Systolic blood pressure \u2265 130 mm Hg or diastolic blood pressure \u2265 80 mm Hg for those with chronic kidney disease or diabetes. Those taking antihypertensive medications were considered to be recommended treatment by this definition.",
  "bp_med_recommended_accaha", "Systolic blood pressure \u2265 140 mm Hg or diastolic blood pressure \u2265 90 mm Hg; Systolic blood pressure \u2265 130 mm Hg or diastolic blood pressure \u2265 80 mm Hg for those with chronic kidney disease, diabetes, 10-year predicted atherosclerotic cardiovascular disease risk by the pooled cohort risk equations or age \u2265 65 years. Those taking antihypertensive medications were considered to be recommended treatment by this definition.",

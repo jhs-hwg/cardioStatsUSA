@@ -1,21 +1,33 @@
 
 
-#' Title
+#' Standardize an NHANES design
 #'
-#' @param x
-#' @param standard_variable
-#' @param standard_weights
+#' @param x \[nhanes_design\]
 #'
-#' @return
+#' `r document_nhanes_design()`
+#'
+#' @param standard_variable \[character(1)\]
+#'
+#' The name of the variable used to create standardization groups.
+#'   The default is to use `demo_age_cat`, which leads to age
+#'   standardization.
+#'
+#' @param standard_weights \[numeric(n)\]
+#'
+#' The proportionate weights for each group defined by the standard variable.
+#'   The number of weights should equal the number of groups defined by
+#'   `standard_variable` and all weights must be >0.
+#'
+#' @return an [nhanes_design] object.
+#'
 #' @export
 #'
-#' @examples
 nhanes_design_standardize <- function(x,
                                       standard_variable = 'demo_age_cat',
                                       standard_weights = c(0.155,
-                                                       0.454,
-                                                       0.215,
-                                                       0.177)){
+                                                           0.454,
+                                                           0.215,
+                                                           0.177)){
 
  by_vars <- c(x$time$variable,
               x$group$variable,

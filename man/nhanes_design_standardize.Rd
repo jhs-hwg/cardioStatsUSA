@@ -2,7 +2,7 @@
 % Please edit documentation in R/nhanes_design_standardize.R
 \name{nhanes_design_standardize}
 \alias{nhanes_design_standardize}
-\title{Title}
+\title{Standardize an NHANES design}
 \usage{
 nhanes_design_standardize(
   x,
@@ -11,8 +11,25 @@ nhanes_design_standardize(
 )
 }
 \arguments{
-\item{standard_weights}{}
+\item{x}{[nhanes_design]
+
+an NHANES design object. See \link{nhanes_design} for more details.}
+
+\item{standard_variable}{[character(1)]
+
+The name of the variable used to create standardization groups.
+The default is to use \code{demo_age_cat}, which leads to age
+standardization.}
+
+\item{standard_weights}{[numeric(n)]
+
+The proportionate weights for each group defined by the standard variable.
+The number of weights should equal the number of groups defined by
+\code{standard_variable} and all weights must be >0.}
+}
+\value{
+an \link{nhanes_design} object.
 }
 \description{
-Title
+Standardize an NHANES design
 }

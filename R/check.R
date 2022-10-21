@@ -10,6 +10,32 @@ check_nobs <- function(x, min_size = 30){
 
 }
 
+check_vars_in_data <- function(..., data_names, data_label) {
+
+ .dots <- rlang::dots_list(...)
+
+ for(i in seq_along(.dots)){
+
+  if(!is.null(.dots[[i]])){
+
+   variable_role <- names(.dots)[i]
+   variable_name <- .dots[[i]]
+
+   if( !(variable_name %in% data_names) ){
+
+    stop(
+     variable_role, " ", variable_name,
+     " was not found in ", data_label,
+     call. = FALSE
+    )
+
+   }
+
+  }
+
+ }
+
+}
 
 # nocov start
 check_group_counts <- function(x, min_size = 5){

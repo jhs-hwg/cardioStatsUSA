@@ -1,9 +1,41 @@
 
+#' Summarize an NHANES design
+#'
+#' @param x \[nhanes_design\]
+#'
+#' `r document_nhanes_design()`
+#'
+#' @param stats \[character(1+)\]
+#'
+#' The statistics that should be computed.
+#'   Multiple statistics may be requested.
+#'   Valid options depend on the type of outcome to be summarized.
+#' `r document_outcome_stat_options()`
+#'
+#' @param simplify_output \[logical(1)\]
+#'
+#' The type of output returned will be [nhanes_design] if `simplify_output`
+#'   is `FALSE` and a `data.table` otherwise.
+#'
+#'
+#' @return if `simplify_output` is `TRUE`, a `data.table`.
+#'   Otherwise, a modified [nhanes_design] object is returned.
+#'
+#' @export
+#'
 nhanes_design_summarize <- function(x,
                                     stats = x$stats,
                                     simplify_output = FALSE){
 
  check_nobs(x)
+
+ if(is_standardized(x) && 'count' %in% stats){
+
+  stop("Direct standardization should not be applied when estimating counts",
+       call. = FALSE)
+
+ }
+
  # check_group_counts(x)
 
  counts <- NULL
@@ -47,11 +79,6 @@ nhanes_design_summarize <- function(x,
   .f = ~ {
 
    stat_string <- if(use_statby) 'statby' else 'stat'
-
-   # identify the function to call
-   # if you want to use svy_stat_proportion instead of svy_stat_percentage,
-   # uncomment the line below
-   # if(.x == 'percentage') .x <- 'proportion'
 
    svy_stat_fun <- paste("svy", stat_string, .x,  sep = '_')
    svy_suppress_fun <- paste('svy_stat_suppress', x$outcome$type, sep = '_')

@@ -3,7 +3,10 @@
 #' Analyze the prevalence, mean, or quantiles of an outcome
 #'   over time.
 #'
-#' @param x an `nhanes_design` object
+#' @param x \[nhanes_design\]
+#'
+#' `r document_nhanes_design()`
+#'
 #' @param statistic_primary (character) the statistic that defines the
 #'   geometric objects in the plot.
 #' @param geom (character) can be 'bar' or 'points'
@@ -23,6 +26,7 @@
 
 nhanes_design_viz <- function(x,
                               statistic_primary = NULL,
+                              title = NULL,
                               geom = 'bar',
                               reorder_cats=FALSE,
                               width = NULL,
@@ -323,9 +327,16 @@ nhanes_design_viz <- function(x,
 
   if(stacked_and_pooled) {
 
+   if(outcome_type == 'catg'){
+    # to make a little more room for the second row of the title
+    yaxis$range <- list(0, 110)
+   }
+
    # this occurs when there are no title addons to worry about
    if(title_addon[1] == ""){
-    title_addon <- levels(data_fig[[time_variable]])
+    # data_fig is always a list of data frames at this point,
+    # so just access the first one.
+    title_addon <- levels(data_fig[[1]][[time_variable]])
    } else {
     # if there are title addons, split them across each year
     title_addon <- c(levels(data_fig[[time_variable]]),title_addon) %>%
@@ -343,7 +354,23 @@ nhanes_design_viz <- function(x,
    xaxis$tickmode <- 'array'
   }
 
-  fig_title <-  paste(c(outcome_label, title_addon), collapse = '<br>')
+  fig_title <- NULL
+
+  if(is.null(title)){
+
+   fig_title <- list(
+    text = paste(c(outcome_label, title_addon), collapse = '<br>'),
+    x = 0.5
+   )
+
+  } else if (title != ""){
+
+   fig_title <- list(
+    text = title,
+    x = 0.5
+   )
+
+  }
 
   xaxis$title = ifelse(stacked_and_pooled, group_label %||% "", time_label)
 
@@ -359,10 +386,7 @@ nhanes_design_viz <- function(x,
 
   output[[j]] <- fig |>
    layout(
-    title = list(
-     text = fig_title,
-     x = 0.5
-    ),
+    title = fig_title,
     font = list(size = 16),
     margin = list(
      t = 100,

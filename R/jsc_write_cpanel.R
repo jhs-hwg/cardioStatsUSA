@@ -14,8 +14,8 @@
 jsc_write_cpanel <- function(key_data, var_type, var_role){
 
  variable_names <- key_data %>%
-  filter(type == var_type, .data[[var_role]]) %>%
-  pull(variable)
+  .[type == var_type & .[[var_role]] == TRUE] %>%
+  .[['variable']]
 
  if(is_empty(variable_names))
   return("false")

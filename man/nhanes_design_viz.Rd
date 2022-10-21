@@ -7,6 +7,7 @@
 nhanes_design_viz(
   x,
   statistic_primary = NULL,
+  title = NULL,
   geom = "bar",
   reorder_cats = FALSE,
   width = NULL,
@@ -16,7 +17,9 @@ nhanes_design_viz(
 )
 }
 \arguments{
-\item{x}{an \code{nhanes_design} object}
+\item{x}{[nhanes_design]
+
+an NHANES design object. See \link{nhanes_design} for more details.}
 
 \item{statistic_primary}{(character) the statistic that defines the
 geometric objects in the plot.}

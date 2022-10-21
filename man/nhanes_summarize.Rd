@@ -59,6 +59,6 @@ The description should include
 }
 \examples{
 
-nhanes_summarize("bp_sys_mean")
+nhanes_summarize(nhanes_data, nhanes_key, outcome_variable = "bp_sys_mean")
 
 }

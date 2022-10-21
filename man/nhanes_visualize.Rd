@@ -9,6 +9,7 @@ nhanes_visualize(
   key,
   outcome_variable,
   outcome_quantiles = NULL,
+  outcome_stats = NULL,
   group_variable = NULL,
   group_cut_n = NULL,
   group_cut_type = NULL,
@@ -19,6 +20,7 @@ nhanes_visualize(
   subset_calls = list(),
   age_wts = NULL,
   statistic_primary = NULL,
+  title = NULL,
   geom = "bar",
   reorder_cats = FALSE,
   width = NULL,
@@ -32,22 +34,42 @@ nhanes_visualize(
 
 \item{age_wts}{(\emph{numeric}; length 4; default is none)}
 
-\item{statistic_primary}{(character) the statistic that defines the
-geometric objects in the plot.}
+\item{statistic_primary}{[character(1)]
 
-\item{geom}{(character) can be 'bar' or 'points'}
+the statistic that defines the geometric objects in the plot.}
 
-\item{reorder_cats}{(logical) whether to re-order the categorical exposure
+\item{geom}{[character(1)]
+
+What type of plot to create. Valid options are
+\itemize{
+\item \code{'bar'} A bar plot will be created
+\item \code{'point'} A scatter plot will be created
+}}
+
+\item{reorder_cats}{[logical(1)]
+
+whether to re-order the categorical exposure
 variable so that its levels are shown in increasing order by the expected
 outcome.}
 
 \item{width}{width of the plot, in pixels}
 
 \item{height}{height of the plot, in pixels}
+
+\item{size_point}{the size of points in the plot (only relevant if \code{geom = 'point'})}
+
+\item{size_error}{the size of error bars in the plot (only relevant if \code{geom = 'point'})}
 }
 \value{
 a plotly visualization
 }
 \description{
 Visualize summaries of NHANES
+}
+\examples{
+
+# Plotly objects do not render for example R code. Please see vignettes
+# for examples of nhanes_visualize. TODO: ADD LINK
+
+
 }

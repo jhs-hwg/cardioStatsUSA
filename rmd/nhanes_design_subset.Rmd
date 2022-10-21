@@ -1,0 +1,43 @@
+```{r child = 'aaa.Rmd'}
+
+```
+
+
+# Examples
+
+First we create an NHANES design object
+
+```{r child='make_simple_nhanes_design.Rmd'}
+
+```
+
+Subset calls work as they do in many other `subset` functions:
+
+```{r}
+
+ds_men <- nhanes_design_subset(ds, demo_gender == 'Men')
+
+```
+
+To verify `ds_men` has been subsetted, you can do something like this:
+
+```{r}
+table(ds_men$design$variables$demo_gender)
+```
+
+and you can also find the subsetted indices here:
+
+```{r}
+ds_men$subset_rows
+```
+
+Why does the design object save this information? In case you update it in the future and subsetting operations need to be repeated.
+
+## Only one subset is allowed
+
+Due to the way `nhanes_design` objects are handled, it is not a good idea to subset them more than once. In fact, it is currently not allowed. If this becomes problematic, please open an issue on GitHub and let us know!
+
+```{r, error=TRUE}
+nhanes_design_subset(ds_men, demo_age_years > 40)
+```
+

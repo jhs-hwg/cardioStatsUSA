@@ -34,7 +34,7 @@ plotly_viz_make_hover <- function(data, stat_all, group, group_label) {
     stat_show
    ),
    stat_label = glue(
-    "{str_to_title(statistic)}: {stat_show}"
+    "{stat_recode(statistic)}: {stat_show}"
    )
   ) %>%
   select(-all_of(numeric_cols),
@@ -47,5 +47,15 @@ plotly_viz_make_hover <- function(data, stat_all, group, group_label) {
   unite(col = 'hover', !!!stat_cols, sep = '<br>') %>%
   mutate(hover = glue("{group_label}{label_sep}{hover}")) %>%
   as.data.table()
+
+}
+
+
+stat_recode <- function(stat){
+
+ fcase(
+  stat == 'percentage_kg', 'Percentage (Korn & Graubard CI)',
+  rep(TRUE, length(stat)), stringr::str_to_title(stat)
+ )
 
 }

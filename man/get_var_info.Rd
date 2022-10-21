@@ -7,7 +7,7 @@
 \alias{get_variable_source}
 \alias{get_variable_description}
 \alias{get_variable_type}
-\alias{get_variable_subpop}
+\alias{get_variable_module}
 \title{Title}
 \usage{
 get_var_info(x, key, field)
@@ -22,11 +22,37 @@ get_variable_description(x, key)
 
 get_variable_type(x, key)
 
-get_variable_subpop(x, key)
+get_variable_module(x, key)
 }
 \arguments{
-\item{field}{}
+\item{x}{[character(1)]
+
+a variable name that is present in the \code{variable} column of \code{key}}
+
+\item{key}{[data.frame]
+
+A data set with one row per variable and with columns that describe the variable. See \link{nhanes_key} for more details}
+
+\item{field}{[character(1)]
+
+the column name in \code{nhanes_key} to get information from.}
+}
+\value{
+a character value
 }
 \description{
 Title
+}
+\examples{
+
+# the low-level working function
+get_var_info('bp_sys_mean', key = nhanes_key, field = 'class')
+
+# the convenience functions
+get_variable_class('bp_sys_mean')
+get_variable_label('bp_sys_mean')
+get_variable_source('bp_sys_mean')
+get_variable_description('bp_sys_mean')
+get_variable_module('bp_sys_mean')
+
 }

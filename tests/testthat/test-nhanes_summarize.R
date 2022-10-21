@@ -14,6 +14,7 @@ years <- 'most_recent'
 test_that(
  desc = "each outcome can be summarized overall and in exposure groups",
  code = {
+
   for(o in outcomes){
 
    smry_overall <- nhanes_summarize(outcome_variable = o,
@@ -48,6 +49,7 @@ test_that(
     }
    }
   }
+
  }
 )
 

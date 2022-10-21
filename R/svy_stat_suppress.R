@@ -1,11 +1,19 @@
-#' .. content for \description{} (no empty lines) ..
+
+#' FILL IN
 #'
-#' .. content for \details{} ..
+#' @param dt FILL IN
+#' @param type FILL IN
+#' @param stat FILL IN
+#' @param n_obs FILL IN
+#' @param n_psu FILL IN
+#' @param n_strata FILL IN
 #'
-#' @title
-#' @param n_obs
-#' @param n_psu
-#' @param n_strata
+#' @return FILL IN
+#'
+#' @export
+#'
+#' @noRd
+#'
 svy_stat_suppress <- function(dt, type, stat, n_obs, n_psu, n_strata) {
 
  # fails <- is.nan(dt$std_error) | dt$std_error == 0
@@ -138,7 +146,7 @@ svy_stat_suppress_bnry <- function(dt, n_obs, n_psu, n_strata){
 
  ci_width <- with(dt, (ci_upper - ci_lower) / 100)
 
- if( any(is.nan(ci_width)) ) rse[is.nan(ci_width)] <- Inf
+ if( any(is.nan(ci_width)) ) ci_width[is.nan(ci_width)] <- Inf
 
  # Large absolute confidence interval width
  # If the absolute confidence interval width is greater than or

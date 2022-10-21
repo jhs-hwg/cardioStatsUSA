@@ -17,16 +17,30 @@ navbar:
     articles:
       text: Results
       menu:
-      - text: Prevalence of hypertension, ACC/AHA
-        href: articles/prev_htn_accaha.html
-      - text: Prevalence of hypertension, JNC7
-        href: articles/prev_htn_jnc7.html
-      - text: Blood pressure levels
-        href: articles/bp_levels.html
-      - text: Antihypertensive medication use
-        href: articles/bp_meds.html
-      - text: Blood pressure control, ACC/AHA
-        href: articles/bp_control_accaha.html
-      - text: Blood pressure control, JNC7
-        href: articles/bp_control_jnc7.html
+      - text: Blood pressure control
+        href: articles/bp_control.html
+      - text: Hypertension
+        href: articles/hypertension.html
 
+reference:
+- title: NHANES data
+  desc: NHANES data include in-home interviews and study examinations conducted at mobile examination centers.
+- contents:
+  - nhanes_data
+  - nhanes_key
+- title: NHANES web application
+  desc: Analyze NHANES data interactively
+- contents:
+  - app_run
+- title: NHANES summary functions
+  desc: Simple and direct functions to summarize or visualize an outcome using NHANES data.
+- contents:
+  - nhanes_summarize
+  - nhanes_visualize
+- title: NHANES design functions
+  desc: Back-end functions for NHANES summary functions.
+- contents:
+  - starts_with("nhanes_design")
+  - nhanes_calibrate
+  - print.nhanes_design
+  - get_var_info

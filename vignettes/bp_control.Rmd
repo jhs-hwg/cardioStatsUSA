@@ -1,0 +1,151 @@
+---
+title: "Blood Pressure (BP) Control"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Blood Pressure (BP) Control}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r child = '_aaa.Rmd'}
+
+```
+
+
+```{r, include = FALSE}
+
+age_wts <- c(26.4, 43.5, 17.0, 13.2)
+last_3 <- c("2013-2014", "2015-2016", "2017-2020")
+outcome_variable <- 'bp_control_accaha'
+outcome_text <- "BP control"
+
+subset_calls <- 
+ list("demo_pregnant" = c("No", "Missing"), "htn_accaha" = "Yes")
+
+subset_labs <- c("Not pregnant", "With hypertension")
+
+make_plot <- function(group_variable = NULL,
+                      time_values = 'all',
+                      subset_addons = NULL,
+                      outcome_stats = 'percentage',
+                      ...){
+
+ 
+ .subset_calls <- c(subset_calls, subset_addons)
+ 
+ plotly_vignette(
+  nhanes_visualize(
+   data = nhanes_data,
+   key = nhanes_key,
+   outcome_variable = outcome_variable,
+   outcome_stats = outcome_stats,
+   group_variable = group_variable,
+   subset_calls = .subset_calls,
+   time_values = time_values,
+   title = "",
+   age_wts = age_wts, 
+   ...)
+ )
+ 
+}
+
+
+```
+
+**P1** `r outcome_text` is important because...
+
+## `r outcome_text` overall
+
+**P2** 1-2 sentences about the results. Here is some filler text for the second sentence
+```{r}
+make_plot()
+```
+
+
+### Among those using antihypertensive medication
+
+**P3** 1-2 sentences about the results. Here is some filler text for the second sentence
+```{r}
+make_plot(subset_addons = list("bp_med_use" = "Yes"))
+```
+
+
+## `r outcome_text` by gender
+
+**P4** 1-2 sentences about the results. Here is some filler text for the second sentence
+```{r}
+make_plot(group_variable = 'demo_gender')
+```
+
+
+### Among those using antihypertensive medication
+
+**P5** 1-2 sentences about the results. Here is some filler text for the second sentence
+```{r}
+make_plot(group_variable = 'demo_gender',
+          subset_addons = list("bp_med_use" = "Yes"))
+```
+
+
+## `r outcome_text` by age group
+
+**P6** 1-2 sentences about the results. Here is some filler text for the second sentence
+```{r}
+make_plot(group_variable = 'demo_age_cat',
+          time_values = last_3)
+```
+
+
+### Among those using antihypertensive medication
+
+**P7** 1-2 sentences about the results. Here is some filler text for the second sentence
+```{r}
+
+make_plot(group_variable = 'demo_age_cat',
+          time_values = last_3,
+          subset_addons = list("bp_med_use" = "Yes"))
+```
+
+
+## `r outcome_text` by race/ethnicity
+
+**P8** 1-2 sentences about the results. Here is some filler text for the second sentence
+```{r}
+make_plot(group_variable = 'demo_race',
+          time_values = last_3)
+```
+
+
+### Among those using antihypertensive medication
+
+**P9** 1-2 sentences about the results. Here is some filler text for the second sentence
+```{r}
+make_plot(group_variable = 'demo_race',
+          time_values = last_3,
+          subset_addons = list("bp_med_use" = "Yes"))
+```
+
+
+## `r outcome_text` definition
+
+For this analysis, our definition of `r outcome_text` was:
+
+> `r clean_text(get_variable_description('bp_control_accaha'))`
+
+## Who is included in this analysis
+
+`r cardioStatsUSA:::describe_module_sample('htn')` To analyze `r outcome_text`, we restricted the sample to non-pregnant adults with hypertension, which was defined as:
+
+> `r clean_text(get_variable_description('htn_accaha'))`
+
+After these exclusions, a total of 26,766 participants were included for the current analysis.
+
+`r cardioStatsUSA:::tabulate_module_sample('htn', subset_calls, subset_labs)`
+
+## Age adjustment
+
+For age adjustment in this analysis, we set the age distribution for the standard population to represent US adults with hypertension from 1999 to 2020: `r cardioStatsUSA:::describe_age_wts(age_wts)`
+
+## How were these results created?
+
+EMBED YOUTUBE VIDEO HERE
