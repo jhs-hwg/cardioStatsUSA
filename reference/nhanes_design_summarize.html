@@ -29,6 +29,13 @@
   <div class="dropdown-menu" aria-labelledby="dropdown-results">
     <a class="dropdown-item" href="../articles/bp_control.html">Blood pressure control</a>
     <a class="dropdown-item" href="../articles/hypertension.html">Hypertension</a>
+    <a class="dropdown-item" href="../articles/bp_meds.html">Antihypertensive medication use</a>
+  </div>
+</li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-validation">Validation</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-validation">
+    <a class="dropdown-item" href="../articles/replicate_jama_2020.html">Muntner et al, 2020</a>
   </div>
 </li>
 <li class="nav-item">
@@ -55,7 +62,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">nhanes_design_summarize</span><span class="op">(</span><span class="va">x</span>, stats <span class="op">=</span> <span class="va">x</span><span class="op">$</span><span class="va">stats</span>, simplify_output <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">nhanes_design_summarize</span><span class="op">(</span><span class="va">x</span>, outcome_stats <span class="op">=</span> <span class="va">x</span><span class="op">$</span><span class="va">stats</span>, simplify_output <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -65,7 +72,7 @@
 <p>an NHANES design object. See <a href="nhanes_design.html">nhanes_design</a> for more details.</p></dd>
 
 
-<dt>stats</dt>
+<dt>outcome_stats</dt>
 <dd><p>[character(1+)]</p>
 <p>The statistics that should be computed.
 Multiple statistics may be requested.
@@ -89,7 +96,7 @@ is <code>FALSE</code> and a <code>data.table</code> otherwise.</p></dd>
     
 
 <p>if <code>simplify_output</code> is <code>TRUE</code>, a <code>data.table</code>.
-Otherwise, a modified <a href="nhanes_design.html">nhanes_design</a> object is returned.</p>
+Otherwise, an <a href="nhanes_design.html">nhanes_design</a> object is returned.</p>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

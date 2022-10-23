@@ -31,6 +31,13 @@ over time."><meta property="og:image" content="https://jhs-hwg.github.io/cardioS
   <div class="dropdown-menu" aria-labelledby="dropdown-results">
     <a class="dropdown-item" href="../articles/bp_control.html">Blood pressure control</a>
     <a class="dropdown-item" href="../articles/hypertension.html">Hypertension</a>
+    <a class="dropdown-item" href="../articles/bp_meds.html">Antihypertensive medication use</a>
+  </div>
+</li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-validation">Validation</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-validation">
+    <a class="dropdown-item" href="../articles/replicate_jama_2020.html">Muntner et al, 2020</a>
   </div>
 </li>
 <li class="nav-item">
@@ -79,18 +86,49 @@ over time.</p>
 
 
 <dt>statistic_primary</dt>
-<dd><p>(character) the statistic that defines the
-geometric objects in the plot.</p></dd>
+<dd><p>[character(1)]</p>
+<p>the statistic that defines the geometric objects in the plot. Other
+statistics will be featured in the text that appears when the users
+mouse hovers over the corresponding object.</p></dd>
+
+
+<dt>title</dt>
+<dd><p>[character(1)]</p>
+<p>The title that will appear above the plot. If this is not supplied,
+the title will be generated using the <code>key</code> data in <code>x</code>.</p></dd>
 
 
 <dt>geom</dt>
-<dd><p>(character) can be 'bar' or 'points'</p></dd>
+<dd><p>[character(1)]</p>
+<p>The type of figure that will be made. Valid options are:</p><ul><li><p><code>'bar'</code> creates a bar plot with annotations on the bars</p></li>
+<li><p><code>'point'</code> creates a scatter plot with 95% confidence interval error bars</p></li>
+</ul></dd>
 
 
 <dt>reorder_cats</dt>
-<dd><p>(logical) whether to re-order the categorical group
-variable so that its levels are shown in increasing order by the expected
-outcome.</p></dd>
+<dd><p>[logical(1)]</p>
+<p>whether to re-order the categorical group variable so that its levels
+are shown in increasing order by the expected outcome.</p></dd>
+
+
+<dt>width</dt>
+<dd><p>[numeric(1)]</p>
+<p>the width of the plot, in pixels</p></dd>
+
+
+<dt>height</dt>
+<dd><p>[numeric(1)]</p>
+<p>the height of the plot, in pixels</p></dd>
+
+
+<dt>size_point</dt>
+<dd><p>[numeric(1)]</p>
+<p>the size of points in the plot. (only relevant if <code>'geom' = 'point'</code>)</p></dd>
+
+
+<dt>size_error</dt>
+<dd><p>[numeric(1)]</p>
+<p>the size of error bars in the plot. (only relevant if <code>'geom' = 'point'</code>)</p></dd>
 
 </dl></div>
     <div class="section level2">

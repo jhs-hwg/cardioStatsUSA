@@ -29,6 +29,13 @@
   <div class="dropdown-menu" aria-labelledby="dropdown-results">
     <a class="dropdown-item" href="../articles/bp_control.html">Blood pressure control</a>
     <a class="dropdown-item" href="../articles/hypertension.html">Hypertension</a>
+    <a class="dropdown-item" href="../articles/bp_meds.html">Antihypertensive medication use</a>
+  </div>
+</li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-validation">Validation</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-validation">
+    <a class="dropdown-item" href="../articles/replicate_jama_2020.html">Muntner et al, 2020</a>
   </div>
 </li>
 <li class="nav-item">
@@ -69,7 +76,8 @@
 <span>  time_values <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  pool <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  subset_calls <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  age_wts <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  standard_variable <span class="op">=</span> <span class="st">"demo_age_cat"</span>,</span>
+<span>  standard_weights <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  statistic_primary <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  title <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  geom <span class="op">=</span> <span class="st">"bar"</span>,</span>
@@ -83,54 +91,188 @@
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt>pool</dt>
-<dd><p>(<em>logical</em>; length 1; default = <code>FALSE</code>)</p></dd>
+    <dl><dt>data</dt>
+<dd><p>[data.frame]
+A set of NHANES data with one row per survey participant and one column per variable. See <a href="nhanes_data.html">nhanes_data</a> for more details
+See Details for specific requirements.
+See <a href="nhanes_data.html">nhanes_data</a> for an example.</p></dd>
 
 
-<dt>age_wts</dt>
-<dd><p>(<em>numeric</em>; length 4; default is none)</p></dd>
+<dt>key</dt>
+<dd><p>[data.frame]
+A data set with one row per variable and with columns that describe the variable. See <a href="nhanes_key.html">nhanes_key</a> for more details
+See Details for specific requirements.
+See <a href="nhanes_key.html">nhanes_key</a> for an example.</p></dd>
+
+
+<dt>outcome_variable</dt>
+<dd><p>[character(1)]
+The name of the outcome variable to be summarized.</p></dd>
+
+
+<dt>outcome_quantiles</dt>
+<dd><p>[numeric(1+)]
+The quantiles to be summarized for a continuous outcome. The default is
+<code>c(0.25, 0.50, 0.75)</code>. For example,</p><ul><li><p><code>outcome_quantiles = c(.5)</code> will compute the 50th percentile
+(i.e., the median)</p></li>
+<li><p><code>outcome_quantiles = c(.25, .5, .75)</code> will compute the 25th, 50th,
+and 75th percentile.</p></li>
+<li><p><code>outcome_quantiles = seq(.1, .9, by = .1)</code> will compute every 10th
+percentile, except for the 0th and 100th</p></li>
+</ul></dd>
+
+
+<dt>outcome_stats</dt>
+<dd><p>[character(1+)]</p>
+<p>The statistics that should be computed.
+Multiple statistics may be requested.
+Valid options depend on the type of outcome to be summarized.
+For continuous outcomes, valid options include</p><ul><li><p>'mean': estimates the mean value of the outcome</p></li>
+<li><p>'quantile': estimates 25th, 50th, and 75th percentile of the outcome.</p></li>
+</ul><p>For categorical outcomes, valid options include</p><ul><li><p>'percentage': estimates the prevalence of the outcome</p></li>
+<li><p>'percentage_kg': estimates the prevalence and uses Korn and Graubard's method to estimate a 95% confidence interval</p></li>
+<li><p>'count': estimates the number of US adults with the outcome.</p></li>
+</ul></dd>
+
+
+<dt>group_variable</dt>
+<dd><p>[character(1)]
+The name of the group variable. See Details for a description of
+the group variable and the stratify variable.</p></dd>
+
+
+<dt>group_cut_n</dt>
+<dd><p>[integer(1)]
+The number of groups to form using the group variable. This is only
+relevant if the group variable is continuous, and can be omitted.
+Default is 3</p></dd>
+
+
+<dt>group_cut_type</dt>
+<dd><p>[character(1)]
+The method used to create groups with the grouping variable. This is only
+relevant i fthe group variable is continuous, and can be omitted.
+Valid options are:</p><ul><li><p>"interval": equal interval width, e.g., three groups with ages of
+0 to &lt;10, 10 to &lt;20, and 20 to &lt; 30 years.</p></li>
+<li><p>"frequency": equal frequency, e.g., three groups with ages of
+0 to &lt;q, q to &lt;p, and p to &lt;r, where q, p, and r are selected
+so that roughly the same number of people are in each group.</p></li>
+</ul></dd>
+
+
+<dt>stratify_variable</dt>
+<dd><p>[character(1)]
+the name of the stratify variable. See Details for a description of
+the group variable and the stratify variable.</p></dd>
+
+
+<dt>time_variable</dt>
+<dd><p>[character(1)]
+The name of the time variable. The default, <code>svy_year</code>, corresponds to
+the variable in <code>nhanes_data</code> that indicates which 2 year NHANES cycle
+an observation was collected in.</p></dd>
+
+
+<dt>time_values</dt>
+<dd><p>[character(1+)]
+The time values that will be included in this design object.
+The default is to include all time values present in <code>data</code>.
+Valid options are:</p><ul><li><p><code>'most_recent'</code>: includes the most recent time value.</p></li>
+<li><p><code>'last_5'</code>: includes the 5 most recent time values.</p></li>
+<li><p><code>'all'</code>: includes all time values present in <code>data</code>.</p></li>
+<li><p>You can also give a vector of specific time values, e.g.,
+<code>c("2009-2010", "2011-2012", "2013-2014")</code>, if these values are
+present in the time_variable column (they are for <code>nhanes_data</code>).</p></li>
+</ul></dd>
+
+
+<dt>pool</dt>
+<dd><p>[logical(1)]
+If <code>FALSE</code> (the default), results are presented for individual times,
+separately. If <code>TRUE</code>, data from each time value are pooled together.
+Note that only contiguous cycles should be pooled together, e.g.,
+using <code>pool = TRUE</code> with <code>time_values = 'last_5'</code> is okay, but
+using <code>pool = TRUE</code> with <code>time_values = c("2009-2010", "2013-2014")</code> is
+not recommended (that would be a strange result to interpret).</p></dd>
+
+
+<dt>subset_calls</dt>
+<dd><p>[named list(n)]</p>
+<p>the names of <code>subset_calls</code> are variable names, and the values are
+values of the variable to include in the subsetted data. For example,
+<code>subset_calls = list("demo_gender" = "Women")</code> will subset the data
+to include rows where <code>demo_gender</code> is equal to <code>"Women"</code>. Multiple
+entries are allowed and collapsed with the logical <code>&amp;</code> operator.
+For example, <code>subset_calls = list(demo_gender = "Women", bp_med_use = "Yes")</code>
+will subset the data to include rows where <code>demo_gender</code> is equal
+to <code>'Women'</code> AND <code>bp_med_use</code> is equal to <code>"Yes"</code></p></dd>
+
+
+<dt>standard_variable</dt>
+<dd><p>[character(1)]</p>
+<p>The name of the variable used to create standardization groups.
+The default is to use <code>demo_age_cat</code>, which leads to age
+standardization.</p></dd>
+
+
+<dt>standard_weights</dt>
+<dd><p>[numeric(n)]</p>
+<p>The proportionate weights for each group defined by the standard variable.
+The number of weights should equal the number of groups defined by
+<code>standard_variable</code> and all weights must be &gt;0.</p></dd>
 
 
 <dt>statistic_primary</dt>
 <dd><p>[character(1)]</p>
-<p>the statistic that defines the geometric objects in the plot.</p></dd>
+<p>the statistic that defines the geometric objects in the plot. Other
+statistics will be featured in the text that appears when the users
+mouse hovers over the corresponding object.</p></dd>
+
+
+<dt>title</dt>
+<dd><p>[character(1)]</p>
+<p>The title that will appear above the plot. If this is not supplied,
+the title will be generated using the <code>key</code> data in <code>x</code>.</p></dd>
 
 
 <dt>geom</dt>
 <dd><p>[character(1)]</p>
-<p>What type of plot to create. Valid options are</p><ul><li><p><code>'bar'</code> A bar plot will be created</p></li>
-<li><p><code>'point'</code> A scatter plot will be created</p></li>
+<p>The type of figure that will be made. Valid options are:</p><ul><li><p><code>'bar'</code> creates a bar plot with annotations on the bars</p></li>
+<li><p><code>'point'</code> creates a scatter plot with 95% confidence interval error bars</p></li>
 </ul></dd>
 
 
 <dt>reorder_cats</dt>
 <dd><p>[logical(1)]</p>
-<p>whether to re-order the categorical exposure
-variable so that its levels are shown in increasing order by the expected
-outcome.</p></dd>
+<p>whether to re-order the categorical group variable so that its levels
+are shown in increasing order by the expected outcome.</p></dd>
 
 
 <dt>width</dt>
-<dd><p>width of the plot, in pixels</p></dd>
+<dd><p>[numeric(1)]</p>
+<p>the width of the plot, in pixels</p></dd>
 
 
 <dt>height</dt>
-<dd><p>height of the plot, in pixels</p></dd>
+<dd><p>[numeric(1)]</p>
+<p>the height of the plot, in pixels</p></dd>
 
 
 <dt>size_point</dt>
-<dd><p>the size of points in the plot (only relevant if <code>geom = 'point'</code>)</p></dd>
+<dd><p>[numeric(1)]</p>
+<p>the size of points in the plot. (only relevant if <code>'geom' = 'point'</code>)</p></dd>
 
 
 <dt>size_error</dt>
-<dd><p>the size of error bars in the plot (only relevant if <code>geom = 'point'</code>)</p></dd>
+<dd><p>[numeric(1)]</p>
+<p>the size of error bars in the plot. (only relevant if <code>'geom' = 'point'</code>)</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>a plotly visualization</p>
+<p>a <code>plotly</code> object</p>
     </div>
 
     <div class="section level2">
