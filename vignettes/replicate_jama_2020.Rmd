@@ -15,12 +15,7 @@ knitr::spin_child('aaa.R')
 
 ```{r}
 
-knitr::spin_child(
- file.path("..", 
-           "tests", 
-           "testthat", 
-           "test-replicate_muntner_jama_2020.R")
-)
+knitr::spin_child("replicate_jama_2020.R")
 
 ```
 
