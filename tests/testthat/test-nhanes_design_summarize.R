@@ -5,7 +5,7 @@ ds <- nhanes_design(data = nhanes_data,
                     outcome_variable = 'bp_sys_mean')
 
 smry <- ds %>%
- nhanes_design_summarize(stats = 'mean',
+ nhanes_design_summarize(outcome_stats = 'mean',
                          simplify_output = FALSE)
 
 test_that(

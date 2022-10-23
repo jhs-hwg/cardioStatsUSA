@@ -25,28 +25,28 @@ ds <- nhanes_data %>%
 nrow(ds$design$variables)
 
 shiny_answers_table_s2_overall <- ds %>%
- nhanes_design_summarize(stats = 'percentage',
+ nhanes_design_summarize(outcome_stats = 'percentage',
                          simplify_output = TRUE)%>%
  filter(bp_control_jnc7=='Yes') %>%
  mutate(group = "Overall")
 
 shiny_answers_table_s2_by_age <- ds %>%
  nhanes_design_update(group_variable = 'demo_age_cat') %>%
- nhanes_design_summarize(stats = 'percentage',
+ nhanes_design_summarize(outcome_stats = 'percentage',
                          simplify_output = TRUE) %>%
  filter(bp_control_jnc7=='Yes') %>%
  mutate(group = demo_age_cat)
 
 shiny_answers_table_s2_by_sex <- ds %>%
  nhanes_design_update(group_variable = 'demo_gender') %>%
- nhanes_design_summarize(stats = 'percentage',
+ nhanes_design_summarize(outcome_stats = 'percentage',
                          simplify_output = TRUE) %>%
  filter(bp_control_jnc7=='Yes') %>%
  mutate(group = demo_gender)
 
 shiny_answers_table_s2_by_race <- ds %>%
  nhanes_design_update(group_variable = 'demo_race') %>%
- nhanes_design_summarize(stats = 'percentage',
+ nhanes_design_summarize(outcome_stats = 'percentage',
                          simplify_output = TRUE) %>%
  filter(bp_control_jnc7=='Yes') %>%
  mutate(group = recode(demo_race,

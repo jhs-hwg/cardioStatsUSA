@@ -65,14 +65,14 @@ test_data <- tibble::tribble(
  as.data.table()
 
 shiny_answers_by_age <- ds %>%
- nhanes_design_summarize(stats = 'percentage',
+ nhanes_design_summarize(outcome_stats = 'percentage',
                          simplify_output = TRUE) %>%
  .[htn_jnc7 == 'Yes'] %>%
  .[, demo_gender := 'Overall']
 
 shiny_answers_by_age_sex <- ds %>%
  nhanes_design_update(stratify_variable = 'demo_gender') %>%
- nhanes_design_summarize(stats = 'percentage',
+ nhanes_design_summarize(outcome_stats = 'percentage',
                          simplify_output = TRUE) %>%
  .[htn_jnc7 == 'Yes']
 
@@ -120,14 +120,14 @@ test_data <- tibble::tribble(
 
 shiny_answers_total <- ds_standard %>%
  nhanes_design_update(group_variable = 'demo_race') %>%
- nhanes_design_summarize(stats = 'percentage',
+ nhanes_design_summarize(outcome_stats = 'percentage',
                          simplify_output = TRUE) %>%
  mutate(demo_gender = 'Total')
 
 shiny_answers_by_gender <- ds_standard %>%
  nhanes_design_update(group_variable = 'demo_race',
                       stratify_variable = 'demo_gender') %>%
- nhanes_design_summarize(stats = 'percentage',
+ nhanes_design_summarize(outcome_stats = 'percentage',
                          simplify_output = TRUE)
 
 shiny_answers <- shiny_answers_total %>%

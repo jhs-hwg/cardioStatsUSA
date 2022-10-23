@@ -42,7 +42,8 @@ Imports:
     stringr,
     survey,
     tibble,
-    tidyr
+    tidyr,
+    stats
 Suggests: 
     covr,
     knitr,

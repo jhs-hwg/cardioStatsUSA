@@ -1,7 +1,5 @@
 
 library(testthat)
-library(haven)
-
 
 key <- nhanes_key$data
 

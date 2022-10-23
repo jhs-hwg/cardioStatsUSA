@@ -1,11 +1,19 @@
 ---
-title: "Hypertension"
+title: "Antihypertensive medication"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Hypertension}
+  %\VignetteIndexEntry{Antihypertensive medication}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
 
 ```{r setup, include = FALSE}
 
@@ -16,16 +24,19 @@ knitr::spin_child("aaa.R")
 
 ```{r, include = FALSE}
 
-standard_weights <- c(49.3, 33.6, 10.1, 7.0)
+standard_weights <- c(26.4, 43.5, 17.0, 13.2)
 last_3 <- c("2013-2014", "2015-2016", "2017-2020")
-outcome_variable <- 'htn_accaha'
-outcome_text <- "Hypertension"
-outcome_text_lowercase <- "hypertension"
+
+outcome_variable <- 'bp_med_use'
+outcome_text <- "Antihypertensive medication use"
+outcome_text_lowercase <- "antihypertensive medication use"
 
 subset_calls <- 
  list("demo_pregnant" = c("No", "Missing"))
 
 subset_labs <- c("Not pregnant")
+
+subset_htn <- list('htn_accaha' = 'Yes')
 
 ```
 
@@ -38,6 +49,13 @@ subset_labs <- c("Not pregnant")
 make_plot(standard_weights = standard_weights)
 ```
 
+### Among those with hypertension
+
+```{r}
+make_plot(subset_addons = subset_htn,
+          standard_weights = standard_weights)
+```
+
 ## `r outcome_text` by gender
 
 **P3** 1-2 sentences about the results. Here is some filler text for the second sentence
@@ -46,11 +64,28 @@ make_plot(group_variable = 'demo_gender',
           standard_weights = standard_weights)
 ```
 
+### Among those with hypertension
+
+```{r}
+make_plot(subset_addons = subset_htn,
+          group_variable = 'demo_gender',
+          standard_weights = standard_weights)
+```
+
 ## `r outcome_text` by age group
 
 **P4** 1-2 sentences about the results. Here is some filler text for the second sentence
 ```{r}
 make_plot(group_variable = 'demo_age_cat',
+          time_values = last_3,
+          standard_weights = standard_weights)
+```
+
+### Among those with hypertension
+
+```{r}
+make_plot(subset_addons = subset_htn,
+          group_variable = 'demo_age_cat',
           time_values = last_3,
           standard_weights = standard_weights)
 ```
@@ -64,6 +99,14 @@ make_plot(group_variable = 'demo_race',
           standard_weights = standard_weights)
 ```
 
+### Among those with hypertension
+
+```{r}
+make_plot(subset_addons = subset_htn,
+          group_variable = 'demo_race',
+          time_values = last_3,
+          standard_weights = standard_weights)
+```
 
 ## `r outcome_text` definition
 
@@ -86,3 +129,4 @@ For age adjustment in this analysis, we set the age distribution for the standar
 ## How were these results created?
 
 EMBED YOUTUBE VIDEO HERE
+

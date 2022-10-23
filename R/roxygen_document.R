@@ -1,18 +1,18 @@
 
 # nocov start
 
-describe_age_wts <- function(age_wts, age_lvls=NULL){
+describe_weights <- function(standard_weights, age_lvls=NULL){
 
  if(is.null(age_lvls))
   age_lvls <- levels(cardioStatsUSA::nhanes_data$demo_age_cat)
 
- .age_wts <- age_wts %>%
+ .standard_weights <- standard_weights %>%
   paste0("%") %>%
   glue::glue_collapse(sep = ', ', last = ', and ')
 
  .age_lvls <- glue::glue_collapse(age_lvls, sep = ', ', last = ', and ')
 
- glue::glue("{.age_wts} being {.age_lvls} years of age, respectively")
+ glue::glue("{.standard_weights} being {.age_lvls} years of age, respectively")
 
 }
 

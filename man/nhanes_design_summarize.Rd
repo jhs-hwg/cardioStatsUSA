@@ -4,14 +4,14 @@
 \alias{nhanes_design_summarize}
 \title{Summarize an NHANES design}
 \usage{
-nhanes_design_summarize(x, stats = x$stats, simplify_output = FALSE)
+nhanes_design_summarize(x, outcome_stats = x$stats, simplify_output = FALSE)
 }
 \arguments{
 \item{x}{[nhanes_design]
 
 an NHANES design object. See \link{nhanes_design} for more details.}
 
-\item{stats}{[character(1+)]
+\item{outcome_stats}{[character(1+)]
 
 The statistics that should be computed.
 Multiple statistics may be requested.
@@ -36,7 +36,7 @@ is \code{FALSE} and a \code{data.table} otherwise.}
 }
 \value{
 if \code{simplify_output} is \code{TRUE}, a \code{data.table}.
-Otherwise, a modified \link{nhanes_design} object is returned.
+Otherwise, an \link{nhanes_design} object is returned.
 }
 \description{
 Summarize an NHANES design

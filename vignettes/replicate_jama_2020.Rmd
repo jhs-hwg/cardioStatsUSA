@@ -1,0 +1,21 @@
+---
+title: "Replicating analysis from Muntner et al, 2020"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Replicating analysis from Muntner et al, 2020}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+
+knitr::spin_child('aaa.R')
+
+```
+
+```{r}
+
+knitr::spin_child("../tests/testthat/test-replicate_muntner_jama_2020.R")
+
+```
+

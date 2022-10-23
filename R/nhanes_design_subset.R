@@ -9,10 +9,6 @@
 #' An expression indicating what rows to keep.
 #'   Missing values are taken as false.
 #'
-#' @param ...
-#'
-#' Currently not used.
-#'
 #' @return an [nhanes_design] object.
 #'
 #' @export

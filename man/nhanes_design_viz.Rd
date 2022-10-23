@@ -21,14 +21,45 @@ nhanes_design_viz(
 
 an NHANES design object. See \link{nhanes_design} for more details.}
 
-\item{statistic_primary}{(character) the statistic that defines the
-geometric objects in the plot.}
+\item{statistic_primary}{[character(1)]
 
-\item{geom}{(character) can be 'bar' or 'points'}
+the statistic that defines the geometric objects in the plot. Other
+statistics will be featured in the text that appears when the users
+mouse hovers over the corresponding object.}
 
-\item{reorder_cats}{(logical) whether to re-order the categorical group
-variable so that its levels are shown in increasing order by the expected
-outcome.}
+\item{title}{[character(1)]
+
+The title that will appear above the plot. If this is not supplied,
+the title will be generated using the \code{key} data in \code{x}.}
+
+\item{geom}{[character(1)]
+
+The type of figure that will be made. Valid options are:
+\itemize{
+\item \code{'bar'} creates a bar plot with annotations on the bars
+\item \code{'point'} creates a scatter plot with 95\% confidence interval error bars
+}}
+
+\item{reorder_cats}{[logical(1)]
+
+whether to re-order the categorical group variable so that its levels
+are shown in increasing order by the expected outcome.}
+
+\item{width}{[numeric(1)]
+
+the width of the plot, in pixels}
+
+\item{height}{[numeric(1)]
+
+the height of the plot, in pixels}
+
+\item{size_point}{[numeric(1)]
+
+the size of points in the plot. (only relevant if \code{'geom' = 'point'})}
+
+\item{size_error}{[numeric(1)]
+
+the size of error bars in the plot. (only relevant if \code{'geom' = 'point'})}
 }
 \value{
 a \code{plotly} object

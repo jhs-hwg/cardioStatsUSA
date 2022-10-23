@@ -4,41 +4,9 @@
 #'
 #' @inheritParams nhanes_summarize
 #'
-#' @param statistic_primary \[character(1)\]
+#' @inheritParams nhanes_design_viz
 #'
-#'   the statistic that defines the geometric objects in the plot.
-#'
-#' @param geom \[character(1)\]
-#'
-#' What type of plot to create. Valid options are
-#'
-#' - `'bar'` A bar plot will be created
-#'
-#' - `'point'` A scatter plot will be created
-#'
-#' @param reorder_cats \[logical(1)\]
-#'
-#' whether to re-order the categorical exposure
-#'   variable so that its levels are shown in increasing order by the expected
-#'   outcome.
-#'
-#' @param width
-#'
-#' width of the plot, in pixels
-#'
-#' @param height
-#'
-#' height of the plot, in pixels
-#'
-#' @param size_point
-#'
-#' the size of points in the plot (only relevant if `geom = 'point'`)
-#'
-#' @param size_error
-#'
-#' the size of error bars in the plot (only relevant if `geom = 'point'`)
-#'
-#' @return a plotly visualization
+#' @inherit nhanes_design_viz return
 #'
 #' @export
 #'
@@ -61,7 +29,8 @@ nhanes_visualize <- function(data,
                              time_values = NULL,
                              pool = FALSE,
                              subset_calls = list(),
-                             age_wts = NULL,
+                             standard_variable = 'demo_age_cat',
+                             standard_weights = NULL,
                              statistic_primary = NULL,
                              title = NULL,
                              geom = 'bar',
@@ -88,7 +57,8 @@ nhanes_visualize <- function(data,
                           time_values = time_values,
                           pool = pool,
                           subset_calls = subset_calls,
-                          age_wts = age_wts,
+                          standard_variable = standard_variable,
+                          standard_weights = standard_weights,
                           simplify_output = FALSE)
 
  nhanes_design_viz(

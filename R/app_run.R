@@ -200,19 +200,19 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
       h5("Weights for each age group (must be >0)"),
 
       splitLayout(
-       numericInput(inputId="age_wts_1",
+       numericInput(inputId="standard_weights_1",
                     label="18-44",
                     value = 49.3,
                     min = 5),
-       numericInput(inputId="age_wts_2",
+       numericInput(inputId="standard_weights_2",
                     label="45-64",
                     value = 33.6,
                     min = 5),
-       numericInput(inputId="age_wts_3",
+       numericInput(inputId="standard_weights_3",
                     label="65-74",
                     value = 10.1,
                     min = 5),
-       numericInput(inputId="age_wts_4",
+       numericInput(inputId="standard_weights_4",
                     label="75+",
                     value = 7.0,
                     min = 5),
@@ -798,7 +798,11 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
        inputId = ss_val_catg,
        choices =
         levels(nhanes_data[[ input[[ss_var]] ]]) %||%
-        sort(unique(na.omit(nhanes_data[[ input[[ss_var]] ]]))) %>%
+        sort(
+         unique(
+          stats::na.omit(nhanes_data[[ input[[ss_var]] ]])
+         )
+        ) %>%
         c(miss_add),
        selected = character(0) #subset_value_selected
       )
@@ -880,13 +884,13 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
 
     pool <- input$pool == 'yes'
 
-    age_wts <- NULL
+    standard_weights <- NULL
 
     if(input$age_standardize){
-     age_wts <- c(input$age_wts_1,
-                  input$age_wts_2,
-                  input$age_wts_3,
-                  input$age_wts_4)
+     standard_weights <- c(input$standard_weights_1,
+                  input$standard_weights_2,
+                  input$standard_weights_3,
+                  input$standard_weights_4)
     }
 
     outcome_variable  <- input_infer(input$outcome,  default = NULL)
@@ -962,7 +966,7 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
        time_values = time_values_selected,
        pool = pool,
        subset_calls = subset_calls,
-       age_wts = age_wts,
+       standard_weights = standard_weights,
        simplify_output = FALSE
       ),
      silent = TRUE

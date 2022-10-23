@@ -7,12 +7,45 @@
 #'
 #' `r document_nhanes_design()`
 #'
-#' @param statistic_primary (character) the statistic that defines the
-#'   geometric objects in the plot.
-#' @param geom (character) can be 'bar' or 'points'
-#' @param reorder_cats (logical) whether to re-order the categorical group
-#'   variable so that its levels are shown in increasing order by the expected
-#'   outcome.
+#' @param statistic_primary \[character(1)\]
+#'
+#' the statistic that defines the geometric objects in the plot. Other
+#'   statistics will be featured in the text that appears when the users
+#'   mouse hovers over the corresponding object.
+#'
+#' @param title \[character(1)\]
+#'
+#' The title that will appear above the plot. If this is not supplied,
+#'   the title will be generated using the `key` data in `x`.
+#'
+#' @param geom \[character(1)\]
+#'
+#' The type of figure that will be made. Valid options are:
+#'
+#' - `'bar'` creates a bar plot with annotations on the bars
+#'
+#' - `'point'` creates a scatter plot with 95% confidence interval error bars
+#'
+#' @param reorder_cats \[logical(1)\]
+#'
+#' whether to re-order the categorical group variable so that its levels
+#'  are shown in increasing order by the expected outcome.
+#'
+#' @param width \[numeric(1)\]
+#'
+#' the width of the plot, in pixels
+#'
+#' @param height \[numeric(1)\]
+#'
+#' the height of the plot, in pixels
+#'
+#' @param size_point \[numeric(1)\]
+#'
+#' the size of points in the plot. (only relevant if `'geom' = 'point'`)
+#'
+#' @param size_error \[numeric(1)\]
+#'
+#' the size of error bars in the plot. (only relevant if `'geom' = 'point'`)
 #'
 #' @return a `plotly` object
 #'

@@ -1,47 +1,18 @@
 
-#' FILL IN
+#' Suppress or flag stats for review
 #'
-#' @param dt FILL IN
-#' @param type FILL IN
-#' @param stat FILL IN
-#' @param n_obs FILL IN
-#' @param n_psu FILL IN
-#' @param n_strata FILL IN
+#' @param dt a data.table from a `svy_stat` function
+#' @param type statistic type
+#' @param stat statistic to consider
+#' @param n_obs number of observations in data
+#' @param n_psu number of primary sampling units in data
+#' @param n_strata number of strata in data
 #'
-#' @return FILL IN
-#'
-#' @export
+#' @return modified `dt` with reliability columns added.
 #'
 #' @noRd
 #'
 svy_stat_suppress <- function(dt, type, stat, n_obs, n_psu, n_strata) {
-
- # fails <- is.nan(dt$std_error) | dt$std_error == 0
- #
- # if(any(fails)){
- #
- #  first_offense <- min(which(fails))
- #
- #  stat_label <- switch(
- #   dt$statistic[first_offense],
- #   "q25" = "25th percentile",
- #   "q50" = "50th percentile",
- #   "q75" = "75th percentile",
- #   dt$statistic[first_offense]
- #  )
- #
- #  outcome_label <- dt$outcome[first_offense]
- #
- #  if(type != 'ctns')
- #   outcome_label <- paste(outcome_label,
- #                          dt$level[first_offense], sep = ' = ')
- #
- #  stop("could not estimate a standard error for the ",
- #       stat_label, " of ", outcome_label, ". ",
- #       "This is probably occurring due to an insufficient ",
- #       "number of observations in the requested data.",
- #       call. = FALSE)
- # }
 
  suppress_fun <- paste('svy_stat_suppress', type, sep = '_')
 
@@ -52,11 +23,11 @@ svy_stat_suppress <- function(dt, type, stat, n_obs, n_psu, n_strata) {
 
  if(stat %in% c('count')) suppress_fun <- 'svy_stat_suppress_ctns'
 
- out <- do.call(suppress_fun,
-                args = list(dt = dt,
-                            n_obs = n_obs,
-                            n_psu = n_psu,
-                            n_strata = n_strata))
+ do.call(suppress_fun,
+         args = list(dt = dt,
+                     n_obs = n_obs,
+                     n_psu = n_psu,
+                     n_strata = n_strata))
 
 }
 
@@ -245,6 +216,35 @@ insert_text <- function(x, index, text){
 }
 
 
+
+# some old code that will probably get deleted
+
+# fails <- is.nan(dt$std_error) | dt$std_error == 0
+#
+# if(any(fails)){
+#
+#  first_offense <- min(which(fails))
+#
+#  stat_label <- switch(
+#   dt$statistic[first_offense],
+#   "q25" = "25th percentile",
+#   "q50" = "50th percentile",
+#   "q75" = "75th percentile",
+#   dt$statistic[first_offense]
+#  )
+#
+#  outcome_label <- dt$outcome[first_offense]
+#
+#  if(type != 'ctns')
+#   outcome_label <- paste(outcome_label,
+#                          dt$level[first_offense], sep = ' = ')
+#
+#  stop("could not estimate a standard error for the ",
+#       stat_label, " of ", outcome_label, ". ",
+#       "This is probably occurring due to an insufficient ",
+#       "number of observations in the requested data.",
+#       call. = FALSE)
+# }
 
 
 

@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 
 This vignette will show
 
-1. How to make results using the shiny app (youtube tutorials maybe)
+1. How to make results using the shiny app (youtube tutorials)
 
 1. How to make results using the R package
 

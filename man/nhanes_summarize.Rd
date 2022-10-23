@@ -18,36 +18,137 @@ nhanes_summarize(
   time_values = NULL,
   pool = FALSE,
   subset_calls = list(),
-  age_wts = NULL,
+  standard_variable = "demo_age_cat",
+  standard_weights = NULL,
   simplify_output = TRUE
 )
 }
 \arguments{
-\item{pool}{(\emph{logical}; length 1; default = \code{FALSE})}
+\item{data}{[data.frame]
+A set of NHANES data with one row per survey participant and one column per variable. See \link{nhanes_data} for more details
+See Details for specific requirements.
+See \link{nhanes_data} for an example.}
 
-\item{age_wts}{(\emph{numeric}; length 4; default is none)}
+\item{key}{[data.frame]
+A data set with one row per variable and with columns that describe the variable. See \link{nhanes_key} for more details
+See Details for specific requirements.
+See \link{nhanes_key} for an example.}
 
-\item{outcome}{(\emph{character}; length 1; no default)
-The variable to be summarized.}
+\item{outcome_variable}{[character(1)]
+The name of the outcome variable to be summarized.}
 
-\item{exposure}{(\emph{character}; length 1; default is none)}
-
-\item{group}{(\emph{character}; length 1; default is none)}
-
-\item{years}{(\emph{character}; length may vary; default = 'all')
-Valid options are
+\item{outcome_quantiles}{[numeric(1+)]
+The quantiles to be summarized for a continuous outcome. The default is
+\code{c(0.25, 0.50, 0.75)}. For example,
 \itemize{
-\item 'all' (includes all NHANES cycles)
-\item 'last_5' (includes the last 5 most recent NHANES cycles)
-\item 'most_recent' (include the most recent NHANES cycle)
+\item \code{outcome_quantiles = c(.5)} will compute the 50th percentile
+(i.e., the median)
+\item \code{outcome_quantiles = c(.25, .5, .75)} will compute the 25th, 50th,
+and 75th percentile.
+\item \code{outcome_quantiles = seq(.1, .9, by = .1)} will compute every 10th
+percentile, except for the 0th and 100th
 }}
 
-\item{subset_variables}{(\emph{list}; length may vary)}
+\item{outcome_stats}{[character(1+)]
 
-\item{subset_values}{(\emph{list}; length must match \code{subset_variables})}
+The statistics that should be computed.
+Multiple statistics may be requested.
+Valid options depend on the type of outcome to be summarized.
+For continuous outcomes, valid options include
+\itemize{
+\item 'mean': estimates the mean value of the outcome
+\item 'quantile': estimates 25th, 50th, and 75th percentile of the outcome.
+}
+
+For categorical outcomes, valid options include
+\itemize{
+\item 'percentage': estimates the prevalence of the outcome
+\item 'percentage_kg': estimates the prevalence and uses Korn and Graubard's method to estimate a 95\% confidence interval
+\item 'count': estimates the number of US adults with the outcome.
+}}
+
+\item{group_variable}{[character(1)]
+The name of the group variable. See Details for a description of
+the group variable and the stratify variable.}
+
+\item{group_cut_n}{[integer(1)]
+The number of groups to form using the group variable. This is only
+relevant if the group variable is continuous, and can be omitted.
+Default is 3}
+
+\item{group_cut_type}{[character(1)]
+The method used to create groups with the grouping variable. This is only
+relevant i fthe group variable is continuous, and can be omitted.
+Valid options are:
+\itemize{
+\item "interval": equal interval width, e.g., three groups with ages of
+0 to <10, 10 to <20, and 20 to < 30 years.
+\item "frequency": equal frequency, e.g., three groups with ages of
+0 to <q, q to <p, and p to <r, where q, p, and r are selected
+so that roughly the same number of people are in each group.
+}}
+
+\item{stratify_variable}{[character(1)]
+the name of the stratify variable. See Details for a description of
+the group variable and the stratify variable.}
+
+\item{time_variable}{[character(1)]
+The name of the time variable. The default, \code{svy_year}, corresponds to
+the variable in \code{nhanes_data} that indicates which 2 year NHANES cycle
+an observation was collected in.}
+
+\item{time_values}{[character(1+)]
+The time values that will be included in this design object.
+The default is to include all time values present in \code{data}.
+Valid options are:
+\itemize{
+\item \code{'most_recent'}: includes the most recent time value.
+\item \code{'last_5'}: includes the 5 most recent time values.
+\item \code{'all'}: includes all time values present in \code{data}.
+\item You can also give a vector of specific time values, e.g.,
+\code{c("2009-2010", "2011-2012", "2013-2014")}, if these values are
+present in the time_variable column (they are for \code{nhanes_data}).
+}}
+
+\item{pool}{[logical(1)]
+If \code{FALSE} (the default), results are presented for individual times,
+separately. If \code{TRUE}, data from each time value are pooled together.
+Note that only contiguous cycles should be pooled together, e.g.,
+using \code{pool = TRUE} with \code{time_values = 'last_5'} is okay, but
+using \code{pool = TRUE} with \code{time_values = c("2009-2010", "2013-2014")} is
+not recommended (that would be a strange result to interpret).}
+
+\item{subset_calls}{[named list(n)]
+
+the names of \code{subset_calls} are variable names, and the values are
+values of the variable to include in the subsetted data. For example,
+\code{subset_calls = list("demo_gender" = "Women")} will subset the data
+to include rows where \code{demo_gender} is equal to \code{"Women"}. Multiple
+entries are allowed and collapsed with the logical \code{&} operator.
+For example, \code{subset_calls = list(demo_gender = "Women", bp_med_use = "Yes")}
+will subset the data to include rows where \code{demo_gender} is equal
+to \code{'Women'} AND \code{bp_med_use} is equal to \code{"Yes"}}
+
+\item{standard_variable}{[character(1)]
+
+The name of the variable used to create standardization groups.
+The default is to use \code{demo_age_cat}, which leads to age
+standardization.}
+
+\item{standard_weights}{[numeric(n)]
+
+The proportionate weights for each group defined by the standard variable.
+The number of weights should equal the number of groups defined by
+\code{standard_variable} and all weights must be >0.}
+
+\item{simplify_output}{[logical(1)]
+
+The type of output returned will be \link{nhanes_design} if \code{simplify_output}
+is \code{FALSE} and a \code{data.table} otherwise.}
 }
 \value{
-a \code{data.table} with summarized values
+if \code{simplify_output} is \code{TRUE}, a \code{data.table}.
+Otherwise, an \link{nhanes_design} object is returned.
 }
 \description{
 The description should include
@@ -59,6 +160,8 @@ The description should include
 }
 \examples{
 
-nhanes_summarize(nhanes_data, nhanes_key, outcome_variable = "bp_sys_mean")
+nhanes_summarize(data = nhanes_data,
+                 key = nhanes_key,
+                 outcome_variable = "bp_sys_mean")
 
 }

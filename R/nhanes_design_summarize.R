@@ -5,7 +5,7 @@
 #'
 #' `r document_nhanes_design()`
 #'
-#' @param stats \[character(1+)\]
+#' @param outcome_stats \[character(1+)\]
 #'
 #' The statistics that should be computed.
 #'   Multiple statistics may be requested.
@@ -19,17 +19,17 @@
 #'
 #'
 #' @return if `simplify_output` is `TRUE`, a `data.table`.
-#'   Otherwise, a modified [nhanes_design] object is returned.
+#'   Otherwise, an [nhanes_design] object is returned.
 #'
 #' @export
 #'
 nhanes_design_summarize <- function(x,
-                                    stats = x$stats,
+                                    outcome_stats = x$stats,
                                     simplify_output = FALSE){
 
  check_nobs(x)
 
- if(is_standardized(x) && 'count' %in% stats){
+ if(is_standardized(x) && 'count' %in% outcome_stats){
 
   stop("Direct standardization should not be applied when estimating counts",
        call. = FALSE)
@@ -74,7 +74,7 @@ nhanes_design_summarize <- function(x,
 
  smry_output <- purrr::map_dfr(
 
-  .x = x$stats[x$stats %in% stats],
+  .x = x$stats[x$stats %in% outcome_stats],
 
   .f = ~ {
 

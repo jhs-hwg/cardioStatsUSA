@@ -7,33 +7,32 @@
 #' - Who is included in the data to be summarized
 #' - How is the summary computed
 #'
-#' @param outcome (*character*; length 1; no default)
-#'   The variable to be summarized.
-#' @param exposure (*character*; length 1; default is none)
+#' @inheritParams nhanes_design
 #'
-#' @param group (*character*; length 1; default is none)
+#' @inheritParams nhanes_design_summarize
 #'
-#' @param years (*character*; length may vary; default = 'all')
-#'   Valid options are
-#'   - 'all' (includes all NHANES cycles)
-#'   - 'last_5' (includes the last 5 most recent NHANES cycles)
-#'   - 'most_recent' (include the most recent NHANES cycle)
+#' @param subset_calls \[named list(n)\]
 #'
-#' @param pool (*logical*; length 1; default = `FALSE`)
+#'  the names of `subset_calls` are variable names, and the values are
+#'    values of the variable to include in the subsetted data. For example,
+#'    `subset_calls = list("demo_gender" = "Women")` will subset the data
+#'    to include rows where `demo_gender` is equal to `"Women"`. Multiple
+#'    entries are allowed and collapsed with the logical `&` operator.
+#'    For example, `subset_calls = list(demo_gender = "Women", bp_med_use = "Yes")`
+#'    will subset the data to include rows where `demo_gender` is equal
+#'    to `'Women'` AND `bp_med_use` is equal to `"Yes"`
 #'
-#' @param subset_variables (*list*; length may vary)
+#' @inheritParams nhanes_design_standardize
 #'
-#' @param subset_values (*list*; length must match `subset_variables`)
-#'
-#' @param age_wts (*numeric*; length 4; default is none)
-#'
-#' @return a `data.table` with summarized values
+#' @inherit nhanes_design_summarize return
 #'
 #' @export
 #'
 #' @examples
 #'
-#' nhanes_summarize(nhanes_data, nhanes_key, outcome_variable = "bp_sys_mean")
+#' nhanes_summarize(data = nhanes_data,
+#'                  key = nhanes_key,
+#'                  outcome_variable = "bp_sys_mean")
 #'
 nhanes_summarize <- function(data,
                              key,
@@ -48,7 +47,8 @@ nhanes_summarize <- function(data,
                              time_values = NULL,
                              pool = FALSE,
                              subset_calls = list(),
-                             age_wts = NULL,
+                             standard_variable = 'demo_age_cat',
+                             standard_weights = NULL,
                              simplify_output = TRUE){
 
  if(missing(data)) data <- cardioStatsUSA::nhanes_data
@@ -102,12 +102,12 @@ nhanes_summarize <- function(data,
 
  }
 
-  dt_sub <- dt_sub %>%
+ dt_sub <- dt_sub %>%
   # restrict to observations where analysis variables are non-missing.
-  na.omit(cols = c(time_variable,
-                   outcome_variable,
-                   group_variable,
-                   stratify_variable)) %>%
+  stats::na.omit(cols = c(time_variable,
+                          outcome_variable,
+                          group_variable,
+                          stratify_variable)) %>%
   # re-calibrate weights to match the total in nhanes_data
   nhanes_calibrate(nhanes_full = dt_data)
 
@@ -131,16 +131,15 @@ nhanes_summarize <- function(data,
   )
  }
 
-
- if(!is.null(age_wts)){
+ if(!is.null(standard_weights)){
   ds %<>% nhanes_design_standardize(
-   standard_variable = 'demo_age_cat',
-   standard_weights = age_wts
+   standard_variable = standard_variable,
+   standard_weights = standard_weights
   )
  }
 
  nhanes_design_summarize(ds,
-                         stats = outcome_stats %||% ds$stats[1],
+                         outcome_stats = outcome_stats %||% ds$stats[1],
                          simplify_output = simplify_output)
 
 }

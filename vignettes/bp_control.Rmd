@@ -7,48 +7,25 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r child = '_aaa.Rmd'}
+```{r setup, include = FALSE}
+
+knitr::spin_child("aaa.R")
 
 ```
 
 
 ```{r, include = FALSE}
 
-age_wts <- c(26.4, 43.5, 17.0, 13.2)
+standard_weights <- c(26.4, 43.5, 17.0, 13.2)
 last_3 <- c("2013-2014", "2015-2016", "2017-2020")
 outcome_variable <- 'bp_control_accaha'
 outcome_text <- "BP control"
 
 subset_calls <- 
- list("demo_pregnant" = c("No", "Missing"), "htn_accaha" = "Yes")
+ list("demo_pregnant" = c("No", "Missing"), 
+      "htn_accaha" = "Yes")
 
 subset_labs <- c("Not pregnant", "With hypertension")
-
-make_plot <- function(group_variable = NULL,
-                      time_values = 'all',
-                      subset_addons = NULL,
-                      outcome_stats = 'percentage',
-                      ...){
-
- 
- .subset_calls <- c(subset_calls, subset_addons)
- 
- plotly_vignette(
-  nhanes_visualize(
-   data = nhanes_data,
-   key = nhanes_key,
-   outcome_variable = outcome_variable,
-   outcome_stats = outcome_stats,
-   group_variable = group_variable,
-   subset_calls = .subset_calls,
-   time_values = time_values,
-   title = "",
-   age_wts = age_wts, 
-   ...)
- )
- 
-}
-
 
 ```
 
@@ -58,7 +35,7 @@ make_plot <- function(group_variable = NULL,
 
 **P2** 1-2 sentences about the results. Here is some filler text for the second sentence
 ```{r}
-make_plot()
+make_plot(standard_weights = standard_weights)
 ```
 
 
@@ -66,7 +43,8 @@ make_plot()
 
 **P3** 1-2 sentences about the results. Here is some filler text for the second sentence
 ```{r}
-make_plot(subset_addons = list("bp_med_use" = "Yes"))
+make_plot(subset_addons = list("bp_med_use" = "Yes"),
+          standard_weights = standard_weights)
 ```
 
 
@@ -74,7 +52,8 @@ make_plot(subset_addons = list("bp_med_use" = "Yes"))
 
 **P4** 1-2 sentences about the results. Here is some filler text for the second sentence
 ```{r}
-make_plot(group_variable = 'demo_gender')
+make_plot(group_variable = 'demo_gender',
+          standard_weights = standard_weights)
 ```
 
 
@@ -83,7 +62,8 @@ make_plot(group_variable = 'demo_gender')
 **P5** 1-2 sentences about the results. Here is some filler text for the second sentence
 ```{r}
 make_plot(group_variable = 'demo_gender',
-          subset_addons = list("bp_med_use" = "Yes"))
+          subset_addons = list("bp_med_use" = "Yes"),
+          standard_weights = standard_weights)
 ```
 
 
@@ -103,7 +83,8 @@ make_plot(group_variable = 'demo_age_cat',
 
 make_plot(group_variable = 'demo_age_cat',
           time_values = last_3,
-          subset_addons = list("bp_med_use" = "Yes"))
+          subset_addons = list("bp_med_use" = "Yes"),
+          standard_weights = standard_weights)
 ```
 
 
@@ -112,7 +93,8 @@ make_plot(group_variable = 'demo_age_cat',
 **P8** 1-2 sentences about the results. Here is some filler text for the second sentence
 ```{r}
 make_plot(group_variable = 'demo_race',
-          time_values = last_3)
+          time_values = last_3,
+          standard_weights = standard_weights)
 ```
 
 
@@ -122,7 +104,8 @@ make_plot(group_variable = 'demo_race',
 ```{r}
 make_plot(group_variable = 'demo_race',
           time_values = last_3,
-          subset_addons = list("bp_med_use" = "Yes"))
+          subset_addons = list("bp_med_use" = "Yes"),
+          standard_weights = standard_weights)
 ```
 
 
@@ -130,13 +113,13 @@ make_plot(group_variable = 'demo_race',
 
 For this analysis, our definition of `r outcome_text` was:
 
-> `r clean_text(get_variable_description('bp_control_accaha'))`
+> `r text_vignette(get_variable_description('bp_control_accaha'))`
 
 ## Who is included in this analysis
 
 `r cardioStatsUSA:::describe_module_sample('htn')` To analyze `r outcome_text`, we restricted the sample to non-pregnant adults with hypertension, which was defined as:
 
-> `r clean_text(get_variable_description('htn_accaha'))`
+> `r text_vignette(get_variable_description('htn_accaha'))`
 
 After these exclusions, a total of 26,766 participants were included for the current analysis.
 
@@ -144,7 +127,7 @@ After these exclusions, a total of 26,766 participants were included for the cur
 
 ## Age adjustment
 
-For age adjustment in this analysis, we set the age distribution for the standard population to represent US adults with hypertension from 1999 to 2020: `r cardioStatsUSA:::describe_age_wts(age_wts)`
+For age adjustment in this analysis, we set the age distribution for the standard population to represent US adults with hypertension from 1999 to 2020: `r cardioStatsUSA:::describe_weights(standard_weights)`
 
 ## How were these results created?
 
