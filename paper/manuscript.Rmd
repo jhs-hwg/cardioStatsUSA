@@ -280,8 +280,6 @@ block_section(
 ```
 
 
-<!-- TODO: make this identical to website output, including even the unreliability columns. Add footnotes to explain what column names mean -->
-
 ### Table 2:	Race/ethnicity distribution of US adults with and without hypertension in 2017-2020
 
 ```{r}
@@ -302,25 +300,54 @@ nhanes_data %>%
          rspec = rspec)
  ) %>% 
  filter(statistic == 'percentage') %>% 
- select(-statistic, 
-        -ends_with("reason"),
-        -unreliable_status,
-        -review_needed) %>% 
  flextable() %>% 
- set_header_labels(
-  svy_year = 'NHANES cycle',
-  htn_accaha = 'Hypertension',
-  demo_race = 'Race/Ethnicity',
-  estimate = 'Estimate',
-  std_error = 'Standard error',
-  ci_lower = 'CI lower',
-  ci_upper = 'CI upper',
-  n_obs = 'N observations'
- ) %>% 
  theme_box() %>% 
- width(width = 1) %>% 
+ width(width = 0.5) %>% 
  align(align = 'center', part = 'all') %>% 
- align(j = 1, align = 'center', part = 'all')
+ align(j = 1, align = 'center', part = 'all') %>% 
+ add_footer_lines(
+  values = "Table format is identical to the web application's output."
+ ) %>% 
+ add_footer_lines(
+  values = "svy_year indicates the NHANES cycle"
+ ) %>% 
+ add_footer_lines(
+  values = "htn_accaha indicates hypertension status." 
+ ) %>% 
+ add_footer_lines(
+  values = "demo_race indicates the race subgroup."
+ ) %>% 
+ add_footer_lines(
+  values = "statistic indicates the type of statistic computed."
+ ) %>% 
+ add_footer_lines(
+  values = "estimate is the point estimate of the given statistic"
+ ) %>% 
+ add_footer_lines(
+  values = "std_error is the standard error for estimate"
+ ) %>% 
+ add_footer_lines(
+  values = "ci_lower is the lower bound of a 95% confidence interval for estimate"
+ ) %>% 
+ add_footer_lines(
+  values = "ci_upper is the upper bound of a 95% confidence interval for estimate"
+ ) %>% 
+ add_footer_lines(
+  values = "n_obs is the number of observations (unweighted) used for computations"
+ ) %>% 
+ add_footer_lines(
+  values = "unreliable_status is TRUE if the result is unreliable, FALSE otherwise"
+ ) %>% 
+ add_footer_lines(
+  values = "unreliable_reason is blank if the result is reliable, and lists reason(s) for unreliability otherwise"
+ ) %>% 
+ add_footer_lines(
+  values = "review_needed is TRUE if the result should be reviewed, FALSE otherwise"
+ ) %>% 
+ add_footer_lines(
+  values = "review_reason is blank if the result does not require review, and lists reason(s) for requiring review otherwise"
+ )  
+
 
 ```
 
