@@ -1,5 +1,5 @@
 Package: cardioStatsUSA
-Title: Explore Cardiometabolic Outcomes Using NHANES
+Title: Analysis and Visualization of Cardiometabolic Outcomes Using NHANES
 Version: 0.0.0.9000
 Authors@R: c(
     person(given = "Byron",
@@ -16,11 +16,11 @@ Authors@R: c(
            role = c("aut", "com", "dtc"),
            email = "pmuntner@uab.edu")
     )
-Description: Analyze cardiometabolic outcomes among adults living in the 
-  United States of America using data from the National Health and Nutrition 
-  Examination Survey (NHANES). Save your results, either in the form of a 
-  dataset or as a figure. All analyses account for the NHANES design weights 
-  and are tested for equivalence with CDC statistics and prior papers.
+Description: Analyze and visualize cardiometabolic outcomes among adults living
+  in the United States of America using data from the National Health and 
+  Nutrition Examination Survey (NHANES). Save your results, either in the form 
+  of a dataset or as a figure. All analyses account for the NHANES design 
+  weights and are tested for equivalence with CDC statistics and prior papers.
 License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

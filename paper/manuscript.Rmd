@@ -1,6 +1,8 @@
 ---
 title: "Hypertension statistics for US adults: an open-source web application for analysis and visualization of US NHANES data"
 always_allow_html: true
+bibliography: refs.bib
+csl: jama.csl
 output: 
   officedown::rdocx_document:
     reference_docx: style_manuscript_times_new_roman.docx
@@ -99,23 +101,21 @@ Paul Muntner, PhD,^2^
 
 # ABSTRACT
 
-<!-- Abstract: Structured with the following headings and no more than 250 words: Background, Objectives, Methods, Results, Conclusions. The abstract should present essential data in 5 paragraphs. Use complete sentences. All data in the abstract also must appear in the manuscript text or tables. -->
-
 **Background**: Data from the US National Health and Nutrition Examination Survey (NHANES) are freely available and can be analyzed to produce hypertension statistics for the non-institutionalized US population. However, the analysis of these data requires statistical programming knowledge.
 
 **Methods**: We developed and validated a web-based application that provides hypertension statistics for US adults using 10 cycles of NHANES data, 1999-2000 through 2017-2020, without requiring users to conduct statistical programming. The application’s interface allows users to estimate crude and age-adjusted means, quantiles, and proportions. Population counts can also be estimated. To demonstrate the application’s capabilities, we estimated hypertension statistics for US adults.
 
 **Results**: The estimated mean systolic blood pressure (BP) declined from 123 mmHg in 1999-2000 to 120 mmHg in 2009-2010 and increased to 123 mmHg in 2017-2020. The age-adjusted prevalence of hypertension (i.e., systolic BP ≥130 mmHg, diastolic BP ≥80 mmHg or self-reported antihypertensive medication use) was 47.9% in 1999-2000, 43.0% in 2009-2010, and 44.7% in 2017-2020. In 2017-2020, 115.3 million US adults had hypertension. The age-adjusted prevalence of controlled BP, defined according to the 2017 American College of Cardiology/American Heart Association BP guideline, among US adults with hypertension was 9.6% in 1999-2000, 24.6% in 2013-2014, and 21.7% in 2017-2020. After age-adjustment and among US adults who self-reported taking antihypertensive medication, 27.4%, 48.5%, and 42.8% had controlled BP in 1999-2000, 2013-2014, and 2017-2020, respectively. The application was validated by replicating statistics from three publications.
 
-**Conclusions**: The application developed and validated in the current study produced valid, transparent, and reproducible results and is publicly available.
+**Conclusions**: The application developed and validated in the current study is publicly available and produced valid, transparent, and reproducible results.
 
 \newpage
 
-The National Health and Nutrition Examination Survey (NHANES) is a program conducted by the US National Center for Health Statistics (NCHS) of the Centers for Disease Control and Prevention (CDC) and is designed to assess the ongoing health and nutritional status of the non-institutionalized US population. NHANES data have been analyzed to provide hypertension statistics for non-institutionalized US adults with important policy and public health implications. For example, NHANES data have been used to estimate the impact of the lower blood pressure (BP) levels that define hypertension and controlled BP in the 2017 American College of Cardiology/American Heart Association (ACC/AHA) BP guideline versus the Seventh Report of the Joint National Committee on Prevention, Detection, Evaluation, and Treatment of High BP (JNC7) guideline. Additionally, NHANES data have been used to track the proportion of US adults with hypertension that have controlled BP, which were included in a Call-to-Action to Control BP from the US Surgeon General.
+The National Health and Nutrition Examination Survey (NHANES) is a program conducted by the US National Center for Health Statistics (NCHS) of the Centers for Disease Control and Prevention (CDC) and is designed to assess the ongoing health and nutritional status of the non-institutionalized US population. NHANES data have been analyzed to provide hypertension statistics for non-institutionalized US adults with important policy and public health implications. For example, NHANES data have been used to estimate the impact of the lower blood pressure (BP) levels that define hypertension and controlled BP in the 2017 American College of Cardiology/American Heart Association (ACC/AHA) BP guideline versus the Seventh Report of the Joint National Committee on Prevention, Detection, Evaluation, and Treatment of High BP (JNC7) guideline.[@whelton20182017; @chobanian2003seventh] Additionally, NHANES data have been used to track the proportion of US adults with hypertension that have controlled BP, which were included in a Call-to-Action to Control BP from the US Surgeon General.[@us_surgeon_2020]
 
 <br>
 
-NHANES data are publicly available and accessible through the CDC website. However, analyzing NHANES data may be challenging for a number of reasons. Specific statistical techniques are required to account for the multi-stage sampling design used to select NHANES participants and analyses need to be weighted to produce nationally representative estimates. NHANES data are currently collected in two-year periods, referred to as cycles, and each cycle  includes over 50 data files and accompanying informational material.  NHANES data collection protocols have changed over time for some variables, and these differences should be taken into account when comparing or aggregating data from multiple cycles. Also, tests need to be performed to ensure the statistical estimates are reliable, and unstable estimates should be suppressed.
+NHANES data are publicly available and accessible through the CDC website.[@nhanes_home] However, analyzing NHANES data may be challenging for a number of reasons. Specific statistical techniques are required to account for the multi-stage sampling design used to select NHANES participants and analyses need to be weighted to produce nationally representative estimates. NHANES data are currently collected in two-year periods, referred to as cycles, and each cycle includes over 50 data files and accompanying informational material. NHANES data collection protocols have changed over time for some variables, and these differences should be taken into account when comparing or aggregating data from multiple cycles. Also, tests need to be performed to ensure the statistical estimates are reliable, and unstable estimates should be suppressed.[@parker2017national]
 
 <br>
 
@@ -129,33 +129,33 @@ The NHANES program was initiated in the early 1960s and beginning in 1999 has be
 
 <br>
 
-NHANES data were collected through in-home interviews and study examinations conducted at mobile examination centers. The interview included questions about demographics, health behaviors, medical history, and medication use. During the interview, the labels of medications that participants reported taking in the preceding 30 days were recorded. During the study examination, height, weight and BP were measured and blood and spot urine samples were collected. Of relevance to the application, blood samples were used to measure total and HDL cholesterol, glycated hemoglobin and serum creatinine, and the urine sample was used to measure albumin and creatinine and to conduct a pregnancy test. The protocol for obtaining BP measurements is available online. In brief, systolic and diastolic BP (SBP and DBP, respectively) were measured three times by trained and certified physicians. BP was measured using a mercury sphygmomanometer from 1999-2000 through 2015-2016 and using an oscillometric device in 2017-2020. The mean SBP and DBP levels were computed over all available measurements for each participant. The oscillometric SBP and DBP values were calibrated to the mercury device. Antihypertensive medication classes were defined using those listed in the 2017 ACC/AHA BP guideline. For the current analysis, we defined hypertension, BP control, and resistant hypertension according to the 2017 ACC/AHA BP guideline. The application also has these variables defined according to the JNC7 definitions. A complete list of the variables available in the data set is provided in **Table 1** with full definitions provided in **Table S1**.
+NHANES data were collected through in-home interviews and study examinations conducted at mobile examination centers. The interview included questions about demographics, health behaviors, medical history, and medication use. During the interview, the labels of medications that participants reported taking in the preceding 30 days were recorded. During the study examination, height, weight and BP were measured and blood and spot urine samples were collected. Of relevance to the application, blood samples were used to measure total and high-density lipoprotein cholesterol, glycated hemoglobin and serum creatinine, and the urine sample was used to measure albumin and creatinine and to conduct a pregnancy test. The protocol for obtaining BP measurements is available online. In brief, systolic and diastolic BP (SBP and DBP, respectively) were measured three times by trained and certified physicians. BP was measured using a mercury sphygmomanometer from 1999-2000 through 2015-2016 and using an oscillometric device in 2017-2020. The mean SBP and DBP levels were computed over all available measurements for each participant. The oscillometric SBP and DBP values were calibrated to the mercury device.[@muntner2022blood] Antihypertensive medication classes were defined using those listed in the 2017 ACC/AHA BP guideline.[@whelton20182017] For the current analysis, we defined hypertension, BP control, and resistant hypertension according to the 2017 ACC/AHA BP guideline. The application also has these variables defined according to the JNC7 definitions. Chronic kidney disease (CKD) was defined by estimated glomerular filtration rate < 60 ml/min/1.73 m^2^ calculated using the 2021 serum creatinine-based equation or albumin-to-creatinine ratio ≥ 30 mg/g.[@inker_new_2021] A list of BP, hypertension, and antihypertensive medication variables is provided in **Table 1** with full definitions for all variables provided in **Table S1**.
 
 <br>
 
-There were 107,622 NHANES participants in the 10 cycles from 1999-2000 to 2017-2020. We restricted the dataset to adults ≥ 18 years of age. This exclusion was applied because statistics for BP levels and hypertension in children and adolescents are markedly different than for adults. We further restricted the population to participants who completed the in-home interview and study examination, with one or more SBP and DBP measurement, and who had data on self-reported antihypertensive medication use. After these exclusions were applied, the population in this application included 56,035 participants (**Figure S1**).
+There were 107,622 NHANES participants in the 10 cycles from 1999-2000 to 2017-2020. We restricted the dataset to adults ≥ 18 years of age. This exclusion was applied because statistics for BP levels and hypertension in children and adolescents are markedly different than for adults (**What should we cite here?** Perhaps this? doi:10.1001/jama.291.17.2107). We further restricted the population to participants who completed the in-home interview and study examination, with one or more SBP and DBP measurement, and who had data on self-reported antihypertensive medication use. After these exclusions were applied, the population in this application included 56,035 participants (**Figure S1**).
 
 <br>
 
 ## Features of the web application
 
-A full summary of this application’s features and associated tutorials are available online. Briefly, users can select NHANES cycles from 1999-2000 to 2017-2020 to be analyzed. Estimates are weighted to represent the non-institutionalized US population and users may incorporate age-adjustment through direct standardization. Users can restrict analyses to subsets of participants (e.g., participants who self-reported taking antihypertensive medication). When population count estimates are requested, survey weights are calibrated to account for missing information on SBP, DBP or self-reported antihypertensive medication use. Users may tabulate or visualize summaries, and can present results for the overall population or in subgroups defined by a stratifying variable. All figures and datasets created with the web application can be downloaded and saved. Following CDC recommendations, unreliable statistical estimates are automatically suppressed. To increase precision and reliability of estimates, contiguous NHANES cycles can be combined.
+A full summary of this application’s features and associated tutorials are available online.[@rpack_cardioStatsUSA] Briefly, users can select NHANES cycles from 1999-2000 to 2017-2020 to be analyzed. Estimates are weighted to represent the non-institutionalized US population and users may incorporate age-adjustment through direct standardization. Users can restrict analyses to subsets of participants (e.g., participants who self-reported taking antihypertensive medication). When population count estimates are requested, survey weights are calibrated to account for missing information on SBP, DBP or self-reported antihypertensive medication use. Users may tabulate or visualize summaries, and can present results for the overall population or in subgroups defined by a stratifying variable. All figures and datasets created with the web application can be downloaded and saved. Following CDC recommendations, unreliable statistical estimates are automatically suppressed. To increase precision and reliability of estimates, contiguous NHANES cycles can be combined.[@nhanes_tutorial_weights]
 
 <br>
 
 ## Development and validation of the web application
 
-The web application was created using Shiny, an open-source software package that translates code from the R programming language into HTML, CSS, or JavaScript commands that create a website interface. We created the “cardioStatsUSA” R package to provide additional details on the web application’s design and comprehensive documentation of its components. We validated the web application by using it to reproduce statistics reported in two prior studies and one CDC report.
+The web application was created using Shiny,[@rpack_shiny; @rpack_shinyWidgets; @rpack_shinyalert] an open-source software package that translates code from the R programming language into HTML, CSS, or JavaScript commands that create a website interface.[@r_language] We created the “cardioStatsUSA” R package to provide additional details on the web application’s design and comprehensive documentation of its components.[@rpack_cardioStatsUSA] We validated the web application by using it to reproduce statistics reported in two prior studies and one CDC report.[@muntner2020htn; @muntner2022blood; @fryar_hypertension_2017]
 
 <br>
 
 ## Statistical analysis
 
-We performed statistical analyses to demonstrate core features of the application. We estimated the mean SBP for US adults by NHANES cycle, 1999-2000 through 2017-2020, with points showing the estimated means and error bars showing the 95% confidence intervals. We made bar charts presenting the age-adjusted prevalence of hypertension and the estimated number of US adults with hypertension. For age adjustment, we used the estimated age distribution of US adults from 1999 to 2020 as the standard (49.3%, 33.6%, 10.1% and 7.0% being 18 to 44, 45 to 64, 65 to 74 and ≥75 years of age, respectively). To illustrate how results from the application appear when saved in various formats (e.g., comma separated, portable document format, Microsoft Excel), we tabulated the estimated race/ethnicity distribution of US adults with and without hypertension, separately. We demonstrated stratification by estimating the prevalence of hypertension by NHANES cycle for US adults with and without chronic kidney disease (CKD). We showed the application’s ability to suppress output when statistical estimates are unstable by attempting to estimate the distribution of BP categories (SBP/DBP < 120/80 mm Hg, 120-129/<80 mm Hg, 130-139/80-89 mm Hg, 140-159/90-99 mm Hg and ≥ 160/100 mm Hg) among pregnant women in 2017-2020. We then showed that reliable estimates can be obtained for the distribution of BP categories among pregnant women by pooling NHANES cycles from 2009-2010 through 2017-2020.
+We performed statistical analyses to demonstrate core features of the application. We estimated the mean SBP for US adults by NHANES cycle, 1999-2000 through 2017-2020, with points showing the estimated means and error bars showing the 95% confidence interval (CI) for the estimate. We made bar charts presenting the age-adjusted prevalence of hypertension and the estimated number of US adults with hypertension. For age adjustment, we used the estimated age distribution of US adults from 1999 to 2020 as the standard (49.3%, 33.6%, 10.1% and 7.0% being 18 to 44, 45 to 64, 65 to 74 and ≥ 75 years of age, respectively). To illustrate how results from the application appear when saved in various formats (e.g., comma separated, portable document format, Microsoft Excel), we tabulated the estimated race/ethnicity distribution of US adults with and without hypertension, separately. We demonstrated stratification by estimating the prevalence of hypertension by NHANES cycle for US adults with and without CKD. We showed the application’s ability to suppress output when statistical estimates are unstable by attempting to estimate the distribution of BP categories (SBP/DBP < 120/80 mm Hg, 120-129/<80 mm Hg, 130-139/80-89 mm Hg, 140-159/90-99 mm Hg and ≥ 160/100 mm Hg) among pregnant women in 2017-2020. We then showed that reliable estimates can be obtained for the distribution of BP categories among pregnant women by pooling NHANES cycles from 2009-2010 through 2017-2020.
 
 <br>
 
-We also illustrated how core features of the application can be combined to perform customized analyses. Specifically, we estimated the age-adjusted proportion of US adults with controlled BP by NHANES cycle among non-pregnant US adults with hypertension, overall and among those who self-reported taking antihypertensive medication. We also estimated the age-adjusted prevalence of resistant hypertension by NHANES cycle for US adults with hypertension taking antihypertensive medication and among US adults with hypertension taking ≥ 3 classes of antihypertensive medication. For age adjustment in the analysis of resistant hypertension, we set the age distribution for the standard population to represent US adults with hypertension from 1999 to 2020: 26.4%, 43.4%, 17.0% and 13.2% being 18 to 44 years, 45 to 64, 65 to 74, and ≥75 years of age, respectively.
+We also illustrated how core features of the application can be combined to perform customized analyses. Specifically, we estimated the age-adjusted proportion of US adults with controlled BP by NHANES cycle among non-pregnant US adults with hypertension, overall and among those who self-reported taking antihypertensive medication. We also estimated the age-adjusted prevalence of resistant hypertension by NHANES cycle for US adults with hypertension taking antihypertensive medication and among US adults with hypertension taking ≥ 3 classes of antihypertensive medication. For age adjustment in the analysis of resistant hypertension, we set the age distribution for the standard population to represent US adults with hypertension from 1999 to 2020: 26.4%, 43.4%, 17.0% and 13.2% being 18 to 44 years, 45 to 64, 65 to 74, and ≥ 75 years of age, respectively.
 
 <br>
 
@@ -169,11 +169,9 @@ The age-adjusted prevalence of BP control among US adults with hypertension was 
 
 <br>
 
-<!-- Among US adults with hypertension, 61.5% were not taking antihypertensive medication in 1999-2000 compared with 44.6% not taking antihypertensive medication in 2017-2020. (Figure 4; panel A). Among US adults who self-reported taking antihypertensive medication, the percentage taking four or more classes of antihypertensive medication increased from 3.5% in 1999-2000 to 7.6% in 2017-2020 (Figure 4; panel B).  -->
-
 # DISCUSSION
 
-In the current manuscript, we present a web application that allows the calculation of nationally representative estimates for BP, hypertension and antihypertensive medication-related outcomes using publicly available NHANES data. Using this application, we generated crude and age-adjusted BP and hypertension statistics. Also, we generated statistics stratified by characteristics of US adults and pooling multiple NHANES cycles to obtain more precise estimates when working with the small sub-group of pregnant women. Following its validation, version 0.0.1 of the application was released and deployed in a publicly available server on **DATE TBD**.(add a citation to version 0.0.1 of the cardioStatsUSA package and a citation to the url where the shiny app lives) Researchers, clinicians, and the public can use the application to generate customized BP and hypertension statistics for US adults.
+In the current manuscript, we present a web application that allows the calculation of nationally representative estimates for BP, hypertension and antihypertensive medication-related outcomes using publicly available NHANES data. Using this application, we generated crude and age-adjusted BP and hypertension statistics. Also, we generated statistics stratified by characteristics of US adults and pooling multiple NHANES cycles to obtain more precise estimates when working with the small sub-group of pregnant women. Following its validation, version 0.0.1 of the application was released and deployed in a publicly available server on **DATE TBD**.[@app_cardioStatsUSA] Researchers, clinicians, and the public can use the application to generate customized BP and hypertension statistics for US adults.
 
 <br>
 
@@ -181,15 +179,15 @@ NHANES was designed to obtain nationally representative estimates of the health 
 
 <br>
 
-Several design decisions have been incorporated into the application. We required participants to have a single SBP and DBP to be included while some prior analyses required three SBP and DBP measurements.  We chose an approach that is consistent with several analyses conducted by CDC investigators (cite pmid 26633197, 29155682). However, mean BP and the prevalence of high BP would be lower if we required multiple BP measurements (cite pmid 23126346). Any bias resulting from this decision is likely to be small as over 95% of adult NHANES participants with at least one SBP and DBP measurement had three SBP and DBP measurements. The application re-calibrates the NHANES weights for the estimation of population counts (cite pmid 12500213). This was done because participants missing data on SBP, DBP or antihypertensive medication use cannot have BP or hypertension-related outcomes. Weights were not re-calibrated when estimating proportions as participants missing data are removed from the numerator and denominator. Medication classes were coded using generic names and the drug classes in the 2017 ACC/AHA BP guideline. We recognize the NCHS recommends using Lexicon Plus®, a proprietary database, to categorize medication classes. While the categorization of most medications is identical using generic drug names and Lexicon Plus®, some differences exist. Many additional decisions were made regarding the definitions of variables, inclusion of study participants, and analytic approach. We sought to make decisions that would be widely acceptable and transparent to ensure the results could be described accurately.
+Several design decisions have been incorporated into the application. We required participants to have a single SBP and DBP to be included while some prior analyses required three SBP and DBP measurements.  We chose an approach that is consistent with several analyses conducted by CDC investigators.[@yoon_hypertension_2015; @fryar_hypertension_2017] However, mean BP and the prevalence of high BP may be lower if we required multiple BP measurements.[@handler_impact_2012] Any bias resulting from this decision is likely to be small as over 95% of adult NHANES participants with at least one SBP and DBP measurement had three SBP and DBP measurements. The application re-calibrates the NHANES weights for the estimation of population counts.[@coresh_prevalence_2003] This was done because participants missing data on SBP, DBP or antihypertensive medication use cannot have BP or hypertension-related outcomes. Weights were not re-calibrated when estimating proportions as participants missing data are removed from the numerator and denominator. Medication classes were coded using generic names and the drug classes in the 2017 ACC/AHA BP guideline. We recognize the NCHS recommends using Lexicon Plus®, a proprietary database, to categorize medication classes. While the categorization of most medications is identical using generic drug names and Lexicon Plus®, some differences exist. Many additional decisions were made regarding the definitions of variables, inclusion of study participants, and analytic approach. We sought to make decisions that would be widely acceptable and transparent to ensure the results could be described accurately.
 
 <br>
 
-We were able to replicate several prior manuscripts using the application. However, we were not able to replicate some results. For example, a prior manuscript reported the prevalence of resistant hypertension defined by the 2017 ACC/AHA BP guideline to be 19.7% in 2009-2014(cite pmid 30580690). When estimated by the application, the prevalence of resistant hypertension over this time period was 17.1%. The difference in the prevalence estimates can be attributed to the approach used to categorize medication into classes. The prior publication used Lexicon Plus®, which counted spironolactone as two drug classes, a potassium-sparing diuretic and an aldosterone antagonist. We included spironolactone as a single drug class, an aldosterone antagonist. Additionally, Lexicon Plus® includes Sotalol as a beta blocker and nitroglycerine as a direct vasodilator and we did not include these drugs as antihypertensive medications as they are not listed in the 2017 ACC/AHA BP guideline. The differences in results between the application and this previously published manuscript emphasize that it may not be possible to always generate results that are identical to prior publications. Users should be aware of the choices made in defining variables as this may affect the statistical estimates generated using the application.
+We were able to replicate several prior manuscripts using the application. However, we were not able to replicate some results. For example, a prior manuscript reported the prevalence of resistant hypertension defined by the 2017 ACC/AHA BP guideline to be 19.7% in 2009-2014.[@carey_prevalence_2019] When estimated by the application, the prevalence of resistant hypertension over this time period was 17.1%. The difference in the prevalence estimates can be attributed to the approach used to categorize medication into classes. The prior publication used Lexicon Plus®, which counted spironolactone as two drug classes, a potassium-sparing diuretic and an aldosterone antagonist. We included spironolactone as a single drug class, an aldosterone antagonist. Additionally, Lexicon Plus® includes Sotalol as a beta blocker and nitroglycerine as a direct vasodilator and we did not include these drugs as antihypertensive medications as they are not listed in the 2017 ACC/AHA BP guideline. The differences in results between the application and this previously published manuscript emphasize that it may not be possible to always generate results that are identical to prior publications. Users should be aware of the choices made in defining variables as this may affect the statistical estimates generated using the application.
 
 <br>
 
-The application has a number of features that can be used in combination to create highly customized statistics. Variables can be analyzed as outcomes or used to stratify results or restrict analyses to subsets of participants.  Combining the variables, tens of thousands of unique statistics can be estimated. In addition, users can generate statistics for US adults over 22 years, pooling results or stratifying the data. All results from the application can be saved as an image and included in scientific proposals or presentations. In addition, the ability to download summary data from the application allows users to further customize their results in tabular or graphical formats. The web application can also be used for educational purposes, as teachers can use it to analyze health outcomes for US adults interactively with students.
+The application has a number of features that can be used in combination to create highly customized statistics. Variables can be analyzed as outcomes or used to stratify results or restrict analyses to subsets of participants.  Combining the variables, tens of thousands of unique statistics can be estimated. In addition, users can generate statistics for US adults over 22 years, pooling results or stratifying the data. All results from the application can be saved as an image and included in scientific proposals or presentations. In addition, the ability to download results as a data set from the application allows users to further customize their results in tabular or graphical formats. The web application can also be used for educational purposes, as teachers can use it to analyze health outcomes for US adults interactively with students.
 
 <br>
 
@@ -206,6 +204,32 @@ This study has a number of strengths. We used NHANES data, which are publicly av
 ## Conclusions
 
 We developed a web-based application for analysis of hypertension outcomes among non-institutionalized adults living in the US from 1999-2000 through 2017-2020. The application is publicly available and produces valid, transparent, and reproducible results.
+
+\newpage
+
+# REFERENCES
+
+<div id="refs"></div>
+
+\newpage
+
+# ACKNOWLEDGMENTS 
+
+**this section is under construction**
+
+The views expressed in this paper are those of the authors and do not represent the official position of the National Institutes of Health (NIH), the National Heart, Lung, and Blood Institute, or the U.S. Government.
+
+# FUNDING/SUPPORT
+
+**this section is under construction and should be checked for correctness**
+
+Drs Muntner and Jaeger receive support through grant R01HL144773 from the National Heart, Lung, and Blood Institute. Drs Muntner and Hardy receive support through grant R01HL117323 from the National Heart, Lung, and Blood Institute. Dr Muntner receives support through grant R01HL139716 from the National Heart, Lung, and Blood Institute.
+
+# FINANCIAL DISCLOSURE 
+
+**this section is under construction and should be checked for correctness**
+
+Drs Muntner reported receiving grant funding and consulting fees from Amgen Inc. Dr Colantonio reported receiving grant funding from Amgen Inc. No other disclosures were reported.
 
 \newpage
 
@@ -302,7 +326,11 @@ nhanes_data %>%
  filter(statistic == 'percentage') %>% 
  flextable() %>% 
  theme_box() %>% 
- width(width = 0.5) %>% 
+ width(width = 0.875) %>% 
+ width(j = ~demo_race, width = 1) %>% 
+ width(j = ~statistic, width = 1) %>% 
+ width(j = ~unreliable_reason, width = 0.7) %>% 
+ width(j = ~review_reason, width = 0.7) %>% 
  align(align = 'center', part = 'all') %>% 
  align(j = 1, align = 'center', part = 'all') %>% 
  add_footer_lines(
@@ -353,7 +381,7 @@ nhanes_data %>%
 
 \newpage
 
-### Figure 1 Mean systolic blood pressure for US adults by calendar year
+### Figure 1: Mean systolic blood pressure for US adults by calendar year
 
 ```{r, fig.height=3.75}
 
@@ -378,7 +406,7 @@ Dots represent mean systolic blood pressure. Vertical lines represent the 95% co
 \newpage
 
 
-### Figure 2 Age-adjusted prevalence of hypertension for US adults by calendar year
+### Figure 2: Age-adjusted prevalence of hypertension for US adults by calendar year
 
 ```{r, fig.height=3.75}
 
@@ -395,7 +423,7 @@ Age adjustment was performed through direct standardization
 
 \newpage
 
-### Figure 3 Number of US adults with hypertension
+### Figure 3: Number of US adults with hypertension
 
 ```{r}
 
@@ -412,7 +440,7 @@ nhanes_visualize(data = nhanes_data,
 \newpage
 
 
-### Figure 4 Age-adjusted prevalence of blood pressure control by calendar year.
+### Figure 4: Age-adjusted prevalence of blood pressure control by calendar year.
 
 A. Among those with hypertension
 ```{r, fig.height=3.75}
