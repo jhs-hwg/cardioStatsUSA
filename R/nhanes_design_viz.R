@@ -87,6 +87,8 @@ nhanes_design_viz <- function(x,
  data <- x$results
  pool <- x$pool
 
+ # browser()
+
  if(is.null(statistic_primary)) statistic_primary <- stat_all[1]
 
  if(outcome_type == 'intg' && statistic_primary != 'quantile'){
@@ -134,9 +136,12 @@ nhanes_design_viz <- function(x,
 
  if(outcome_type == 'bnry'){
 
-  data <- data[data[[outcome]] == 'Yes', ]
+  data <- data %>%
+   .[.[[outcome]] == levels(.[[outcome]])[2], ]
 
  }
+
+ # browser()
 
  if(!group_used){
   group <- 'fake_._group'
@@ -194,6 +199,8 @@ nhanes_design_viz <- function(x,
     group = if(stacked_stratified_noexp) outcome else group,
     group_label = if(stacked_stratified_noexp) x$outcome$label else x$group$label
    )
+
+  # browser()
 
   join_names <- intersect(names(data_fig), names(data_hovertext))
 

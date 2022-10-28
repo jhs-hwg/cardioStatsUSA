@@ -61,6 +61,8 @@ nhanes_visualize <- function(data,
                           standard_weights = standard_weights,
                           simplify_output = FALSE)
 
+ # browser()
+
  nhanes_design_viz(
   smry,
   statistic_primary = statistic_primary,

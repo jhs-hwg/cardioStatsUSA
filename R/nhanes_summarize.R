@@ -76,8 +76,6 @@ nhanes_summarize <- function(data,
   dt_key <- key
  }
 
-
-
  if('module' %in% names(dt_key)){
 
   type_subpop <- dt_key[variable == outcome_variable, module]

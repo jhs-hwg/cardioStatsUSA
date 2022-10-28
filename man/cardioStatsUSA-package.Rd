@@ -4,11 +4,11 @@
 \name{cardioStatsUSA-package}
 \alias{cardioStatsUSA}
 \alias{cardioStatsUSA-package}
-\title{cardioStatsUSA: Explore Cardiometabolic Outcomes Using NHANES}
+\title{cardioStatsUSA: Analysis and Visualization of Cardiometabolic Outcomes Using NHANES}
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-Analyze cardiometabolic outcomes among adults living in the United States of America using data from the National Health and Nutrition Examination Survey (NHANES). Save your results, either in the form of a dataset or as a figure. All analyses account for the NHANES design weights and are tested for equivalence with CDC statistics and prior papers.
+Analyze and visualize cardiometabolic outcomes among adults living in the United States of America using data from the National Health and Nutrition Examination Survey (NHANES). Save your results, either in the form of a dataset or as a figure. All analyses account for the NHANES design weights and are tested for equivalence with CDC statistics and prior papers.
 }
 \seealso{
 Useful links:

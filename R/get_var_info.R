@@ -1,7 +1,7 @@
 
 
 
-#' Title
+#' Get variable information
 #'
 #' @param x \[character(1)\]
 #'

@@ -30,10 +30,14 @@ nhanes_design_subset <- function(x, subset){
        " subset(B)")
  }
 
+
+
+
  e <- substitute(subset)
  r <- eval(e, x$design$variables, parent.frame())
  r <- r & !is.na(r)
  x$design <- x$design[r, ]
+ # TODO: make subset_rows a list so we can do multiple subsets
  x$subset_rows <- which(r)
  x$operations <- c(x$operations, 'subset')
  x
