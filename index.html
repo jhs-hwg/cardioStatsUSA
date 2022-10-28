@@ -92,36 +92,43 @@
 </h1>
 </div>
 <!-- badges: start -->
-<p>Our goal is to provide a platform for exploration of the National Health and Nutrition Examination Survey (NHANES) data. You can find the online application for exploratory data here: <a href="https://bcjaeger.shinyapps.io/nhanesShinyBP/" class="external-link uri">https://bcjaeger.shinyapps.io/nhanesShinyBP/</a></p>
+
+<p>Our goal is to provide a platform for exploration of the National Health and Nutrition Examination Survey (NHANES) data. We created this website to give context and documentation for users of the application, which can be accessed here: <a href="https://bcjaeger.shinyapps.io/nhanesShinyBP/" class="external-link uri">https://bcjaeger.shinyapps.io/nhanesShinyBP/</a></p>
 <div class="section level2">
-<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+<h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
 </h2>
-<p>You can install the development version of cardioStatsUSA from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"jhs-hwg/cardioStatsUSA"</span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level2">
-<h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
-</h2>
-<p>The shiny application is hosted on a public server, but you can also run it locally:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jhs-hwg.github.io/cardioStatsUSA/">cardioStatsUSA</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="reference/app_run.html">app_run</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<!-- ## TODO list --><!-- - Write vignettes for tests of the app --><!-- - Write vignette for medication data --><!-- - Replication with AB's group --><!-- - Incorporate suppression of unreliable estimates --><!-- - Documentation/demos for R functions used in the app --><!-- - Tutorial videos --><!-- - Do we need to use AF weights? -->
-</div>
-<div class="section level2">
-<h2 id="features-of-the-application">Features of the application<a class="anchor" aria-label="anchor" href="#features-of-the-application"></a>
-</h2>
-<p>Using the web application, we estimated characteristics of the population which are relevant when investigating BP and hypertension data. As the application was designed with a number of options so that analyses can be customized to the user’s specifications. Results can be presented as figures or in tables. Figures can be made with the data represented as bars or points. The 10 NHANES cycles can be analyzed separately or multiple cycles can be pooled together, which provides a larger sample size leading to more stable statistical estimates. The analyses can be done crude or with age-adjustment using direct standardization in four age groups (18-44, 45-64, 65-74 and ≥75 years of age). Users can select the age distribution to be used as the standard population. Analyses can be done in sub-groups and stratified by participant characteristics.</p>
-<p>Full summaries of this application’s features and associated tutorials are publicly available. Briefly, selected NHANES cycles can be analyzed separately, and contiguous cycles can be pooled together to increase reliability of statistical estimates. Users may select statistics to estimate, and based on the type of outcome they are analyzing. For example, a mean may be computed for a continuous variable, whereas a prevalence or an estimated count of US adults may be computed for a categorical variable. When a user requests to estimate a count, the application automatically calibrates survey weights to ensure the sum of the counts matches the estimated total number of US adults. Weights are recalibrated within age, sex, race/ethnicity groups and NHANES cycle. All statistical analyses on the application are weighted to provide representative estimates for the non-institutionalized US population. Analyses may incorporate age-adjustment using direct standardization, and users can select the age distribution to be used as the standard population. Analyses can be done in sub-groups and stratified by participant characteristics. Following CDC recommendations, the application automatically suppresses statistics which are unreliable, e.g., due to being based on a small sample size.</p>
-</div>
-<div class="section level2">
-<h2 id="validation-of-results-from-the-shiny-application">Validation of results from the shiny application<a class="anchor" aria-label="anchor" href="#validation-of-results-from-the-shiny-application"></a>
-</h2>
-<p>We have replicated results from prior NHANES publications to verify that routines used to conduct analyses in this app are valid. Based on these tests, we have identified some cases where our app does not exactly match previously published articles, and we note those cases here.</p>
-<p>TO BE WRITTEN: notes on tests showing exact match with <a href="https://jamanetwork.com/journals/jama/fullarticle/2770254" class="external-link">Muntner et al</a></p>
-<p>TO BE WRITTEN: notes on discrepancies with results in <a href="https://www.ahajournals.org/doi/10.1161/HYPERTENSIONAHA.118.12191" class="external-link">Carey et al.</a></p>
+<p>Below are a few graphs produced by the platform. Additional graphs can be found by selecting the “Results” tab above. Instructions on how to generate statistics using the application are available by clicking on the “Get Started” tab.</p>
+<p><strong>Systolic blood pressure by age group in the last three NHANES cycles.</strong></p>
+<p><img src="reference/figures/README-unnamed-chunk-2-1.png" width="100%"></p>
+<p><strong>Prevalence of blood pressure control by sex among adults with hypertension.</strong></p>
+<p><img src="reference/figures/README-unnamed-chunk-3-1.png" width="100%"></p>
+<!-- ## Installation -->
+<!-- You can install the development version of cardioStatsUSA from [GitHub](https://github.com/) with: -->
+<!-- ``` r -->
+<!-- # install.packages("remotes") -->
+<!-- remotes::install_github("jhs-hwg/cardioStatsUSA") -->
+<!-- ``` -->
+<!-- ## Example -->
+<!-- The shiny application is hosted on a public server, but you can also run it locally: -->
+<!-- ```{r, eval=FALSE} -->
+<!-- library(cardioStatsUSA) -->
+<!-- app_run() -->
+<!-- ``` -->
+<!-- ## TODO list -->
+<!-- - Write vignettes for tests of the app -->
+<!-- - Write vignette for medication data -->
+<!-- - Replication with AB's group -->
+<!-- - Incorporate suppression of unreliable estimates -->
+<!-- - Documentation/demos for R functions used in the app -->
+<!-- - Tutorial videos -->
+<!-- - Do we need to use AF weights? -->
+<!-- ## Features of the application -->
+<!-- Using the web application, we estimated characteristics of the population which are relevant when investigating BP and hypertension data. As the application was designed with a number of options so that analyses can be customized to the user’s specifications. Results can be presented as figures or in tables. Figures can be made with the data represented as bars or points.  The 10 NHANES cycles can be analyzed separately or multiple cycles can be pooled together, which provides a larger sample size leading to more stable statistical estimates. The analyses can be done crude or with age-adjustment using direct standardization in four age groups (18-44, 45-64, 65-74 and ≥75 years of age).  Users can select the age distribution to be used as the standard population.  Analyses can be done in sub-groups and stratified by participant characteristics. -->
+<!-- Full summaries of this application's features and associated tutorials are publicly available. Briefly, selected NHANES cycles can be analyzed separately, and contiguous cycles can be pooled together to increase reliability of statistical estimates. Users may select statistics to estimate, and based on the type of outcome they are analyzing. For example, a mean may be computed for a continuous variable, whereas a prevalence or an estimated count of US adults may be computed for a categorical variable. When a user requests to estimate a count, the application automatically calibrates survey weights to ensure the sum of the counts matches the estimated total number of US adults. Weights are recalibrated within age, sex, race/ethnicity groups and NHANES cycle. All statistical analyses on the application are weighted to provide representative estimates for the non-institutionalized US population. Analyses may incorporate age-adjustment using direct standardization, and users can select the age distribution to be used as the standard population. Analyses can be done in sub-groups and stratified by participant characteristics. Following CDC recommendations, the application automatically suppresses statistics which are unreliable, e.g., due to being based on a small sample size.  -->
+<!-- ## Validation of results from the shiny application -->
+<!-- We have replicated results from prior NHANES publications to verify that routines used to conduct analyses in this app are valid. Based on these tests, we have identified some cases where our app does not exactly match previously published articles, and we note those cases here. -->
+<!-- TO BE WRITTEN: notes on tests showing exact match with [Muntner et al](https://jamanetwork.com/journals/jama/fullarticle/2770254) -->
+<!-- TO BE WRITTEN: notes on discrepancies with results in [Carey et al.](https://www.ahajournals.org/doi/10.1161/HYPERTENSIONAHA.118.12191)  -->
 </div>
 </div>
   </main><aside class="col-md-3"><div class="license">

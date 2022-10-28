@@ -94,22 +94,34 @@
 <div class="section level2">
 <h2 id="who-is-included-in-this-test">Who is included in this test<a class="anchor" aria-label="anchor" href="#who-is-included-in-this-test"></a>
 </h2>
-<p>For these tests, we include the same cohort as Muntner et al. Full details on the inclusion criteria are given in the paper, but here all that we need to do is subset the data to include rows where <code>svy_subpop_htn</code> is equal to 1.</p>
+<p>For these tests, we include the same cohort as Muntner et al. Full
+details on the inclusion criteria are given in the paper, but here all
+that we need to do is subset the data to include rows where
+<code>svy_subpop_htn</code> is equal to 1.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">nhanes_subpop_htn</span> <span class="op">&lt;-</span> <span class="va">nhanes_data</span><span class="op">[</span><span class="va">svy_subpop_htn</span> <span class="op">==</span> <span class="fl">1</span><span class="op">]</span></span></code></pre></div>
-<p>after these exclusions, <code>56035</code> participants are included.</p>
+<p>after these exclusions, <code>56035</code> participants are
+included.</p>
 </div>
 <div class="section level2">
 <h2 id="age-adjustment">Age adjustment<a class="anchor" aria-label="anchor" href="#age-adjustment"></a>
 </h2>
-<p>We use direct standardization with the same standard weights as in Munter et al.</p>
+<p>We use direct standardization with the same standard weights as in
+Munter et al.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">standard_weights</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">15.5</span>, <span class="fl">45.4</span>, <span class="fl">21.5</span>, <span class="fl">17.7</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="nhanes-design-objects">NHANES design objects<a class="anchor" aria-label="anchor" href="#nhanes-design-objects"></a>
 </h2>
-<p>In most cases, we use <code><a href="../reference/nhanes_summarize.html">nhanes_summarize()</a></code> or <code>nhanes_visualize</code> when generating results with <code>cardioStatsUSA</code>. In this case, we find it’s easier to use the <code>nhanes_design</code> family of functions, which are the lower level functions that support <code>nhanes_summarize</code> and <code>nhanes_visualize</code>. Full details on this family can be found at the help page for [nhanes_design]. For this analysis, we create three designs:</p>
+<p>In most cases, we use <code><a href="../reference/nhanes_summarize.html">nhanes_summarize()</a></code> or
+<code>nhanes_visualize</code> when generating results with
+<code>cardioStatsUSA</code>. In this case, we find it’s easier to use
+the <code>nhanes_design</code> family of functions, which are the lower
+level functions that support <code>nhanes_summarize</code> and
+<code>nhanes_visualize</code>. Full details on this family can be found
+at the help page for [nhanes_design]. For this analysis, we create three
+designs:</p>
 <ul>
 <li>an initial design that encapsulates the two others:</li>
 </ul>
@@ -130,7 +142,8 @@
 <span> <span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span> <span class="fu"><a href="../reference/nhanes_design_standardize.html">nhanes_design_standardize</a></span><span class="op">(</span>standard_weights <span class="op">=</span> <span class="va">standard_weights</span><span class="op">)</span></span></code></pre></div>
 <ul>
-<li>a design for non-pregnant adults with hypertension who reported using antihypertensive medication</li>
+<li>a design for non-pregnant adults with hypertension who reported
+using antihypertensive medication</li>
 </ul>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ds_meds</span> <span class="op">&lt;-</span> <span class="va">ds_init</span> <span class="op">%&gt;%</span></span>
@@ -144,7 +157,9 @@
 <div class="section level2">
 <h2 id="replicating-etable-1">Replicating eTable 1<a class="anchor" aria-label="anchor" href="#replicating-etable-1"></a>
 </h2>
-<p>To reproduce eTable 1 from Muntner et al, we use the <code>ds_meds</code> design object to estimate the proportion of adults with BP control according to the JNC7 BP guidelines.</p>
+<p>To reproduce eTable 1 from Muntner et al, we use the
+<code>ds_meds</code> design object to estimate the proportion of adults
+with BP control according to the JNC7 BP guidelines.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">shiny_answers_etable_1_overall</span> <span class="op">&lt;-</span> <span class="va">ds_meds</span> <span class="op">%&gt;%</span></span>
 <span> <span class="fu"><a href="../reference/nhanes_design_summarize.html">nhanes_design_summarize</a></span><span class="op">(</span>outcome_stats <span class="op">=</span> <span class="st">'percentage'</span>,</span>
@@ -204,7 +219,10 @@
 <span><span class="co">#&gt; 102: 2017-2020 Non-Hispanic Black     52.6     47.3     57.9</span></span>
 <span><span class="co">#&gt; 103: 2017-2020 Non-Hispanic Asian     63.6     57.0     70.1</span></span>
 <span><span class="co">#&gt; 104: 2017-2020           Hispanic     62.3     56.9     67.7</span></span></code></pre></div>
-<p>We also need to get the data from Muntner et al to make sure our answers match their answers. There isn’t really an easy way to load these data programmatically, so they are written manually into a data set here.</p>
+<p>We also need to get the data from Muntner et al to make sure our
+answers match their answers. There isn’t really an easy way to load
+these data programmatically, so they are written manually into a data
+set here.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">jama_etable_1</span> <span class="op">&lt;-</span> <span class="fu">tribble</span><span class="op">(</span></span>
 <span> <span class="op">~</span><span class="va">svy_year</span>,   <span class="op">~</span><span class="va">group</span>              , <span class="op">~</span><span class="va">estimate</span>, <span class="op">~</span><span class="va">ci_lower</span>, <span class="op">~</span><span class="va">ci_upper</span>,</span>
@@ -312,7 +330,8 @@
 <span> <span class="st">"2013-2014"</span>, <span class="st">"Non-Hispanic Asian"</span>,  <span class="fl">63.8</span>    ,  <span class="fl">57.2</span>    ,  <span class="fl">70.5</span>    ,</span>
 <span> <span class="st">"2015-2016"</span>, <span class="st">"Non-Hispanic Asian"</span>,  <span class="fl">54.1</span>    ,  <span class="fl">43.8</span>    ,  <span class="fl">64.4</span>    ,</span>
 <span> <span class="st">"2017-2018"</span>, <span class="st">"Non-Hispanic Asian"</span>,  <span class="fl">63.7</span>    ,  <span class="fl">58.9</span>    ,  <span class="fl">68.5</span>    <span class="op">)</span></span></code></pre></div>
-<p>Now put everything together and test that all of our answers match</p>
+<p>Now put everything together and test that all of our answers
+match</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">test_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span> jama <span class="op">=</span> <span class="va">jama_etable_1</span>,</span>
@@ -321,7 +340,8 @@
 <span> <span class="fu">rbindlist</span><span class="op">(</span>idcol <span class="op">=</span> <span class="st">'source'</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span> <span class="va">.</span><span class="op">[</span><span class="op">!</span><span class="va">svy_year</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2017-2018'</span>, <span class="st">'2017-2020'</span><span class="op">)</span><span class="op">]</span> <span class="op">%&gt;%</span></span>
 <span> <span class="fu">dcast</span><span class="op">(</span>formula <span class="op">=</span> <span class="va">svy_year</span> <span class="op">+</span> <span class="va">group</span> <span class="op">~</span> <span class="va">source</span>, value.var <span class="op">=</span> <span class="va">est_cols</span><span class="op">)</span></span></code></pre></div>
-<p>take a look at the merged results, you can see estimate_shiny matches estimate_jama in all cells shown.</p>
+<p>take a look at the merged results, you can see estimate_shiny matches
+estimate_jama in all cells shown.</p>
 <pre><code><span><span class="co">#&gt;      svy_year              group estimate_jama estimate_shiny ci_lower_jama</span></span>
 <span><span class="co">#&gt;  1: 1999-2000           18 to 44          66.1           66.1          54.7</span></span>
 <span><span class="co">#&gt;  2: 1999-2000           45 to 64          60.6           60.6          55.1</span></span>
@@ -512,7 +532,11 @@
 <span><span class="co">#&gt; 92:           63.0          70.6           70.6</span></span>
 <span><span class="co">#&gt; 93:           63.9          71.9           71.8</span></span>
 <span><span class="co">#&gt;     ci_lower_shiny ci_upper_jama ci_upper_shiny</span></span></code></pre>
-<p>In some cases, we have differences in CI estimates due to rounding and/or minor differences in the way CI boundaries are computed in R versus stata. To ensure all of these differences are small enough, we allow a 1% difference in the CI boundaries for our test. I.e., |A-B|/ B &lt; 0.01</p>
+<p>In some cases, we have differences in CI estimates due to rounding
+and/or minor differences in the way CI boundaries are computed in R
+versus stata. To ensure all of these differences are small enough, we
+allow a 1% difference in the CI boundaries for our test. I.e., |A-B|/ B
+&lt; 0.01</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ci_diff_tolerance</span> <span class="op">&lt;-</span> <span class="fl">0.01</span></span>
 <span></span>
@@ -535,7 +559,7 @@
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">Test passed</span> 😀</span></span></code></pre></div>
 <p>success! ## Replicating Table 2</p>
-<pre><code><span><span class="co">#&gt; <span style="color: #00BB00;">Test passed</span> 🥳</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; <span style="color: #00BB00;">Test passed</span> 😸</span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
