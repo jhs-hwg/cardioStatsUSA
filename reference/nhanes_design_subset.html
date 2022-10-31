@@ -18,24 +18,22 @@
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="nav-item">
-  <a class="nav-link" href="../articles/cardioStatsUSA.html">Get started</a>
-</li>
-<li class="active nav-item">
-  <a class="nav-link" href="../reference/index.html">Reference</a>
-</li>
-<li class="nav-item dropdown">
+      <ul class="navbar-nav me-auto"><li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-results">Results</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-results">
-    <a class="dropdown-item" href="../articles/bp_control.html">Blood pressure control</a>
     <a class="dropdown-item" href="../articles/hypertension.html">Hypertension</a>
     <a class="dropdown-item" href="../articles/bp_meds.html">Antihypertensive medication use</a>
+    <a class="dropdown-item" href="../articles/bp_control.html">Blood pressure control</a>
   </div>
 </li>
-<li class="nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-validation">Validation</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-validation">
-    <a class="dropdown-item" href="../articles/replicate_jama_2020.html">Muntner et al, 2020</a>
+<li class="nav-item">
+  <a class="nav-link" href="../articles/cardioStatsUSA.html">Get started</a>
+</li>
+<li class="active nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-technical-stuff">Technical stuff</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-technical-stuff">
+    <a class="dropdown-item" href="../reference/index.html">Documentation</a>
+    <a class="dropdown-item" href="../articles/replicate_jama_2020.html">Replicating Muntner et al, 2020</a>
   </div>
 </li>
 <li class="nav-item">
@@ -95,26 +93,27 @@ Missing values are taken as false.</p></dd>
 <span>                    outcome_variable <span class="op">=</span> <span class="st">'bp_sys_mean'</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">ds</span><span class="op">)</span></span></code></pre><p></p></div>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="do">## -------------------------------- NHANES design --------------------------------</span></span>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="do">## --------------------------- NHANES design ---------------------------</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Outcome variable: bp_sys_mean</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="do">## - label: Systolic blood pressure, mm Hg</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="do">## - type: continuous</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="do">## - description: Mean systolic blood pressure in mm Hg. This is based on the</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="do">##     average of up to 3 readings.  Overall, &gt;95% of participants with at least one</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="do">##     systolic blood pressure reading had three readings.  From 1999-2000 through</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="do">##     2015-2016, systolic blood pressure was measured using a mercury</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="do">##     sphygmomanometer.  In 2017-2020, systolic blood pressure was measured using an</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="do">##     oscillometric device.  The systolic blood pressure in 2017-2020 was calibrated</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="do">##     to the mercury device by adding 1.5 mm Hg to the mean measured value.</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="do">## Group variable: None</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="do">## Stratify variable: None</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="do">## N observations</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="do">## - Unweighted: 9,693</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="do">## - Weighted: 247,835,696</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="do">## ---------------------------------------------------------------------------------</span></span></code></pre><p></p></div>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="do">## - description: Mean systolic blood pressure in mm Hg. This is based on</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="do">##     the average of up to 3 readings.  Overall, &gt;95% of participants with</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="do">##     at least one systolic blood pressure reading had three readings.  From</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="do">##     1999-2000 through 2015-2016, systolic blood pressure was measured</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="do">##     using a mercury sphygmomanometer.  In 2017-2020, systolic blood</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="do">##     pressure was measured using an oscillometric device.  The systolic</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="do">##     blood pressure in 2017-2020 was calibrated to the mercury device by</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="do">##     adding 1.5 mm Hg to the mean measured value.</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="do">## Group variable: None</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Stratify variable: None</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="do">## N observations</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="do">## - Unweighted: 9,693</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="do">## - Weighted: 247,835,696</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="do">## -----------------------------------------------------------------------</span></span></code></pre><p></p></div>
 <p>Subset calls work as they do in many other <code>subset</code> functions:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="va">ds_men</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nhanes_design_subset.html">nhanes_design_subset</a></span><span class="op">(</span><span class="va">ds</span>, <span class="va">demo_gender</span> <span class="op">==</span> <span class="st">'Men'</span><span class="op">)</span></span></code></pre><p></p></div>
 <p>To verify <code>ds_men</code> has been subsetted, you can do something like this:</p>
@@ -124,74 +123,84 @@ Missing values are taken as false.</p></dd>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="do">##  4718     0</span></span></code></pre><p></p></div>
 <p>and you can also find the subsetted indices here:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="va">ds_men</span><span class="op">$</span><span class="va">subset_rows</span></span></code></pre><p></p></div>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="do">##    [1]    1    2    3    4    5    6    7    8    9   10   11   12   13   14   15</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="do">##   [16]   16   17   18   19   20   21   22   23   24   25   26   27   28   29   30</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="do">##   [31]   31   32   33   34   35   36   37   38   39   40   41   42   43   44   45</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="do">##   [46]   46   47   48   49   50   51   52   53   54   55   56   57   58   59   60</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="do">##   [61]   61   62   63   64   65   66   67   68   69   70   71   72   73   74   75</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="do">##   [76]   76   77   78   79   80   81   82   83   84   85   86   87   88   89   90</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="do">##   [91]   91   92   93   94   95   96   97   98   99  100  101  102  103  104  105</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="do">##  [106]  106  107  108  109  110  111  112  113  114  115  116  117  118  119  120</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="do">##  [121]  121  122  123  124  125  126  127  128  129  130  131  132  133  134  135</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="do">##  [136]  136  137  138  139  140  141  142  143  144  145  146  147  148  149  150</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="do">##  [151]  151  152  153  154  155  156  157  158  159  160  161  162  163  164  165</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="do">##  [166]  166  167  168  169  170  171  172  173  174  175  176  177  178  179  180</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="do">##  [181]  181  182  183  184  185  186  187  188  189  190  191  192  193  194  195</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="do">##  [196]  196  197  198  199  200  201  202  203  204  205  206  207  208  209  210</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="do">##  [211]  211  212  213  214  215  216  217  218  219  220  221  222  223  224  225</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="do">##  [226]  226  227  228  229  230  231  232  233  234  235  236  237  238  239  240</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="do">##  [241]  241  242  243  244  245  246  247  248  249  250  251  252  253  254  255</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="do">##  [256]  256  257  258  259  260  261  262  263  264  265  266  267  268  269  270</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="do">##  [271]  271  272  273  274  275  276  277  278  279  280  281  282  283  284  285</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="do">##  [286]  286  287  288  289  290  291  292  293  294  295  296  297  298  299  300</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="do">##  [301]  301  302  303  304  305  306  307  308  309  310  311  312  313  314  315</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="do">##  [316]  316  317  318  319  320  321  322  323  324  325  326  327  328  329  330</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="do">##  [331]  331  332  333  334  335  336  337  338  339  340  341  342  343  344  345</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="do">##  [346]  346  347  348  349  350  351  352  353  354  355  356  357  358  359  360</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="do">##  [361]  361  362  363  364  365  366  367  368  369  370  371  372  373  374  375</span></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="do">##  [376]  376  377  378  379  380  381  382  383  384  385  386  387  388  389  390</span></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="do">##  [391]  391  392  393  394  395  396  397  398  399  400  401  402  403  404  405</span></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="do">##  [406]  406  407  408  409  410  411  412  413  414  415  416  417  418  419  420</span></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="do">##  [421]  421  422  423  424  425  426  427  428  429  430  431  432  433  434  435</span></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="do">##  [436]  436  437  438  439  440  441  442  443  444  445  446  447  448  449  450</span></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="do">##  [451]  451  452  453  454  455  456  457  458  459  460  461  462  463  464  465</span></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="do">##  [466]  466  467  468  469  470  471  472  473  474  475  476  477  478  479  480</span></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="do">##  [481]  481  482  483  484  485  486  487  488  489  490  491  492  493  494  495</span></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="do">##  [496]  496  497  498  499  500  501  502  503  504  505  506  507  508  509  510</span></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="do">##  [511]  511  512  513  514  515  516  517  518  519  520  521  522  523  524  525</span></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="do">##  [526]  526  527  528  529  530  531  532  533  534  535  536  537  538  539  540</span></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="do">##  [541]  541  542  543  544  545  546  547  548  549  550  551  552  553  554  555</span></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="do">##  [556]  556  557  558  559  560  561  562  563  564  565  566  567  568  569  570</span></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="do">##  [571]  571  572  573  574  575  576  577  578  579  580  581  582  583  584  585</span></span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="do">##  [586]  586  587  588  589  590  591  592  593  594  595  596  597  598  599  600</span></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="do">##  [601]  601  602  603  604  605  606  607  608  609  610  611  612  613  614  615</span></span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="do">##  [616]  616  617  618  619  620  621  622  623  624  625  626  627  628  629  630</span></span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="do">##  [631]  631  632  633  634  635  636  637  638  639  640  641  642  643  644  645</span></span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="do">##  [646]  646  647  648  649  650  651  652  653  654  655  656  657  658  659  660</span></span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="do">##  [661]  661  662  663  664  665  666  667  668  669  670  671  672  673  674  675</span></span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="do">##  [676]  676  677  678  679  680  681  682  683  684  685  686  687  688  689  690</span></span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="do">##  [691]  691  692  693  694  695  696  697  698  699  700  701  702  703  704  705</span></span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="do">##  [706]  706  707  708  709  710  711  712  713  714  715  716  717  718  719  720</span></span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="do">##  [721]  721  722  723  724  725  726  727  728  729  730  731  732  733  734  735</span></span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="do">##  [736]  736  737  738  739  740  741  742  743  744  745  746  747  748  749  750</span></span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="do">##  [751]  751  752  753  754  755  756  757  758  759  760  761  762  763  764  765</span></span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="do">##  [766]  766  767  768  769  770  771  772  773  774  775  776  777  778  779  780</span></span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="do">##  [781]  781  782  783  784  785  786  787  788  789  790  791  792  793  794  795</span></span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="do">##  [796]  796  797  798  799  800  801  802  803  804  805  806  807  808  809  810</span></span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="do">##  [811]  811  812  813  814  815  816  817  818  819  820  821  822  823  824  825</span></span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="do">##  [826]  826  827  828  829  830  831  832  833  834  835  836  837  838  839  840</span></span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="do">##  [841]  841  842  843  844  845  846  847  848  849  850  851  852  853  854  855</span></span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a><span class="do">##  [856]  856  857  858  859  860  861  862  863  864  865  866  867  868  869  870</span></span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a><span class="do">##  [871]  871  872  873  874  875  876  877  878  879  880  881  882  883  884  885</span></span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a><span class="do">##  [886]  886  887  888  889  890  891  892  893  894  895  896  897  898  899  900</span></span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a><span class="do">##  [901]  901  902  903  904  905  906  907  908  909  910  911  912  913  914  915</span></span>
-<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a><span class="do">##  [916]  916  917  918  919  920  921  922  923  924  925  926  927  928  929  930</span></span>
-<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="do">##  [931]  931  932  933  934  935  936  937  938  939  940  941  942  943  944  945</span></span>
-<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a><span class="do">##  [946]  946  947  948  949  950  951  952  953  954  955  956  957  958  959  960</span></span>
-<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a><span class="do">##  [961]  961  962  963  964  965  966  967  968  969  970  971  972  973  974  975</span></span>
-<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a><span class="do">##  [976]  976  977  978  979  980  981  982  983  984  985  986  987  988  989  990</span></span>
-<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a><span class="do">##  [991]  991  992  993  994  995  996  997  998  999 1000</span></span>
-<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a><span class="do">##  [ reached getOption("max.print") -- omitted 3718 entries ]</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="do">##    [1]    1    2    3    4    5    6    7    8    9   10   11   12   13</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="do">##   [14]   14   15   16   17   18   19   20   21   22   23   24   25   26</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="do">##   [27]   27   28   29   30   31   32   33   34   35   36   37   38   39</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="do">##   [40]   40   41   42   43   44   45   46   47   48   49   50   51   52</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="do">##   [53]   53   54   55   56   57   58   59   60   61   62   63   64   65</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="do">##   [66]   66   67   68   69   70   71   72   73   74   75   76   77   78</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="do">##   [79]   79   80   81   82   83   84   85   86   87   88   89   90   91</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="do">##   [92]   92   93   94   95   96   97   98   99  100  101  102  103  104</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="do">##  [105]  105  106  107  108  109  110  111  112  113  114  115  116  117</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="do">##  [118]  118  119  120  121  122  123  124  125  126  127  128  129  130</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="do">##  [131]  131  132  133  134  135  136  137  138  139  140  141  142  143</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="do">##  [144]  144  145  146  147  148  149  150  151  152  153  154  155  156</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="do">##  [157]  157  158  159  160  161  162  163  164  165  166  167  168  169</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="do">##  [170]  170  171  172  173  174  175  176  177  178  179  180  181  182</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="do">##  [183]  183  184  185  186  187  188  189  190  191  192  193  194  195</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="do">##  [196]  196  197  198  199  200  201  202  203  204  205  206  207  208</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="do">##  [209]  209  210  211  212  213  214  215  216  217  218  219  220  221</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="do">##  [222]  222  223  224  225  226  227  228  229  230  231  232  233  234</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="do">##  [235]  235  236  237  238  239  240  241  242  243  244  245  246  247</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="do">##  [248]  248  249  250  251  252  253  254  255  256  257  258  259  260</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="do">##  [261]  261  262  263  264  265  266  267  268  269  270  271  272  273</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="do">##  [274]  274  275  276  277  278  279  280  281  282  283  284  285  286</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="do">##  [287]  287  288  289  290  291  292  293  294  295  296  297  298  299</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="do">##  [300]  300  301  302  303  304  305  306  307  308  309  310  311  312</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="do">##  [313]  313  314  315  316  317  318  319  320  321  322  323  324  325</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="do">##  [326]  326  327  328  329  330  331  332  333  334  335  336  337  338</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="do">##  [339]  339  340  341  342  343  344  345  346  347  348  349  350  351</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="do">##  [352]  352  353  354  355  356  357  358  359  360  361  362  363  364</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="do">##  [365]  365  366  367  368  369  370  371  372  373  374  375  376  377</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="do">##  [378]  378  379  380  381  382  383  384  385  386  387  388  389  390</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="do">##  [391]  391  392  393  394  395  396  397  398  399  400  401  402  403</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="do">##  [404]  404  405  406  407  408  409  410  411  412  413  414  415  416</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="do">##  [417]  417  418  419  420  421  422  423  424  425  426  427  428  429</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="do">##  [430]  430  431  432  433  434  435  436  437  438  439  440  441  442</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="do">##  [443]  443  444  445  446  447  448  449  450  451  452  453  454  455</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="do">##  [456]  456  457  458  459  460  461  462  463  464  465  466  467  468</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="do">##  [469]  469  470  471  472  473  474  475  476  477  478  479  480  481</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="do">##  [482]  482  483  484  485  486  487  488  489  490  491  492  493  494</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="do">##  [495]  495  496  497  498  499  500  501  502  503  504  505  506  507</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="do">##  [508]  508  509  510  511  512  513  514  515  516  517  518  519  520</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="do">##  [521]  521  522  523  524  525  526  527  528  529  530  531  532  533</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="do">##  [534]  534  535  536  537  538  539  540  541  542  543  544  545  546</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="do">##  [547]  547  548  549  550  551  552  553  554  555  556  557  558  559</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="do">##  [560]  560  561  562  563  564  565  566  567  568  569  570  571  572</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="do">##  [573]  573  574  575  576  577  578  579  580  581  582  583  584  585</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="do">##  [586]  586  587  588  589  590  591  592  593  594  595  596  597  598</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="do">##  [599]  599  600  601  602  603  604  605  606  607  608  609  610  611</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="do">##  [612]  612  613  614  615  616  617  618  619  620  621  622  623  624</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="do">##  [625]  625  626  627  628  629  630  631  632  633  634  635  636  637</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="do">##  [638]  638  639  640  641  642  643  644  645  646  647  648  649  650</span></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="do">##  [651]  651  652  653  654  655  656  657  658  659  660  661  662  663</span></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="do">##  [664]  664  665  666  667  668  669  670  671  672  673  674  675  676</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="do">##  [677]  677  678  679  680  681  682  683  684  685  686  687  688  689</span></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="do">##  [690]  690  691  692  693  694  695  696  697  698  699  700  701  702</span></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="do">##  [703]  703  704  705  706  707  708  709  710  711  712  713  714  715</span></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="do">##  [716]  716  717  718  719  720  721  722  723  724  725  726  727  728</span></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="do">##  [729]  729  730  731  732  733  734  735  736  737  738  739  740  741</span></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a><span class="do">##  [742]  742  743  744  745  746  747  748  749  750  751  752  753  754</span></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a><span class="do">##  [755]  755  756  757  758  759  760  761  762  763  764  765  766  767</span></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a><span class="do">##  [768]  768  769  770  771  772  773  774  775  776  777  778  779  780</span></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a><span class="do">##  [781]  781  782  783  784  785  786  787  788  789  790  791  792  793</span></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a><span class="do">##  [794]  794  795  796  797  798  799  800  801  802  803  804  805  806</span></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="do">##  [807]  807  808  809  810  811  812  813  814  815  816  817  818  819</span></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a><span class="do">##  [820]  820  821  822  823  824  825  826  827  828  829  830  831  832</span></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a><span class="do">##  [833]  833  834  835  836  837  838  839  840  841  842  843  844  845</span></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a><span class="do">##  [846]  846  847  848  849  850  851  852  853  854  855  856  857  858</span></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a><span class="do">##  [859]  859  860  861  862  863  864  865  866  867  868  869  870  871</span></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a><span class="do">##  [872]  872  873  874  875  876  877  878  879  880  881  882  883  884</span></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a><span class="do">##  [885]  885  886  887  888  889  890  891  892  893  894  895  896  897</span></span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a><span class="do">##  [898]  898  899  900  901  902  903  904  905  906  907  908  909  910</span></span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a><span class="do">##  [911]  911  912  913  914  915  916  917  918  919  920  921  922  923</span></span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a><span class="do">##  [924]  924  925  926  927  928  929  930  931  932  933  934  935  936</span></span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a><span class="do">##  [937]  937  938  939  940  941  942  943  944  945  946  947  948  949</span></span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a><span class="do">##  [950]  950  951  952  953  954  955  956  957  958  959  960  961  962</span></span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a><span class="do">##  [963]  963  964  965  966  967  968  969  970  971  972  973  974  975</span></span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a><span class="do">##  [976]  976  977  978  979  980  981  982  983  984  985  986  987  988</span></span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a><span class="do">##  [989]  989  990  991  992  993  994  995  996  997  998  999 1000</span></span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a><span class="do">##  [ reached getOption("max.print") -- omitted 3718 entries ]</span></span></code></pre><p></p></div>
 <p>Why does the design object save this information? In case you update it
 in the future and subsetting operations need to be repeated.</p><div class="section">
 <h3 id="only-one-subset-is-allowed">Only one subset is allowed<a class="anchor" aria-label="anchor" href="#only-one-subset-is-allowed"></a></h3>

@@ -42,24 +42,22 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
-<li class="nav-item">
-  <a class="nav-link" href="../articles/cardioStatsUSA.html">Get started</a>
-</li>
-<li class="nav-item">
-  <a class="nav-link" href="../reference/index.html">Reference</a>
-</li>
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-results">Results</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-results">
-    <a class="dropdown-item" href="../articles/bp_control.html">Blood pressure control</a>
     <a class="dropdown-item" href="../articles/hypertension.html">Hypertension</a>
     <a class="dropdown-item" href="../articles/bp_meds.html">Antihypertensive medication use</a>
+    <a class="dropdown-item" href="../articles/bp_control.html">Blood pressure control</a>
   </div>
 </li>
+<li class="nav-item">
+  <a class="nav-link" href="../articles/cardioStatsUSA.html">Get started</a>
+</li>
 <li class="active nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-validation">Validation</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-validation">
-    <a class="dropdown-item" href="../articles/replicate_jama_2020.html">Muntner et al, 2020</a>
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-technical-stuff">Technical stuff</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-technical-stuff">
+    <a class="dropdown-item" href="../reference/index.html">Documentation</a>
+    <a class="dropdown-item" href="../articles/replicate_jama_2020.html">Replicating Muntner et al, 2020</a>
   </div>
 </li>
 <li class="nav-item">
@@ -224,112 +222,8 @@ answers match their answers. There isn’t really an easy way to load
 these data programmatically, so they are written manually into a data
 set here.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">jama_etable_1</span> <span class="op">&lt;-</span> <span class="fu">tribble</span><span class="op">(</span></span>
-<span> <span class="op">~</span><span class="va">svy_year</span>,   <span class="op">~</span><span class="va">group</span>              , <span class="op">~</span><span class="va">estimate</span>, <span class="op">~</span><span class="va">ci_lower</span>, <span class="op">~</span><span class="va">ci_upper</span>,</span>
-<span> <span class="st">"1999-2000"</span>, <span class="st">"Overall"</span>           ,  <span class="fl">53.4</span>    ,  <span class="fl">49.0</span>    ,  <span class="fl">57.9</span>    ,</span>
-<span> <span class="st">"2001-2002"</span>, <span class="st">"Overall"</span>           ,  <span class="fl">58.6</span>    ,  <span class="fl">56.0</span>    ,  <span class="fl">61.2</span>    ,</span>
-<span> <span class="st">"2003-2004"</span>, <span class="st">"Overall"</span>           ,  <span class="fl">62.1</span>    ,  <span class="fl">57.9</span>    ,  <span class="fl">66.2</span>    ,</span>
-<span> <span class="st">"2005-2006"</span>, <span class="st">"Overall"</span>           ,  <span class="fl">65.5</span>    ,  <span class="fl">62.0</span>    ,  <span class="fl">69.0</span>    ,</span>
-<span> <span class="st">"2007-2008"</span>, <span class="st">"Overall"</span>           ,  <span class="fl">68.3</span>    ,  <span class="fl">65.9</span>    ,  <span class="fl">70.8</span>    ,</span>
-<span> <span class="st">"2009-2010"</span>, <span class="st">"Overall"</span>           ,  <span class="fl">69.7</span>    ,  <span class="fl">67.4</span>    ,  <span class="fl">72.1</span>    ,</span>
-<span> <span class="st">"2011-2012"</span>, <span class="st">"Overall"</span>           ,  <span class="fl">70.3</span>    ,  <span class="fl">66.8</span>    ,  <span class="fl">73.8</span>    ,</span>
-<span> <span class="st">"2013-2014"</span>, <span class="st">"Overall"</span>           ,  <span class="fl">72.2</span>    ,  <span class="fl">68.6</span>    ,  <span class="fl">75.8</span>    ,</span>
-<span> <span class="st">"2015-2016"</span>, <span class="st">"Overall"</span>           ,  <span class="fl">66.8</span>    ,  <span class="fl">63.0</span>    ,  <span class="fl">70.6</span>    ,</span>
-<span> <span class="st">"2017-2018"</span>, <span class="st">"Overall"</span>           ,  <span class="fl">64.8</span>    ,  <span class="fl">61.3</span>    ,  <span class="fl">68.3</span>    ,</span>
-<span> <span class="st">"1999-2000"</span>, <span class="st">"18 to 44"</span>          ,  <span class="fl">66.1</span>    ,  <span class="fl">54.7</span>    ,  <span class="fl">77.5</span>    ,</span>
-<span> <span class="st">"2001-2002"</span>, <span class="st">"18 to 44"</span>          ,  <span class="fl">70.8</span>    ,  <span class="fl">60.4</span>    ,  <span class="fl">81.1</span>    ,</span>
-<span> <span class="st">"2003-2004"</span>, <span class="st">"18 to 44"</span>          ,  <span class="fl">81.7</span>    ,  <span class="fl">73.2</span>    ,  <span class="fl">90.2</span>    ,</span>
-<span> <span class="st">"2005-2006"</span>, <span class="st">"18 to 44"</span>          ,  <span class="fl">77.2</span>    ,  <span class="fl">67.1</span>    ,  <span class="fl">87.4</span>    ,</span>
-<span> <span class="st">"2007-2008"</span>, <span class="st">"18 to 44"</span>          ,  <span class="fl">83.7</span>    ,  <span class="fl">78.6</span>    ,  <span class="fl">88.7</span>    ,</span>
-<span> <span class="st">"2009-2010"</span>, <span class="st">"18 to 44"</span>          ,  <span class="fl">65.5</span>    ,  <span class="fl">56.0</span>    ,  <span class="fl">74.9</span>    ,</span>
-<span> <span class="st">"2011-2012"</span>, <span class="st">"18 to 44"</span>          ,  <span class="fl">83.3</span>    ,  <span class="fl">74.2</span>    ,  <span class="fl">92.4</span>    ,</span>
-<span> <span class="st">"2013-2014"</span>, <span class="st">"18 to 44"</span>          ,  <span class="fl">81.0</span>    ,  <span class="fl">76.0</span>    ,  <span class="fl">85.9</span>    ,</span>
-<span> <span class="st">"2015-2016"</span>, <span class="st">"18 to 44"</span>          ,  <span class="fl">70.9</span>    ,  <span class="fl">63.2</span>    ,  <span class="fl">78.6</span>    ,</span>
-<span> <span class="st">"2017-2018"</span>, <span class="st">"18 to 44"</span>          ,  <span class="fl">73.3</span>    ,  <span class="fl">60.5</span>    ,  <span class="fl">86.0</span>    ,</span>
-<span> <span class="st">"1999-2000"</span>, <span class="st">"45 to 64"</span>          ,  <span class="fl">60.6</span>    ,  <span class="fl">55.1</span>    ,  <span class="fl">66.1</span>    ,</span>
-<span> <span class="st">"2001-2002"</span>, <span class="st">"45 to 64"</span>          ,  <span class="fl">63.3</span>    ,  <span class="fl">58.6</span>    ,  <span class="fl">68.1</span>    ,</span>
-<span> <span class="st">"2003-2004"</span>, <span class="st">"45 to 64"</span>          ,  <span class="fl">63.9</span>    ,  <span class="fl">58.6</span>    ,  <span class="fl">69.2</span>    ,</span>
-<span> <span class="st">"2005-2006"</span>, <span class="st">"45 to 64"</span>          ,  <span class="fl">68.8</span>    ,  <span class="fl">63.1</span>    ,  <span class="fl">74.5</span>    ,</span>
-<span> <span class="st">"2007-2008"</span>, <span class="st">"45 to 64"</span>          ,  <span class="fl">69.8</span>    ,  <span class="fl">65.5</span>    ,  <span class="fl">74.1</span>    ,</span>
-<span> <span class="st">"2009-2010"</span>, <span class="st">"45 to 64"</span>          ,  <span class="fl">73.4</span>    ,  <span class="fl">69.6</span>    ,  <span class="fl">77.3</span>    ,</span>
-<span> <span class="st">"2011-2012"</span>, <span class="st">"45 to 64"</span>          ,  <span class="fl">74.6</span>    ,  <span class="fl">70.6</span>    ,  <span class="fl">78.5</span>    ,</span>
-<span> <span class="st">"2013-2014"</span>, <span class="st">"45 to 64"</span>          ,  <span class="fl">75.2</span>    ,  <span class="fl">69.7</span>    ,  <span class="fl">80.7</span>    ,</span>
-<span> <span class="st">"2015-2016"</span>, <span class="st">"45 to 64"</span>          ,  <span class="fl">74.0</span>    ,  <span class="fl">68.1</span>    ,  <span class="fl">79.9</span>    ,</span>
-<span> <span class="st">"2017-2018"</span>, <span class="st">"45 to 64"</span>          ,  <span class="fl">69.1</span>    ,  <span class="fl">64.6</span>    ,  <span class="fl">73.6</span>    ,</span>
-<span> <span class="st">"1999-2000"</span>, <span class="st">"65 to 74"</span>          ,  <span class="fl">50.0</span>    ,  <span class="fl">43.2</span>    ,  <span class="fl">56.9</span>    ,</span>
-<span> <span class="st">"2001-2002"</span>, <span class="st">"65 to 74"</span>          ,  <span class="fl">49.8</span>    ,  <span class="fl">43.1</span>    ,  <span class="fl">56.5</span>    ,</span>
-<span> <span class="st">"2003-2004"</span>, <span class="st">"65 to 74"</span>          ,  <span class="fl">58.7</span>    ,  <span class="fl">51.9</span>    ,  <span class="fl">65.5</span>    ,</span>
-<span> <span class="st">"2005-2006"</span>, <span class="st">"65 to 74"</span>          ,  <span class="fl">58.8</span>    ,  <span class="fl">53.7</span>    ,  <span class="fl">63.9</span>    ,</span>
-<span> <span class="st">"2007-2008"</span>, <span class="st">"65 to 74"</span>          ,  <span class="fl">66.1</span>    ,  <span class="fl">62.2</span>    ,  <span class="fl">70.0</span>    ,</span>
-<span> <span class="st">"2009-2010"</span>, <span class="st">"65 to 74"</span>          ,  <span class="fl">71.5</span>    ,  <span class="fl">67.5</span>    ,  <span class="fl">75.6</span>    ,</span>
-<span> <span class="st">"2011-2012"</span>, <span class="st">"65 to 74"</span>          ,  <span class="fl">68.6</span>    ,  <span class="fl">62.0</span>    ,  <span class="fl">75.2</span>    ,</span>
-<span> <span class="st">"2013-2014"</span>, <span class="st">"65 to 74"</span>          ,  <span class="fl">70.6</span>    ,  <span class="fl">66.4</span>    ,  <span class="fl">74.7</span>    ,</span>
-<span> <span class="st">"2015-2016"</span>, <span class="st">"65 to 74"</span>          ,  <span class="fl">64.4</span>    ,  <span class="fl">56.7</span>    ,  <span class="fl">72.2</span>    ,</span>
-<span> <span class="st">"2017-2018"</span>, <span class="st">"65 to 74"</span>          ,  <span class="fl">64.3</span>    ,  <span class="fl">56.9</span>    ,  <span class="fl">71.7</span>    ,</span>
-<span> <span class="st">"1999-2000"</span>, <span class="st">"75+"</span>               ,  <span class="fl">28.1</span>    ,  <span class="fl">22.0</span>    ,  <span class="fl">34.3</span>    ,</span>
-<span> <span class="st">"2001-2002"</span>, <span class="st">"75+"</span>               ,  <span class="fl">46.5</span>    ,  <span class="fl">36.9</span>    ,  <span class="fl">56.2</span>    ,</span>
-<span> <span class="st">"2003-2004"</span>, <span class="st">"75+"</span>               ,  <span class="fl">44.1</span>    ,  <span class="fl">38.2</span>    ,  <span class="fl">50.1</span>    ,</span>
-<span> <span class="st">"2005-2006"</span>, <span class="st">"75+"</span>               ,  <span class="fl">55.0</span>    ,  <span class="fl">48.3</span>    ,  <span class="fl">61.7</span>    ,</span>
-<span> <span class="st">"2007-2008"</span>, <span class="st">"75+"</span>               ,  <span class="fl">53.9</span>    ,  <span class="fl">48.5</span>    ,  <span class="fl">59.2</span>    ,</span>
-<span> <span class="st">"2009-2010"</span>, <span class="st">"75+"</span>               ,  <span class="fl">61.7</span>    ,  <span class="fl">55.8</span>    ,  <span class="fl">67.6</span>    ,</span>
-<span> <span class="st">"2011-2012"</span>, <span class="st">"75+"</span>               ,  <span class="fl">49.9</span>    ,  <span class="fl">41.7</span>    ,  <span class="fl">58.1</span>    ,</span>
-<span> <span class="st">"2013-2014"</span>, <span class="st">"75+"</span>               ,  <span class="fl">58.5</span>    ,  <span class="fl">50.4</span>    ,  <span class="fl">66.7</span>    ,</span>
-<span> <span class="st">"2015-2016"</span>, <span class="st">"75+"</span>               ,  <span class="fl">47.7</span>    ,  <span class="fl">39.2</span>    ,  <span class="fl">56.2</span>    ,</span>
-<span> <span class="st">"2017-2018"</span>, <span class="st">"75+"</span>               ,  <span class="fl">46.9</span>    ,  <span class="fl">39.9</span>    ,  <span class="fl">53.9</span>    ,</span>
-<span> <span class="st">"1999-2000"</span>, <span class="st">"Women"</span>             ,  <span class="fl">49.6</span>    ,  <span class="fl">44.6</span>    ,  <span class="fl">54.5</span>    ,</span>
-<span> <span class="st">"2001-2002"</span>, <span class="st">"Women"</span>             ,  <span class="fl">57.5</span>    ,  <span class="fl">53.8</span>    ,  <span class="fl">61.1</span>    ,</span>
-<span> <span class="st">"2003-2004"</span>, <span class="st">"Women"</span>             ,  <span class="fl">59.4</span>    ,  <span class="fl">54.2</span>    ,  <span class="fl">64.6</span>    ,</span>
-<span> <span class="st">"2005-2006"</span>, <span class="st">"Women"</span>             ,  <span class="fl">63.8</span>    ,  <span class="fl">60.0</span>    ,  <span class="fl">67.6</span>    ,</span>
-<span> <span class="st">"2007-2008"</span>, <span class="st">"Women"</span>             ,  <span class="fl">67.5</span>    ,  <span class="fl">64.7</span>    ,  <span class="fl">70.3</span>    ,</span>
-<span> <span class="st">"2009-2010"</span>, <span class="st">"Women"</span>             ,  <span class="fl">71.4</span>    ,  <span class="fl">68.7</span>    ,  <span class="fl">74.0</span>    ,</span>
-<span> <span class="st">"2011-2012"</span>, <span class="st">"Women"</span>             ,  <span class="fl">70.2</span>    ,  <span class="fl">65.6</span>    ,  <span class="fl">74.7</span>    ,</span>
-<span> <span class="st">"2013-2014"</span>, <span class="st">"Women"</span>             ,  <span class="fl">72.4</span>    ,  <span class="fl">68.1</span>    ,  <span class="fl">76.7</span>    ,</span>
-<span> <span class="st">"2015-2016"</span>, <span class="st">"Women"</span>             ,  <span class="fl">67.9</span>    ,  <span class="fl">63.9</span>    ,  <span class="fl">71.9</span>    ,</span>
-<span> <span class="st">"2017-2018"</span>, <span class="st">"Women"</span>             ,  <span class="fl">63.0</span>    ,  <span class="fl">59.1</span>    ,  <span class="fl">66.8</span>    ,</span>
-<span> <span class="st">"1999-2000"</span>, <span class="st">"Men"</span>               ,  <span class="fl">59.2</span>    ,  <span class="fl">51.3</span>    ,  <span class="fl">67.1</span>    ,</span>
-<span> <span class="st">"2001-2002"</span>, <span class="st">"Men"</span>               ,  <span class="fl">61.3</span>    ,  <span class="fl">55.8</span>    ,  <span class="fl">66.8</span>    ,</span>
-<span> <span class="st">"2003-2004"</span>, <span class="st">"Men"</span>               ,  <span class="fl">65.5</span>    ,  <span class="fl">60.6</span>    ,  <span class="fl">70.3</span>    ,</span>
-<span> <span class="st">"2005-2006"</span>, <span class="st">"Men"</span>               ,  <span class="fl">68.4</span>    ,  <span class="fl">62.7</span>    ,  <span class="fl">74.1</span>    ,</span>
-<span> <span class="st">"2007-2008"</span>, <span class="st">"Men"</span>               ,  <span class="fl">69.4</span>    ,  <span class="fl">66.2</span>    ,  <span class="fl">72.6</span>    ,</span>
-<span> <span class="st">"2009-2010"</span>, <span class="st">"Men"</span>               ,  <span class="fl">68.4</span>    ,  <span class="fl">64.5</span>    ,  <span class="fl">72.3</span>    ,</span>
-<span> <span class="st">"2011-2012"</span>, <span class="st">"Men"</span>               ,  <span class="fl">71.1</span>    ,  <span class="fl">67.1</span>    ,  <span class="fl">75.1</span>    ,</span>
-<span> <span class="st">"2013-2014"</span>, <span class="st">"Men"</span>               ,  <span class="fl">72.6</span>    ,  <span class="fl">67.5</span>    ,  <span class="fl">77.8</span>    ,</span>
-<span> <span class="st">"2015-2016"</span>, <span class="st">"Men"</span>               ,  <span class="fl">66.5</span>    ,  <span class="fl">61.1</span>    ,  <span class="fl">71.8</span>    ,</span>
-<span> <span class="st">"2017-2018"</span>, <span class="st">"Men"</span>               ,  <span class="fl">67.1</span>    ,  <span class="fl">62.5</span>    ,  <span class="fl">71.8</span>    ,</span>
-<span> <span class="st">"1999-2000"</span>, <span class="st">"Non-Hispanic White"</span>,  <span class="fl">57.3</span>    ,  <span class="fl">51.9</span>    ,  <span class="fl">62.8</span>    ,</span>
-<span> <span class="st">"2001-2002"</span>, <span class="st">"Non-Hispanic White"</span>,  <span class="fl">61.3</span>    ,  <span class="fl">57.2</span>    ,  <span class="fl">65.4</span>    ,</span>
-<span> <span class="st">"2003-2004"</span>, <span class="st">"Non-Hispanic White"</span>,  <span class="fl">65.1</span>    ,  <span class="fl">60.6</span>    ,  <span class="fl">69.6</span>    ,</span>
-<span> <span class="st">"2005-2006"</span>, <span class="st">"Non-Hispanic White"</span>,  <span class="fl">67.1</span>    ,  <span class="fl">62.9</span>    ,  <span class="fl">71.2</span>    ,</span>
-<span> <span class="st">"2007-2008"</span>, <span class="st">"Non-Hispanic White"</span>,  <span class="fl">71.0</span>    ,  <span class="fl">68.3</span>    ,  <span class="fl">73.7</span>    ,</span>
-<span> <span class="st">"2009-2010"</span>, <span class="st">"Non-Hispanic White"</span>,  <span class="fl">73.4</span>    ,  <span class="fl">70.7</span>    ,  <span class="fl">76.1</span>    ,</span>
-<span> <span class="st">"2011-2012"</span>, <span class="st">"Non-Hispanic White"</span>,  <span class="fl">72.3</span>    ,  <span class="fl">68.5</span>    ,  <span class="fl">76.2</span>    ,</span>
-<span> <span class="st">"2013-2014"</span>, <span class="st">"Non-Hispanic White"</span>,  <span class="fl">75.4</span>    ,  <span class="fl">70.4</span>    ,  <span class="fl">80.4</span>    ,</span>
-<span> <span class="st">"2015-2016"</span>, <span class="st">"Non-Hispanic White"</span>,  <span class="fl">70.4</span>    ,  <span class="fl">65.6</span>    ,  <span class="fl">75.2</span>    ,</span>
-<span> <span class="st">"2017-2018"</span>, <span class="st">"Non-Hispanic White"</span>,  <span class="fl">68.2</span>    ,  <span class="fl">63.5</span>    ,  <span class="fl">72.9</span>    ,</span>
-<span> <span class="st">"1999-2000"</span>, <span class="st">"Non-Hispanic Black"</span>,  <span class="fl">44.3</span>    ,  <span class="fl">37.1</span>    ,  <span class="fl">51.5</span>    ,</span>
-<span> <span class="st">"2001-2002"</span>, <span class="st">"Non-Hispanic Black"</span>,  <span class="fl">48.6</span>    ,  <span class="fl">45.7</span>    ,  <span class="fl">51.6</span>    ,</span>
-<span> <span class="st">"2003-2004"</span>, <span class="st">"Non-Hispanic Black"</span>,  <span class="fl">55.6</span>    ,  <span class="fl">49.0</span>    ,  <span class="fl">62.2</span>    ,</span>
-<span> <span class="st">"2005-2006"</span>, <span class="st">"Non-Hispanic Black"</span>,  <span class="fl">57.9</span>    ,  <span class="fl">51.9</span>    ,  <span class="fl">63.9</span>    ,</span>
-<span> <span class="st">"2007-2008"</span>, <span class="st">"Non-Hispanic Black"</span>,  <span class="fl">61.1</span>    ,  <span class="fl">56.7</span>    ,  <span class="fl">65.6</span>    ,</span>
-<span> <span class="st">"2009-2010"</span>, <span class="st">"Non-Hispanic Black"</span>,  <span class="fl">60.1</span>    ,  <span class="fl">56.0</span>    ,  <span class="fl">64.1</span>    ,</span>
-<span> <span class="st">"2011-2012"</span>, <span class="st">"Non-Hispanic Black"</span>,  <span class="fl">64.2</span>    ,  <span class="fl">58.9</span>    ,  <span class="fl">69.4</span>    ,</span>
-<span> <span class="st">"2013-2014"</span>, <span class="st">"Non-Hispanic Black"</span>,  <span class="fl">60.4</span>    ,  <span class="fl">54.4</span>    ,  <span class="fl">66.5</span>    ,</span>
-<span> <span class="st">"2015-2016"</span>, <span class="st">"Non-Hispanic Black"</span>,  <span class="fl">58.1</span>    ,  <span class="fl">53.0</span>    ,  <span class="fl">63.2</span>    ,</span>
-<span> <span class="st">"2017-2018"</span>, <span class="st">"Non-Hispanic Black"</span>,  <span class="fl">53.2</span>    ,  <span class="fl">47.5</span>    ,  <span class="fl">58.9</span>    ,</span>
-<span> <span class="st">"1999-2000"</span>, <span class="st">"Hispanic"</span>          ,  <span class="fl">48.8</span>    ,  <span class="fl">39.3</span>    ,  <span class="fl">58.3</span>    ,</span>
-<span> <span class="st">"2001-2002"</span>, <span class="st">"Hispanic"</span>          ,  <span class="fl">61.7</span>    ,  <span class="fl">51.0</span>    ,  <span class="fl">72.4</span>    ,</span>
-<span> <span class="st">"2003-2004"</span>, <span class="st">"Hispanic"</span>          ,  <span class="fl">54.5</span>    ,  <span class="fl">40.9</span>    ,  <span class="fl">68.1</span>    ,</span>
-<span> <span class="st">"2005-2006"</span>, <span class="st">"Hispanic"</span>          ,  <span class="fl">64.2</span>    ,  <span class="fl">57.1</span>    ,  <span class="fl">71.4</span>    ,</span>
-<span> <span class="st">"2007-2008"</span>, <span class="st">"Hispanic"</span>          ,  <span class="fl">64.3</span>    ,  <span class="fl">57.7</span>    ,  <span class="fl">70.9</span>    ,</span>
-<span> <span class="st">"2009-2010"</span>, <span class="st">"Hispanic"</span>          ,  <span class="fl">58.1</span>    ,  <span class="fl">52.3</span>    ,  <span class="fl">64.1</span>    ,</span>
-<span> <span class="st">"2011-2012"</span>, <span class="st">"Hispanic"</span>          ,  <span class="fl">65.4</span>    ,  <span class="fl">59.5</span>    ,  <span class="fl">71.2</span>    ,</span>
-<span> <span class="st">"2013-2014"</span>, <span class="st">"Hispanic"</span>          ,  <span class="fl">68.9</span>    ,  <span class="fl">61.8</span>    ,  <span class="fl">75.9</span>    ,</span>
-<span> <span class="st">"2015-2016"</span>, <span class="st">"Hispanic"</span>          ,  <span class="fl">65.0</span>    ,  <span class="fl">58.8</span>    ,  <span class="fl">71.2</span>    ,</span>
-<span> <span class="st">"2017-2018"</span>, <span class="st">"Hispanic"</span>          ,  <span class="fl">58.2</span>    ,  <span class="fl">48.7</span>    ,  <span class="fl">67.7</span>    ,</span>
-<span> <span class="st">"2011-2012"</span>, <span class="st">"Non-Hispanic Asian"</span>,  <span class="fl">72.5</span>    ,  <span class="fl">62.3</span>    ,  <span class="fl">82.6</span>    ,</span>
-<span> <span class="st">"2013-2014"</span>, <span class="st">"Non-Hispanic Asian"</span>,  <span class="fl">63.8</span>    ,  <span class="fl">57.2</span>    ,  <span class="fl">70.5</span>    ,</span>
-<span> <span class="st">"2015-2016"</span>, <span class="st">"Non-Hispanic Asian"</span>,  <span class="fl">54.1</span>    ,  <span class="fl">43.8</span>    ,  <span class="fl">64.4</span>    ,</span>
-<span> <span class="st">"2017-2018"</span>, <span class="st">"Non-Hispanic Asian"</span>,  <span class="fl">63.7</span>    ,  <span class="fl">58.9</span>    ,  <span class="fl">68.5</span>    <span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span></span>
+<span><span class="va">jama_etable_1</span> <span class="op">&lt;-</span> <span class="fu">cardioStatsUSA</span><span class="fu">::</span><span class="va">muntner_jama_2020_etable_1</span></span></code></pre></div>
 <p>Now put everything together and test that all of our answers
 match</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -557,9 +451,15 @@ allow a 1% difference in the CI boundaries for our test. I.e., |A-B|/ B
 <span></span>
 <span> <span class="op">}</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">Test passed</span> 😀</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #00BB00;">Test passed</span> 😸</span></span></code></pre></div>
 <p>success! ## Replicating Table 2</p>
-<pre><code><span><span class="co">#&gt; <span style="color: #00BB00;">Test passed</span> 😸</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; <span style="color: #00BB00;">Test passed</span> 🌈</span></span></code></pre>
+</div>
+<div class="section level2">
+<h2 id="make-your-own-results">Make your own results<a class="anchor" aria-label="anchor" href="#make-your-own-results"></a>
+</h2>
+<p>You can find the online application where customized graphs can be
+made here: <a href="https://bcjaeger.shinyapps.io/nhanesShinyBP/" class="external-link uri">https://bcjaeger.shinyapps.io/nhanesShinyBP/</a></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
