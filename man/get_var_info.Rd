@@ -8,7 +8,7 @@
 \alias{get_variable_description}
 \alias{get_variable_type}
 \alias{get_variable_module}
-\title{Title}
+\title{Get variable information}
 \usage{
 get_var_info(x, key, field)
 
@@ -41,7 +41,7 @@ the column name in \code{nhanes_key} to get information from.}
 a character value
 }
 \description{
-Title
+Get variable information
 }
 \examples{
 

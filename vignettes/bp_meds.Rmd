@@ -40,11 +40,12 @@ subset_htn <- list('htn_accaha' = 'Yes')
 
 ```
 
-**P1** `r outcome_text` is important because...
+Randomized trials have demonstrated that antihypertensive medications lower blood pressure and prevent cardiovascular disease and mortality.
 
 ## `r outcome_text` overall
 
-**P2** 1-2 sentences about the results. Here is some filler text for the second sentence
+The percentage of US adults with hypertension that are taking blood pressure lowering medication increased from 1999-2000 to 2009-2010.  However, the percentage has not increased from 2009-2010 through 2017-2020. 
+
 ```{r}
 make_plot(standard_weights = standard_weights)
 ```
@@ -58,7 +59,8 @@ make_plot(subset_addons = subset_htn,
 
 ## `r outcome_text` by gender
 
-**P3** 1-2 sentences about the results. Here is some filler text for the second sentence
+Among US adults with hypertension, women are more likely to take antihypertensive medication compared with men.  However, there is a treatment gap with many women and men with hypertension not taking antihypertensive medication.
+
 ```{r}
 make_plot(group_variable = 'demo_gender',
           standard_weights = standard_weights)
@@ -74,7 +76,8 @@ make_plot(subset_addons = subset_htn,
 
 ## `r outcome_text` by age group
 
-**P4** 1-2 sentences about the results. Here is some filler text for the second sentence
+The percentage of US adults with hypertension that is taking antihypertensive medication is higher at older age.  In 2017-2020, only about 1 in 5 US adults 18 to 44 years of age with hypertension was taking antihypertensive medication.
+
 ```{r}
 make_plot(group_variable = 'demo_age_cat',
           time_values = last_3,
@@ -92,7 +95,7 @@ make_plot(subset_addons = subset_htn,
 
 ## `r outcome_text` by race/ethnicity
 
-**P5** 1-2 sentences about the results. Here is some filler text for the second sentence
+Among US adults with hypertension, non-Hispanic Black adults are more likely to take antihypertensive medication compared with non-Hispanic White and Asian adults and Hispanic adults. 
 ```{r}
 make_plot(group_variable = 'demo_race',
           time_values = last_3,
@@ -126,7 +129,7 @@ After these exclusions, a total of 54102 participants were included for the curr
 
 For age adjustment in this analysis, we set the age distribution for the standard population to represent US adults from 1999 to 2020: `r cardioStatsUSA:::describe_weights(standard_weights)`
 
-## How were these results created?
-
-EMBED YOUTUBE VIDEO HERE
+```{r finale}
+knitr::spin_child("footer.R")
+```
 

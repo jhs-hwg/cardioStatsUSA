@@ -29,18 +29,18 @@ subset_labs <- c("Not pregnant")
 
 ```
 
-**P1** `r outcome_text` is important because...
+`r outcome_text` Hypertension contributes to more cardiovascular disease events than any other risk factor in the United States and worldwide.  However, it is a preventable and treatable risk factor.  In addition to antihypertensive medication, physical activity, eating less sodium, eating more potassium, weight loss for those who are overweight and not drinking alcohol can lower blood pressure. 
 
 ## `r outcome_text` overall
 
-**P2** 1-2 sentences about the results. Here is some filler text for the second sentence
+Over 40% of US adults have hypertension according to the 2017 ACC/AHA blood pressure guideline.  According to the most recent NHANES data (NHANES 2017-2020), 44.9% of US adults have hypertension.
 ```{r}
 make_plot(standard_weights = standard_weights)
 ```
 
 ## `r outcome_text` by gender
 
-**P3** 1-2 sentences about the results. Here is some filler text for the second sentence
+Men are more likely to have hypertension compared with women.  However, a high percentage of women have hypertension. 
 ```{r}
 make_plot(group_variable = 'demo_gender',
           standard_weights = standard_weights)
@@ -48,7 +48,7 @@ make_plot(group_variable = 'demo_gender',
 
 ## `r outcome_text` by age group
 
-**P4** 1-2 sentences about the results. Here is some filler text for the second sentence
+The likelihood of having hypertension is higher among older versus younger adults. More than 80% of US adults ≥ 75 years of age hypertension.  
 ```{r}
 make_plot(group_variable = 'demo_age_cat',
           time_values = last_3,
@@ -57,7 +57,7 @@ make_plot(group_variable = 'demo_age_cat',
 
 ## `r outcome_text` by race/ethnicity
 
-**P5** 1-2 sentences about the results. Here is some filler text for the second sentence
+Non-Hispanic black adults are more likely to have hypertension compared with other race-ethnic groups in the US.  Research has reported this mostly being due to social determinants of health.
 ```{r}
 make_plot(group_variable = 'demo_race',
           time_values = last_3,
@@ -71,6 +71,8 @@ For this analysis, our definition of `r outcome_text_lowercase` was:
 
 > `r text_vignette(get_variable_description(outcome_variable))`
 
+You can use the online application to create figures for these results using the Seventh Joint National Committee definition of hypertension.
+
 ## Who is included in this analysis
 
 `r cardioStatsUSA:::describe_module_sample('htn')` Last, we restricted the sample to non-pregnant adults.
@@ -83,6 +85,6 @@ After these exclusions, a total of 54102 participants were included for the curr
 
 For age adjustment in this analysis, we set the age distribution for the standard population to represent US adults from 1999 to 2020: `r cardioStatsUSA:::describe_weights(standard_weights)`
 
-## How were these results created?
-
-EMBED YOUTUBE VIDEO HERE
+```{r finale}
+knitr::spin_child("footer.R")
+```

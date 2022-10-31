@@ -5,9 +5,8 @@ template:
 navbar:
   structure:
     left:
-    - intro
-    - reference
     - articles
+    - intro
     - tutorials
     - news
     right:
@@ -17,16 +16,18 @@ navbar:
     articles:
       text: Results
       menu:
-      - text: Blood pressure control
-        href: articles/bp_control.html
       - text: Hypertension
         href: articles/hypertension.html
       - text: Antihypertensive medication use
         href: articles/bp_meds.html
+      - text: Blood pressure control
+        href: articles/bp_control.html
     tutorials:
-      text: Validation
+      text: Technical stuff
       menu:
-      - text: Muntner et al, 2020
+      - text: Documentation
+        href: reference/index.html
+      - text: Replicating Muntner et al, 2020
         href: articles/replicate_jama_2020.html
 
 reference:

@@ -41,7 +41,8 @@ utils::globalVariables(
    "svy_subpop_chol",
    "svy_subpop_htn",
    "unreliable_reason",
-   "unreliable_status"
+   "unreliable_status",
+   "hover"
   )
  )
 )

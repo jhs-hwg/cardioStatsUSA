@@ -29,11 +29,12 @@ subset_labs <- c("Not pregnant", "With hypertension")
 
 ```
 
-**P1** `r outcome_text` is important because...
+For people with hypertension, controlling their blood pressure can substantially reduce their risk for a heart attack or stroke among many other outcomes.
 
 ## `r outcome_text` overall
 
-**P2** 1-2 sentences about the results. Here is some filler text for the second sentence
+The proportion of US adults with hypertension that has controlled blood pressure increased from 1999-2000 to 2013-2014 but has declined recently.  Only 21.7% of US adults with hypertension had controlled blood pressure in 2017-2020.
+
 ```{r}
 make_plot(standard_weights = standard_weights)
 ```
@@ -41,7 +42,8 @@ make_plot(standard_weights = standard_weights)
 
 ### Among those using antihypertensive medication
 
-**P3** 1-2 sentences about the results. Here is some filler text for the second sentence
+Among US adults taking antihypertensive medication, only 42.8% had controlled blood pressure in 2017-2020.
+
 ```{r}
 make_plot(subset_addons = list("bp_med_use" = "Yes"),
           standard_weights = standard_weights)
@@ -50,7 +52,8 @@ make_plot(subset_addons = list("bp_med_use" = "Yes"),
 
 ## `r outcome_text` by gender
 
-**P4** 1-2 sentences about the results. Here is some filler text for the second sentence
+The proportion of US adults with hypertension that has controlled BP is low among women and men.
+
 ```{r}
 make_plot(group_variable = 'demo_gender',
           standard_weights = standard_weights)
@@ -59,7 +62,8 @@ make_plot(group_variable = 'demo_gender',
 
 ### Among those using antihypertensive medication
 
-**P5** 1-2 sentences about the results. Here is some filler text for the second sentence
+Even among US adults taking antihypertensive medication, the percentage of women and men with controlled BP is low.
+
 ```{r}
 make_plot(group_variable = 'demo_gender',
           subset_addons = list("bp_med_use" = "Yes"),
@@ -69,7 +73,8 @@ make_plot(group_variable = 'demo_gender',
 
 ## `r outcome_text` by age group
 
-**P6** 1-2 sentences about the results. Here is some filler text for the second sentence
+Among all US adults with hypertension, BP control is more likely among older versus young adults. This likely is occurring because many young adults with hypertension are not taking antihypertensive medication. 
+
 ```{r}
 make_plot(group_variable = 'demo_age_cat',
           time_values = last_3)
@@ -78,7 +83,8 @@ make_plot(group_variable = 'demo_age_cat',
 
 ### Among those using antihypertensive medication
 
-**P7** 1-2 sentences about the results. Here is some filler text for the second sentence
+Among US adults taking antihypertensive medication, BP control is more common among younger compared with older adults.
+
 ```{r}
 
 make_plot(group_variable = 'demo_age_cat',
@@ -90,7 +96,8 @@ make_plot(group_variable = 'demo_age_cat',
 
 ## `r outcome_text` by race/ethnicity
 
-**P8** 1-2 sentences about the results. Here is some filler text for the second sentence
+Non-Hispanic White adults with hypertension are more likely to have controlled BP compared with non-Hispanic Black and Asian and Hispanic US adults.
+
 ```{r}
 make_plot(group_variable = 'demo_race',
           time_values = last_3,
@@ -100,7 +107,8 @@ make_plot(group_variable = 'demo_race',
 
 ### Among those using antihypertensive medication
 
-**P9** 1-2 sentences about the results. Here is some filler text for the second sentence
+Racial differences in BP control are even larger among US adults taking antihypertensive medication. However, in 2017-2020, less than 50% of each race-ethnic group in the US had controlled BP.
+
 ```{r}
 make_plot(group_variable = 'demo_race',
           time_values = last_3,
@@ -129,6 +137,7 @@ After these exclusions, a total of 26,766 participants were included for the cur
 
 For age adjustment in this analysis, we set the age distribution for the standard population to represent US adults with hypertension from 1999 to 2020: `r cardioStatsUSA:::describe_weights(standard_weights)`
 
-## How were these results created?
 
-EMBED YOUTUBE VIDEO HERE
+```{r finale}
+knitr::spin_child("footer.R")
+```

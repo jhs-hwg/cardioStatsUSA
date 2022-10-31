@@ -537,6 +537,7 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
 
     if(input$subset_n < 1) return(NULL)
 
+
     map(
      .x = seq(as.integer(input$subset_n)),
      ~ {
@@ -545,8 +546,8 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
       new_id_val_catg <- paste('subset_value', .x, 'catg', sep = '_')
       new_id_val_ctns <- paste('subset_value', .x, 'ctns', sep = '_')
 
-      ss_var_is_ctns<-
-       jsc_write_subset_ctns(new_id, ctns_subset_variables)
+      ss_var_is_ctns <- new_id %>%
+       jsc_write_subset_ctns(ctns_subset_variables)
 
       new_value_choices <- input[[new_id]] %||% character()
 

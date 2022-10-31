@@ -139,8 +139,6 @@ document_outcome_stat_options <- function(){
   "
  )
 
-
-
 }
 
 # nocov end

@@ -16,10 +16,13 @@ knitr::opts_chunk$set(
 
 ## Under construction
 
-This vignette will show
+Below is short a YouTube video explaining how to use the application.  Technical information is provided by clicking the “Technical stuff” tab above.
 
 1. How to make results using the shiny app (youtube tutorials)
 
 1. How to make results using the R package
 
 
+```{r finale}
+knitr::spin_child("footer.R")
+```
