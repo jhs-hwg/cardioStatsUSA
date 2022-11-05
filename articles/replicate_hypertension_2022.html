@@ -53,12 +53,12 @@
 <li class="nav-item">
   <a class="nav-link" href="../articles/cardioStatsUSA.html">Get started</a>
 </li>
-<li class="nav-item dropdown">
+<li class="active nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-technical-stuff">Technical stuff</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-technical-stuff">
     <a class="dropdown-item" href="../reference/index.html">Documentation</a>
     <a class="dropdown-item" href="../articles/replicate_jama_2020.html">Replicating Muntner et al, 2020</a>
-    <a class="dropdown-item" href="../articles/replicate_muntner_2022.html">Replicating Muntner et al, 2022</a>
+    <a class="dropdown-item" href="../articles/replicate_hypertension_2022.html">Replicating Muntner et al, 2022</a>
     <a class="dropdown-item" href="../articles/modules.html">Extending the application</a>
   </div>
 </li>
@@ -118,7 +118,7 @@ Munter et al.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">standard_weights</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">13.5</span>, <span class="fl">45.3</span>, <span class="fl">23.3</span>, <span class="fl">17.8</span><span class="op">)</span></span></code></pre></div>
 <p>In most cases, we use <code><a href="../reference/nhanes_summarize.html">nhanes_summarize()</a></code> or
-<code>nhanes_visualize</code> when generating results with
+<code><a href="../reference/nhanes_visualize.html">nhanes_visualize()</a></code> when generating results with
 <code>cardioStatsUSA</code>. Here, we use the <code>nhanes_design</code>
 family of functions. NHANES design functions are lower level functions
 that support <code>nhanes_summarize</code> and
@@ -276,7 +276,7 @@ the boundaries for our test. I.e., |A-B|/ B &lt; 0.01</p>
 <span></span>
 <span> <span class="op">}</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">Test passed</span> 😸</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #00BB00;">Test passed</span> 🎊</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="make-your-own-results">Make your own results<a class="anchor" aria-label="anchor" href="#make-your-own-results"></a>

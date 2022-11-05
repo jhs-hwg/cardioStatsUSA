@@ -7,9 +7,10 @@ articles:
   cardioStatsUSA: cardioStatsUSA.html
   hypertension: hypertension.html
   modules: modules.html
+  replicate_cdc_2017: replicate_cdc_2017.html
   replicate_hypertension_2022: replicate_hypertension_2022.html
   replicate_jama_2020: replicate_jama_2020.html
-last_built: 2022-11-05T13:32Z
+last_built: 2022-11-05T19:09Z
 urls:
   reference: https://jhs-hwg.github.io/cardioStatsUSA/reference
   article: https://jhs-hwg.github.io/cardioStatsUSA/articles
