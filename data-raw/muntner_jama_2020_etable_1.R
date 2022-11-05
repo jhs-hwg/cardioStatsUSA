@@ -107,4 +107,5 @@ muntner_jama_2020_etable_1 <- tibble::tribble(
  "2015-2016", "Non-Hispanic Asian",  54.1    ,  43.8    ,  64.4    ,
  "2017-2018", "Non-Hispanic Asian",  63.7    ,  58.9    ,  68.5    )
 
-usethis::use_data(muntner_jama_2020_etable_1)
+setDT(muntner_jama_2020_etable_1)
+usethis::use_data(muntner_jama_2020_etable_1, overwrite = TRUE)

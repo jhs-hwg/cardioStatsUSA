@@ -42,7 +42,7 @@ subset_htn <- list('htn_accaha' = 'Yes')
 
 Randomized trials have demonstrated that antihypertensive medications lower blood pressure and prevent cardiovascular disease and mortality.
 
-## `r outcome_text` overall
+## `r outcome_text` in the overall US population
 
 The percentage of US adults with hypertension that are taking blood pressure lowering medication increased from 1999-2000 to 2009-2010.  However, the percentage has not increased from 2009-2010 through 2017-2020. 
 

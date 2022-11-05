@@ -35,27 +35,27 @@ ds <- nhanes_design(data = nhanes_data,
 print(ds)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## --------------------------- NHANES design ---------------------------
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## ---------------------------- NHANES design ----------------------------
 ## 
 ## Outcome variable: bp_sys_mean
-## - label: Systolic blood pressure, mm Hg
+## - label: Systolic blood pressure (SBP), mm Hg
 ## - type: continuous
 ## - description: Mean systolic blood pressure in mm Hg. This is based on
-##     the average of up to 3 readings.  Overall, >95\% of participants with
-##     at least one systolic blood pressure reading had three readings.  From
-##     1999-2000 through 2015-2016, systolic blood pressure was measured
-##     using a mercury sphygmomanometer.  In 2017-2020, systolic blood
-##     pressure was measured using an oscillometric device.  The systolic
-##     blood pressure in 2017-2020 was calibrated to the mercury device by
-##     adding 1.5 mm Hg to the mean measured value.
+##     the average of up to 3 readings.  Overall, >95\% of participants with at
+##     least one systolic blood pressure reading had three readings.  From
+##     1999-2000 through 2015-2016, systolic blood pressure was measured using
+##     a mercury sphygmomanometer.  In 2017-2020, systolic blood pressure was
+##     measured using an oscillometric device.  The systolic blood pressure in
+##     2017-2020 was calibrated to the mercury device by adding 1.5 mm Hg to
+##     the mean measured oscillometric value.
 ## 
 ## Group variable: None
 ## Stratify variable: None
 ## 
 ## N observations
-## - Unweighted: 9,693
+## - Unweighted: 8,965
 ## - Weighted: 247,835,696
-## -----------------------------------------------------------------------
+## ------------------------------------------------------------------------
 }\if{html}{\out{</div>}}
 
 Subset calls work as they do in many other \code{subset} functions:
@@ -70,7 +70,7 @@ To verify \code{ds_men} has been subsetted, you can do something like this:
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## 
 ##   Men Women 
-##  4718     0
+##  4357     0
 }\if{html}{\out{</div>}}
 
 and you can also find the subsetted indices here:
@@ -155,7 +155,7 @@ and you can also find the subsetted indices here:
 ##  [963]  963  964  965  966  967  968  969  970  971  972  973  974  975
 ##  [976]  976  977  978  979  980  981  982  983  984  985  986  987  988
 ##  [989]  989  990  991  992  993  994  995  996  997  998  999 1000
-##  [ reached getOption("max.print") -- omitted 3718 entries ]
+##  [ reached getOption("max.print") -- omitted 3357 entries ]
 }\if{html}{\out{</div>}}
 
 Why does the design object save this information? In case you update it

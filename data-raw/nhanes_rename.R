@@ -39,12 +39,25 @@ nhanes_rename <- function(data){
   bp_cat_meds_excluded      = bpcat,
   bp_cat_meds_included      = bpcatmed,
 
+  # bp_control, a sub-class of bp variables
+  bp_control_jnc7   = jnc7_control,
+  bp_control_accaha = accaha_control,
+  bp_control_140_90 = control14090,
+  bp_control_130_80 = control13080,
+
+  # uncontrolled bp, inverse of controlled
+  bp_uncontrolled_jnc7,   # was already named this
+  bp_uncontrolled_accaha, # was already named this
+  bp_uncontrolled_140_90 = uncontrol14090,
+  bp_uncontrolled_130_80 = uncontrol13080,
+
   # bp_med, a sub-class of bp variables
   bp_med_use                = htmeds,
   bp_med_recommended_jnc7   = jnc7tx,
   bp_med_recommended_accaha = newgdltx,
   bp_med_n_class            = num_htn_class,
 
+  # bp_med_x, a sub-class of bp_med variables
   bp_med_ace = ace,
   bp_med_aldo = aldo,
   bp_med_alpha = alpha,
@@ -57,13 +70,6 @@ nhanes_rename <- function(data){
   bp_med_diur_thz = diur_thz,
   bp_med_renin_inhibitors = renin_inhibitors,
   bp_med_vasod = vasod,
-
-  # bp_control, a sub-class of bp variables
-  bp_control_jnc7           = jnc7_control,
-  bp_control_accaha         = accaha_control,
-
-  dplyr::any_of(c("bp_uncontrolled_jnc7",
-                  "bp_uncontrolled_accaha")),
 
   # Hypertension ------------------------------------------------------------
   htn_jnc7             = jnc7htn,

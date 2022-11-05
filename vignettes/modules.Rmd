@@ -16,6 +16,8 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 library(cardioStatsUSA)
+library(dplyr)
+library(tibble)
 ```
 
 ## Modules
@@ -23,10 +25,72 @@ library(cardioStatsUSA)
 **Definition**: We define a module as a subpopulation of NHANES participants paired with a collection of variables. Each variable in the collection has designated roles. For example, hypertension can be an outcome and can also be used to define groups when analyzing another outcome. This module definition is general enough to allow for diverse extensions of the web application, but may not be specific enough to illustrate how the web application works. Therefore, in the current analysis, we define and present results from the "BP and hypertension" module, defined as follows.
 
 
-### The Blood Pressure and Hypertension Module
+## The Blood Pressure and Hypertension Module
 
 **Subpopulation:** Beginning with 107,622 US individuals who participated in NHANES 1999-2000 to 2017- March 2020, we restricted the subpopulation to adults ≥ 18 years of age. This exclusion was applied because statistics for hypertension and BP levels in children and adolescents are markedly different than for adults. We further restricted the subpopulation to participants who completed the in-home interview and study examination, with one or more SBP and DBP measurement, and who had data on self-reported antihypertensive medication use. After these exclusions were applied, the sub-population included data from 56,035 participants (Figure S1).
 
 **Variables** The primary variables from the BP and hypertension module are listed in Table 1, with full definitions provided in Supplemental Table 1. Briefly, mean SBP and DBP levels were computed over all available measurements for each participant. Oscillometric BP values were calibrated to the mercury device as described previously. Antihypertensive medication classes were defined using recommendations from the 2017 ACC/AHA BP guideline.
 
+## Example
+
+```{r}
+my_key <- tibble::tribble(
+   ~class,        ~variable,                              ~label,  ~type, ~outcome, ~group, ~subset, ~stratify, ~module, ~description,
+ "Survey",         "svy_id",            "participant identifier",  "svy",    FALSE,  FALSE,   FALSE,     FALSE,  "none",  NA_character_,
+ "Survey",        "svy_psu",             "primary sampling unit",  "svy",    FALSE,  FALSE,   FALSE,     FALSE,  "none",  NA_character_,
+ "Survey",     "svy_strata",                            "strata",  "svy",    FALSE,  FALSE,   FALSE,     FALSE,  "none",  NA_character_,
+ "Survey", "svy_weight_mec", "Mobile examination center weights",  "svy",    FALSE,  FALSE,   FALSE,     FALSE,  "none",  NA_character_,
+ "Survey", "svy_subpop_sbp",  "Subpopulation for the SBP module",  "svy",    FALSE,  FALSE,   FALSE,     FALSE,  "none",  NA_character_,
+ "Survey",       "svy_year",                      "NHANES cycle", "time",    FALSE,  FALSE,   FALSE,     FALSE,  "none",  NA_character_,
+    "SBP",       "sbp_mmhg",                        "SBP, mm Hg", "ctns",     TRUE,   TRUE,    TRUE,      TRUE,   "sbp",  "Systolic blood pressure in mm Hg",
+    "SBP",        "sbp_cat",                      "SBP category", "catg",     TRUE,   TRUE,    TRUE,      TRUE,   "sbp",  "Systolic blood pressure categories",
+    "SBP",   "sbp_gteq_130",                  "SBP >= 130 mm Hg", "bnry",     TRUE,   TRUE,    TRUE,      TRUE,   "sbp",  "Systolic blood pressure in hypertensive range?"
+ )
+
+```
+
+Create the data that will be used in the new module
+
+```{r}
+
+my_nhanes_init <- nhanes_data %>%
+ as_tibble() %>%
+ select(svy_id,
+        svy_psu,
+        svy_strata,
+        svy_weight_mec,
+        svy_year,
+        sbp_mmhg = bp_sys_mean)
+
+```
+
+
+Derive variables to be used in your module
+
+```{r}
+
+my_nhanes_derived <- my_nhanes_init %>%
+ mutate(
+  svy_subpop_sbp = if_else(is.na(sbp_mmhg), 0, 1),
+  sbp_cat = case_when(
+   sbp_mmhg <  120 ~ "< 120 mm Hg",
+   sbp_mmhg <  130 ~ "< 130 mm Hg",
+   sbp_mmhg <  140 ~ "< 140 mm Hg",
+   sbp_mmhg >= 140 ~ ">= 140 mm Hg"
+  ),
+  sbp_gteq_130 = if_else(sbp_mmhg >= 130, "Yes", "No")
+ )
+
+nhanes_summarize(data = my_nhanes_derived,
+                 key = my_key,
+                 outcome_variable = 'sbp_mmhg')
+
+```
+
+
+```{r, echo=FALSE}
+
+knitr::include_app(url = 'https://bcjaeger.shinyapps.io/nhanesShinyBP/')
+
+```
 

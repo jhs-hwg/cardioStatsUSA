@@ -8,15 +8,12 @@ vignette: >
 ---
 
 ```{r, include = FALSE}
-
+library(testthat)
 knitr::spin_child('aaa.R')
-
 ```
 
 ```{r}
-
 knitr::spin_child("../tests/testthat/test-replicate_muntner_jama_2020.R")
-
 ```
 
 ```{r finale}

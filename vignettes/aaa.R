@@ -1,6 +1,7 @@
 
 library(cardioStatsUSA)
 library(magrittr)
+library(data.table)
 
 knitr::opts_chunk$set(
   collapse = TRUE,

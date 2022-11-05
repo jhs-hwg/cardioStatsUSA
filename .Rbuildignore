@@ -16,3 +16,4 @@ rsconnect
 ^doc$
 ^pkgdown$
 ^rmd$
+^vignettes/modules\.Rmd$

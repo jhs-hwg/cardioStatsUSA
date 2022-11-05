@@ -53,4 +53,6 @@ muntner_jama_2020_table_2 <- tibble::tribble(
  "2017-2018", "gt_160_100",   14.6     ,  11.7    ,  17.5
 )
 
-usethis::use_data(muntner_jama_2020_table_2)
+setDT(muntner_jama_2020_table_2)
+
+usethis::use_data(muntner_jama_2020_table_2, overwrite = TRUE)

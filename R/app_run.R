@@ -25,7 +25,7 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
 
  # coerce inputs to data.tables but don't copy them.
  if(!is.data.table(nhanes_data)) setDT(nhanes_data)
- if(!is.data.table(nhanes_key))  setDT(nhanes_data)
+ if(!is.data.table(nhanes_key))  setDT(nhanes_key)
 
  time_variable <- nhanes_key$variable[nhanes_key$type == 'time']
  time_values <- levels(nhanes_data[[time_variable]])

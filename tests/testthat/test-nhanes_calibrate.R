@@ -6,6 +6,8 @@
 #                               nhanes_sub = nhanes_data[svy_subpop_htn == 1])
 # )
 
+nhanes_data <- cardioStatsUSA::nhanes_data
+
 # validate calibration in subgroups defined by:
 variables <- c('svy_year',
                'demo_age_cat',

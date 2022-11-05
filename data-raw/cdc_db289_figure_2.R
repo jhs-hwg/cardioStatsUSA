@@ -15,4 +15,5 @@ cdc_db289_figure_2 <- tibble::tribble(
  "Hispanic",           "Women",      28.0,      1.2
 )
 
-usethis::use_data(cdc_db289_figure_2)
+setDT(cdc_db289_figure_2)
+usethis::use_data(cdc_db289_figure_2, overwrite = TRUE)

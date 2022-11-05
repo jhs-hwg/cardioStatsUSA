@@ -28,27 +28,27 @@ ds <- nhanes_design(data = nhanes_data,
 print(ds)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## --------------------------- NHANES design ---------------------------
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## ---------------------------- NHANES design ----------------------------
 ## 
 ## Outcome variable: bp_sys_mean
-## - label: Systolic blood pressure, mm Hg
+## - label: Systolic blood pressure (SBP), mm Hg
 ## - type: continuous
 ## - description: Mean systolic blood pressure in mm Hg. This is based on
-##     the average of up to 3 readings.  Overall, >95\% of participants with
-##     at least one systolic blood pressure reading had three readings.  From
-##     1999-2000 through 2015-2016, systolic blood pressure was measured
-##     using a mercury sphygmomanometer.  In 2017-2020, systolic blood
-##     pressure was measured using an oscillometric device.  The systolic
-##     blood pressure in 2017-2020 was calibrated to the mercury device by
-##     adding 1.5 mm Hg to the mean measured value.
+##     the average of up to 3 readings.  Overall, >95\% of participants with at
+##     least one systolic blood pressure reading had three readings.  From
+##     1999-2000 through 2015-2016, systolic blood pressure was measured using
+##     a mercury sphygmomanometer.  In 2017-2020, systolic blood pressure was
+##     measured using an oscillometric device.  The systolic blood pressure in
+##     2017-2020 was calibrated to the mercury device by adding 1.5 mm Hg to
+##     the mean measured oscillometric value.
 ## 
 ## Group variable: None
 ## Stratify variable: None
 ## 
 ## N observations
-## - Unweighted: 9,693
+## - Unweighted: 8,965
 ## - Weighted: 247,835,696
-## -----------------------------------------------------------------------
+## ------------------------------------------------------------------------
 }\if{html}{\out{</div>}}
 }
 

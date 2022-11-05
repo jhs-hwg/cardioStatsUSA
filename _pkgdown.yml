@@ -29,6 +29,10 @@ navbar:
         href: reference/index.html
       - text: Replicating Muntner et al, 2020
         href: articles/replicate_jama_2020.html
+      - text: Replicating Muntner et al, 2022
+        href: articles/replicate_muntner_2022.html
+      - text: Extending the application
+        href: articles/modules.html
 
 reference:
 - title: NHANES data
@@ -53,3 +57,7 @@ reference:
   - nhanes_calibrate
   - print.nhanes_design
   - get_var_info
+- title: Miscellaneous
+  desc: Data sets or functions that are used but don't fit in the categories above.
+- contents:
+  - replication

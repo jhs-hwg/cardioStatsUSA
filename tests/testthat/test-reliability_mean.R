@@ -1,4 +1,5 @@
 
+# A case where the number of observations is low
 
 smry <- nhanes_summarize(
  data = nhanes_data,
@@ -10,4 +11,8 @@ smry <- nhanes_summarize(
  stratify_variable = "demo_race"
 )
 
-smry[unreliable_status==TRUE]
+reasons <- smry[unreliable_status==TRUE, unreliable_reason]
+
+expect_true(
+ "Sample size < 30" %in% reasons
+)

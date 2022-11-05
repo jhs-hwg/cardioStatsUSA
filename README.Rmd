@@ -55,6 +55,7 @@ nhanes_visualize(outcome_variable = 'bp_control_accaha',
                                  
 ```
 
+
 <!-- ## Installation -->
 
 <!-- You can install the development version of cardioStatsUSA from [GitHub](https://github.com/) with: -->

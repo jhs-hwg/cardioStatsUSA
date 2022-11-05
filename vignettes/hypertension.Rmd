@@ -31,7 +31,7 @@ subset_labs <- c("Not pregnant")
 
 `r outcome_text` Hypertension contributes to more cardiovascular disease events than any other risk factor in the United States and worldwide.  However, it is a preventable and treatable risk factor.  In addition to antihypertensive medication, physical activity, eating less sodium, eating more potassium, weight loss for those who are overweight and not drinking alcohol can lower blood pressure. 
 
-## `r outcome_text` overall
+## `r outcome_text` in the overall US population
 
 Over 40% of US adults have hypertension according to the 2017 ACC/AHA blood pressure guideline.  According to the most recent NHANES data (NHANES 2017-2020), 44.9% of US adults have hypertension.
 ```{r}

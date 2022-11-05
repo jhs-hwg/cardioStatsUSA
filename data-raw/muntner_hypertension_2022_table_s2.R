@@ -39,4 +39,5 @@ muntner_hypertension_2022_table_s2 <- tibble::tribble(
  "2017-2020", "Sex", "Men",	49.0, 44.8, 53.3
 )
 
-usethis::use_data(muntner_hypertension_2022_table_s2)
+setDT(muntner_hypertension_2022_table_s2)
+usethis::use_data(muntner_hypertension_2022_table_s2, overwrite = TRUE)

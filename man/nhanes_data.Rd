@@ -5,7 +5,7 @@
 \alias{nhanes_data}
 \title{NHANES data, 1999-2020}
 \format{
-An object of class \code{data.table} (inherits from \code{data.frame}) with 63041 rows and 98 columns.
+An object of class \code{data.table} (inherits from \code{data.frame}) with 59799 rows and 102 columns.
 }
 \source{
 \url{https://wwwn.cdc.gov/nchs/nhanes/continuousnhanes/default.aspx}
@@ -133,7 +133,7 @@ were calibrated to the mercury device. Mean SBP and DBP levels were
 computed over all available
 \subsection{bp_sys_mean}{
 \itemize{
-\item Label: Systolic blood pressure, mm Hg
+\item Label: Systolic blood pressure (SBP), mm Hg
 \item Description: Mean systolic blood pressure in mm Hg. This is based on
 the average of up to 3 readings. Overall, >95\% of participants with
 at least one systolic blood pressure reading had three readings.
@@ -141,13 +141,13 @@ From 1999-2000 through 2015-2016, systolic blood pressure was
 measured using a mercury sphygmomanometer. In 2017-2020, systolic
 blood pressure was measured using an oscillometric device. The
 systolic blood pressure in 2017-2020 was calibrated to the mercury
-device by adding 1.5 mm Hg to the mean measured value.
+device by adding 1.5 mm Hg to the mean measured oscillometric value.
 }
 }
 
 \subsection{bp_dia_mean}{
 \itemize{
-\item Label: Diastolic blood pressure, mm Hg
+\item Label: Diastolic blood pressure (DBP), mm Hg
 \item Description: Mean diastolic blood pressure in mm Hg. This is based
 on the average of up to 3 readings. Overall, >95\% of participants
 with at least one diastolic blood pressure reading had three
@@ -155,7 +155,8 @@ readings. From 1999-2000 through 2015-2016, diastolic blood pressure
 was measured using a mercury sphygmomanometer. In 2017-2020,
 diastolic blood pressure was measured using an oscillometric device.
 The diastolic blood pressure in 2017-2020 was calibrated to the
-mercury device by subtracting 1.0 mm Hg to the mean measured value.
+mercury device by subtracting 1.0 mm Hg to the mean measured
+oscillometric value.
 }
 }
 
@@ -163,66 +164,110 @@ mercury device by subtracting 1.0 mm Hg to the mean measured value.
 \itemize{
 \item Label: Blood pressure category
 \item Description: Systolic/diastolic blood pressure <120/80,
-120-129/<80, 130-139/80-89, 140-159/90-99, >= 160/100.
-Participants were placed in the category associated with higher
+120-129/<80, 130-139/80-89, 140-159/90-99, >= 160/100. All
+participants were placed in the category associated with a higher
 blood pressure (e.g., someone with systolic blood pressure of 150 mm
-Hg and diastolic blood pressure of 76 mm Hg was placed in the >=
-140/90 mm Hg category)
+Hg and diastolic blood pressure of 76 mm Hg was placed in the
+140-159/90-99 mm Hg category)
 }
 }
 
 \subsection{bp_cat_meds_included}{
 \itemize{
-\item Label: Blood pressure category (including antihypertensive
-medication use)
+\item Label: Blood pressure category including antihypertensive medication
+use as a group
 \item Description: Systolic/diastolic blood pressure <120/80,
 120-129/<80, 130-139/80-89, 140-159/90-99, >= 160/100.
 Participants taking antihypertensive medication were placed in a
 separate category. Participants were placed in the category
 associated with higher blood pressure (e.g., someone with systolic
 blood pressure of 150 mm Hg and diastolic blood pressure of 76 mm Hg
-was placed in the >= 140/90 mm Hg category)
+was placed in the 140-159/90-99 mm Hg category)
 }
 }
 
 \subsection{bp_control_jnc7}{
 \itemize{
-\item Label: Blood pressure control (JNC7 guideline)
+\item Label: Blood pressure control defined by the JNC7 guideline
 \item Description: Systolic and diastolic blood pressure controlled to the
 levels recommended in the JNC7 guideline, systolic blood pressure <
-140 mm Hg and diastolic blood pressure < 90 mm Hg.
+140 mm Hg and diastolic blood pressure < 90 mm Hg except for those
+with diabetes or chronic kidney disease, where blood pressure
+control was defined by systolic blood pressure < 130 mm Hg and
+diastolic blood pressure < 80 mm Hg.
 }
 }
 
 \subsection{bp_control_accaha}{
 \itemize{
-\item Label: Blood pressure control (2017 ACC/AHA BP guideline)
+\item Label: Blood pressure control defined by the 2017 ACC/AHA BP
+guideline
 \item Description: Systolic and diastolic blood pressure controlled to the
 levels recommended in the 2017 ACC/AHA BP guideline, systolic blood
 pressure < 130 mm Hg and diastolic blood pressure < 80 mm Hg
 except for those >= 65 years of age without diabetes, chronic
 kidney disease, history of cardiovascular disease or 10-year
-predicted ASCVD risk >= 10\%. For this group, blood pressure control
-was defined as systolic blood pressure < 130 mm Hg
+predicted ASCVD risk >= 10\% estimated using the Pooled Cohort risk
+equations. For this group, blood pressure control was defined as
+systolic blood pressure < 130 mm Hg
+}
+}
+
+\subsection{bp_control_140_90}{
+\itemize{
+\item Label: Blood pressure control (SBP < 140 mm Hg and DBP < 90 mm Hg)
+\item Description: Systolic blood pressure < 140 mm Hg and diastolic
+blood pressure < 90 mm Hg
+}
+}
+
+\subsection{bp_control_130_80}{
+\itemize{
+\item Label: Blood pressure control (SBP < 130 mm Hg and DBP < 80 mm Hg)
+\item Description: Systolic blood pressure < 130 mm Hg and diastolic
+blood pressure < 80 mm Hg
 }
 }
 
 \subsection{bp_uncontrolled_jnc7}{
 \itemize{
-\item Label: Uncontrolled BP (JNC7 guideline)
+\item Label: Uncontrolled blood pressure defined by the JNC7 guideline
 \item Description: Systolic blood pressure >= 140 mm Hg or diastolic
-blood pressure >= 90 mm Hg
+blood pressure >= 90 mm Hg for those without diabetes and without
+chronic kidney disease; Systolic blood pressure >= 130 mm Hg or
+diastolic blood pressure >= 80 mm Hg for those with diabetes or
+chronic kidney disease
 }
 }
 
 \subsection{bp_uncontrolled_accaha}{
 \itemize{
-\item Label: Uncontrolled BP (2017 ACC/AHA BP guideline)
+\item Label: Uncontrolled blood pressure defined by the 2017 ACC/AHA BP
+guideline
 \item Description: Systolic blood pressure >= 130 mm Hg or diastolic
-blood pressure >= 80 mm Hg except for individuals without diabetes,
-chronic kidney disease, history of cardiovascular disease or 10-year
-predicted ASCVD risk >= 10\%. For this group, uncontrolled blood
+blood pressure >= 80 mm Hg except for adults >= 65 years of age
+without diabetes, chronic kidney disease, history of cardiovascular
+disease or 10-year predicted ASCVD risk >= 10\% estimated using the
+Pooled Cohort risk equations. For this group, uncontrolled blood
 pressure was defined as systolic blood pressure >= 130 mm Hg
+}
+}
+
+\subsection{bp_uncontrolled_140_90}{
+\itemize{
+\item Label: Uncontrolled blood pressure (SBP >= 140 mm Hg or DBP >= 90
+mm Hg)
+\item Description: Systolic blood pressure >= 140 mm Hg or diastolic
+blood pressure >= 90 mm Hg
+}
+}
+
+\subsection{bp_uncontrolled_130_80}{
+\itemize{
+\item Label: Uncontrolled blood pressure (SBP >= 130 mm Hg or DBP >= 80
+mm Hg)
+\item Description: Systolic blood pressure >= 130 mm Hg or diastolic
+blood pressure >= 80 mm Hg
 }
 }
 }
@@ -233,7 +278,7 @@ Cardiology/American Heart Association (ACC/AHA) BP guideline and the
 Seventh Joint National Committee (JNC7) BP guideline.
 \subsection{htn_jnc7}{
 \itemize{
-\item Label: Hypertension (JNC7 guideline)
+\item Label: Hypertension defined by the JNC7 guideline
 \item Description: Hypertension defined by the JNC7 guideline, systolic
 blood pressure >= 140 mm Hg, diastolic blood pressure >= 90 mm Hg
 or self-reported antihypertensive medication use.
@@ -242,7 +287,7 @@ or self-reported antihypertensive medication use.
 
 \subsection{htn_accaha}{
 \itemize{
-\item Label: Hypertension (2017 ACC/AHA BP guideline)
+\item Label: Hypertension defined by the 2017 ACC/AHA BP guideline
 \item Description: Hypertension defined by the 2017 ACC/AHA blood pressure
 guideline, systolic blood pressure >= 130 mm Hg, diastolic blood
 pressure >= 80 mm Hg or self-reported antihypertensive medication
@@ -260,7 +305,7 @@ medication.
 
 \subsection{htn_resistant_jnc7}{
 \itemize{
-\item Label: Resistant hypertension (JNC7 guideline definition)
+\item Label: Resistant hypertension defined by the JNC7 guideline
 \item Description: Taking 4 or more classes of antihypertensive
 medication, systolic blood pressure >= 140 mm Hg or diastolic blood
 pressure >= 90 mm Hg with the use of 3 classes of antihypertensive
@@ -273,24 +318,25 @@ kidney disease.
 
 \subsection{htn_resistant_accaha}{
 \itemize{
-\item Label: Resistant hypertension (2017 ACC/AHA BP guideline)
+\item Label: Resistant hypertension defined by the 2017 ACC/AHA BP
+guideline
 \item Description: Taking 4 or more classes of antihypertensive
-medication, systolic blood pressure >= 140 mm Hg or diastolic blood
-pressure >= 90 mm Hg with the use of 3 classes of antihypertensive
-medication, or systolic blood pressure >= 130 mm Hg or diastolic
-blood pressure >= 80 mm Hg with the use of 3 classes of
-antihypertensive medication for those <65 years of age and those
->= 65 years of age with diabetes, chronic kidney disease or high
-cardiovascular risk defined by a history of cardiovascular disease
-or 10-year predicted risk >= 10\% using the pooled cohort risk
-equations.
+medication; systolic blood pressure >= 130 mm Hg or diastolic blood
+pressure >= 80 mm Hg with the use of 3 classes of antihypertensive
+medication for those < 65 years of age and those >= 65 years of
+age with diabetes, chronic kidney disease, history of cardiovascular
+disease or 10-year predicted ASCVD risk >= 10\%; Systolic blood
+pressure >= 130 mm Hg with the use of 3 classes of antihypertensive
+medication for those >= 65 years of age without diabetes, chronic
+kidney disease, history of cardiovascular disease or 10-year
+predicted ASCVD risk >= 10\%.
 }
 }
 
 \subsection{htn_resistant_accaha_thz}{
 \itemize{
-\item Label: Resistant hypertension (JNC7 guideline, requires thiazide
-diuretic)
+\item Label: Resistant hypertension defined by the JNC7 guideline,
+requires thiazide diuretic
 \item Description: Taking 4 or more classes of antihypertensive
 medication, systolic blood pressure >= 140 mm Hg or diastolic blood
 pressure >= 90 mm Hg with the use of 3 classes of antihypertensive
@@ -307,8 +353,8 @@ participant had to be taking a thiazide diuretic.
 
 \subsection{htn_resistant_jnc7_thz}{
 \itemize{
-\item Label: Resistant hypertension (2017 ACC/AHA BP guideline, requires
-thiazide diuretic)
+\item Label: Resistant hypertension defined by the 2017 ACC/AHA BP
+guideline, requires thiazide diuretic
 \item Description: Taking 4 or more classes of antihypertensive
 medication, systolic blood pressure >= 140 mm Hg or diastolic blood
 pressure >= 90 mm Hg with the use of 3 classes of antihypertensive
@@ -333,7 +379,8 @@ reported taking in the preceding 30 days were recorded.
 
 \subsection{bp_med_recommended_jnc7}{
 \itemize{
-\item Label: Antihypertensive medications recommended (JNC7 guideline)
+\item Label: Antihypertensive medications recommended defined by the JNC7
+guideline
 \item Description: Systolic blood pressure >= 140 mm Hg or diastolic
 blood pressure >= 90 mm Hg; Systolic blood pressure >= 130 mm Hg
 or diastolic blood pressure >= 80 mm Hg for those with chronic
@@ -345,8 +392,8 @@ definition.
 
 \subsection{bp_med_recommended_accaha}{
 \itemize{
-\item Label: Antihypertensive medications recommended (2017 ACC/AHA BP
-guideline)
+\item Label: Antihypertensive medications recommended by the 2017 ACC/AHA
+BP guideline
 \item Description: Systolic blood pressure >= 140 mm Hg or diastolic
 blood pressure >= 90 mm Hg; Systolic blood pressure >= 130 mm Hg
 or diastolic blood pressure >= 80 mm Hg for those with chronic

@@ -5,9 +5,7 @@
 # Years: 2015-2016
 
 nhanes_data_test <- nhanes_data %>%
- as.data.table() %>%
  dplyr::mutate(
-  svy_weight = svy_weight_mec,
   demo_age_cat = cut(demo_age_years,
                      breaks = c(18, 39, 59, Inf),
                      labels = c("18-39", "40-59", "60+"),

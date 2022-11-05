@@ -20,15 +20,18 @@ nhanes_data <-
  nhanes_recode() %>%
  nhanes_rename()
 
-
 setDT(nhanes_data)
 
 nhanes_key <- cardioStatsUSA::nhanes_key
 
-for(i in names(nhanes_data)){
+for(i in intersect(names(nhanes_data), nhanes_key$variable)){
+
  if(is.null(attr(nhanes_data[[i]], 'label'))){
-  attr(nhanes_data[[i]], 'label') <- nhanes_key$variables[[i]]$label
+  attr(nhanes_data[[i]], 'label') <- nhanes_key %>%
+   .[variable == i] %>%
+   .[['label']]
  }
+
 }
 
 usethis::use_data(nhanes_data, overwrite = TRUE)

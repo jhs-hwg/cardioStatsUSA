@@ -1,0 +1,21 @@
+---
+title: "Replicating analysis from Muntner et al, 2022"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Replicating analysis from Muntner et al, 2022}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+library(testthat)
+knitr::spin_child('aaa.R')
+```
+
+```{r}
+knitr::spin_child("../tests/testthat/test-replicate_muntner_hypertension_2022.R")
+```
+
+```{r finale}
+knitr::spin_child("footer.R")
+```

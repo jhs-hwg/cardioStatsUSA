@@ -13,4 +13,6 @@ cdc_db289_figure_1 <- tibble::tribble(
  "Women",         "60+",         66.8,      2.6
 )
 
-usethis::use_data(cdc_db289_figure_1)
+setDT(cdc_db289_figure_1)
+usethis::use_data(cdc_db289_figure_1, overwrite = TRUE)
+

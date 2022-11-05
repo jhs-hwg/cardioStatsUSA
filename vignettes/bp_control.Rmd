@@ -31,7 +31,7 @@ subset_labs <- c("Not pregnant", "With hypertension")
 
 For people with hypertension, controlling their blood pressure can substantially reduce their risk for a heart attack or stroke among many other outcomes.
 
-## `r outcome_text` overall
+## `r outcome_text` in the overall US population
 
 The proportion of US adults with hypertension that has controlled blood pressure increased from 1999-2000 to 2013-2014 but has declined recently.  Only 21.7% of US adults with hypertension had controlled blood pressure in 2017-2020.
 

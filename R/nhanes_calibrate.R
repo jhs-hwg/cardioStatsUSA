@@ -64,6 +64,12 @@ nhanes_calibrate <- function(nhanes_sub,
                                           'demo_gender',
                                           'demo_race_black')){
 
+ # We can only calibrate on variables that are in nhanes_sub
+ calib_by <- calib_by[calib_by %in% names(nhanes_sub)]
+
+ if(is_empty(calib_by))
+  stop("nhanes data do not have any variables in calib_by")
+
  if(!is.data.table(nhanes_sub))
   nhanes_sub <- as.data.table(nhanes_sub)
 

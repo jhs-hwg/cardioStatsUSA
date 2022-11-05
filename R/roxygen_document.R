@@ -121,6 +121,10 @@ document_nhanes_design <- function(){
  "an NHANES design object. See [nhanes_design] for more details."
 }
 
+describe_nhanes_design <- function(){
+ "NHANES design functions are lower level functions that support `nhanes_summarize` and `nhanes_visualize`. Full details on this family can be found at the help page for [nhanes_design]"
+}
+
 document_outcome_stat_options <- function(){
 
  stats <- c('ctns', 'intg', 'catg', 'bnry') %>%
