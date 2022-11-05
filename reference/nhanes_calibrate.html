@@ -40,6 +40,8 @@ full NHANES data"><meta property="og:image" content="https://jhs-hwg.github.io/c
   <div class="dropdown-menu" aria-labelledby="dropdown-technical-stuff">
     <a class="dropdown-item" href="../reference/index.html">Documentation</a>
     <a class="dropdown-item" href="../articles/replicate_jama_2020.html">Replicating Muntner et al, 2020</a>
+    <a class="dropdown-item" href="../articles/replicate_muntner_2022.html">Replicating Muntner et al, 2022</a>
+    <a class="dropdown-item" href="../articles/modules.html">Extending the application</a>
   </div>
 </li>
 <li class="nav-item">
@@ -125,7 +127,7 @@ the original NHANES data.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># the un-calibrated weights do not match the size of the NHANES population</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">nhanes_sub</span><span class="op">$</span><span class="va">svy_weight_mec</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2129608883</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2129039733</span>
 <span class="r-in"><span><span class="co"># but the calibrated weights do</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">nhanes_htn</span><span class="op">$</span><span class="va">svy_weight_cal</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2244544303</span>

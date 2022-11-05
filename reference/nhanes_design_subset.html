@@ -34,6 +34,8 @@
   <div class="dropdown-menu" aria-labelledby="dropdown-technical-stuff">
     <a class="dropdown-item" href="../reference/index.html">Documentation</a>
     <a class="dropdown-item" href="../articles/replicate_jama_2020.html">Replicating Muntner et al, 2020</a>
+    <a class="dropdown-item" href="../articles/replicate_muntner_2022.html">Replicating Muntner et al, 2022</a>
+    <a class="dropdown-item" href="../articles/modules.html">Extending the application</a>
   </div>
 </li>
 <li class="nav-item">
@@ -93,34 +95,34 @@ Missing values are taken as false.</p></dd>
 <span>                    outcome_variable <span class="op">=</span> <span class="st">'bp_sys_mean'</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">ds</span><span class="op">)</span></span></code></pre><p></p></div>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="do">## --------------------------- NHANES design ---------------------------</span></span>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="do">## ---------------------------- NHANES design ----------------------------</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Outcome variable: bp_sys_mean</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="do">## - label: Systolic blood pressure, mm Hg</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="do">## - label: Systolic blood pressure (SBP), mm Hg</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="do">## - type: continuous</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="do">## - description: Mean systolic blood pressure in mm Hg. This is based on</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="do">##     the average of up to 3 readings.  Overall, &gt;95% of participants with</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="do">##     at least one systolic blood pressure reading had three readings.  From</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="do">##     1999-2000 through 2015-2016, systolic blood pressure was measured</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="do">##     using a mercury sphygmomanometer.  In 2017-2020, systolic blood</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="do">##     pressure was measured using an oscillometric device.  The systolic</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="do">##     blood pressure in 2017-2020 was calibrated to the mercury device by</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="do">##     adding 1.5 mm Hg to the mean measured value.</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="do">##     the average of up to 3 readings.  Overall, &gt;95% of participants with at</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="do">##     least one systolic blood pressure reading had three readings.  From</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="do">##     1999-2000 through 2015-2016, systolic blood pressure was measured using</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="do">##     a mercury sphygmomanometer.  In 2017-2020, systolic blood pressure was</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="do">##     measured using an oscillometric device.  The systolic blood pressure in</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="do">##     2017-2020 was calibrated to the mercury device by adding 1.5 mm Hg to</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="do">##     the mean measured oscillometric value.</span></span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="do">## Group variable: None</span></span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Stratify variable: None</span></span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="do">## N observations</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="do">## - Unweighted: 9,693</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="do">## - Unweighted: 8,965</span></span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="do">## - Weighted: 247,835,696</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="do">## -----------------------------------------------------------------------</span></span></code></pre><p></p></div>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="do">## ------------------------------------------------------------------------</span></span></code></pre><p></p></div>
 <p>Subset calls work as they do in many other <code>subset</code> functions:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="va">ds_men</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nhanes_design_subset.html">nhanes_design_subset</a></span><span class="op">(</span><span class="va">ds</span>, <span class="va">demo_gender</span> <span class="op">==</span> <span class="st">'Men'</span><span class="op">)</span></span></code></pre><p></p></div>
 <p>To verify <code>ds_men</code> has been subsetted, you can do something like this:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">ds_men</span><span class="op">$</span><span class="va">design</span><span class="op">$</span><span class="va">variables</span><span class="op">$</span><span class="va">demo_gender</span><span class="op">)</span></span></code></pre><p></p></div>
 <p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="do">##   Men Women </span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="do">##  4718     0</span></span></code></pre><p></p></div>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="do">##  4357     0</span></span></code></pre><p></p></div>
 <p>and you can also find the subsetted indices here:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="va">ds_men</span><span class="op">$</span><span class="va">subset_rows</span></span></code></pre><p></p></div>
 <p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="do">##    [1]    1    2    3    4    5    6    7    8    9   10   11   12   13</span></span>
@@ -200,7 +202,7 @@ Missing values are taken as false.</p></dd>
 <span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a><span class="do">##  [963]  963  964  965  966  967  968  969  970  971  972  973  974  975</span></span>
 <span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a><span class="do">##  [976]  976  977  978  979  980  981  982  983  984  985  986  987  988</span></span>
 <span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a><span class="do">##  [989]  989  990  991  992  993  994  995  996  997  998  999 1000</span></span>
-<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a><span class="do">##  [ reached getOption("max.print") -- omitted 3718 entries ]</span></span></code></pre><p></p></div>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a><span class="do">##  [ reached getOption("max.print") -- omitted 3357 entries ]</span></span></code></pre><p></p></div>
 <p>Why does the design object save this information? In case you update it
 in the future and subsetting operations need to be repeated.</p><div class="section">
 <h3 id="only-one-subset-is-allowed">Only one subset is allowed<a class="anchor" aria-label="anchor" href="#only-one-subset-is-allowed"></a></h3>

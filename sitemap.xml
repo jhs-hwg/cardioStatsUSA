@@ -25,6 +25,9 @@
     <loc>https://jhs-hwg.github.io/cardioStatsUSA/articles/modules.html</loc>
   </url>
   <url>
+    <loc>https://jhs-hwg.github.io/cardioStatsUSA/articles/replicate_hypertension_2022.html</loc>
+  </url>
+  <url>
     <loc>https://jhs-hwg.github.io/cardioStatsUSA/articles/replicate_jama_2020.html</loc>
   </url>
   <url>
@@ -86,5 +89,8 @@
   </url>
   <url>
     <loc>https://jhs-hwg.github.io/cardioStatsUSA/reference/print.nhanes_design.html</loc>
+  </url>
+  <url>
+    <loc>https://jhs-hwg.github.io/cardioStatsUSA/reference/replication.html</loc>
   </url>
 </urlset>

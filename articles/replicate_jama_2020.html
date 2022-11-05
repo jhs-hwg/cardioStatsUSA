@@ -58,6 +58,8 @@
   <div class="dropdown-menu" aria-labelledby="dropdown-technical-stuff">
     <a class="dropdown-item" href="../reference/index.html">Documentation</a>
     <a class="dropdown-item" href="../articles/replicate_jama_2020.html">Replicating Muntner et al, 2020</a>
+    <a class="dropdown-item" href="../articles/replicate_muntner_2022.html">Replicating Muntner et al, 2022</a>
+    <a class="dropdown-item" href="../articles/modules.html">Extending the application</a>
   </div>
 </li>
 <li class="nav-item">
@@ -98,7 +100,7 @@ that we need to do is subset the data to include rows where
 <code>svy_subpop_htn</code> is equal to 1.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">nhanes_subpop_htn</span> <span class="op">&lt;-</span> <span class="va">nhanes_data</span><span class="op">[</span><span class="va">svy_subpop_htn</span> <span class="op">==</span> <span class="fl">1</span><span class="op">]</span></span></code></pre></div>
-<p>after these exclusions, <code>56035</code> participants are
+<p>after these exclusions, <code>56017</code> participants are
 included.</p>
 </div>
 <div class="section level2">
@@ -114,9 +116,9 @@ Munter et al.</p>
 </h2>
 <p>In most cases, we use <code><a href="../reference/nhanes_summarize.html">nhanes_summarize()</a></code> or
 <code>nhanes_visualize</code> when generating results with
-<code>cardioStatsUSA</code>. In this case, we find it’s easier to use
-the <code>nhanes_design</code> family of functions, which are the lower
-level functions that support <code>nhanes_summarize</code> and
+<code>cardioStatsUSA</code>. Here, we use the <code>nhanes_design</code>
+family of functions. NHANES design functions are lower level functions
+that support <code>nhanes_summarize</code> and
 <code>nhanes_visualize</code>. Full details on this family can be found
 at the help page for [nhanes_design]. For this analysis, we create three
 designs:</p>
@@ -125,31 +127,32 @@ designs:</p>
 </ul>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ds_init</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nhanes_design.html">nhanes_design</a></span><span class="op">(</span></span>
-<span> data <span class="op">=</span> <span class="va">nhanes_data</span><span class="op">[</span><span class="va">svy_subpop_htn</span> <span class="op">==</span> <span class="fl">1</span><span class="op">]</span>,</span>
+<span> data <span class="op">=</span> <span class="va">nhanes_subpop_htn</span>,</span>
 <span> key <span class="op">=</span> <span class="va">nhanes_key</span>,</span>
-<span> outcome_variable <span class="op">=</span> <span class="st">'bp_control_jnc7'</span></span>
+<span> outcome_variable <span class="op">=</span> <span class="st">'bp_control_140_90'</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <ul>
 <li>a design for non-pregnant adults with hypertension</li>
 </ul>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ds_all</span> <span class="op">&lt;-</span> <span class="va">ds_init</span> <span class="op">%&gt;%</span></span>
+<code class="sourceCode R"><span><span class="va">ds_all</span> <span class="op">&lt;-</span> <span class="va">ds_init</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span> <span class="fu"><a href="../reference/nhanes_design_subset.html">nhanes_design_subset</a></span><span class="op">(</span></span>
+<span>  <span class="va">svy_subpop_htn</span> <span class="op">==</span> <span class="fl">1</span> <span class="op">&amp;</span></span>
 <span>  <span class="op">(</span><span class="va">demo_pregnant</span> <span class="op">==</span> <span class="st">'No'</span> <span class="op">|</span> <span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">demo_pregnant</span><span class="op">)</span><span class="op">)</span> <span class="op">&amp;</span></span>
 <span>   <span class="va">htn_jnc7</span> <span class="op">==</span> <span class="st">'Yes'</span></span>
-<span> <span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span> <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span> <span class="fu"><a href="../reference/nhanes_design_standardize.html">nhanes_design_standardize</a></span><span class="op">(</span>standard_weights <span class="op">=</span> <span class="va">standard_weights</span><span class="op">)</span></span></code></pre></div>
 <ul>
 <li>a design for non-pregnant adults with hypertension who reported
 using antihypertensive medication</li>
 </ul>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ds_meds</span> <span class="op">&lt;-</span> <span class="va">ds_init</span> <span class="op">%&gt;%</span></span>
+<code class="sourceCode R"><span><span class="va">ds_meds</span> <span class="op">&lt;-</span> <span class="va">ds_init</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span> <span class="fu"><a href="../reference/nhanes_design_subset.html">nhanes_design_subset</a></span><span class="op">(</span></span>
 <span>  <span class="op">(</span><span class="va">demo_pregnant</span> <span class="op">==</span> <span class="st">'No'</span> <span class="op">|</span> <span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">demo_pregnant</span><span class="op">)</span><span class="op">)</span> <span class="op">&amp;</span></span>
 <span>   <span class="va">htn_jnc7</span> <span class="op">==</span> <span class="st">'Yes'</span> <span class="op">&amp;</span></span>
 <span>   <span class="va">bp_med_use</span> <span class="op">==</span> <span class="st">'Yes'</span></span>
-<span> <span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span> <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span> <span class="fu"><a href="../reference/nhanes_design_standardize.html">nhanes_design_standardize</a></span><span class="op">(</span>standard_weights <span class="op">=</span> <span class="va">standard_weights</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -159,33 +162,35 @@ using antihypertensive medication</li>
 <code>ds_meds</code> design object to estimate the proportion of adults
 with BP control according to the JNC7 BP guidelines.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">shiny_answers_etable_1_overall</span> <span class="op">&lt;-</span> <span class="va">ds_meds</span> <span class="op">%&gt;%</span></span>
+<code class="sourceCode R"><span><span class="va">shiny_answers_etable_1_overall</span> <span class="op">&lt;-</span> <span class="va">ds_meds</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span> <span class="fu"><a href="../reference/nhanes_design_summarize.html">nhanes_design_summarize</a></span><span class="op">(</span>outcome_stats <span class="op">=</span> <span class="st">'percentage'</span>,</span>
-<span>                         simplify_output <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">bp_control_jnc7</span><span class="op">==</span><span class="st">'Yes'</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span> <span class="fu">mutate</span><span class="op">(</span>group <span class="op">=</span> <span class="st">'Overall'</span><span class="op">)</span></span>
+<span>                         simplify_output <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span> <span class="va">.</span><span class="op">[</span><span class="va">bp_control_140_90</span><span class="op">==</span><span class="st">'Yes'</span><span class="op">]</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span> <span class="va">.</span><span class="op">[</span>, <span class="va">group</span> <span class="op">:=</span> <span class="st">"Overall"</span><span class="op">]</span></span>
 <span></span>
-<span><span class="va">shiny_answers_etable_1_by_age</span> <span class="op">&lt;-</span> <span class="va">ds_meds</span> <span class="op">%&gt;%</span></span>
-<span> <span class="fu"><a href="../reference/nhanes_design_update.html">nhanes_design_update</a></span><span class="op">(</span>group_variable <span class="op">=</span> <span class="st">'demo_age_cat'</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span><span class="va">shiny_answers_etable_1_by_age</span> <span class="op">&lt;-</span> <span class="va">ds_meds</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span> <span class="fu"><a href="../reference/nhanes_design_update.html">nhanes_design_update</a></span><span class="op">(</span>group_variable <span class="op">=</span> <span class="st">'demo_age_cat'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span> <span class="fu"><a href="../reference/nhanes_design_summarize.html">nhanes_design_summarize</a></span><span class="op">(</span>outcome_stats <span class="op">=</span> <span class="st">'percentage'</span>,</span>
-<span>                         simplify_output <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">bp_control_jnc7</span><span class="op">==</span><span class="st">'Yes'</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span> <span class="fu">mutate</span><span class="op">(</span>group <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">demo_age_cat</span><span class="op">)</span><span class="op">)</span></span>
+<span>                         simplify_output <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span> <span class="va">.</span><span class="op">[</span><span class="va">bp_control_140_90</span><span class="op">==</span><span class="st">'Yes'</span><span class="op">]</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span> <span class="va">.</span><span class="op">[</span>, <span class="va">group</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">demo_age_cat</span><span class="op">)</span><span class="op">]</span></span>
 <span></span>
-<span><span class="va">shiny_answers_etable_1_by_sex</span> <span class="op">&lt;-</span> <span class="va">ds_meds</span> <span class="op">%&gt;%</span></span>
-<span> <span class="fu"><a href="../reference/nhanes_design_update.html">nhanes_design_update</a></span><span class="op">(</span>group_variable <span class="op">=</span> <span class="st">'demo_gender'</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span> <span class="fu"><a href="../reference/nhanes_design_summarize.html">nhanes_design_summarize</a></span><span class="op">(</span>outcome_stats <span class="op">=</span> <span class="st">'percentage'</span>,</span>
-<span>                         simplify_output <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">bp_control_jnc7</span><span class="op">==</span><span class="st">'Yes'</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span> <span class="fu">mutate</span><span class="op">(</span>group <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">demo_gender</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">shiny_answers_etable_1_by_race</span> <span class="op">&lt;-</span> <span class="va">ds_meds</span> <span class="op">%&gt;%</span></span>
-<span> <span class="fu"><a href="../reference/nhanes_design_update.html">nhanes_design_update</a></span><span class="op">(</span>group_variable <span class="op">=</span> <span class="st">'demo_race'</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span><span class="va">shiny_answers_etable_1_by_sex</span> <span class="op">&lt;-</span> <span class="va">ds_meds</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span> <span class="fu"><a href="../reference/nhanes_design_update.html">nhanes_design_update</a></span><span class="op">(</span>group_variable <span class="op">=</span> <span class="st">'demo_gender'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span> <span class="fu"><a href="../reference/nhanes_design_summarize.html">nhanes_design_summarize</a></span><span class="op">(</span>outcome_stats <span class="op">=</span> <span class="st">'percentage'</span>,</span>
-<span>                         simplify_output <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">bp_control_jnc7</span><span class="op">==</span><span class="st">'Yes'</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span> <span class="fu">mutate</span><span class="op">(</span>group <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">demo_race</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">group</span> <span class="op">!=</span> <span class="st">'Other'</span><span class="op">)</span></span></code></pre></div>
+<span>                         simplify_output <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span> <span class="va">.</span><span class="op">[</span><span class="va">bp_control_140_90</span><span class="op">==</span><span class="st">'Yes'</span><span class="op">]</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span> <span class="va">.</span><span class="op">[</span>, <span class="va">group</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">demo_gender</span><span class="op">)</span><span class="op">]</span></span>
+<span></span>
+<span></span>
+<span><span class="va">shiny_answers_etable_1_by_race</span> <span class="op">&lt;-</span> <span class="va">ds_meds</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span> <span class="fu"><a href="../reference/nhanes_design_update.html">nhanes_design_update</a></span><span class="op">(</span>group_variable <span class="op">=</span> <span class="st">'demo_race'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span> <span class="fu"><a href="../reference/nhanes_design_summarize.html">nhanes_design_summarize</a></span><span class="op">(</span>outcome_stats <span class="op">=</span> <span class="st">'percentage'</span>,</span>
+<span>                         simplify_output <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span> <span class="va">.</span><span class="op">[</span><span class="va">bp_control_140_90</span><span class="op">==</span><span class="st">'Yes'</span><span class="op">]</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span> <span class="va">.</span><span class="op">[</span>, <span class="va">group</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">demo_race</span><span class="op">)</span><span class="op">]</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span> <span class="va">.</span><span class="op">[</span><span class="va">group</span> <span class="op">!=</span> <span class="st">'Other'</span><span class="op">]</span></span></code></pre></div>
 <p>Now we can put all of our answers together</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
@@ -199,9 +204,9 @@ with BP control according to the JNC7 BP guidelines.</p>
 <span> <span class="va">shiny_answers_etable_1_by_age</span>,</span>
 <span> <span class="va">shiny_answers_etable_1_by_sex</span>,</span>
 <span> <span class="va">shiny_answers_etable_1_by_race</span></span>
-<span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span> <span class="fu">rbindlist</span><span class="op">(</span>fill <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span> <span class="va">.</span><span class="op">[</span>, <span class="op">(</span><span class="va">est_cols</span><span class="op">)</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="va">round</span>, digits <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>, .SDcols <span class="op">=</span> <span class="va">est_cols</span><span class="op">]</span> <span class="op">%&gt;%</span></span>
+<span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span> <span class="fu">rbindlist</span><span class="op">(</span>fill <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span> <span class="va">.</span><span class="op">[</span>, <span class="op">(</span><span class="va">est_cols</span><span class="op">)</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="va">round</span>, digits <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>, .SDcols <span class="op">=</span> <span class="va">est_cols</span><span class="op">]</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span> <span class="va">.</span><span class="op">[</span>, <span class="va">.SD</span>, .SDcols <span class="op">=</span> <span class="va">muntner_cols</span><span class="op">]</span></span>
 <span></span>
 <span><span class="va">shiny_answers_etable_1</span></span>
@@ -218,25 +223,22 @@ with BP control according to the JNC7 BP guidelines.</p>
 <span><span class="co">#&gt; 103: 2017-2020 Non-Hispanic Asian     63.6     57.0     70.1</span></span>
 <span><span class="co">#&gt; 104: 2017-2020           Hispanic     62.3     56.9     67.7</span></span></code></pre></div>
 <p>We also need to get the data from Muntner et al to make sure our
-answers match their answers. There isn’t really an easy way to load
-these data programmatically, so they are written manually into a data
-set here.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
-<span><span class="va">jama_etable_1</span> <span class="op">&lt;-</span> <span class="fu">cardioStatsUSA</span><span class="fu">::</span><span class="va">muntner_jama_2020_etable_1</span></span></code></pre></div>
+answers match their answers.</p>
 <p>Now put everything together and test that all of our answers
 match</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">test_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span> jama <span class="op">=</span> <span class="va">jama_etable_1</span>,</span>
 <span> shiny <span class="op">=</span> <span class="va">shiny_answers_etable_1</span></span>
-<span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span> <span class="fu">rbindlist</span><span class="op">(</span>idcol <span class="op">=</span> <span class="st">'source'</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span> <span class="va">.</span><span class="op">[</span><span class="op">!</span><span class="va">svy_year</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2017-2018'</span>, <span class="st">'2017-2020'</span><span class="op">)</span><span class="op">]</span> <span class="op">%&gt;%</span></span>
+<span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span> <span class="fu">rbindlist</span><span class="op">(</span>idcol <span class="op">=</span> <span class="st">'source'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span> <span class="va">.</span><span class="op">[</span><span class="op">!</span><span class="va">svy_year</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2017-2018'</span>, <span class="st">'2017-2020'</span><span class="op">)</span><span class="op">]</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span> <span class="fu">dcast</span><span class="op">(</span>formula <span class="op">=</span> <span class="va">svy_year</span> <span class="op">+</span> <span class="va">group</span> <span class="op">~</span> <span class="va">source</span>, value.var <span class="op">=</span> <span class="va">est_cols</span><span class="op">)</span></span></code></pre></div>
 <p>take a look at the merged results, you can see estimate_shiny matches
 estimate_jama in all cells shown.</p>
-<pre><code><span><span class="co">#&gt;      svy_year              group estimate_jama estimate_shiny ci_lower_jama</span></span>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">test_results</span></span>
+<span><span class="co">#&gt;      svy_year              group estimate_jama estimate_shiny ci_lower_jama</span></span>
 <span><span class="co">#&gt;  1: 1999-2000           18 to 44          66.1           66.1          54.7</span></span>
 <span><span class="co">#&gt;  2: 1999-2000           45 to 64          60.6           60.6          55.1</span></span>
 <span><span class="co">#&gt;  3: 1999-2000           65 to 74          50.0           50.0          43.2</span></span>
@@ -425,13 +427,13 @@ estimate_jama in all cells shown.</p>
 <span><span class="co">#&gt; 91:           65.6          75.2           75.2</span></span>
 <span><span class="co">#&gt; 92:           63.0          70.6           70.6</span></span>
 <span><span class="co">#&gt; 93:           63.9          71.9           71.8</span></span>
-<span><span class="co">#&gt;     ci_lower_shiny ci_upper_jama ci_upper_shiny</span></span></code></pre>
+<span><span class="co">#&gt;     ci_lower_shiny ci_upper_jama ci_upper_shiny</span></span></code></pre></div>
 <p>In some cases, we have differences in CI estimates due to rounding
 and/or minor differences in the way CI boundaries are computed in R
 versus stata. To ensure all of these differences are small enough, we
 allow a 1% difference in the CI boundaries for our test. I.e., |A-B|/ B
 &lt; 0.01</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ci_diff_tolerance</span> <span class="op">&lt;-</span> <span class="fl">0.01</span></span>
 <span></span>
 <span><span class="fu">test_that</span><span class="op">(</span></span>
@@ -452,8 +454,220 @@ allow a 1% difference in the CI boundaries for our test. I.e., |A-B|/ B
 <span> <span class="op">}</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">Test passed</span> 😸</span></span></code></pre></div>
-<p>success! ## Replicating Table 2</p>
-<pre><code><span><span class="co">#&gt; <span style="color: #00BB00;">Test passed</span> 🌈</span></span></code></pre>
+<p>success!</p>
+</div>
+<div class="section level2">
+<h2 id="replicating-table-2">Replicating Table 2<a class="anchor" aria-label="anchor" href="#replicating-table-2"></a>
+</h2>
+<p>The process for this table is similar. The values from Muntner et
+al’s Table 2 are saved in a data frame:</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">jama_table_2</span> <span class="op">&lt;-</span> <span class="fu">cardioStatsUSA</span><span class="fu">::</span><span class="va"><a href="../reference/replication.html">muntner_jama_2020_table_2</a></span></span>
+<span><span class="va">jama_table_2</span></span>
+<span><span class="co">#&gt;      svy_year        group estimate ci_lower ci_upper</span></span>
+<span><span class="co">#&gt;  1: 1999-2000    lt_120_80      9.2      7.4     10.9</span></span>
+<span><span class="co">#&gt;  2: 2001-2002    lt_120_80     12.5     10.0     15.0</span></span>
+<span><span class="co">#&gt;  3: 2003-2004    lt_120_80     13.1     11.2     14.9</span></span>
+<span><span class="co">#&gt;  4: 2005-2006    lt_120_80     14.9     12.8     17.0</span></span>
+<span><span class="co">#&gt;  5: 2007-2008    lt_120_80     18.2     15.8     20.6</span></span>
+<span><span class="co">#&gt;  6: 2009-2010    lt_120_80     21.4     19.4     23.4</span></span>
+<span><span class="co">#&gt;  7: 2011-2012    lt_120_80     18.4     14.7     22.1</span></span>
+<span><span class="co">#&gt;  8: 2013-2014    lt_120_80     20.2     16.8     23.6</span></span>
+<span><span class="co">#&gt;  9: 2015-2016    lt_120_80     17.2     13.5     20.9</span></span>
+<span><span class="co">#&gt; 10: 2017-2018    lt_120_80     15.8     12.9     18.6</span></span>
+<span><span class="co">#&gt; 11: 1999-2000 gt_120_lt_80      6.5      5.3      7.6</span></span>
+<span><span class="co">#&gt; 12: 2001-2002 gt_120_lt_80      7.1      5.7      8.5</span></span>
+<span><span class="co">#&gt; 13: 2003-2004 gt_120_lt_80      9.6      8.0     11.3</span></span>
+<span><span class="co">#&gt; 14: 2005-2006 gt_120_lt_80     10.7      8.5     12.8</span></span>
+<span><span class="co">#&gt; 15: 2007-2008 gt_120_lt_80     12.3     10.0     14.5</span></span>
+<span><span class="co">#&gt; 16: 2009-2010 gt_120_lt_80     12.5     10.9     14.0</span></span>
+<span><span class="co">#&gt; 17: 2011-2012 gt_120_lt_80     15.8     13.8     17.8</span></span>
+<span><span class="co">#&gt; 18: 2013-2014 gt_120_lt_80     14.6     12.5     16.7</span></span>
+<span><span class="co">#&gt; 19: 2015-2016 gt_120_lt_80     14.3     11.6     16.9</span></span>
+<span><span class="co">#&gt; 20: 2017-2018 gt_120_lt_80     11.3      9.4     13.2</span></span>
+<span><span class="co">#&gt; 21: 1999-2000    gt_130_80     16.2     12.4     19.9</span></span>
+<span><span class="co">#&gt; 22: 2001-2002    gt_130_80     15.3     13.0     17.5</span></span>
+<span><span class="co">#&gt; 23: 2003-2004    gt_130_80     17.1     14.6     19.7</span></span>
+<span><span class="co">#&gt; 24: 2005-2006    gt_130_80     18.3     14.8     21.8</span></span>
+<span><span class="co">#&gt; 25: 2007-2008    gt_130_80     18.0     15.5     20.6</span></span>
+<span><span class="co">#&gt; 26: 2009-2010    gt_130_80     19.2     17.3     21.0</span></span>
+<span><span class="co">#&gt; 27: 2011-2012    gt_130_80     17.7     16.4     18.9</span></span>
+<span><span class="co">#&gt; 28: 2013-2014    gt_130_80     19.1     15.3     22.8</span></span>
+<span><span class="co">#&gt; 29: 2015-2016    gt_130_80     16.9     14.0     19.7</span></span>
+<span><span class="co">#&gt; 30: 2017-2018    gt_130_80     16.7     15.0     18.3</span></span>
+<span><span class="co">#&gt; 31: 1999-2000    gt_140_90     48.2     44.3     52.1</span></span>
+<span><span class="co">#&gt; 32: 2001-2002    gt_140_90     44.8     41.8     47.7</span></span>
+<span><span class="co">#&gt; 33: 2003-2004    gt_140_90     42.4     38.2     46.6</span></span>
+<span><span class="co">#&gt; 34: 2005-2006    gt_140_90     41.5     38.8     44.2</span></span>
+<span><span class="co">#&gt; 35: 2007-2008    gt_140_90     39.3     36.3     42.4</span></span>
+<span><span class="co">#&gt; 36: 2009-2010    gt_140_90     36.7     33.3     40.0</span></span>
+<span><span class="co">#&gt; 37: 2011-2012    gt_140_90     35.7     31.7     39.7</span></span>
+<span><span class="co">#&gt; 38: 2013-2014    gt_140_90     35.1     31.0     39.2</span></span>
+<span><span class="co">#&gt; 39: 2015-2016    gt_140_90     40.1     36.8     43.4</span></span>
+<span><span class="co">#&gt; 40: 2017-2018    gt_140_90     41.7     38.6     44.8</span></span>
+<span><span class="co">#&gt; 41: 1999-2000   gt_160_100     20.0     16.5     23.6</span></span>
+<span><span class="co">#&gt; 42: 2001-2002   gt_160_100     20.4     17.2     23.5</span></span>
+<span><span class="co">#&gt; 43: 2003-2004   gt_160_100     17.8     15.4     20.2</span></span>
+<span><span class="co">#&gt; 44: 2005-2006   gt_160_100     14.6     12.4     16.9</span></span>
+<span><span class="co">#&gt; 45: 2007-2008   gt_160_100     12.2     10.7     13.7</span></span>
+<span><span class="co">#&gt; 46: 2009-2010   gt_160_100     10.3      8.7     12.0</span></span>
+<span><span class="co">#&gt; 47: 2011-2012   gt_160_100     12.4      9.6     15.2</span></span>
+<span><span class="co">#&gt; 48: 2013-2014   gt_160_100     11.1      9.3     12.9</span></span>
+<span><span class="co">#&gt; 49: 2015-2016   gt_160_100     11.5      9.9     13.2</span></span>
+<span><span class="co">#&gt; 50: 2017-2018   gt_160_100     14.6     11.7     17.5</span></span>
+<span><span class="co">#&gt;      svy_year        group estimate ci_lower ci_upper</span></span></code></pre></div>
+<p>Our answers are generated with the design object created earlier.</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">shiny_answers_table_2</span> <span class="op">&lt;-</span> <span class="va">ds_all</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span> <span class="fu"><a href="../reference/nhanes_design_update.html">nhanes_design_update</a></span><span class="op">(</span>outcome_variable <span class="op">=</span> <span class="st">'bp_cat_meds_excluded'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span> <span class="fu"><a href="../reference/nhanes_design_summarize.html">nhanes_design_summarize</a></span><span class="op">(</span>outcome_stats <span class="op">=</span> <span class="st">'percentage'</span>,</span>
+<span>                         simplify_output <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span> <span class="fu">as.data.table</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span> <span class="va">.</span><span class="op">[</span>,</span>
+<span>   <span class="co"># just recoding this variable to match JAMA group variable</span></span>
+<span>   <span class="va">group</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span></span>
+<span>    <span class="va">bp_cat_meds_excluded</span>,</span>
+<span>    labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>     <span class="st">"lt_120_80"</span>,</span>
+<span>     <span class="st">"gt_120_lt_80"</span>,</span>
+<span>     <span class="st">"gt_130_80"</span>,</span>
+<span>     <span class="st">"gt_140_90"</span>,</span>
+<span>     <span class="st">"gt_160_100"</span></span>
+<span>    <span class="op">)</span></span>
+<span>   <span class="op">)</span><span class="op">]</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span> <span class="co"># select the same names as JAMA table</span></span>
+<span> <span class="va">.</span><span class="op">[</span>, <span class="fu">.</span><span class="op">(</span><span class="va">svy_year</span>, <span class="va">group</span>, <span class="va">estimate</span>, <span class="va">ci_lower</span>, <span class="va">ci_upper</span><span class="op">)</span><span class="op">]</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span> <span class="co"># round to 1 decimal place (matching rounding in JAMA table)</span></span>
+<span> <span class="va">.</span><span class="op">[</span>, <span class="va">estimate</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">estimate</span>, digits <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">]</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span> <span class="va">.</span><span class="op">[</span>, <span class="va">ci_lower</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">ci_lower</span>, digits <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">]</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span> <span class="va">.</span><span class="op">[</span>, <span class="va">ci_upper</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">ci_upper</span>, digits <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
+<p>Now we merge the results from our code with the JAMA data:</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">test_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>jama <span class="op">=</span> <span class="va">jama_table_2</span>,</span>
+<span>                     shiny <span class="op">=</span> <span class="va">shiny_answers_table_2</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span> <span class="fu">rbindlist</span><span class="op">(</span>idcol <span class="op">=</span> <span class="st">'source'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span> <span class="va">.</span><span class="op">[</span><span class="va">svy_year</span> <span class="op">!=</span> <span class="st">'2017-2018'</span> <span class="op">&amp;</span>  <span class="va">svy_year</span> <span class="op">!=</span> <span class="st">'2017-2020'</span><span class="op">]</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span> <span class="fu">dcast</span><span class="op">(</span><span class="va">svy_year</span> <span class="op">+</span> <span class="va">group</span> <span class="op">~</span> <span class="va">source</span>, value.var <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'estimate'</span>,</span>
+<span>                                                <span class="st">'ci_lower'</span>,</span>
+<span>                                                <span class="st">'ci_upper'</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">test_results</span></span>
+<span><span class="co">#&gt;      svy_year        group estimate_jama estimate_shiny ci_lower_jama</span></span>
+<span><span class="co">#&gt;  1: 1999-2000    lt_120_80           9.2            9.2           7.4</span></span>
+<span><span class="co">#&gt;  2: 1999-2000 gt_120_lt_80           6.5            6.5           5.3</span></span>
+<span><span class="co">#&gt;  3: 1999-2000    gt_130_80          16.2           16.2          12.4</span></span>
+<span><span class="co">#&gt;  4: 1999-2000    gt_140_90          48.2           48.2          44.3</span></span>
+<span><span class="co">#&gt;  5: 1999-2000   gt_160_100          20.0           20.0          16.5</span></span>
+<span><span class="co">#&gt;  6: 2001-2002    lt_120_80          12.5           12.5          10.0</span></span>
+<span><span class="co">#&gt;  7: 2001-2002 gt_120_lt_80           7.1            7.1           5.7</span></span>
+<span><span class="co">#&gt;  8: 2001-2002    gt_130_80          15.3           15.3          13.0</span></span>
+<span><span class="co">#&gt;  9: 2001-2002    gt_140_90          44.8           44.8          41.8</span></span>
+<span><span class="co">#&gt; 10: 2001-2002   gt_160_100          20.4           20.3          17.2</span></span>
+<span><span class="co">#&gt; 11: 2003-2004    lt_120_80          13.1           13.1          11.2</span></span>
+<span><span class="co">#&gt; 12: 2003-2004 gt_120_lt_80           9.6            9.6           8.0</span></span>
+<span><span class="co">#&gt; 13: 2003-2004    gt_130_80          17.1           17.1          14.6</span></span>
+<span><span class="co">#&gt; 14: 2003-2004    gt_140_90          42.4           42.4          38.2</span></span>
+<span><span class="co">#&gt; 15: 2003-2004   gt_160_100          17.8           17.8          15.4</span></span>
+<span><span class="co">#&gt; 16: 2005-2006    lt_120_80          14.9           14.9          12.8</span></span>
+<span><span class="co">#&gt; 17: 2005-2006 gt_120_lt_80          10.7           10.7           8.5</span></span>
+<span><span class="co">#&gt; 18: 2005-2006    gt_130_80          18.3           18.3          14.8</span></span>
+<span><span class="co">#&gt; 19: 2005-2006    gt_140_90          41.5           41.5          38.8</span></span>
+<span><span class="co">#&gt; 20: 2005-2006   gt_160_100          14.6           14.6          12.4</span></span>
+<span><span class="co">#&gt; 21: 2007-2008    lt_120_80          18.2           18.2          15.8</span></span>
+<span><span class="co">#&gt; 22: 2007-2008 gt_120_lt_80          12.3           12.3          10.0</span></span>
+<span><span class="co">#&gt; 23: 2007-2008    gt_130_80          18.0           18.0          15.5</span></span>
+<span><span class="co">#&gt; 24: 2007-2008    gt_140_90          39.3           39.3          36.3</span></span>
+<span><span class="co">#&gt; 25: 2007-2008   gt_160_100          12.2           12.2          10.7</span></span>
+<span><span class="co">#&gt; 26: 2009-2010    lt_120_80          21.4           21.4          19.4</span></span>
+<span><span class="co">#&gt; 27: 2009-2010 gt_120_lt_80          12.5           12.5          10.9</span></span>
+<span><span class="co">#&gt; 28: 2009-2010    gt_130_80          19.2           19.2          17.3</span></span>
+<span><span class="co">#&gt; 29: 2009-2010    gt_140_90          36.7           36.7          33.3</span></span>
+<span><span class="co">#&gt; 30: 2009-2010   gt_160_100          10.3           10.3           8.7</span></span>
+<span><span class="co">#&gt; 31: 2011-2012    lt_120_80          18.4           18.4          14.7</span></span>
+<span><span class="co">#&gt; 32: 2011-2012 gt_120_lt_80          15.8           15.8          13.8</span></span>
+<span><span class="co">#&gt; 33: 2011-2012    gt_130_80          17.7           17.7          16.4</span></span>
+<span><span class="co">#&gt; 34: 2011-2012    gt_140_90          35.7           35.7          31.7</span></span>
+<span><span class="co">#&gt; 35: 2011-2012   gt_160_100          12.4           12.4           9.6</span></span>
+<span><span class="co">#&gt; 36: 2013-2014    lt_120_80          20.2           20.2          16.8</span></span>
+<span><span class="co">#&gt; 37: 2013-2014 gt_120_lt_80          14.6           14.6          12.5</span></span>
+<span><span class="co">#&gt; 38: 2013-2014    gt_130_80          19.1           19.1          15.3</span></span>
+<span><span class="co">#&gt; 39: 2013-2014    gt_140_90          35.1           35.1          31.0</span></span>
+<span><span class="co">#&gt; 40: 2013-2014   gt_160_100          11.1           11.1           9.3</span></span>
+<span><span class="co">#&gt; 41: 2015-2016    lt_120_80          17.2           17.2          13.5</span></span>
+<span><span class="co">#&gt; 42: 2015-2016 gt_120_lt_80          14.3           14.3          11.6</span></span>
+<span><span class="co">#&gt; 43: 2015-2016    gt_130_80          16.9           16.9          14.0</span></span>
+<span><span class="co">#&gt; 44: 2015-2016    gt_140_90          40.1           40.1          36.8</span></span>
+<span><span class="co">#&gt; 45: 2015-2016   gt_160_100          11.5           11.5           9.9</span></span>
+<span><span class="co">#&gt;      svy_year        group estimate_jama estimate_shiny ci_lower_jama</span></span>
+<span><span class="co">#&gt;     ci_lower_shiny ci_upper_jama ci_upper_shiny</span></span>
+<span><span class="co">#&gt;  1:            7.4          10.9           10.9</span></span>
+<span><span class="co">#&gt;  2:            5.3           7.6            7.6</span></span>
+<span><span class="co">#&gt;  3:           12.5          19.9           19.8</span></span>
+<span><span class="co">#&gt;  4:           44.3          52.1           52.1</span></span>
+<span><span class="co">#&gt;  5:           16.5          23.6           23.5</span></span>
+<span><span class="co">#&gt;  6:           10.0          15.0           15.0</span></span>
+<span><span class="co">#&gt;  7:            5.7           8.5            8.6</span></span>
+<span><span class="co">#&gt;  8:           13.1          17.5           17.5</span></span>
+<span><span class="co">#&gt;  9:           41.9          47.7           47.8</span></span>
+<span><span class="co">#&gt; 10:           17.1          23.5           23.4</span></span>
+<span><span class="co">#&gt; 11:           11.3          14.9           14.8</span></span>
+<span><span class="co">#&gt; 12:            8.0          11.3           11.3</span></span>
+<span><span class="co">#&gt; 13:           14.7          19.7           19.6</span></span>
+<span><span class="co">#&gt; 14:           38.2          46.6           46.5</span></span>
+<span><span class="co">#&gt; 15:           15.4          20.2           20.2</span></span>
+<span><span class="co">#&gt; 16:           12.8          17.0           17.0</span></span>
+<span><span class="co">#&gt; 17:            8.6          12.8           12.8</span></span>
+<span><span class="co">#&gt; 18:           14.8          21.8           21.8</span></span>
+<span><span class="co">#&gt; 19:           38.9          44.2           44.2</span></span>
+<span><span class="co">#&gt; 20:           12.4          16.9           16.8</span></span>
+<span><span class="co">#&gt; 21:           15.8          20.6           20.6</span></span>
+<span><span class="co">#&gt; 22:           10.0          14.5           14.5</span></span>
+<span><span class="co">#&gt; 23:           15.5          20.6           20.6</span></span>
+<span><span class="co">#&gt; 24:           36.3          42.4           42.4</span></span>
+<span><span class="co">#&gt; 25:           10.7          13.7           13.6</span></span>
+<span><span class="co">#&gt; 26:           19.4          23.4           23.4</span></span>
+<span><span class="co">#&gt; 27:           10.9          14.0           14.0</span></span>
+<span><span class="co">#&gt; 28:           17.4          21.0           21.0</span></span>
+<span><span class="co">#&gt; 29:           33.4          40.0           39.9</span></span>
+<span><span class="co">#&gt; 30:            8.7          12.0           12.0</span></span>
+<span><span class="co">#&gt; 31:           14.7          22.1           22.1</span></span>
+<span><span class="co">#&gt; 32:           13.9          17.8           17.8</span></span>
+<span><span class="co">#&gt; 33:           16.4          18.9           18.9</span></span>
+<span><span class="co">#&gt; 34:           31.7          39.7           39.6</span></span>
+<span><span class="co">#&gt; 35:            9.7          15.2           15.2</span></span>
+<span><span class="co">#&gt; 36:           16.8          23.6           23.6</span></span>
+<span><span class="co">#&gt; 37:           12.5          16.7           16.7</span></span>
+<span><span class="co">#&gt; 38:           15.4          22.8           22.7</span></span>
+<span><span class="co">#&gt; 39:           31.1          39.2           39.1</span></span>
+<span><span class="co">#&gt; 40:            9.3          12.9           12.8</span></span>
+<span><span class="co">#&gt; 41:           13.6          20.9           20.9</span></span>
+<span><span class="co">#&gt; 42:           11.6          16.9           16.9</span></span>
+<span><span class="co">#&gt; 43:           14.0          19.7           19.7</span></span>
+<span><span class="co">#&gt; 44:           36.8          43.4           43.4</span></span>
+<span><span class="co">#&gt; 45:            9.9          13.2           13.2</span></span>
+<span><span class="co">#&gt;     ci_lower_shiny ci_upper_jama ci_upper_shiny</span></span></code></pre></div>
+<p>Last, we assert the expectation that all of our answers match the
+corresponding value in the JAMA table.</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">test_that</span><span class="op">(</span></span>
+<span> desc <span class="op">=</span> <span class="st">"shiny app matches Table 2 of JAMA paper"</span>,</span>
+<span> code <span class="op">=</span> <span class="op">{</span></span>
+<span></span>
+<span>  <span class="fu">expect_equal</span><span class="op">(</span><span class="va">test_results</span><span class="op">$</span><span class="va">estimate_jama</span>,</span>
+<span>               <span class="va">test_results</span><span class="op">$</span><span class="va">estimate_shiny</span>,</span>
+<span>               tolerance <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="fu">expect_equal</span><span class="op">(</span><span class="va">test_results</span><span class="op">$</span><span class="va">ci_lower_jama</span>,</span>
+<span>               <span class="va">test_results</span><span class="op">$</span><span class="va">ci_lower_shiny</span>,</span>
+<span>               tolerance <span class="op">=</span> <span class="va">ci_diff_tolerance</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="fu">expect_equal</span><span class="op">(</span><span class="va">test_results</span><span class="op">$</span><span class="va">ci_upper_jama</span>,</span>
+<span>               <span class="va">test_results</span><span class="op">$</span><span class="va">ci_upper_shiny</span>,</span>
+<span>               tolerance <span class="op">=</span> <span class="va">ci_diff_tolerance</span><span class="op">)</span></span>
+<span></span>
+<span> <span class="op">}</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">Test passed</span> 🌈</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="make-your-own-results">Make your own results<a class="anchor" aria-label="anchor" href="#make-your-own-results"></a>

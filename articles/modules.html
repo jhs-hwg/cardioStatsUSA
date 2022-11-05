@@ -53,11 +53,13 @@
 <li class="nav-item">
   <a class="nav-link" href="../articles/cardioStatsUSA.html">Get started</a>
 </li>
-<li class="nav-item dropdown">
+<li class="active nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-technical-stuff">Technical stuff</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-technical-stuff">
     <a class="dropdown-item" href="../reference/index.html">Documentation</a>
     <a class="dropdown-item" href="../articles/replicate_jama_2020.html">Replicating Muntner et al, 2020</a>
+    <a class="dropdown-item" href="../articles/replicate_muntner_2022.html">Replicating Muntner et al, 2022</a>
+    <a class="dropdown-item" href="../articles/modules.html">Extending the application</a>
   </div>
 </li>
 <li class="nav-item">
@@ -90,7 +92,17 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jhs-hwg.github.io/cardioStatsUSA/">cardioStatsUSA</a></span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jhs-hwg.github.io/cardioStatsUSA/">cardioStatsUSA</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Attaching package: 'dplyr'</span></span>
+<span><span class="co">#&gt; The following objects are masked from 'package:stats':</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     filter, lag</span></span>
+<span><span class="co">#&gt; The following objects are masked from 'package:base':</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     intersect, setdiff, setequal, union</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/" class="external-link">tibble</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="modules">Modules<a class="anchor" aria-label="anchor" href="#modules"></a>
 </h2>
@@ -103,9 +115,10 @@ extensions of the web application, but may not be specific enough to
 illustrate how the web application works. Therefore, in the current
 analysis, we define and present results from the “BP and hypertension”
 module, defined as follows.</p>
-<div class="section level3">
-<h3 id="the-blood-pressure-and-hypertension-module">The Blood Pressure and Hypertension Module<a class="anchor" aria-label="anchor" href="#the-blood-pressure-and-hypertension-module"></a>
-</h3>
+</div>
+<div class="section level2">
+<h2 id="the-blood-pressure-and-hypertension-module">The Blood Pressure and Hypertension Module<a class="anchor" aria-label="anchor" href="#the-blood-pressure-and-hypertension-module"></a>
+</h2>
 <p><strong>Subpopulation:</strong> Beginning with 107,622 US individuals
 who participated in NHANES 1999-2000 to 2017- March 2020, we restricted
 the subpopulation to adults ≥ 18 years of age. This exclusion was
@@ -124,6 +137,75 @@ Oscillometric BP values were calibrated to the mercury device as
 described previously. Antihypertensive medication classes were defined
 using recommendations from the 2017 ACC/AHA BP guideline.</p>
 </div>
+<div class="section level2">
+<h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
+</h2>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">my_key</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span></span>
+<span>   <span class="op">~</span><span class="va">class</span>,        <span class="op">~</span><span class="va">variable</span>,                              <span class="op">~</span><span class="va">label</span>,  <span class="op">~</span><span class="va">type</span>, <span class="op">~</span><span class="va">outcome</span>, <span class="op">~</span><span class="va">group</span>, <span class="op">~</span><span class="va">subset</span>, <span class="op">~</span><span class="va">stratify</span>, <span class="op">~</span><span class="va">module</span>, <span class="op">~</span><span class="va">description</span>,</span>
+<span> <span class="st">"Survey"</span>,         <span class="st">"svy_id"</span>,            <span class="st">"participant identifier"</span>,  <span class="st">"svy"</span>,    <span class="cn">FALSE</span>,  <span class="cn">FALSE</span>,   <span class="cn">FALSE</span>,     <span class="cn">FALSE</span>,  <span class="st">"none"</span>,  <span class="cn">NA_character_</span>,</span>
+<span> <span class="st">"Survey"</span>,        <span class="st">"svy_psu"</span>,             <span class="st">"primary sampling unit"</span>,  <span class="st">"svy"</span>,    <span class="cn">FALSE</span>,  <span class="cn">FALSE</span>,   <span class="cn">FALSE</span>,     <span class="cn">FALSE</span>,  <span class="st">"none"</span>,  <span class="cn">NA_character_</span>,</span>
+<span> <span class="st">"Survey"</span>,     <span class="st">"svy_strata"</span>,                            <span class="st">"strata"</span>,  <span class="st">"svy"</span>,    <span class="cn">FALSE</span>,  <span class="cn">FALSE</span>,   <span class="cn">FALSE</span>,     <span class="cn">FALSE</span>,  <span class="st">"none"</span>,  <span class="cn">NA_character_</span>,</span>
+<span> <span class="st">"Survey"</span>, <span class="st">"svy_weight_mec"</span>, <span class="st">"Mobile examination center weights"</span>,  <span class="st">"svy"</span>,    <span class="cn">FALSE</span>,  <span class="cn">FALSE</span>,   <span class="cn">FALSE</span>,     <span class="cn">FALSE</span>,  <span class="st">"none"</span>,  <span class="cn">NA_character_</span>,</span>
+<span> <span class="st">"Survey"</span>, <span class="st">"svy_subpop_sbp"</span>,  <span class="st">"Subpopulation for the SBP module"</span>,  <span class="st">"svy"</span>,    <span class="cn">FALSE</span>,  <span class="cn">FALSE</span>,   <span class="cn">FALSE</span>,     <span class="cn">FALSE</span>,  <span class="st">"none"</span>,  <span class="cn">NA_character_</span>,</span>
+<span> <span class="st">"Survey"</span>,       <span class="st">"svy_year"</span>,                      <span class="st">"NHANES cycle"</span>, <span class="st">"time"</span>,    <span class="cn">FALSE</span>,  <span class="cn">FALSE</span>,   <span class="cn">FALSE</span>,     <span class="cn">FALSE</span>,  <span class="st">"none"</span>,  <span class="cn">NA_character_</span>,</span>
+<span>    <span class="st">"SBP"</span>,       <span class="st">"sbp_mmhg"</span>,                        <span class="st">"SBP, mm Hg"</span>, <span class="st">"ctns"</span>,     <span class="cn">TRUE</span>,   <span class="cn">TRUE</span>,    <span class="cn">TRUE</span>,      <span class="cn">TRUE</span>,   <span class="st">"sbp"</span>,  <span class="st">"Systolic blood pressure in mm Hg"</span>,</span>
+<span>    <span class="st">"SBP"</span>,        <span class="st">"sbp_cat"</span>,                      <span class="st">"SBP category"</span>, <span class="st">"catg"</span>,     <span class="cn">TRUE</span>,   <span class="cn">TRUE</span>,    <span class="cn">TRUE</span>,      <span class="cn">TRUE</span>,   <span class="st">"sbp"</span>,  <span class="st">"Systolic blood pressure categories"</span>,</span>
+<span>    <span class="st">"SBP"</span>,   <span class="st">"sbp_gteq_130"</span>,                  <span class="st">"SBP &gt;= 130 mm Hg"</span>, <span class="st">"bnry"</span>,     <span class="cn">TRUE</span>,   <span class="cn">TRUE</span>,    <span class="cn">TRUE</span>,      <span class="cn">TRUE</span>,   <span class="st">"sbp"</span>,  <span class="st">"Systolic blood pressure in hypertensive range?"</span></span>
+<span> <span class="op">)</span></span></code></pre></div>
+<p>Create the data that will be used in the new module</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="va">my_nhanes_init</span> <span class="op">&lt;-</span> <span class="va">nhanes_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">svy_id</span>,</span>
+<span>        <span class="va">svy_psu</span>,</span>
+<span>        <span class="va">svy_strata</span>,</span>
+<span>        <span class="va">svy_weight_mec</span>,</span>
+<span>        <span class="va">svy_year</span>,</span>
+<span>        sbp_mmhg <span class="op">=</span> <span class="va">bp_sys_mean</span><span class="op">)</span></span></code></pre></div>
+<p>Derive variables to be used in your module</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="va">my_nhanes_derived</span> <span class="op">&lt;-</span> <span class="va">my_nhanes_init</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
+<span>  svy_subpop_sbp <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html" class="external-link">if_else</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">sbp_mmhg</span><span class="op">)</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>,</span>
+<span>  sbp_cat <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html" class="external-link">case_when</a></span><span class="op">(</span></span>
+<span>   <span class="va">sbp_mmhg</span> <span class="op">&lt;</span>  <span class="fl">120</span> <span class="op">~</span> <span class="st">"&lt; 120 mm Hg"</span>,</span>
+<span>   <span class="va">sbp_mmhg</span> <span class="op">&lt;</span>  <span class="fl">130</span> <span class="op">~</span> <span class="st">"&lt; 130 mm Hg"</span>,</span>
+<span>   <span class="va">sbp_mmhg</span> <span class="op">&lt;</span>  <span class="fl">140</span> <span class="op">~</span> <span class="st">"&lt; 140 mm Hg"</span>,</span>
+<span>   <span class="va">sbp_mmhg</span> <span class="op">&gt;=</span> <span class="fl">140</span> <span class="op">~</span> <span class="st">"&gt;= 140 mm Hg"</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  sbp_gteq_130 <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html" class="external-link">if_else</a></span><span class="op">(</span><span class="va">sbp_mmhg</span> <span class="op">&gt;=</span> <span class="fl">130</span>, <span class="st">"Yes"</span>, <span class="st">"No"</span><span class="op">)</span></span>
+<span> <span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/nhanes_summarize.html">nhanes_summarize</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">my_nhanes_derived</span>,</span>
+<span>                 key <span class="op">=</span> <span class="va">my_key</span>,</span>
+<span>                 outcome_variable <span class="op">=</span> <span class="st">'sbp_mmhg'</span><span class="op">)</span></span>
+<span><span class="co">#&gt;      svy_year statistic estimate std_error ci_lower ci_upper n_obs</span></span>
+<span><span class="co">#&gt;  1: 1999-2000      mean 122.8637 0.7063396 121.4793 124.2481  4805</span></span>
+<span><span class="co">#&gt;  2: 2001-2002      mean 122.5326 0.4679821 121.6153 123.4498  5290</span></span>
+<span><span class="co">#&gt;  3: 2003-2004      mean 122.7715 0.5106348 121.7707 123.7723  4943</span></span>
+<span><span class="co">#&gt;  4: 2005-2006      mean 122.3453 0.4492387 121.4648 123.2258  5057</span></span>
+<span><span class="co">#&gt;  5: 2007-2008      mean 121.6019 0.3776369 120.8617 122.3420  5700</span></span>
+<span><span class="co">#&gt;  6: 2009-2010      mean 120.5063 0.4843604 119.5569 121.4556  6072</span></span>
+<span><span class="co">#&gt;  7: 2011-2012      mean 121.6048 0.6520077 120.3269 122.8827  5356</span></span>
+<span><span class="co">#&gt;  8: 2013-2014      mean 121.4424 0.3140021 120.8270 122.0579  5716</span></span>
+<span><span class="co">#&gt;  9: 2015-2016      mean 123.3737 0.4620068 122.4682 124.2792  5571</span></span>
+<span><span class="co">#&gt; 10: 2017-2020      mean 123.1444 0.3692445 122.4207 123.8681  8024</span></span>
+<span><span class="co">#&gt;     unreliable_status unreliable_reason review_needed review_reason</span></span>
+<span><span class="co">#&gt;  1:             FALSE              &lt;NA&gt;         FALSE          &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;  2:             FALSE              &lt;NA&gt;         FALSE          &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;  3:             FALSE              &lt;NA&gt;         FALSE          &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;  4:             FALSE              &lt;NA&gt;         FALSE          &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;  5:             FALSE              &lt;NA&gt;         FALSE          &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;  6:             FALSE              &lt;NA&gt;         FALSE          &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;  7:             FALSE              &lt;NA&gt;         FALSE          &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;  8:             FALSE              &lt;NA&gt;         FALSE          &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;  9:             FALSE              &lt;NA&gt;         FALSE          &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 10:             FALSE              &lt;NA&gt;         FALSE          &lt;NA&gt;</span></span></code></pre></div>
+<iframe src="https://bcjaeger.shinyapps.io/nhanesShinyBP/?showcase=0" width="700" height="400px" data-external="1">
+</iframe>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

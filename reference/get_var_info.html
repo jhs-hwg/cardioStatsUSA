@@ -34,6 +34,8 @@
   <div class="dropdown-menu" aria-labelledby="dropdown-technical-stuff">
     <a class="dropdown-item" href="../reference/index.html">Documentation</a>
     <a class="dropdown-item" href="../articles/replicate_jama_2020.html">Replicating Muntner et al, 2020</a>
+    <a class="dropdown-item" href="../articles/replicate_muntner_2022.html">Replicating Muntner et al, 2022</a>
+    <a class="dropdown-item" href="../articles/modules.html">Extending the application</a>
   </div>
 </li>
 <li class="nav-item">
@@ -110,11 +112,11 @@
 <span class="r-in"><span><span class="fu">get_variable_class</span><span class="op">(</span><span class="st">'bp_sys_mean'</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Blood pressure"</span>
 <span class="r-in"><span><span class="fu">get_variable_label</span><span class="op">(</span><span class="st">'bp_sys_mean'</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Systolic blood pressure, mm Hg"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Systolic blood pressure (SBP), mm Hg"</span>
 <span class="r-in"><span><span class="fu">get_variable_source</span><span class="op">(</span><span class="st">'bp_sys_mean'</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Derived"</span>
 <span class="r-in"><span><span class="fu">get_variable_description</span><span class="op">(</span><span class="st">'bp_sys_mean'</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Mean systolic blood pressure in mm Hg. This is based on the average of up to 3 readings.  Overall, &gt;95% of participants with at least one systolic blood pressure reading had three readings.  From 1999-2000 through 2015-2016, systolic blood pressure was measured using a mercury sphygmomanometer.  In 2017-2020, systolic blood pressure was measured using an oscillometric device.  The systolic blood pressure in 2017-2020 was calibrated to the mercury device by adding 1.5 mm Hg to the mean measured value."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Mean systolic blood pressure in mm Hg. This is based on the average of up to 3 readings.  Overall, &gt;95% of participants with at least one systolic blood pressure reading had three readings.  From 1999-2000 through 2015-2016, systolic blood pressure was measured using a mercury sphygmomanometer.  In 2017-2020, systolic blood pressure was measured using an oscillometric device.  The systolic blood pressure in 2017-2020 was calibrated to the mercury device by adding 1.5 mm Hg to the mean measured oscillometric value."</span>
 <span class="r-in"><span><span class="fu">get_variable_module</span><span class="op">(</span><span class="st">'bp_sys_mean'</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "htn"</span>
 <span class="r-in"><span></span></span>
