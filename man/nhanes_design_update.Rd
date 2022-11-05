@@ -104,7 +104,7 @@ print(ds)
 ## N observations
 ## - Unweighted: 8,965
 ## - Weighted: 247,835,696
-## ------------------------------------------------------------------------
+## -------------------------------------------------------------------------
 }\if{html}{\out{</div>}}
 
 There are a few ways the design can be updated. For example, we can add
@@ -137,7 +137,7 @@ a group variable:
 ## N observations
 ## - Unweighted: 8,965
 ## - Weighted: 247,835,696
-## ------------------------------------------------------------------------
+## -------------------------------------------------------------------------
 }\if{html}{\out{</div>}}
 
 Pipes and multiple modifications are allowed:
@@ -178,7 +178,7 @@ Pipes and multiple modifications are allowed:
 ## N observations
 ## - Unweighted: 8,965
 ## - Weighted: 247,835,696
-## ------------------------------------------------------------------------
+## -------------------------------------------------------------------------
 }\if{html}{\out{</div>}}
 }
 

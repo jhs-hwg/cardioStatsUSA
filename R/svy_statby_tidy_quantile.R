@@ -2,13 +2,21 @@
 svy_statby_tidy_quantile <- function(x, outcome, by_vars, ...) {
 
  out_names <- names(x) %>%
-  str_replace(pattern = paste0("^", outcome),
-              replacement = paste0('estimate.', outcome)) %>%
-  str_replace(pattern = outcome,
-              replacement = paste0('_z.z.z_.', outcome, '._z.z.z_')) %>%
-  str_replace(pattern = '^se\\.', replacement = 'std_error.') %>%
-  str_replace(pattern = '^ci_l\\.', replacement = 'ci_lower.') %>%
-  str_replace(pattern = '^ci_u\\.', replacement = 'ci_upper.')
+  gsub(pattern = paste0("^", outcome),
+       replacement = paste0('estimate.', outcome),
+       x = .) %>%
+  gsub(pattern = outcome,
+       replacement = paste0('_z.z.z_.', outcome, '._z.z.z_'),
+       x = .) %>%
+  gsub(pattern = '^se\\.',
+       replacement = 'std_error.',
+       x = .) %>%
+  gsub(pattern = '^ci_l\\.',
+       replacement = 'ci_lower.',
+       x = .) %>%
+  gsub(pattern = '^ci_u\\.',
+       replacement = 'ci_upper.',
+       x = .)
 
  out <- as.data.table(x) %>%
   setnames(new = out_names) %>%

@@ -34,7 +34,7 @@ nhanes_subpop_htn <- nhanes_data %>%
 #+ echo = TRUE
 standard_weights <- c(13.5, 45.3, 23.3, 17.8)
 #'
-#' In most cases, we use `nhanes_summarize()` or `nhanes_visualize`
+#' In most cases, we use `nhanes_summarize()` or `nhanes_visualize()`
 #' when generating results with `cardioStatsUSA`. Here, we use the
 #' `nhanes_design` family of functions. NHANES design functions are
 #' lower level functions that support `nhanes_summarize` and

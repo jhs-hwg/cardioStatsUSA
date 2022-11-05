@@ -29,8 +29,9 @@
 
 #' @rdname replication
 #' @format NULL
-"cdc_db289_figure_2"
+"cdc_db289_figure_1"
 
 #' @rdname replication
 #' @format NULL
 "cdc_db289_figure_2"
+

@@ -298,8 +298,8 @@ pre code {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -307,16 +307,9 @@ pre code {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -365,874 +358,1003 @@ pre code {
 </div>
 
 
-<div id="antihypertensive-medication" class="section level2">
-<h2>Antihypertensive medication</h2>
-<div id="bp_med_use" class="section level3">
-<h3>bp_med_use</h3>
+<div id="survey-variables" class="section level1">
+<h1>Survey variables</h1>
+<p>In each NHANES cycle, potential participants were identified using a
+multi-stage sampling process. The variables below are based on this
+process.</p>
+<div id="svy_id" class="section level2">
+<h2>svy_id</h2>
 <ul>
-<li>Label: Self-reported antihypertensive medication use</li>
-<li>Description: Self-reported use of antihypertensive medication</li>
+<li><strong>Label</strong>: participant identifier</li>
+<li><strong>Description</strong>: NHANES participant unique
+identifier.</li>
 </ul>
 </div>
-<div id="bp_med_recommended_jnc7" class="section level3">
-<h3>bp_med_recommended_jnc7</h3>
+<div id="svy_psu" class="section level2">
+<h2>svy_psu</h2>
 <ul>
-<li>Label: Antihypertensive medications recommended by JNC7</li>
-<li>Description: Systolic blood pressure = 140 mm Hg or diastolic blood
-pressure = 90 mm Hg; Systolic blood pressure = 130 mm Hg or diastolic
-blood pressure = 80 mm Hg for those with chronic kidney disease or
-diabetes. Those taking antihypertensive medications were considered to
-be recommended treatment by this definition.</li>
+<li><strong>Label</strong>: primary sampling unit</li>
+<li><strong>Description</strong>: Population sampling unit. This
+variable is used to account for the non-random selection of study
+participants for NHANES</li>
 </ul>
 </div>
-<div id="bp_med_recommended_accaha" class="section level3">
-<h3>bp_med_recommended_accaha</h3>
+<div id="svy_strata" class="section level2">
+<h2>svy_strata</h2>
 <ul>
-<li>Label: Antihypertensive medications recommended by ACC/AHA 2017</li>
-<li>Description: Systolic blood pressure = 140 mm Hg or diastolic blood
-pressure = 90 mm Hg; Systolic blood pressure = 130 mm Hg or diastolic
-blood pressure = 80 mm Hg for those with chronic kidney disease,
-diabetes, 10-year predicted atherosclerotic cardiovascular disease risk
-by the pooled cohort risk equations or age = 65 years. Those taking
-antihypertensive medications were considered to be recommended treatment
-by this definition.</li>
+<li><strong>Label</strong>: strata</li>
+<li><strong>Description</strong>: Population stratification. This
+variable is used to account for the non-random selection of study
+participants for NHANES</li>
 </ul>
 </div>
-<div id="bp_med_n_class" class="section level3">
-<h3>bp_med_n_class</h3>
+<div id="svy_weight_mec" class="section level2">
+<h2>svy_weight_mec</h2>
 <ul>
-<li>Label: Number of antihypertensive medication classes</li>
-<li>Description: Number of antihypertensive medication classes being
-taken based on the pill bottle review</li>
+<li><strong>Label</strong>: Mobile examination center weights</li>
+<li><strong>Description</strong>: Weight applied to produce statistical
+estimates for the non-institutionalized US population. This weight is
+used for calculating means and proportions.</li>
 </ul>
 </div>
-<div id="bp_med_ace" class="section level3">
-<h3>bp_med_ace</h3>
+<div id="svy_subpop_htn" class="section level2">
+<h2>svy_subpop_htn</h2>
 <ul>
-<li>Label: ACE inhibitors</li>
-<li>Description: Taking an angiotensin converting enzyme inhibitor,
-defined using the pill bottle review. Drugs in this class included
-bnazepril, captopril, enalapril, fosinopril, lisonopril, moexipril,
-perindopril, quinapril, ramipril, trandolapril</li>
+<li><strong>Label</strong>: Subpopulation for hypertension</li>
+<li><strong>Description</strong>: This indicates that the person has
+data needed to be included in the analysis of blood pressure or
+hypertension data (i.e., they had at least one systolic and diastolic
+blood pressure measurement and they had information on self-reported
+antihypertensive medication use).</li>
 </ul>
 </div>
-<div id="bp_med_aldo" class="section level3">
-<h3>bp_med_aldo</h3>
+<div id="svy_year" class="section level2">
+<h2>svy_year</h2>
 <ul>
-<li>Label: Aldosterone antagonists</li>
-<li>Description: Taking an aldosterone antagonist, defined using the
-pill bottle review. Drugs in this class included eplerenone,
-spironolactone.</li>
-</ul>
-</div>
-<div id="bp_med_alpha" class="section level3">
-<h3>bp_med_alpha</h3>
-<ul>
-<li>Label: Alpha-1 blockers</li>
-<li>Description: Taking an alpha blocker, defined using the pill bottle
-review. Drugs in this class included doxazosin, prazosin,
-terazosin.</li>
-</ul>
-</div>
-<div id="bp_med_angioten" class="section level3">
-<h3>bp_med_angioten</h3>
-<ul>
-<li>Label: Angiotensin receptor blockers</li>
-<li>Description: Taking an angiotensin receptor blocker, defined using
-the pill bottle review. Drugs in this class included candesartan,
-eprosartan, irbesartan, losartan, olmesartan, telmisartan, valsartan,
-azilsartan.</li>
-</ul>
-</div>
-<div id="bp_med_beta" class="section level3">
-<h3>bp_med_beta</h3>
-<ul>
-<li>Label: Beta blockers</li>
-<li>Description: Taking a beta blocker. Drugs in this class included
-acebutolol, atenolol, betaxolol, bisoprolol, carvedilol, labetalol,
-metoprolol, nadolol, nebivolol, pindolol, propranolol.</li>
-</ul>
-</div>
-<div id="bp_med_central" class="section level3">
-<h3>bp_med_central</h3>
-<ul>
-<li>Label: Central alpha1 agonist and other centrally acting agents</li>
-<li>Description: Taking a centrally acting agents, defined using the
-pill bottle review. Drugs in this class included clonidine, guanabenz,
-guanfaacine, methyldopa, reserpine.</li>
-</ul>
-</div>
-<div id="bp_med_ccb" class="section level3">
-<h3>bp_med_ccb</h3>
-<ul>
-<li>Label: Calcium channel blockers</li>
-<li>Description: Taking a calcium channel blocker, defined using the
-pill bottle review. Drugs in this class included amlodipine, diltiazem,
-felodipine, isradipine, nicardipine, nifedipine, nisoldipine,
-verapamil.</li>
-</ul>
-</div>
-<div id="bp_med_diur_ksparing" class="section level3">
-<h3>bp_med_diur_Ksparing</h3>
-<ul>
-<li>Label: Potassium sparing diuretics</li>
-<li>Description: Taking a potassium-sparing diuretic, defined using the
-pill bottle review. Drugs in this class included amiloride,
-triamterene.</li>
-</ul>
-</div>
-<div id="bp_med_diur_loop" class="section level3">
-<h3>bp_med_diur_loop</h3>
-<ul>
-<li>Label: Loop diuretics</li>
-<li>Description: Taking a loop diuretic, defined using the pill bottle
-review. Drugs in this class included bumetanide, furosemide, torsemide,
-ethacrynic acid.</li>
-</ul>
-</div>
-<div id="bp_med_diur_thz" class="section level3">
-<h3>bp_med_diur_thz</h3>
-<ul>
-<li>Label: Thiazide or thiazide-type diuretics</li>
-<li>Description: Taking a thiazide diuretic, defined using the pill
-bottle review. Drugs in this class included bendroflumethiazide,
-chlorthalidone, chlorothiazide, hydrochlorothiazide, indapamide,
-metolazone, polythiazide.</li>
-</ul>
-</div>
-<div id="bp_med_renin_inhibitors" class="section level3">
-<h3>bp_med_renin_inhibitors</h3>
-<ul>
-<li>Label: Direct renin inhibitors</li>
-<li>Description: Taking a renin inhibitor, defined using the pill bottle
-review. Drugs in this class included aliskiren.</li>
-</ul>
-</div>
-<div id="bp_med_vasod" class="section level3">
-<h3>bp_med_vasod</h3>
-<ul>
-<li>Label: Direct vasodilators</li>
-<li>Description: Taking a vasodilator, defined using the pill bottle
-review. Drugs in this class included hydralazine, minoxidil.</li>
+<li><strong>Label</strong>: NHANES cycle</li>
+<li><strong>Description</strong>: NHANES survey cycle: 1999-2000,
+2001-2002, 2003-2004, 2005-2006, 2007-2008, 2009-2010, 2011-2012,
+2013-2014, 2015-2016, 2017-2020</li>
 </ul>
 </div>
 </div>
-<div id="atherosclerotic-cvd-risk" class="section level2">
-<h2>Atherosclerotic CVD risk</h2>
-<div id="ascvd_risk_vh_ahaacc" class="section level3">
-<h3>ascvd_risk_vh_ahaacc</h3>
+<div id="demographics-variables" class="section level1">
+<h1>Demographics variables</h1>
+<p>The NHANES in-home interview included questions about participant
+demographics, including age, sex, race/ethnicity, and pregnancy
+status</p>
+<div id="demo_age_cat" class="section level2">
+<h2>demo_age_cat</h2>
 <ul>
-<li>Label: Very high ASCVD risk according to the 2018 AHA/ACC
+<li><strong>Label</strong>: Age category, years</li>
+<li><strong>Description</strong>: Age grouping: 18-44, 45-64, 65-74,
+&gt;= 75 years</li>
+<li><strong>Number of observed values</strong>: 56,017 (100%)</li>
+<li><strong>Number of missing values</strong>: 0 (0.00%)</li>
+<li><strong>Counts of observed values</strong>
+<ul>
+<li><em>18 to 44</em>: 26,096 (46.6%)</li>
+<li><em>45 to 64</em>: 17,155 (30.6%)</li>
+<li><em>65 to 74</em>: 7,013 (12.5%)</li>
+<li><em>75+</em>: 5,753 (10.3%)</li>
+</ul></li>
+</ul>
+</div>
+<div id="demo_race" class="section level2">
+<h2>demo_race</h2>
+<ul>
+<li><strong>Label</strong>: Race</li>
+<li><strong>Description</strong>: Self-reported race/ethnicity. From
+1999-2000 through 2009-2010 this was available as non-Hispanic White,
+non-Hispanic Black, Hispanic and other. From 2011-2012 through 2017-2020
+this was available as non-Hispanic White, non-Hispanic Black,
+non-Hispanic Asian, Hispanic and other.</li>
+<li><strong>Number of observed values</strong>: 56,017 (100%)</li>
+<li><strong>Number of missing values</strong>: 0 (0.00%)</li>
+<li><strong>Counts of observed values</strong>
+<ul>
+<li><em>Non-Hispanic White</em>: 23,980 (42.8%)</li>
+<li><em>Non-Hispanic Black</em>: 12,355 (22.1%)</li>
+<li><em>Non-Hispanic Asian</em>: 2,946 (5.26%)</li>
+<li><em>Hispanic</em>: 14,520 (25.9%)</li>
+<li><em>Other</em>: 2,216 (3.96%)</li>
+</ul></li>
+</ul>
+</div>
+<div id="demo_age_years" class="section level2">
+<h2>demo_age_years</h2>
+<ul>
+<li><strong>Label</strong>: Age, years</li>
+<li><strong>Description</strong>: Participant age in years. Participants
+&gt; 80 years of age are given an age of 80 years.</li>
+<li><strong>Number of observed values</strong>: 56,017 (100%)</li>
+<li><strong>Number of missing values</strong>: 0 (0.00%)</li>
+<li><strong>Mean (standard deviation)</strong>: 47.49 (19.15)</li>
+<li><strong>Median (25th, 75th percentile)</strong>: 31.00 (47.00,
+63.00)</li>
+</ul>
+</div>
+<div id="demo_pregnant" class="section level2">
+<h2>demo_pregnant</h2>
+<ul>
+<li><strong>Label</strong>: Pregnant</li>
+<li><strong>Description</strong>: Pregnancy status. This is defined by
+either self-report of being pregnant or a positive pregnancy test
+conducted during the study visit.</li>
+<li><strong>Number of observed values</strong>: 55,597 (99.3%)</li>
+<li><strong>Number of missing values</strong>: 420 (0.75%)</li>
+<li><strong>Counts of observed values</strong>
+<ul>
+<li><em>No</em>: 54,084 (97.3%)</li>
+<li><em>Yes</em>: 1,513 (2.72%)</li>
+</ul></li>
+</ul>
+</div>
+<div id="demo_gender" class="section level2">
+<h2>demo_gender</h2>
+<ul>
+<li><strong>Label</strong>: Gender</li>
+<li><strong>Description</strong>: Self-reported gender</li>
+<li><strong>Number of observed values</strong>: 56,017 (100%)</li>
+<li><strong>Number of missing values</strong>: 0 (0.00%)</li>
+<li><strong>Counts of observed values</strong>
+<ul>
+<li><em>Men</em>: 27,242 (48.6%)</li>
+<li><em>Women</em>: 28,775 (51.4%)</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="blood-pressure-variables" class="section level1">
+<h1>Blood pressure variables</h1>
+<p>Systolic and diastolic BP (SBP and DBP, respectively) were measured
+three times by trained and certified physicians. BP was measured using a
+mercury sphygmomanometer from 1999-2000 through 2015-2016 and using an
+oscillometric device in 2017-2020. The oscillometric SBP and DBP values
+were calibrated to the mercury device. Mean SBP and DBP levels were
+computed over all available</p>
+<div id="bp_sys_mean" class="section level2">
+<h2>bp_sys_mean</h2>
+<ul>
+<li><strong>Label</strong>: Systolic blood pressure (SBP), mm Hg</li>
+<li><strong>Description</strong>: Mean systolic blood pressure in mm Hg.
+This is based on the average of up to 3 readings. Overall, &gt;95% of
+participants with at least one systolic blood pressure reading had three
+readings. From 1999-2000 through 2015-2016, systolic blood pressure was
+measured using a mercury sphygmomanometer. In 2017-2020, systolic blood
+pressure was measured using an oscillometric device. The systolic blood
+pressure in 2017-2020 was calibrated to the mercury device by adding 1.5
+mm Hg to the mean measured oscillometric value.</li>
+<li><strong>Number of observed values</strong>: 56,017 (100%)</li>
+<li><strong>Number of missing values</strong>: 0 (0.00%)</li>
+<li><strong>Mean (standard deviation)</strong>: 124.06 (19.34)</li>
+<li><strong>Median (25th, 75th percentile)</strong>: 110.67 (120.67,
+134.00)</li>
+</ul>
+</div>
+<div id="bp_dia_mean" class="section level2">
+<h2>bp_dia_mean</h2>
+<ul>
+<li><strong>Label</strong>: Diastolic blood pressure (DBP), mm Hg</li>
+<li><strong>Description</strong>: Mean diastolic blood pressure in mm
+Hg. This is based on the average of up to 3 readings. Overall, &gt;95%
+of participants with at least one diastolic blood pressure reading had
+three readings. From 1999-2000 through 2015-2016, diastolic blood
+pressure was measured using a mercury sphygmomanometer. In 2017-2020,
+diastolic blood pressure was measured using an oscillometric device. The
+diastolic blood pressure in 2017-2020 was calibrated to the mercury
+device by subtracting 1.0 mm Hg to the mean measured oscillometric
+value.</li>
+<li><strong>Number of observed values</strong>: 56,017 (100%)</li>
+<li><strong>Number of missing values</strong>: 0 (0.00%)</li>
+<li><strong>Mean (standard deviation)</strong>: 70.34 (12.10)</li>
+<li><strong>Median (25th, 75th percentile)</strong>: 62.67 (70.37,
+78.00)</li>
+</ul>
+</div>
+<div id="bp_cat_meds_excluded" class="section level2">
+<h2>bp_cat_meds_excluded</h2>
+<ul>
+<li><strong>Label</strong>: Blood pressure category</li>
+<li><strong>Description</strong>: Systolic/diastolic blood pressure
+&lt;120/80, 120-129/&lt;80, 130-139/80-89, 140-159/90-99, &gt;= 160/100.
+All participants were placed in the category associated with a higher
+blood pressure (e.g., someone with systolic blood pressure of 150 mm Hg
+and diastolic blood pressure of 76 mm Hg was placed in the 140-159/90-99
+mm Hg category)</li>
+<li><strong>Number of observed values</strong>: 56,017 (100%)</li>
+<li><strong>Number of missing values</strong>: 0 (0.00%)</li>
+<li><strong>Counts of observed values</strong>
+<ul>
+<li><em>SBP &lt;120 and DBP &lt;80 mm Hg</em>: 25,278 (45.1%)</li>
+<li><em>SBP of 120 to &lt;130 and DBP &lt;80 mm Hg</em>: 8,962
+(16.0%)</li>
+<li><em>SBP of 130 to &lt;140 or DBP 80 to &lt;90 mm Hg</em>: 10,854
+(19.4%)</li>
+<li><em>SBP of 140 to &lt;160 or DBP 90 to &lt;100 mm Hg</em>: 7,617
+(13.6%)</li>
+<li><em>SBP 160+ or DBP 100+ mm Hg</em>: 3,306 (5.90%)</li>
+</ul></li>
+</ul>
+</div>
+<div id="bp_cat_meds_included" class="section level2">
+<h2>bp_cat_meds_included</h2>
+<ul>
+<li><strong>Label</strong>: Blood pressure category including
+antihypertensive medication use as a group</li>
+<li><strong>Description</strong>: Systolic/diastolic blood pressure
+&lt;120/80, 120-129/&lt;80, 130-139/80-89, 140-159/90-99, &gt;= 160/100.
+Participants taking antihypertensive medication were placed in a
+separate category. Participants were placed in the category associated
+with higher blood pressure (e.g., someone with systolic blood pressure
+of 150 mm Hg and diastolic blood pressure of 76 mm Hg was placed in the
+140-159/90-99 mm Hg category)</li>
+<li><strong>Number of observed values</strong>: 56,017 (100%)</li>
+<li><strong>Number of missing values</strong>: 0 (0.00%)</li>
+<li><strong>Counts of observed values</strong>
+<ul>
+<li><em>SBP &lt;120 and DBP &lt;80 mm Hg</em>: 22,359 (39.9%)</li>
+<li><em>SBP of 120 to &lt;130 and DBP &lt; 80 mm Hg</em>: 6,702
+(12.0%)</li>
+<li><em>SBP of 130 to &lt;140 or DBP 80 to &lt;90 mm Hg</em>: 7,579
+(13.5%)</li>
+<li><em>SBP of 140 to &lt;160 or DBP 90 to &lt;100 mm Hg</em>: 4,122
+(7.36%)</li>
+<li><em>SBP 160+ or DBP 100+ mm Hg</em>: 1,508 (2.69%)</li>
+<li><em>taking antihypertensive medications</em>: 13,747 (24.5%)</li>
+</ul></li>
+</ul>
+</div>
+<div id="bp_control_jnc7" class="section level2">
+<h2>bp_control_jnc7</h2>
+<ul>
+<li><strong>Label</strong>: Blood pressure control defined by the JNC7
 guideline</li>
-<li>Description: NA</li>
+<li><strong>Description</strong>: Systolic and diastolic blood pressure
+controlled to the levels recommended in the JNC7 guideline, systolic
+blood pressure &lt; 140 mm Hg and diastolic blood pressure &lt; 90 mm Hg
+except for those with diabetes or chronic kidney disease, where blood
+pressure control was defined by systolic blood pressure &lt; 130 mm Hg
+and diastolic blood pressure &lt; 80 mm Hg.</li>
+<li><strong>Number of observed values</strong>: 56,017 (100%)</li>
+<li><strong>Number of missing values</strong>: 0 (0.00%)</li>
+<li><strong>Counts of observed values</strong>
+<ul>
+<li><em>No</em>: 13,868 (24.8%)</li>
+<li><em>Yes</em>: 42,149 (75.2%)</li>
+</ul></li>
 </ul>
 </div>
-</div>
-<div id="blood-pressure" class="section level2">
-<h2>Blood pressure</h2>
-<div id="bp_sys_mean" class="section level3">
-<h3>bp_sys_mean</h3>
+<div id="bp_control_accaha" class="section level2">
+<h2>bp_control_accaha</h2>
 <ul>
-<li>Label: Systolic blood pressure, mm Hg</li>
-<li>Description: Mean systolic blood pressure in mm Hg. This is based on
-the average of up to 3 readings. Overall, &gt;95% of participants with
-at least one systolic blood pressure reading had three readings. From
-1999-2000 through 2015-2016, systolic blood pressure was measured using
-a mercury sphygmomanometer. In 2017-2020, systolic blood pressure was
-measured using an oscillometric device. The systolic blood pressure in
-2017-2020 was calibrated to the mercury device by adding 1.5 mm Hg to
-the mean measured value.</li>
-</ul>
-</div>
-<div id="bp_dia_mean" class="section level3">
-<h3>bp_dia_mean</h3>
-<ul>
-<li>Label: Diastolic blood pressure, mm Hg</li>
-<li>Description: Mean diastolic blood pressure in mm Hg. This is based
-on the average of up to 3 readings. Overall, &gt;95% of participants
-with at least one diastolic blood pressure reading had three readings.
-From 1999-2000 through 2015-2016, diastolic blood pressure was measured
-using a mercury sphygmomanometer. In 2017-2020, diastolic blood pressure
-was measured using an oscillometric device. The diastolic blood pressure
-in 2017-2020 was calibrated to the mercury device by subtracting 1.0 mm
-Hg to the mean measured value.</li>
-</ul>
-</div>
-<div id="bp_cat_meds_excluded" class="section level3">
-<h3>bp_cat_meds_excluded</h3>
-<ul>
-<li>Label: Blood pressure category (not including antihypertensive
-medication use)</li>
-<li>Description: Systolic/diastolic blood pressure &lt;120/80,
-120-129/&lt;80, 130-139/80-89, 140-159/90-99, =160/100. Participants
-were placed in the category associated with higher blood pressure (e.g.,
-someone with systolic blood pressure of 150 mm Hg and diastolic blood
-pressure of 76 mm Hg was placed in the = 140/90 mm Hg category)</li>
-</ul>
-</div>
-<div id="bp_cat_meds_included" class="section level3">
-<h3>bp_cat_meds_included</h3>
-<ul>
-<li>Label: Blood pressure category (including antihypertensive
-medication use)</li>
-<li>Description: Systolic/diastolic blood pressure &lt;120/80,
-120-129/&lt;80, 130-139/80-89, 140-159/90-99, =160/100. Participants
-taking antihypertensive medication were placed in a separate category.
-Participants were placed in the category associated with higher blood
-pressure (e.g., someone with systolic blood pressure of 150 mm Hg and
-diastolic blood pressure of 76 mm Hg was placed in the = 140/90 mm Hg
-category)</li>
-</ul>
-</div>
-<div id="bp_control_jnc7" class="section level3">
-<h3>bp_control_jnc7</h3>
-<ul>
-<li>Label: Blood pressure control (SBP &lt; 140 mm Hg and DBP &lt; 90 mm
-Hg)</li>
-<li>Description: Systolic and diastolic blood pressure controlled to the
-levels recommended in the JNC7 guideline, systolic blood pressure &lt;
-140 mm Hg and diastolic blood pressure &lt; 90 mm Hg.</li>
-</ul>
-</div>
-<div id="bp_control_accaha" class="section level3">
-<h3>bp_control_accaha</h3>
-<ul>
-<li>Label: Blood pressure control (SBP &lt; 130 mm Hg and DBP &lt; 80 mm
-Hg)</li>
-<li>Description: Systolic and diastolic blood pressure controlled to the
-levels recommended in the 2017 ACC/AHA BP guideline, systolic blood
-pressure &lt; 130 mm Hg and diastolic blood pressure &lt; 80 mm Hg
-except for those = 65 years of age without diabetes, chronic kidney
-disease, history of cardiovascular disease or 10-year predicted ASCVD
-risk =10%. For this group, blood pressure control was defined as
+<li><strong>Label</strong>: Blood pressure control defined by the 2017
+ACC/AHA BP guideline</li>
+<li><strong>Description</strong>: Systolic and diastolic blood pressure
+controlled to the levels recommended in the 2017 ACC/AHA BP guideline,
+systolic blood pressure &lt; 130 mm Hg and diastolic blood pressure &lt;
+80 mm Hg except for those &gt;= 65 years of age without diabetes,
+chronic kidney disease, history of cardiovascular disease or 10-year
+predicted ASCVD risk &gt;= 10% estimated using the Pooled Cohort risk
+equations. For this group, blood pressure control was defined as
 systolic blood pressure &lt; 130 mm Hg</li>
+<li><strong>Number of observed values</strong>: 56,017 (100%)</li>
+<li><strong>Number of missing values</strong>: 0 (0.00%)</li>
+<li><strong>Counts of observed values</strong>
+<ul>
+<li><em>No</em>: 21,740 (38.8%)</li>
+<li><em>Yes</em>: 34,277 (61.2%)</li>
+</ul></li>
 </ul>
 </div>
-<div id="bp_uncontrolled_jnc7" class="section level3">
-<h3>bp_uncontrolled_jnc7</h3>
+<div id="bp_control_140_90" class="section level2">
+<h2>bp_control_140_90</h2>
 <ul>
-<li>Label: Uncontrolled BP (SBP = 140 mm Hg or DBP = 90 mm Hg)</li>
-<li>Description: Systolic blood pressure = 140 mm Hg or diastolic blood
-pressure = 90 mm Hg</li>
+<li><strong>Label</strong>: Blood pressure control (SBP &lt; 140 mm Hg
+and DBP &lt; 90 mm Hg)</li>
+<li><strong>Description</strong>: Systolic blood pressure &lt; 140 mm Hg
+and diastolic blood pressure &lt; 90 mm Hg</li>
+<li><strong>Number of observed values</strong>: 56,017 (100%)</li>
+<li><strong>Number of missing values</strong>: 0 (0.00%)</li>
+<li><strong>Counts of observed values</strong>
+<ul>
+<li><em>No</em>: 10,923 (19.5%)</li>
+<li><em>Yes</em>: 45,094 (80.5%)</li>
+</ul></li>
 </ul>
 </div>
-<div id="bp_uncontrolled_accaha" class="section level3">
-<h3>bp_uncontrolled_accaha</h3>
+<div id="bp_control_130_80" class="section level2">
+<h2>bp_control_130_80</h2>
 <ul>
-<li>Label: Uncontrolled BP (SBP = 130 mm Hg or DBP = 80 mm Hg)</li>
-<li>Description: Systolic blood pressure = 130 mm Hg or diastolic blood
-pressure = 80 mm Hg except for individuals without diabetes, chronic
-kidney disease, history of cardiovascular disease or 10-year predicted
-ASCVD risk =10%. For this group, uncontrolled blood pressure was defined
-as systolic blood pressure = 130 mm Hg</li>
+<li><strong>Label</strong>: Blood pressure control (SBP &lt; 130 mm Hg
+and DBP &lt; 80 mm Hg)</li>
+<li><strong>Description</strong>: Systolic blood pressure &lt; 130 mm Hg
+and diastolic blood pressure &lt; 80 mm Hg</li>
+<li><strong>Number of observed values</strong>: 56,017 (100%)</li>
+<li><strong>Number of missing values</strong>: 0 (0.00%)</li>
+<li><strong>Counts of observed values</strong>
+<ul>
+<li><em>No</em>: 21,777 (38.9%)</li>
+<li><em>Yes</em>: 34,240 (61.1%)</li>
+</ul></li>
+</ul>
+</div>
+<div id="bp_uncontrolled_jnc7" class="section level2">
+<h2>bp_uncontrolled_jnc7</h2>
+<ul>
+<li><strong>Label</strong>: Uncontrolled blood pressure defined by the
+JNC7 guideline</li>
+<li><strong>Description</strong>: Systolic blood pressure &gt;= 140 mm
+Hg or diastolic blood pressure &gt;= 90 mm Hg for those without diabetes
+and without chronic kidney disease; Systolic blood pressure &gt;= 130 mm
+Hg or diastolic blood pressure &gt;= 80 mm Hg for those with diabetes or
+chronic kidney disease</li>
+<li><strong>Number of observed values</strong>: 56,017 (100%)</li>
+<li><strong>Number of missing values</strong>: 0 (0.00%)</li>
+<li><strong>Counts of observed values</strong>
+<ul>
+<li><em>No</em>: 42,149 (75.2%)</li>
+<li><em>Yes</em>: 13,868 (24.8%)</li>
+</ul></li>
+</ul>
+</div>
+<div id="bp_uncontrolled_accaha" class="section level2">
+<h2>bp_uncontrolled_accaha</h2>
+<ul>
+<li><strong>Label</strong>: Uncontrolled blood pressure defined by the
+2017 ACC/AHA BP guideline</li>
+<li><strong>Description</strong>: Systolic blood pressure &gt;= 130 mm
+Hg or diastolic blood pressure &gt;= 80 mm Hg except for adults &gt;= 65
+years of age without diabetes, chronic kidney disease, history of
+cardiovascular disease or 10-year predicted ASCVD risk &gt;= 10%
+estimated using the Pooled Cohort risk equations. For this group,
+uncontrolled blood pressure was defined as systolic blood pressure &gt;=
+130 mm Hg</li>
+<li><strong>Number of observed values</strong>: 56,017 (100%)</li>
+<li><strong>Number of missing values</strong>: 0 (0.00%)</li>
+<li><strong>Counts of observed values</strong>
+<ul>
+<li><em>No</em>: 34,277 (61.2%)</li>
+<li><em>Yes</em>: 21,740 (38.8%)</li>
+</ul></li>
+</ul>
+</div>
+<div id="bp_uncontrolled_140_90" class="section level2">
+<h2>bp_uncontrolled_140_90</h2>
+<ul>
+<li><strong>Label</strong>: Uncontrolled blood pressure (SBP &gt;= 140
+mm Hg or DBP &gt;= 90 mm Hg)</li>
+<li><strong>Description</strong>: Systolic blood pressure &gt;= 140 mm
+Hg or diastolic blood pressure &gt;= 90 mm Hg</li>
+<li><strong>Number of observed values</strong>: 56,017 (100%)</li>
+<li><strong>Number of missing values</strong>: 0 (0.00%)</li>
+<li><strong>Counts of observed values</strong>
+<ul>
+<li><em>No</em>: 45,094 (80.5%)</li>
+<li><em>Yes</em>: 10,923 (19.5%)</li>
+</ul></li>
+</ul>
+</div>
+<div id="bp_uncontrolled_130_80" class="section level2">
+<h2>bp_uncontrolled_130_80</h2>
+<ul>
+<li><strong>Label</strong>: Uncontrolled blood pressure (SBP &gt;= 130
+mm Hg or DBP &gt;= 80 mm Hg)</li>
+<li><strong>Description</strong>: Systolic blood pressure &gt;= 130 mm
+Hg or diastolic blood pressure &gt;= 80 mm Hg</li>
+<li><strong>Number of observed values</strong>: 56,017 (100%)</li>
+<li><strong>Number of missing values</strong>: 0 (0.00%)</li>
+<li><strong>Counts of observed values</strong>
+<ul>
+<li><em>No</em>: 34,240 (61.1%)</li>
+<li><em>Yes</em>: 21,777 (38.9%)</li>
+</ul></li>
 </ul>
 </div>
 </div>
-<div id="cholesterol" class="section level2">
-<h2>Cholesterol</h2>
-<div id="chol_measured_never" class="section level3">
-<h3>chol_measured_never</h3>
+<div id="hypertension-variables" class="section level1">
+<h1>Hypertension variables</h1>
+<p>These variables are derived according to the 2017 American College of
+Cardiology/American Heart Association (ACC/AHA) BP guideline and the
+Seventh Joint National Committee (JNC7) BP guideline.</p>
+<div id="htn_jnc7" class="section level2">
+<h2>htn_jnc7</h2>
 <ul>
-<li>Label: Cholesterol has never been measured</li>
-<li>Description: NA</li>
-</ul>
-</div>
-<div id="chol_measured_last" class="section level3">
-<h3>chol_measured_last</h3>
-<ul>
-<li>Label: Time since having their cholesterol measured</li>
-<li>Description: NA</li>
-</ul>
-</div>
-<div id="chol_total" class="section level3">
-<h3>chol_total</h3>
-<ul>
-<li>Label: Total cholesterol, mg/dL</li>
-<li>Description: NA</li>
-</ul>
-</div>
-<div id="chol_total_gteq_200" class="section level3">
-<h3>chol_total_gteq_200</h3>
-<ul>
-<li>Label: Total cholesterol = 200 mg/dL</li>
-<li>Description: NA</li>
-</ul>
-</div>
-<div id="chol_total_gteq_240" class="section level3">
-<h3>chol_total_gteq_240</h3>
-<ul>
-<li>Label: Total cholesterol = 240 mg/dL</li>
-<li>Description: NA</li>
-</ul>
-</div>
-<div id="chol_trig" class="section level3">
-<h3>chol_trig</h3>
-<ul>
-<li>Label: Triglycerides, mg/dL</li>
-<li>Description: NA</li>
-</ul>
-</div>
-<div id="chol_trig_gteq_150" class="section level3">
-<h3>chol_trig_gteq_150</h3>
-<ul>
-<li>Label: Triglycerides = 150 mg/dL</li>
-<li>Description: NA</li>
-</ul>
-</div>
-</div>
-<div id="cholesterol-lowering-medication" class="section level2">
-<h2>Cholesterol-lowering medication</h2>
-<div id="chol_med_use" class="section level3">
-<h3>chol_med_use</h3>
-<ul>
-<li>Label: Taking a cholesterol-lowering medication</li>
-<li>Description: NA</li>
-</ul>
-</div>
-<div id="chol_med_use_sr" class="section level3">
-<h3>chol_med_use_sr</h3>
-<ul>
-<li>Label: Self-reported cholesterol-lowering medication use</li>
-<li>Description: NA</li>
-</ul>
-</div>
-<div id="chol_med_statin" class="section level3">
-<h3>chol_med_statin</h3>
-<ul>
-<li>Label: Taking a statin</li>
-<li>Description: NA</li>
-</ul>
-</div>
-<div id="chol_med_ezetimibe" class="section level3">
-<h3>chol_med_ezetimibe</h3>
-<ul>
-<li>Label: Taking ezetimibe</li>
-<li>Description: NA</li>
-</ul>
-</div>
-<div id="chol_med_pcsk9i" class="section level3">
-<h3>chol_med_pcsk9i</h3>
-<ul>
-<li>Label: Taking a PCSK9 inhibitor</li>
-<li>Description: NA</li>
-</ul>
-</div>
-<div id="chol_med_bile" class="section level3">
-<h3>chol_med_bile</h3>
-<ul>
-<li>Label: Taking a bile acid sequestrant</li>
-<li>Description: NA</li>
-</ul>
-</div>
-<div id="chol_med_fibric_acid" class="section level3">
-<h3>chol_med_fibric_acid</h3>
-<ul>
-<li>Label: Taking a fibrate</li>
-<li>Description: NA</li>
-</ul>
-</div>
-<div id="chol_med_atorvastatin" class="section level3">
-<h3>chol_med_atorvastatin</h3>
-<ul>
-<li>Label: Taking atorvastatin</li>
-<li>Description: NA</li>
-</ul>
-</div>
-<div id="chol_med_simvastatin" class="section level3">
-<h3>chol_med_simvastatin</h3>
-<ul>
-<li>Label: Taking simvastatin</li>
-<li>Description: NA</li>
-</ul>
-</div>
-<div id="chol_med_rosuvastatin" class="section level3">
-<h3>chol_med_rosuvastatin</h3>
-<ul>
-<li>Label: Taking rosuvastatin</li>
-<li>Description: NA</li>
-</ul>
-</div>
-<div id="chol_med_pravastatin" class="section level3">
-<h3>chol_med_pravastatin</h3>
-<ul>
-<li>Label: Taking pravastatin</li>
-<li>Description: NA</li>
-</ul>
-</div>
-<div id="chol_med_pitavastatin" class="section level3">
-<h3>chol_med_pitavastatin</h3>
-<ul>
-<li>Label: Taking pitavastatin</li>
-<li>Description: NA</li>
-</ul>
-</div>
-<div id="chol_med_fluvastatin" class="section level3">
-<h3>chol_med_fluvastatin</h3>
-<ul>
-<li>Label: Taking fluvastatin</li>
-<li>Description: NA</li>
-</ul>
-</div>
-<div id="chol_med_lovastatin" class="section level3">
-<h3>chol_med_lovastatin</h3>
-<ul>
-<li>Label: Taking lovastatin</li>
-<li>Description: NA</li>
-</ul>
-</div>
-<div id="chol_med_other" class="section level3">
-<h3>chol_med_other</h3>
-<ul>
-<li>Label: Taking other cholesterol-lowering medication</li>
-<li>Description: NA</li>
-</ul>
-</div>
-<div id="chol_med_addon_use" class="section level3">
-<h3>chol_med_addon_use</h3>
-<ul>
-<li>Label: Taking add-on lipid-lowering therapy (ezetimibe or PCSK9
-inhibitor)</li>
-<li>Description: NA</li>
-</ul>
-</div>
-<div id="chol_med_addon_recommended_ahaacc" class="section level3">
-<h3>chol_med_addon_recommended_ahaacc</h3>
-<ul>
-<li>Label: Recommended add-on lipid-lowering therapy by the 2018 AHA/ACC
+<li><strong>Label</strong>: Hypertension defined by the JNC7
 guideline</li>
-<li>Description: NA</li>
+<li><strong>Description</strong>: Hypertension defined by the JNC7
+guideline, systolic blood pressure &gt;= 140 mm Hg, diastolic blood
+pressure &gt;= 90 mm Hg or self-reported antihypertensive medication
+use.</li>
+<li><strong>Number of observed values</strong>: 56,017 (100%)</li>
+<li><strong>Number of missing values</strong>: 0 (0.00%)</li>
+<li><strong>Counts of observed values</strong>
+<ul>
+<li><em>No</em>: 36,640 (65.4%)</li>
+<li><em>Yes</em>: 19,377 (34.6%)</li>
+</ul></li>
 </ul>
 </div>
-<div id="chol_med_statin_recommended_ahaacc" class="section level3">
-<h3>chol_med_statin_recommended_ahaacc</h3>
+<div id="htn_accaha" class="section level2">
+<h2>htn_accaha</h2>
 <ul>
-<li>Label: Recommended a statin by the 2018 AHA/ACC guideline</li>
-<li>Description: NA</li>
+<li><strong>Label</strong>: Hypertension defined by the 2017 ACC/AHA BP
+guideline</li>
+<li><strong>Description</strong>: Hypertension defined by the 2017
+ACC/AHA blood pressure guideline, systolic blood pressure &gt;= 130 mm
+Hg, diastolic blood pressure &gt;= 80 mm Hg or self-reported
+antihypertensive medication use.</li>
+<li><strong>Number of observed values</strong>: 56,017 (100%)</li>
+<li><strong>Number of missing values</strong>: 0 (0.00%)</li>
+<li><strong>Counts of observed values</strong>
+<ul>
+<li><em>No</em>: 29,061 (51.9%)</li>
+<li><em>Yes</em>: 26,956 (48.1%)</li>
+</ul></li>
 </ul>
 </div>
-<div id="chol_med_recommended_ever" class="section level3">
-<h3>chol_med_recommended_ever</h3>
+<div id="htn_aware" class="section level2">
+<h2>htn_aware</h2>
 <ul>
-<li>Label: Ever been told to take cholesterol-lowering medication</li>
-<li>Description: NA</li>
+<li><strong>Label</strong>: Awareness of hypertension</li>
+<li><strong>Description</strong>: Self-report of a prior diagnosis of
+antihypertensive medication.</li>
+<li><strong>Number of observed values</strong>: 56,017 (100%)</li>
+<li><strong>Number of missing values</strong>: 0 (0.00%)</li>
+<li><strong>Counts of observed values</strong>
+<ul>
+<li><em>No</em>: 37,597 (67.1%)</li>
+<li><em>Yes</em>: 18,420 (32.9%)</li>
+</ul></li>
+</ul>
+</div>
+<div id="htn_resistant_jnc7" class="section level2">
+<h2>htn_resistant_jnc7</h2>
+<ul>
+<li><strong>Label</strong>: Resistant hypertension defined by the JNC7
+guideline</li>
+<li><strong>Description</strong>: Taking 4 or more classes of
+antihypertensive medication, systolic blood pressure &gt;= 140 mm Hg or
+diastolic blood pressure &gt;= 90 mm Hg with the use of 3 classes of
+antihypertensive medication, or systolic blood pressure &gt;= 130 mm Hg
+or diastolic blood pressure &gt;= 80 mm Hg with the use of 3 classes of
+antihypertensive medication for those with diabetes or chronic kidney
+disease.</li>
+<li><strong>Number of observed values</strong>: 56,017 (100%)</li>
+<li><strong>Number of missing values</strong>: 0 (0.00%)</li>
+<li><strong>Counts of observed values</strong>
+<ul>
+<li><em>No</em>: 53,628 (95.7%)</li>
+<li><em>Yes</em>: 2,389 (4.26%)</li>
+</ul></li>
+</ul>
+</div>
+<div id="htn_resistant_accaha" class="section level2">
+<h2>htn_resistant_accaha</h2>
+<ul>
+<li><strong>Label</strong>: Resistant hypertension defined by the 2017
+ACC/AHA BP guideline</li>
+<li><strong>Description</strong>: Taking 4 or more classes of
+antihypertensive medication; systolic blood pressure &gt;= 130 mm Hg or
+diastolic blood pressure &gt;= 80 mm Hg with the use of 3 classes of
+antihypertensive medication for those &lt; 65 years of age and those
+&gt;= 65 years of age with diabetes, chronic kidney disease, history of
+cardiovascular disease or 10-year predicted ASCVD risk &gt;= 10%;
+Systolic blood pressure &gt;= 130 mm Hg with the use of 3 classes of
+antihypertensive medication for those &gt;= 65 years of age without
+diabetes, chronic kidney disease, history of cardiovascular disease or
+10-year predicted ASCVD risk &gt;= 10%.</li>
+<li><strong>Number of observed values</strong>: 56,017 (100%)</li>
+<li><strong>Number of missing values</strong>: 0 (0.00%)</li>
+<li><strong>Counts of observed values</strong>
+<ul>
+<li><em>No</em>: 53,392 (95.3%)</li>
+<li><em>Yes</em>: 2,625 (4.69%)</li>
+</ul></li>
+</ul>
+</div>
+<div id="htn_resistant_accaha_thz" class="section level2">
+<h2>htn_resistant_accaha_thz</h2>
+<ul>
+<li><strong>Label</strong>: Resistant hypertension defined by the JNC7
+guideline, requires thiazide diuretic</li>
+<li><strong>Description</strong>: Taking 4 or more classes of
+antihypertensive medication, systolic blood pressure &gt;= 140 mm Hg or
+diastolic blood pressure &gt;= 90 mm Hg with the use of 3 classes of
+antihypertensive medication, or systolic blood pressure &gt;= 130 mm Hg
+or diastolic blood pressure &gt;= 80 mm Hg with the use of 3 classes of
+antihypertensive medication for those &lt; 65 years of age and those
+&gt;= 65 years of age with diabetes, chronic kidney disease or high
+cardiovascular risk defined by a history of cardiovascular disease or
+10-year predicted risk &gt;= 10% using the pooled cohort risk equations.
+To meet this definition of resistant hypertension, the participant had
+to be taking a thiazide diuretic.</li>
+<li><strong>Number of observed values</strong>: 56,017 (100%)</li>
+<li><strong>Number of missing values</strong>: 0 (0.00%)</li>
+<li><strong>Counts of observed values</strong>
+<ul>
+<li><em>No</em>: 54,487 (97.3%)</li>
+<li><em>Yes</em>: 1,530 (2.73%)</li>
+</ul></li>
+</ul>
+</div>
+<div id="htn_resistant_jnc7_thz" class="section level2">
+<h2>htn_resistant_jnc7_thz</h2>
+<ul>
+<li><strong>Label</strong>: Resistant hypertension defined by the 2017
+ACC/AHA BP guideline, requires thiazide diuretic</li>
+<li><strong>Description</strong>: Taking 4 or more classes of
+antihypertensive medication, systolic blood pressure &gt;= 140 mm Hg or
+diastolic blood pressure &gt;= 90 mm Hg with the use of 3 classes of
+antihypertensive medication, or systolic blood pressure &gt;= 130 mm Hg
+or diastolic blood pressure &gt;= 80 mm Hg with the use of 3 classes of
+antihypertensive medication for those with diabetes or chronic kidney
+disease. To meet this definition of resistant hypertension, the
+participant had to be taking a thiazide diuretic.</li>
+<li><strong>Number of observed values</strong>: 56,017 (100%)</li>
+<li><strong>Number of missing values</strong>: 0 (0.00%)</li>
+<li><strong>Counts of observed values</strong>
+<ul>
+<li><em>No</em>: 54,649 (97.6%)</li>
+<li><em>Yes</em>: 1,368 (2.44%)</li>
+</ul></li>
 </ul>
 </div>
 </div>
-<div id="comorbidities" class="section level2">
-<h2>Comorbidities</h2>
-<div id="cc_n_highrisk" class="section level3">
-<h3>cc_n_highrisk</h3>
+<div id="antihypertensive-medication-variables" class="section level1">
+<h1>Antihypertensive medication variables</h1>
+<p>During the interview, the labels of medications that participants
+reported taking in the preceding 30 days were recorded.</p>
+<div id="bp_med_use" class="section level2">
+<h2>bp_med_use</h2>
 <ul>
-<li>Label: Number of high risk conditions</li>
-<li>Description: Self-reported history of coronary heart disease,
-myocardial infarction, stroke or heart failure or 10-year predicted risk
-= 10% estimated by the pooled cohort risk equations</li>
+<li><strong>Label</strong>: Self-reported antihypertensive medication
+use</li>
+<li><strong>Description</strong>: Self-reported use of antihypertensive
+medication</li>
+<li><strong>Number of observed values</strong>: 56,017 (100%)</li>
+<li><strong>Number of missing values</strong>: 0 (0.00%)</li>
+<li><strong>Counts of observed values</strong>
+<ul>
+<li><em>No</em>: 42,270 (75.5%)</li>
+<li><em>Yes</em>: 13,747 (24.5%)</li>
+</ul></li>
 </ul>
 </div>
-<div id="cc_smoke" class="section level3">
-<h3>cc_smoke</h3>
+<div id="bp_med_recommended_jnc7" class="section level2">
+<h2>bp_med_recommended_jnc7</h2>
 <ul>
-<li>Label: Smoking status</li>
-<li>Description: Self-reported current cigarette smoking</li>
+<li><strong>Label</strong>: Antihypertensive medications recommended
+defined by the JNC7 guideline</li>
+<li><strong>Description</strong>: Systolic blood pressure &gt;= 140 mm
+Hg or diastolic blood pressure &gt;= 90 mm Hg; Systolic blood pressure
+&gt;= 130 mm Hg or diastolic blood pressure &gt;= 80 mm Hg for those
+with chronic kidney disease or diabetes. Those taking antihypertensive
+medications were considered to be recommended treatment by this
+definition.</li>
+<li><strong>Number of observed values</strong>: 56,017 (100%)</li>
+<li><strong>Number of missing values</strong>: 0 (0.00%)</li>
+<li><strong>Counts of observed values</strong>
+<ul>
+<li><em>No</em>: 35,265 (63.0%)</li>
+<li><em>Yes</em>: 20,752 (37.0%)</li>
+</ul></li>
 </ul>
 </div>
-<div id="cc_bmi" class="section level3">
-<h3>cc_bmi</h3>
+<div id="bp_med_recommended_accaha" class="section level2">
+<h2>bp_med_recommended_accaha</h2>
 <ul>
-<li>Label: Body mass index, kg/m2</li>
-<li>Description: Body mass index in kg/m2, estimated using the height
-and weight measured during the study examination.</li>
+<li><strong>Label</strong>: Antihypertensive medications recommended by
+the 2017 ACC/AHA BP guideline</li>
+<li><strong>Description</strong>: Systolic blood pressure &gt;= 140 mm
+Hg or diastolic blood pressure &gt;= 90 mm Hg; Systolic blood pressure
+&gt;= 130 mm Hg or diastolic blood pressure &gt;= 80 mm Hg for those
+with chronic kidney disease, diabetes, 10-year predicted atherosclerotic
+cardiovascular disease risk by the pooled cohort risk equations or age
+&gt;= 65 years. Those taking antihypertensive medications were
+considered to be recommended treatment by this definition.</li>
+<li><strong>Number of observed values</strong>: 56,017 (100%)</li>
+<li><strong>Number of missing values</strong>: 0 (0.00%)</li>
+<li><strong>Counts of observed values</strong>
+<ul>
+<li><em>No</em>: 34,003 (60.7%)</li>
+<li><em>Yes</em>: 22,014 (39.3%)</li>
+</ul></li>
 </ul>
 </div>
-<div id="cc_diabetes" class="section level3">
-<h3>cc_diabetes</h3>
+<div id="bp_med_n_class" class="section level2">
+<h2>bp_med_n_class</h2>
 <ul>
-<li>Label: Prevalent diabetes</li>
-<li>Description: HbA1c &lt;U+2275&gt;6.5% or self-report of a prior
-diagnosis of diabetes with use of insulin or oral glucose-lowering
+<li><strong>Label</strong>: Number of antihypertensive medication
+classes</li>
+<li><strong>Description</strong>: Number of antihypertensive medication
+classes being taken based on the pill bottle review</li>
+<li><strong>Number of observed values</strong>: 55,649 (99.3%)</li>
+<li><strong>Number of missing values</strong>: 368 (0.66%)</li>
+<li><strong>Counts of observed values</strong>
+<ul>
+<li><em>None</em>: 39,556 (71.1%)</li>
+<li><em>One</em>: 6,880 (12.4%)</li>
+<li><em>Two</em>: 5,340 (9.60%)</li>
+<li><em>Three</em>: 2,712 (4.87%)</li>
+<li><em>Four or more</em>: 1,161 (2.09%)</li>
+</ul></li>
+</ul>
+</div>
+<div id="bp_med_ace" class="section level2">
+<h2>bp_med_ace</h2>
+<ul>
+<li><strong>Label</strong>: ACE inhibitors</li>
+<li><strong>Description</strong>: Taking an angiotensin converting
+enzyme inhibitor, defined using the pill bottle review. Drugs in this
+class included bnazepril, captopril, enalapril, fosinopril, lisonopril,
+moexipril, perindopril, quinapril, ramipril, trandolapril</li>
+<li><strong>Number of observed values</strong>: 55,649 (99.3%)</li>
+<li><strong>Number of missing values</strong>: 368 (0.66%)</li>
+<li><strong>Counts of observed values</strong>
+<ul>
+<li><em>No</em>: 49,016 (88.1%)</li>
+<li><em>Yes</em>: 6,633 (11.9%)</li>
+</ul></li>
+</ul>
+</div>
+<div id="bp_med_aldo" class="section level2">
+<h2>bp_med_aldo</h2>
+<ul>
+<li><strong>Label</strong>: Aldosterone antagonists</li>
+<li><strong>Description</strong>: Taking an aldosterone antagonist,
+defined using the pill bottle review. Drugs in this class included
+eplerenone, spironolactone.</li>
+<li><strong>Number of observed values</strong>: 55,649 (99.3%)</li>
+<li><strong>Number of missing values</strong>: 368 (0.66%)</li>
+<li><strong>Counts of observed values</strong>
+<ul>
+<li><em>No</em>: 55,235 (99.3%)</li>
+<li><em>Yes</em>: 414 (0.74%)</li>
+</ul></li>
+</ul>
+</div>
+<div id="bp_med_alpha" class="section level2">
+<h2>bp_med_alpha</h2>
+<ul>
+<li><strong>Label</strong>: Alpha-1 blockers</li>
+<li><strong>Description</strong>: Taking an alpha blocker, defined using
+the pill bottle review. Drugs in this class included doxazosin,
+prazosin, terazosin.</li>
+<li><strong>Number of observed values</strong>: 55,649 (99.3%)</li>
+<li><strong>Number of missing values</strong>: 368 (0.66%)</li>
+<li><strong>Counts of observed values</strong>
+<ul>
+<li><em>No</em>: 54,880 (98.6%)</li>
+<li><em>Yes</em>: 769 (1.38%)</li>
+</ul></li>
+</ul>
+</div>
+<div id="bp_med_angioten" class="section level2">
+<h2>bp_med_angioten</h2>
+<ul>
+<li><strong>Label</strong>: Angiotensin receptor blockers</li>
+<li><strong>Description</strong>: Taking an angiotensin receptor
+blocker, defined using the pill bottle review. Drugs in this class
+included candesartan, eprosartan, irbesartan, losartan, olmesartan,
+telmisartan, valsartan, azilsartan.</li>
+<li><strong>Number of observed values</strong>: 55,649 (99.3%)</li>
+<li><strong>Number of missing values</strong>: 368 (0.66%)</li>
+<li><strong>Counts of observed values</strong>
+<ul>
+<li><em>No</em>: 52,132 (93.7%)</li>
+<li><em>Yes</em>: 3,517 (6.32%)</li>
+</ul></li>
+</ul>
+</div>
+<div id="bp_med_beta" class="section level2">
+<h2>bp_med_beta</h2>
+<ul>
+<li><strong>Label</strong>: Beta blockers</li>
+<li><strong>Description</strong>: Taking a beta blocker. Drugs in this
+class included acebutolol, atenolol, betaxolol, bisoprolol, carvedilol,
+labetalol, metoprolol, nadolol, nebivolol, pindolol, propranolol.</li>
+<li><strong>Number of observed values</strong>: 55,649 (99.3%)</li>
+<li><strong>Number of missing values</strong>: 368 (0.66%)</li>
+<li><strong>Counts of observed values</strong>
+<ul>
+<li><em>No</em>: 49,610 (89.1%)</li>
+<li><em>Yes</em>: 6,039 (10.9%)</li>
+</ul></li>
+</ul>
+</div>
+<div id="bp_med_central" class="section level2">
+<h2>bp_med_central</h2>
+<ul>
+<li><strong>Label</strong>: Central alpha1 agonist and other centrally
+acting agents</li>
+<li><strong>Description</strong>: Taking a centrally acting agents,
+defined using the pill bottle review. Drugs in this class included
+clonidine, guanabenz, guanfaacine, methyldopa, reserpine.</li>
+<li><strong>Number of observed values</strong>: 55,649 (99.3%)</li>
+<li><strong>Number of missing values</strong>: 368 (0.66%)</li>
+<li><strong>Counts of observed values</strong>
+<ul>
+<li><em>No</em>: 55,185 (99.2%)</li>
+<li><em>Yes</em>: 464 (0.83%)</li>
+</ul></li>
+</ul>
+</div>
+<div id="bp_med_ccb" class="section level2">
+<h2>bp_med_ccb</h2>
+<ul>
+<li><strong>Label</strong>: Calcium channel blockers</li>
+<li><strong>Description</strong>: Taking a calcium channel blocker,
+defined using the pill bottle review. Drugs in this class included
+amlodipine, diltiazem, felodipine, isradipine, nicardipine, nifedipine,
+nisoldipine, verapamil.</li>
+<li><strong>Number of observed values</strong>: 55,649 (99.3%)</li>
+<li><strong>Number of missing values</strong>: 368 (0.66%)</li>
+<li><strong>Counts of observed values</strong>
+<ul>
+<li><em>No</em>: 50,787 (91.3%)</li>
+<li><em>Yes</em>: 4,862 (8.74%)</li>
+</ul></li>
+</ul>
+</div>
+<div id="bp_med_diur_ksparing" class="section level2">
+<h2>bp_med_diur_Ksparing</h2>
+<ul>
+<li><strong>Label</strong>: Potassium sparing diuretics</li>
+<li><strong>Description</strong>: Taking a potassium-sparing diuretic,
+defined using the pill bottle review. Drugs in this class included
+amiloride, triamterene.</li>
+<li><strong>Number of observed values</strong>: 55,649 (99.3%)</li>
+<li><strong>Number of missing values</strong>: 368 (0.66%)</li>
+<li><strong>Counts of observed values</strong>
+<ul>
+<li><em>No</em>: 54,853 (98.6%)</li>
+<li><em>Yes</em>: 796 (1.43%)</li>
+</ul></li>
+</ul>
+</div>
+<div id="bp_med_diur_loop" class="section level2">
+<h2>bp_med_diur_loop</h2>
+<ul>
+<li><strong>Label</strong>: Loop diuretics</li>
+<li><strong>Description</strong>: Taking a loop diuretic, defined using
+the pill bottle review. Drugs in this class included bumetanide,
+furosemide, torsemide, ethacrynic acid.</li>
+<li><strong>Number of observed values</strong>: 55,649 (99.3%)</li>
+<li><strong>Number of missing values</strong>: 368 (0.66%)</li>
+<li><strong>Counts of observed values</strong>
+<ul>
+<li><em>No</em>: 53,806 (96.7%)</li>
+<li><em>Yes</em>: 1,843 (3.31%)</li>
+</ul></li>
+</ul>
+</div>
+<div id="bp_med_diur_thz" class="section level2">
+<h2>bp_med_diur_thz</h2>
+<ul>
+<li><strong>Label</strong>: Thiazide or thiazide-type diuretics</li>
+<li><strong>Description</strong>: Taking a thiazide diuretic, defined
+using the pill bottle review. Drugs in this class included
+bendroflumethiazide, chlorthalidone, chlorothiazide,
+hydrochlorothiazide, indapamide, metolazone, polythiazide.</li>
+<li><strong>Number of observed values</strong>: 55,649 (99.3%)</li>
+<li><strong>Number of missing values</strong>: 368 (0.66%)</li>
+<li><strong>Counts of observed values</strong>
+<ul>
+<li><em>No</em>: 50,646 (91.0%)</li>
+<li><em>Yes</em>: 5,003 (8.99%)</li>
+</ul></li>
+</ul>
+</div>
+<div id="bp_med_renin_inhibitors" class="section level2">
+<h2>bp_med_renin_inhibitors</h2>
+<ul>
+<li><strong>Label</strong>: Direct renin inhibitors</li>
+<li><strong>Description</strong>: Taking a renin inhibitor, defined
+using the pill bottle review. Drugs in this class included
+aliskiren.</li>
+<li><strong>Number of observed values</strong>: 55,649 (99.3%)</li>
+<li><strong>Number of missing values</strong>: 368 (0.66%)</li>
+<li><strong>Counts of observed values</strong>
+<ul>
+<li><em>No</em>: 55,626 (100%)</li>
+<li><em>Yes</em>: 23 (0.04%)</li>
+</ul></li>
+</ul>
+</div>
+<div id="bp_med_vasod" class="section level2">
+<h2>bp_med_vasod</h2>
+<ul>
+<li><strong>Label</strong>: Direct vasodilators</li>
+<li><strong>Description</strong>: Taking a vasodilator, defined using
+the pill bottle review. Drugs in this class included hydralazine,
+minoxidil.</li>
+<li><strong>Number of observed values</strong>: 55,649 (99.3%)</li>
+<li><strong>Number of missing values</strong>: 368 (0.66%)</li>
+<li><strong>Counts of observed values</strong>
+<ul>
+<li><em>No</em>: 55,380 (99.5%)</li>
+<li><em>Yes</em>: 269 (0.48%)</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="comorbidities-variables" class="section level1">
+<h1>Comorbidities variables</h1>
+<p>These variables describe comorbid conditions.</p>
+<div id="cc_n_highrisk" class="section level2">
+<h2>cc_n_highrisk</h2>
+<ul>
+<li><strong>Label</strong>: Number of high risk conditions</li>
+<li><strong>Description</strong>: Self-reported history of coronary
+heart disease, myocardial infarction, stroke or heart failure or 10-year
+predicted risk &gt;= 10% estimated by the pooled cohort risk
+equations</li>
+<li><strong>Number of observed values</strong>: 22,506 (40.2%)</li>
+<li><strong>Number of missing values</strong>: 33,511 (59.8%)</li>
+<li><strong>Counts of observed values</strong>
+<ul>
+<li><em>0</em>: 7,300 (32.4%)</li>
+<li><em>1</em>: 6,974 (31.0%)</li>
+<li><em>2</em>: 4,680 (20.8%)</li>
+<li><em>3 or more</em>: 3,552 (15.8%)</li>
+</ul></li>
+</ul>
+</div>
+<div id="cc_smoke" class="section level2">
+<h2>cc_smoke</h2>
+<ul>
+<li><strong>Label</strong>: Smoking status</li>
+<li><strong>Description</strong>: Self-reported current cigarette
+smoking</li>
+<li><strong>Number of observed values</strong>: 53,077 (94.8%)</li>
+<li><strong>Number of missing values</strong>: 2,940 (5.25%)</li>
+<li><strong>Counts of observed values</strong>
+<ul>
+<li><em>Never</em>: 29,261 (55.1%)</li>
+<li><em>Former</em>: 12,912 (24.3%)</li>
+<li><em>Current</em>: 10,904 (20.5%)</li>
+</ul></li>
+</ul>
+</div>
+<div id="cc_bmi" class="section level2">
+<h2>cc_bmi</h2>
+<ul>
+<li><strong>Label</strong>: Body mass index, kg/m2</li>
+<li><strong>Description</strong>: Body mass index in kg/m2, estimated
+using the height and weight measured during the study examination.</li>
+<li><strong>Number of observed values</strong>: 54,862 (97.9%)</li>
+<li><strong>Number of missing values</strong>: 1,155 (2.06%)</li>
+<li><strong>Counts of observed values</strong>
+<ul>
+<li><em>&lt;25</em>: 17,284 (31.5%)</li>
+<li><em>25 to &lt;30</em>: 18,005 (32.8%)</li>
+<li><em>30 to &lt;35</em>: 10,916 (19.9%)</li>
+<li><em>35+</em>: 8,657 (15.8%)</li>
+</ul></li>
+</ul>
+</div>
+<div id="cc_diabetes" class="section level2">
+<h2>cc_diabetes</h2>
+<ul>
+<li><strong>Label</strong>: Prevalent diabetes</li>
+<li><strong>Description</strong>: HbA1c &gt;= 6.5% or self-report of a
+prior diagnosis of diabetes with use of insulin or oral glucose-lowering
 medications.</li>
+<li><strong>Number of observed values</strong>: 56,017 (100%)</li>
+<li><strong>Number of missing values</strong>: 0 (0.00%)</li>
+<li><strong>Counts of observed values</strong>
+<ul>
+<li><em>No</em>: 48,778 (87.1%)</li>
+<li><em>Yes</em>: 7,239 (12.9%)</li>
+</ul></li>
 </ul>
 </div>
-<div id="cc_ckd" class="section level3">
-<h3>cc_ckd</h3>
+<div id="cc_ckd" class="section level2">
+<h2>cc_ckd</h2>
 <ul>
-<li>Label: Prevalent chronic kidney disease</li>
-<li>Description: Estimated glomerular filtration rate &lt; 60
-ml/min/1.73 m2 or albumin-to-creatinine &gt; 30 mg/g. Estimated
+<li><strong>Label</strong>: Prevalent chronic kidney disease</li>
+<li><strong>Description</strong>: Estimated glomerular filtration rate
+&lt; 60 ml/min/1.73 m2 or albumin-to-creatinine &gt; 30 mg/g. Estimated
 glomerular filtration rate was calculated using the 2021 serum
 creatinine-based equation.</li>
+<li><strong>Number of observed values</strong>: 56,017 (100%)</li>
+<li><strong>Number of missing values</strong>: 0 (0.00%)</li>
+<li><strong>Counts of observed values</strong>
+<ul>
+<li><em>No</em>: 46,773 (83.5%)</li>
+<li><em>Yes</em>: 9,244 (16.5%)</li>
+</ul></li>
 </ul>
 </div>
-<div id="cc_cvd_mi" class="section level3">
-<h3>cc_cvd_mi</h3>
+<div id="cc_cvd_mi" class="section level2">
+<h2>cc_cvd_mi</h2>
 <ul>
-<li>Label: History of myocardial infarction</li>
-<li>Description: Self-reported history of myocardial infarction</li>
+<li><strong>Label</strong>: History of myocardial infarction</li>
+<li><strong>Description</strong>: Self-reported history of myocardial
+infarction</li>
+<li><strong>Number of observed values</strong>: 52,087 (93.0%)</li>
+<li><strong>Number of missing values</strong>: 3,930 (7.02%)</li>
+<li><strong>Counts of observed values</strong>
+<ul>
+<li><em>No</em>: 49,829 (95.7%)</li>
+<li><em>Yes</em>: 2,258 (4.34%)</li>
+</ul></li>
 </ul>
 </div>
-<div id="cc_cvd_chd" class="section level3">
-<h3>cc_cvd_chd</h3>
+<div id="cc_cvd_chd" class="section level2">
+<h2>cc_cvd_chd</h2>
 <ul>
-<li>Label: History of coronary heart disease</li>
-<li>Description: Self-reported history of myocardial infarction or
-coronary heart disease</li>
+<li><strong>Label</strong>: History of coronary heart disease</li>
+<li><strong>Description</strong>: Self-reported history of myocardial
+infarction or coronary heart disease</li>
+<li><strong>Number of observed values</strong>: 52,084 (93.0%)</li>
+<li><strong>Number of missing values</strong>: 3,933 (7.02%)</li>
+<li><strong>Counts of observed values</strong>
+<ul>
+<li><em>No</em>: 48,771 (93.6%)</li>
+<li><em>Yes</em>: 3,313 (6.36%)</li>
+</ul></li>
 </ul>
 </div>
-<div id="cc_cvd_stroke" class="section level3">
-<h3>cc_cvd_stroke</h3>
+<div id="cc_cvd_stroke" class="section level2">
+<h2>cc_cvd_stroke</h2>
 <ul>
-<li>Label: History of stroke</li>
-<li>Description: Self-reported history of stroke</li>
+<li><strong>Label</strong>: History of stroke</li>
+<li><strong>Description</strong>: Self-reported history of stroke</li>
+<li><strong>Number of observed values</strong>: 52,099 (93.0%)</li>
+<li><strong>Number of missing values</strong>: 3,918 (6.99%)</li>
+<li><strong>Counts of observed values</strong>
+<ul>
+<li><em>No</em>: 50,081 (96.1%)</li>
+<li><em>Yes</em>: 2,018 (3.87%)</li>
+</ul></li>
 </ul>
 </div>
-<div id="cc_cvd_ascvd" class="section level3">
-<h3>cc_cvd_ascvd</h3>
+<div id="cc_cvd_ascvd" class="section level2">
+<h2>cc_cvd_ascvd</h2>
 <ul>
-<li>Label: History of ASCVD</li>
-<li>Description: Self-reported history of coronary heart disease,
-myocardial infarction or stroke</li>
+<li><strong>Label</strong>: History of ASCVD</li>
+<li><strong>Description</strong>: Self-reported history of coronary
+heart disease, myocardial infarction or stroke</li>
+<li><strong>Number of observed values</strong>: 56,017 (100%)</li>
+<li><strong>Number of missing values</strong>: 0 (0.00%)</li>
+<li><strong>Counts of observed values</strong>
+<ul>
+<li><em>No</em>: 51,268 (91.5%)</li>
+<li><em>Yes</em>: 4,749 (8.48%)</li>
+</ul></li>
 </ul>
 </div>
-<div id="cc_cvd_hf" class="section level3">
-<h3>cc_cvd_hf</h3>
+<div id="cc_cvd_hf" class="section level2">
+<h2>cc_cvd_hf</h2>
 <ul>
-<li>Label: History of heart failure</li>
-<li>Description: Self-reported history of heart failure</li>
+<li><strong>Label</strong>: History of heart failure</li>
+<li><strong>Description</strong>: Self-reported history of heart
+failure</li>
+<li><strong>Number of observed values</strong>: 52,013 (92.9%)</li>
+<li><strong>Number of missing values</strong>: 4,004 (7.15%)</li>
+<li><strong>Counts of observed values</strong>
+<ul>
+<li><em>No</em>: 50,301 (96.7%)</li>
+<li><em>Yes</em>: 1,712 (3.29%)</li>
+</ul></li>
 </ul>
 </div>
-<div id="cc_cvd_any" class="section level3">
-<h3>cc_cvd_any</h3>
+<div id="cc_cvd_any" class="section level2">
+<h2>cc_cvd_any</h2>
 <ul>
-<li>Label: History of CVD</li>
-<li>Description: Self-reported history of coronary heart disease,
-myocardial infarction, stroke or heart failure</li>
-</ul>
-</div>
-</div>
-<div id="demographics" class="section level2">
-<h2>Demographics</h2>
-<div id="demo_age_cat" class="section level3">
-<h3>demo_age_cat</h3>
+<li><strong>Label</strong>: History of CVD</li>
+<li><strong>Description</strong>: Self-reported history of coronary
+heart disease, myocardial infarction, stroke or heart failure</li>
+<li><strong>Number of observed values</strong>: 56,017 (100%)</li>
+<li><strong>Number of missing values</strong>: 0 (0.00%)</li>
+<li><strong>Counts of observed values</strong>
 <ul>
-<li>Label: Age category, years</li>
-<li>Description: Age grouping: 18-44, 45-64, 65-74, = 75 years</li>
-</ul>
-</div>
-<div id="demo_race" class="section level3">
-<h3>demo_race</h3>
-<ul>
-<li>Label: Race</li>
-<li>Description: Self-reported race/ethnicity. From 1999-2000 through
-2009-2010 this was available as non-Hispanic White, non-Hispanic Black,
-Hispanic and other. From 2011-2012 through 2017-2020 this was available
-as non-Hispanic White, non-Hispanic Black, non-Hispanic Asian, Hispanic
-and other.</li>
-</ul>
-</div>
-<div id="demo_age_years" class="section level3">
-<h3>demo_age_years</h3>
-<ul>
-<li>Label: Age, years</li>
-<li>Description: Participants’ age in years. Participants &gt; 80 years
-of age are given an age of 80 years.</li>
-</ul>
-</div>
-<div id="demo_pregnant" class="section level3">
-<h3>demo_pregnant</h3>
-<ul>
-<li>Label: Pregnant</li>
-<li>Description: Pregnancy status. This is defined by either self-report
-of being pregnant or a positive pregnancy test conducted during the
-study visit.</li>
-</ul>
-</div>
-<div id="demo_gender" class="section level3">
-<h3>demo_gender</h3>
-<ul>
-<li>Label: Gender</li>
-<li>Description: Self-reported gender</li>
-</ul>
-</div>
-</div>
-<div id="hdl-cholesterol" class="section level2">
-<h2>HDL Cholesterol</h2>
-<div id="chol_hdl" class="section level3">
-<h3>chol_hdl</h3>
-<ul>
-<li>Label: HDL cholesterol, mg/dL</li>
-<li>Description: NA</li>
-</ul>
-</div>
-<div id="chol_hdl_low" class="section level3">
-<h3>chol_hdl_low</h3>
-<ul>
-<li>Label: HDL cholesterol &lt;40 mg/dL in women (&lt;50 mg/dL in
-men)</li>
-<li>Description: NA</li>
-</ul>
-</div>
-</div>
-<div id="hypertension" class="section level2">
-<h2>Hypertension</h2>
-<div id="htn_jnc7" class="section level3">
-<h3>htn_jnc7</h3>
-<ul>
-<li>Label: Hypertension (JNC7 guideline definition)</li>
-<li>Description: Hypertension defined by the JNC7 guideline, systolic
-blood pressure = 140 mm Hg, diastolic blood pressure = 90 mm Hg or
-self-reported antihypertensive medication use.</li>
-</ul>
-</div>
-<div id="htn_accaha" class="section level3">
-<h3>htn_accaha</h3>
-<ul>
-<li>Label: Hypertension (2017 ACC/AHA BP guideline definition)</li>
-<li>Description: Hypertension defined by the 2017 ACC/AHA blood pressure
-guideline, systolic blood pressure = 130 mm Hg, diastolic blood pressure
-= 80 mm Hg or self-reported antihypertensive medication use.</li>
-</ul>
-</div>
-<div id="htn_aware" class="section level3">
-<h3>htn_aware</h3>
-<ul>
-<li>Label: Awareness of hypertension</li>
-<li>Description: Self-report of a prior diagnosis of antihypertensive
-medication.</li>
-</ul>
-</div>
-<div id="htn_resistant_jnc7" class="section level3">
-<h3>htn_resistant_jnc7</h3>
-<ul>
-<li>Label: Resistant hypertension (JNC7 guideline definition)</li>
-<li>Description: Taking 4 or more classes of antihypertensive
-medication, systolic blood pressure = 140 mm Hg or diastolic blood
-pressure = 90 mm Hg with the use of 3 classes of antihypertensive
-medication, or systolic blood pressure = 130 mm Hg or diastolic blood
-pressure = 80 mm Hg with the use of 3 classes of antihypertensive
-medication for those with diabetes or chronic kidney disease.</li>
-</ul>
-</div>
-<div id="htn_resistant_accaha" class="section level3">
-<h3>htn_resistant_accaha</h3>
-<ul>
-<li>Label: Resistant hypertension (2017 ACC/AHA BP guideline
-definition)</li>
-<li>Description: Taking 4 or more classes of antihypertensive
-medication, systolic blood pressure = 140 mm Hg or diastolic blood
-pressure = 90 mm Hg with the use of 3 classes of antihypertensive
-medication, or systolic blood pressure = 130 mm Hg or diastolic blood
-pressure = 80 mm Hg with the use of 3 classes of antihypertensive
-medication for those &lt;65 years of age and those = 65 years of age
-with diabetes, chronic kidney disease or high cardiovascular risk
-defined by a history of cardiovascular disease or 10-year predicted risk
-= 10% using the pooled cohort risk equations.</li>
-</ul>
-</div>
-<div id="htn_resistant_accaha_thz" class="section level3">
-<h3>htn_resistant_accaha_thz</h3>
-<ul>
-<li>Label: Resistant hypertension (JNC7 guideline definition requires
-thiazide diuretic)</li>
-<li>Description: Taking 4 or more classes of antihypertensive
-medication, systolic blood pressure = 140 mm Hg or diastolic blood
-pressure = 90 mm Hg with the use of 3 classes of antihypertensive
-medication, or systolic blood pressure = 130 mm Hg or diastolic blood
-pressure = 80 mm Hg with the use of 3 classes of antihypertensive
-medication for those &lt; 65 years of age and those = 65 years of age
-with diabetes, chronic kidney disease or high cardiovascular risk
-defined by a history of cardiovascular disease or 10-year predicted risk
-= 10% using the pooled cohort risk equations. To meet this definition of
-resistant hypertension, the participant had to be taking a thiazide
-diuretic.</li>
-</ul>
-</div>
-<div id="htn_resistant_jnc7_thz" class="section level3">
-<h3>htn_resistant_jnc7_thz</h3>
-<ul>
-<li>Label: Resistant hypertension (2017 ACC/AHA BP guideline definition
-requires thiazide diuretic)</li>
-<li>Description: Taking 4 or more classes of antihypertensive
-medication, systolic blood pressure = 140 mm Hg or diastolic blood
-pressure = 90 mm Hg with the use of 3 classes of antihypertensive
-medication, or systolic blood pressure = 130 mm Hg or diastolic blood
-pressure = 80 mm Hg with the use of 3 classes of antihypertensive
-medication for those with diabetes or chronic kidney disease. To meet
-this definition of resistant hypertension, the participant had to be
-taking a thiazide diuretic.</li>
-</ul>
-</div>
-</div>
-<div id="ldl-cholesterol" class="section level2">
-<h2>LDL Cholesterol</h2>
-<div id="chol_ldl" class="section level3">
-<h3>chol_ldl</h3>
-<ul>
-<li>Label: LDL cholesterol, mg/dL</li>
-<li>Description: NA</li>
-</ul>
-</div>
-<div id="chol_ldl_5cat" class="section level3">
-<h3>chol_ldl_5cat</h3>
-<ul>
-<li>Label: LDL cholesterol categories</li>
-<li>Description: NA</li>
-</ul>
-</div>
-<div id="chol_ldl_lt_70" class="section level3">
-<h3>chol_ldl_lt_70</h3>
-<ul>
-<li>Label: LDL cholesterol &lt; 70 mg/dL</li>
-<li>Description: NA</li>
-</ul>
-</div>
-<div id="chol_ldl_gteq_70" class="section level3">
-<h3>chol_ldl_gteq_70</h3>
-<ul>
-<li>Label: LDL cholesterol = 70 mg/dL</li>
-<li>Description: NA</li>
-</ul>
-</div>
-<div id="chol_ldl_lt_100" class="section level3">
-<h3>chol_ldl_lt_100</h3>
-<ul>
-<li>Label: LDL cholesterol &lt; 100 mg/dL</li>
-<li>Description: NA</li>
-</ul>
-</div>
-<div id="chol_ldl_gteq_100" class="section level3">
-<h3>chol_ldl_gteq_100</h3>
-<ul>
-<li>Label: LDL cholesterol = 100 mg/dL</li>
-<li>Description: NA</li>
-</ul>
-</div>
-<div id="chol_ldl_gteq_190" class="section level3">
-<h3>chol_ldl_gteq_190</h3>
-<ul>
-<li>Label: LDL cholesterol = 190 mg/dL</li>
-<li>Description: NA</li>
-</ul>
-</div>
-<div id="chol_ldl_persistent" class="section level3">
-<h3>chol_ldl_persistent</h3>
-<ul>
-<li>Label: LDL persistently elevated (LDL = 100 mg/dL while taking a
-statin)</li>
-<li>Description: NA</li>
-</ul>
-</div>
-</div>
-<div id="non-hdl-cholesterol" class="section level2">
-<h2>Non-HDL Cholesterol</h2>
-<div id="chol_nonhdl" class="section level3">
-<h3>chol_nonhdl</h3>
-<ul>
-<li>Label: Non-HDL cholesterol, mg/dL</li>
-<li>Description: NA</li>
-</ul>
-</div>
-<div id="chol_nonhdl_5cat" class="section level3">
-<h3>chol_nonhdl_5cat</h3>
-<ul>
-<li>Label: Non-HDL cholesterol categories</li>
-<li>Description: NA</li>
-</ul>
-</div>
-<div id="chol_nonhdl_lt_100" class="section level3">
-<h3>chol_nonhdl_lt_100</h3>
-<ul>
-<li>Label: Non-HDL cholesterol &lt; 100 mg/dL</li>
-<li>Description: NA</li>
-</ul>
-</div>
-<div id="chol_nonhdl_gteq_100" class="section level3">
-<h3>chol_nonhdl_gteq_100</h3>
-<ul>
-<li>Label: Non-HDL cholesterol = 100 mg/dL</li>
-<li>Description: NA</li>
-</ul>
-</div>
-<div id="chol_nonhdl_gteq_220" class="section level3">
-<h3>chol_nonhdl_gteq_220</h3>
-<ul>
-<li>Label: Non-HDL cholesterol = 220 mg/dL</li>
-<li>Description: NA</li>
-</ul>
-</div>
-</div>
-<div id="survey" class="section level2">
-<h2>Survey</h2>
-<div id="svy_id" class="section level3">
-<h3>svy_id</h3>
-<ul>
-<li>Label: participant identifier</li>
-<li>Description: NHANES participant’s unique identifier.</li>
-</ul>
-</div>
-<div id="svy_psu" class="section level3">
-<h3>svy_psu</h3>
-<ul>
-<li>Label: primary sampling unit</li>
-<li>Description: Population sampling unit. This variable is used to
-account for the non-random selection of study participants for
-NHANES</li>
-</ul>
-</div>
-<div id="svy_strata" class="section level3">
-<h3>svy_strata</h3>
-<ul>
-<li>Label: strata</li>
-<li>Description: Population stratification. This variable is used to
-account for the non-random selection of study participants for
-NHANES</li>
-</ul>
-</div>
-<div id="svy_weight_mec" class="section level3">
-<h3>svy_weight_mec</h3>
-<ul>
-<li>Label: Mobile examination center weights</li>
-<li>Description: Weight applied to produce statistical estimates for the
-non-institutionalized US population. This weight is used for calculating
-means and proportions.</li>
-</ul>
-</div>
-<div id="svy_weight_cal" class="section level3">
-<h3>svy_weight_cal</h3>
-<ul>
-<li>Label: Calibrated mobile examination center weights</li>
-<li>Description: Weight applied to produce statistical estimates for the
-non-institutionalized US population. This weight is used for estimating
-population counts and is recalibrated to account for participants
-excluded from this analysis due to missing data on systolic blood
-pressure, diastolic blood pressure or self-reported antihypertensive
-medication use.</li>
-</ul>
-</div>
-<div id="svy_subpop_htn" class="section level3">
-<h3>svy_subpop_htn</h3>
-<ul>
-<li>Label: Subpopulation for hypertension</li>
-<li>Description: This indicates that the person has data needed to be
-included in the analysis of blood pressure or hypertension data (i.e.,
-they had at least one systolic and diastolic blood pressure measurement
-and they had information on self-reported antihypertensive medication
-use).</li>
-</ul>
-</div>
-<div id="svy_year" class="section level3">
-<h3>svy_year</h3>
-<ul>
-<li>Label: NHANES cycle</li>
-<li>Description: NHANES survey cycle: 1999-2000, 2001-2002, 2003-2004,
-2005-2006, 2007-2008, 2009-2010, 2011-2012, 2013-2014, 2015-2016,
-2017-2020</li>
-</ul>
-</div>
-<div id="svy_subpop_chol" class="section level3">
-<h3>svy_subpop_chol</h3>
-<ul>
-<li>Label: Subpopulation for cholesterol</li>
-<li>Description: NA</li>
+<li><em>No</em>: 50,646 (90.4%)</li>
+<li><em>Yes</em>: 5,371 (9.59%)</li>
+</ul></li>
 </ul>
 </div>
 </div>

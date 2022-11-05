@@ -10,6 +10,7 @@
 \alias{cdc_db289_figure_2}
 \alias{muntner_jama_2020_etable_1}
 \alias{muntner_hypertension_2022_table_s2}
+\alias{cdc_db289_figure_1}
 \title{Results from Prior Studies of NHANES Data}
 \format{
 Data frames with varying numbers of rows and variables.
@@ -30,7 +31,7 @@ muntner_jama_2020_etable_1
 
 muntner_hypertension_2022_table_s2
 
-cdc_db289_figure_2
+cdc_db289_figure_1
 
 cdc_db289_figure_2
 }

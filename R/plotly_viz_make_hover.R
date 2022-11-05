@@ -32,43 +32,9 @@ plotly_viz_make_hover <- function(data, stat_all, group, group_label) {
         "review_reason",
         "review_needed",
         "stat_show") := NULL] %>%
-  dcast(data = ., formula = ... ~ statistic, value.var = "stat_label") %>%
+  dcast(formula = ... ~ statistic, value.var = "stat_label") %>%
   .[, hover := do.call(paste, c(.SD, sep="<br>")), .SDcols = stat_cols] %>%
   .[, hover := paste0(group_label, label_sep, hover)]
-
- # data %>%
- #  as_tibble() %>%
- #  mutate(across(all_of(numeric_cols), table_value)) %>%
- #  mutate(
- #   stat_show = if_else(
- #    review_needed,
- #    paste0(" -Review needed-<br>  Reasons: ", review_reason),
- #    ""
- #   ),
- #   stat_show = if_else(
- #    unreliable_status,
- #    paste0(" -Unreliable-<br>  Reasons: ", unreliable_reason),
- #    stat_show
- #   ),
- #   stat_show = if_else(
- #    stat_show == "",
- #    as.character(glue("{estimate} (95% CI {ci_lower}, {ci_upper})")),
- #    stat_show
- #   ),
- #   stat_label = glue(
- #    "{stat_recode(statistic)}: {stat_show}"
- #   )
- #  ) %>%
- #  select(-all_of(numeric_cols),
- #         -c(unreliable_reason,
- #            unreliable_status,
- #            review_reason,
- #            review_needed,
- #            stat_show)) %>%
- #  pivot_wider(names_from = statistic, values_from = stat_label) %>%
- #  unite(col = 'hover', !!!stat_cols, sep = '<br>') %>%
- #  mutate(hover = glue("{group_label}{label_sep}{hover}")) %>%
- #  as.data.table()
 
 }
 
@@ -76,8 +42,13 @@ plotly_viz_make_hover <- function(data, stat_all, group, group_label) {
 stat_recode <- function(stat){
 
  fcase(
-  stat == 'percentage_kg', 'Percentage (Korn & Graubard CI)',
-  rep(TRUE, length(stat)), stringr::str_to_title(stat)
+  stat == "percentage_kg", "Percentage (Korn & Graubard CI)",
+  stat == "mean", "Mean",
+  stat == "percentage", "Percentage",
+  stat == "count", "Count",
+  stat == "q25", "25th %",
+  stat == "q50", "50th %",
+  stat == "q75", "75th %"
  )
 
 }

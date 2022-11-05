@@ -55,7 +55,7 @@ print(ds)
 ## N observations
 ## - Unweighted: 8,965
 ## - Weighted: 247,835,696
-## ------------------------------------------------------------------------
+## -------------------------------------------------------------------------
 }\if{html}{\out{</div>}}
 
 Subset calls work as they do in many other \code{subset} functions:

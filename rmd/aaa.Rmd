@@ -1,6 +1,9 @@
 ```{r, include=FALSE}
 
 library(cardioStatsUSA)
+library(magrittr)
+library(data.table)
+
 knitr::opts_chunk$set(echo = TRUE)
 
 abbrvs <- list(
@@ -34,6 +37,96 @@ abbrvs_write <- function(abbr){
   
   abbrvs_paste(strings)
   
+}
+
+get_variable_summary <- function(x, data){
+ 
+ out <- get_nobs_summary(x, data)
+ 
+ if(is.factor(data[[x]]) || is.character(data[[x]])){
+  out %<>% c(get_count_summary(x, data))
+ }
+ 
+ if(is.numeric(data[[x]])){
+   out %<>% c(get_mean_summary(x, data),
+              get_quant_summary(x, data))
+ }
+ 
+ out %<>% c(get_miss_summary(x, data))
+ 
+ paste(out, collapse = '\n')
+ 
+}
+
+get_nobs_summary <- function(x, data){
+ 
+ table.glue::table_glue(
+  "- **Number of observed values**: {sum(!is.na(data[[x]]))} \\
+  ({100*mean(!is.na(data[[x]]))}%)"
+ )
+ 
+}
+
+get_miss_summary <- function(x, data){
+ 
+ table.glue::table_glue(
+  "- **Number of missing values**: {sum(is.na(data[[x]]))} \\
+  ({100*mean(is.na(data[[x]]))}%)"
+ )
+ 
+}
+
+
+get_mean_summary <- function(x, data){
+ 
+ table.glue::table_glue(
+  "- **Mean (standard deviation)**: \\
+  {mean(data[[x]], na.rm = TRUE)} \\
+  ({sd(data[[x]], na.rm = TRUE)})",
+  rspec = table.glue::round_spec() %>% 
+   table.glue::round_using_decimal(digits = 2)
+ )
+ 
+}
+
+get_quant_summary <- function(x, data){
+ 
+ quants <- quantile(data[[x]], 
+                    probs = c(1,2,3)/4, 
+                    na.rm = TRUE)
+ 
+ table.glue::table_glue(
+  "- **Median (25th, 75th percentile)**: \\
+  {quants[1]} ({quants[2]}, {quants[3]})",
+  rspec = table.glue::round_spec() %>% 
+   table.glue::round_using_decimal(digits = 2)
+ )
+ 
+}
+
+get_count_summary <- function(x, data){
+ 
+ counts <- table(data[[x]])
+ props <- prop.table(counts)
+ 
+ out <- vector(mode = 'character', length = length(counts))
+ 
+ for(i in seq_along(out)){
+  
+  .name <- names(counts)[i]
+  .count_value <- counts[i]
+  .prop_value <- 100 * props[i]
+  
+  out[i] <- table.glue::table_glue(
+   "    + *{.name}*: {.count_value} ({.prop_value}%)"
+  )
+  
+ }
+ 
+ out <- paste(out, collapse = '\n')
+ 
+ paste("- **Counts of observed values**", out, sep = '\n')
+ 
 }
 
 ```

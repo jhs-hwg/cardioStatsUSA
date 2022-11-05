@@ -20,12 +20,11 @@ data_to_doc <- nhanes_key %>%
  .[variable != 'svy_weight_cal'] %>% 
  .[, class := factor(class, levels = names(classes))] %>% 
  .[order(class)] %>% 
- droplevels()
+ droplevels() %>% 
+ .[, description := gsub('\u2265', '>=', x = description, fixed = T)] %>% 
+ .[, label := gsub('\u2265', '>=', x = label, fixed = T)]
 
-data_to_doc$description %<>% stringr::str_replace_all('\u2265', '>=')
-data_to_doc$label %<>% stringr::str_replace_all('\u2265', '>=')
-
-key_classes <- split(data_to_doc, f = data_to_doc$class)
+key_classes <- split(data_to_doc, by = 'class')
 
 for(i in seq_along(key_classes)){
  
@@ -35,8 +34,18 @@ for(i in seq_along(key_classes)){
  
  for(j in seq_along(key_classes[[i]]$variable)){
   cat("##", key_classes[[i]]$variable[j], "\n")
-  cat("- Label: ", key_classes[[i]]$label[j], "\n")
-  cat("- Description: ", key_classes[[i]]$description[j], "\n\n")
+  cat("- **Label**: ", key_classes[[i]]$label[j], "\n")
+  cat("- **Description**: ", key_classes[[i]]$description[j], "\n")
+  
+  if(names(key_classes)[i] != 'Survey'){
+   cat(get_variable_summary(key_classes[[i]]$variable[j],
+                            data = nhanes_data[svy_subpop_htn == 1]),
+       "\n\n")
+  } else {
+   cat("\n")
+  }
+  
+  
  }
  
 }
