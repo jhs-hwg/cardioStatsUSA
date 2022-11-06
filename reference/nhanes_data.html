@@ -77,6 +77,15 @@
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>NHANES data include in-home interviews and study examinations conducted at mobile examination centers. The interview included questions about demographics, health behaviors, prior diagnoses, medication use, and medical history. During the interview, the labels of medications that participants reported taking in the preceding 30 days were recorded. During the study examination, height and weight were measured, blood samples were used to measure cholesterol, glycated hemoglobin and serum creatinine, and a spot urine sample was used to measure albumin and creatinine and to conduct a pregnancy test.</p>
+<p>Currently, two sub-populations are included in <code>nhanes_data</code>:</p><ul><li><p>blood pressure and hypertension (n = 56,017)</p></li>
+<li><p>lipids and cholesterol (n = 25,151)</p></li>
+</ul><p>To access a sub-population, simply filter <code>nhanes_data</code> to contain rows
+where the corresponding sub-population indicator is equal to 1, e.g.,</p>
+<p></p><div class="sourceCode r"><pre><code><span><span class="co"># for blood pressure and hypertension sub-population</span></span>
+<span><span class="va">nhanes_data</span><span class="op">[</span><span class="va">svy_subpop_htn</span> <span class="op">==</span> <span class="fl">1</span><span class="op">]</span></span>
+<span></span>
+<span><span class="co"># for lipids and cholesterol sub-population</span></span>
+<span><span class="va">nhanes_data</span><span class="op">[</span><span class="va">svy_subpop_chol</span> <span class="op">==</span> <span class="fl">1</span><span class="op">]</span></span></code></pre><p></p></div>
     </div>
     <div class="section level2">
     <h2 id="survey-variables">Survey variables<a class="anchor" aria-label="anchor" href="#survey-variables"></a></h2>
