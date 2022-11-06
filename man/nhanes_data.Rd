@@ -18,6 +18,22 @@ The NHANES program was initiated in the early 1960s and beginning in 1999 has be
 }
 \details{
 NHANES data include in-home interviews and study examinations conducted at mobile examination centers. The interview included questions about demographics, health behaviors, prior diagnoses, medication use, and medical history. During the interview, the labels of medications that participants reported taking in the preceding 30 days were recorded. During the study examination, height and weight were measured, blood samples were used to measure cholesterol, glycated hemoglobin and serum creatinine, and a spot urine sample was used to measure albumin and creatinine and to conduct a pregnancy test.
+
+Currently, two sub-populations are included in \code{nhanes_data}:
+\itemize{
+\item blood pressure and hypertension (n = 56,017)
+\item lipids and cholesterol (n = 25,151)
+}
+
+To access a sub-population, simply filter \code{nhanes_data} to contain rows
+where the corresponding sub-population indicator is equal to 1, e.g.,
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# for blood pressure and hypertension sub-population
+nhanes_data[svy_subpop_htn == 1]
+
+# for lipids and cholesterol sub-population
+nhanes_data[svy_subpop_chol == 1]
+}\if{html}{\out{</div>}}
 }
 \section{Survey variables}{
 In each NHANES cycle, potential participants were identified using a

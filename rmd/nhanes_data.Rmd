@@ -3,6 +3,32 @@
 
 ```
 
+```{r, echo = FALSE}
+
+n_htn <- table.glue::table_value(sum(nhanes_data$svy_subpop_htn))
+n_chol <- table.glue::table_value(sum(nhanes_data$svy_subpop_chol))
+
+```
+
+
+Currently, two sub-populations are included in `nhanes_data`:
+
+- blood pressure and hypertension (n = `r n_htn`) 
+
+- lipids and cholesterol (n = `r n_chol`)
+
+To access a sub-population, simply filter `nhanes_data` to contain rows where the corresponding sub-population indicator is equal to 1, e.g., 
+
+```{r, results='hide'}
+
+# for blood pressure and hypertension sub-population
+nhanes_data[svy_subpop_htn == 1]
+
+# for lipids and cholesterol sub-population
+nhanes_data[svy_subpop_chol == 1]
+
+```
+
 
 ```{r, echo=FALSE, results='asis'}
 

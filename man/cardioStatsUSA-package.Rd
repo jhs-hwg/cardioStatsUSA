@@ -8,7 +8,7 @@
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-Analyze and visualize cardiometabolic outcomes among adults living in the United States of America using data from the National Health and Nutrition Examination Survey (NHANES). Save your results, either in the form of a dataset or as a figure. All analyses account for the NHANES design weights and are tested for equivalence with CDC statistics and prior papers.
+Analyze and visualize cardiometabolic outcomes among adults living in the United States of America using data from the National Health and Nutrition Examination Survey (NHANES). Save your results as a dataset or a figure. All analyses account for the NHANES design weights. Results are tested for equivalence with prior studies and a data brief report from the National Center for Health Statistics (NCHS).
 }
 \seealso{
 Useful links:
