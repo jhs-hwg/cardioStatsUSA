@@ -3,6 +3,9 @@
 # https://github.com/jhs-hwg/cardioStatsUSA/issues/39
 # nrow(ds$design$variables)
 
+# Solution: it may be the calibrated BP
+# - try using uncalibrated BP values when making the sample
+
 # Hypertension Trends in BP tests --------------------------------------------
 
 #' ## Who is included in this test
