@@ -12,6 +12,19 @@ library(testthat)
 knitr::spin_child('aaa.R')
 ```
 
+This article shows how `cardioStatsUSA` can replicate results from a prior study in the Journal of the American Medical Association. The results can be replicated with our shiny application or with code.
+
+## Replicate with the shiny application
+
+The video below shows how Table 2 can be replicated using our web application.
+
+<video width="775" height="560" controls>
+  <source src="D:/cardioStatsUSA/media/muntner_jama_table_2.mp4" type="video/mp4">
+</video>
+</br>
+
+## Replicate with code
+
 ```{r}
 knitr::spin_child("../tests/testthat/test-replicate_muntner_jama_2020.R")
 ```
