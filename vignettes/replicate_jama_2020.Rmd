@@ -18,10 +18,9 @@ This article shows how `cardioStatsUSA` can replicate results from a prior study
 
 The video below shows how Table 2 can be replicated using our web application.
 
-<video width="775" height="560" controls>
-  <source src="D:/cardioStatsUSA/media/muntner_jama_table_2.mp4" type="video/mp4">
-</video>
-</br>
+```{r}
+vembedr::embed_url("https://www.youtube.com/watch?v=EQe7feUjNuo")
+```
 
 ## Replicate with code
 
