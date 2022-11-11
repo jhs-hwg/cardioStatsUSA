@@ -204,7 +204,7 @@ We were able to replicate several prior manuscripts using the application.[@munt
 
 <br>
 
-The application has a number of features that can be used in combination to create highly customized statistics. Variables can be analyzed as outcomes or used to stratify results or restrict analyses to subsets of participants.  Combining the variables, tens of thousands of unique statistics can be estimated using the application. In addition, users can generate statistics for US adults from 1999 to March 2020, pooling results or stratifying the data. All results from the application can be saved as an image and included in scientific proposals or presentations. In addition, the ability to download results as a data set from the application allows users to further customize their results in tabular or graphical formats. 
+The application has a number of features that can be used in combination to create highly customized statistics. Variables can be analyzed as outcomes or used to stratify results or restrict analyses to subsets of participants.  Combining the variables, tens of thousands of unique statistics can be estimated using the application. In addition, users can generate statistics for US adults from 1999-2000 to 2017-2020, pooling results or stratifying the data. All results from the application can be saved as an image and included in scientific proposals or presentations. In addition, the ability to download results as a data set from the application allows users to further customize their results in tabular or graphical formats. 
 
 <br>
 
