@@ -108,6 +108,7 @@ Paul Muntner, PhD,^2^
 ^5^Department of Pharmacy Practice, Rosalind Franklin University of Medicine and Science, North Chicago, IL, USA
 ^6^Department of Internal Medicine, University of Utah School of Medicine, Salt Lake City, UT
 ^7^ University of Colorado Skaggs School of Pharmacy and Pharmaceutical Sciences, Aurora, CO, USA
+
 \newpage
 
 # ABSTRACT
@@ -126,7 +127,9 @@ The National Health and Nutrition Examination Survey (NHANES) is a program condu
 
 <br>
 
-NHANES data are publicly available and accessible through the CDC website.[@nhanes_home; @nhanes_data] However, analyzing NHANES data may be challenging for a number of reasons. Specific statistical techniques are required to account for the multi-stage sampling design used to select NHANES participants and analyses need to be weighted to produce nationally representative estimates. NHANES data are currently collected in two-year periods, referred to as cycles, and each cycle includes over 50 data files and accompanying informational material. NHANES data collection protocols have changed over time for some variables, and these differences should be taken into account when comparing or aggregating data from multiple cycles. Also, tests need to be performed to ensure the statistical estimates are reliable, and unstable estimates should be suppressed.[@parker2017national]
+NHANES data are publicly available and accessible through the CDC website.[@nhanes_home; @nhanes_data] However, analyzing NHANES data may be challenging for a number of reasons. Specific statistical techniques are required to account for the multi-stage sampling design used to select NHANES participants and analyses need to be weighted to produce nationally representative estimates. NHANES data are currently collected in two-year periods, referred to as cycles, and each cycle includes over 50 data files and accompanying informational material. NHANES data collection protocols have changed over time for some variables, and these differences should be considered when comparing or aggregating data from multiple cycles. For example, while BP was measured using a mercury sphygmomanometer until 2016,[@centers2015national] a validated oscillometric device was used in 2017 through 2020.[@ostchega2010assessing] Also, tests need to be performed to ensure the statistical estimates are reliable, and unstable estimates should be suppressed.[@parker2017national]
+
+
 
 <br>
 
@@ -192,7 +195,7 @@ In the current manuscript, we present a web application with a user-friendly poi
 
 <br>
 
-NHANES was designed to obtain nationally representative estimates of the health and nutrition status of non-institutionalized US adults and is an ideal data source to obtain statistics related to hypertension. SBP and DBP were measured following a standardized protocol by trained and certified physicians.  NHANES data are publicly available to download, but working with these data requires understanding variable definitions and advanced programming and statistical knowledge. Challenges of analyzing NHANES data may also include downloading and merging multiple data files, even for a single NHANES cycle; combining multiple variables to create outcome definitions, which may require dealing with missing data and questionnaire skip patterns; harmonizing variables across multiple NHANES cycles; and the analysis of complex survey design data. The web application that we present in the current manuscript addresses these challenges, allowing NHANES data to more fully inform public health decisions and future research related to hypertension.
+NHANES was designed to obtain nationally representative estimates of the health and nutrition status of non-institutionalized US adults and is an ideal data source to obtain statistics related to hypertension. SBP and DBP were measured following a standardized protocol by trained and certified physicians.  NHANES data are publicly available to download, but working with these data requires understanding variable definitions and advanced programming and statistical knowledge. Challenges of analyzing NHANES data may also include downloading and merging multiple data files, even for a single NHANES cycle; combining multiple variables to create outcome definitions, which may require dealing with missing data and questionnaire skip patterns; harmonizing variables across multiple NHANES cycles; and the analysis of complex survey design data. Although multiple reports based on the data are publicly available, it may be difficult to customize reports based on user requests. The web application that we present in the current manuscript addresses these challenges, allowing NHANES data to more fully inform public health decisions and future research related to hypertension.
 
 <br>
 
@@ -236,7 +239,7 @@ Drs Muntner and Jaeger receive support through grant R01HL144773 from the Nation
 
 **this section is under construction and should be checked for correctness**
 
-Drs Muntner reported receiving grant funding and consulting fees from Amgen Inc. Dr Colantonio reported receiving grant funding from Amgen Inc. No other disclosures were reported.
+Dr Muntner reported receiving grant funding and consulting fees from Amgen Inc. Dr Colantonio reported receiving grant funding from Amgen Inc. No other disclosures were reported.
 
 \newpage
 
