@@ -17,3 +17,4 @@ rsconnect
 ^pkgdown$
 ^rmd$
 ^vignettes/modules\.Rmd$
+^shiny_bookmarks$

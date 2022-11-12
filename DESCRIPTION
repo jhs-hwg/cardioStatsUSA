@@ -37,6 +37,7 @@ Imports:
     rintrojs,
     rlang,
     shiny,
+    shinyjs,
     shinyalert,
     shinyWidgets,
     survey,

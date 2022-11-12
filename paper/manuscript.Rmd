@@ -87,7 +87,7 @@ abbrvs_write <- function(abbr){
 
 Byron C. Jaeger, PhD,^1^ 
 Ligong Chen, PhD,^2^
-Kathryn Foti,^2^
+Kathryn Foti, PhD, MPH^2^
 Shakia T. Hardy,^2^
 Adam P. Bress, PharmD, MS,^3,4^ 
 Sean P. Kane, PharmD, BCPS,^5^
@@ -116,7 +116,7 @@ Paul Muntner, PhD,^2^
 
 **Methods**: We developed and validated a web-based application that provides hypertension statistics for US adults using 10 cycles of NHANES data, 1999-2000 through 2017-2020, without requiring users to conduct statistical programming. The application's interface allows users to estimate crude and age-adjusted means, quantiles, and proportions. Population counts can also be estimated. To demonstrate the application’s capabilities, we estimated hypertension statistics for US adults.The application was validated by replicating statistics from three publications.
 
-**Results**: The estimated mean systolic blood pressure (BP) declined from 123 mmHg in 1999-2000 to 120 mmHg in 2009-2010 and increased to 123 mmHg in 2017-2020. The age-adjusted prevalence of hypertension (i.e., systolic BP ≥130 mmHg, diastolic BP ≥80 mmHg or self-reported antihypertensive medication use) was 47.9% in 1999-2000, 43.0% in 2009-2010, and 44.7% in 2017-2020. In 2017-2020, 115.3 million US adults had hypertension. The age-adjusted prevalence of controlled BP, defined by the 2017 American College of Cardiology/American Heart Association BP guideline, among US adults with hypertension was 9.7% in 1999-2000, 25.0% in 2013-2014, and 21.9% in 2017-2020. After age-adjustment and among non-pregnant US adults who self-reported taking antihypertensive medication, 27.6%, 48.5%, and 43.0% had controlled BP in 1999-2000, 2013-2014, and 2017-2020, respectively.
+**Results**: The estimated mean systolic blood pressure (BP) declined from 123 mmHg in 1999-2000 to 120 mmHg in 2009-2010 and increased to 123 mmHg in 2017-2020. The age-adjusted prevalence of hypertension (i.e., systolic BP ≥130 mmHg, diastolic BP ≥80 mmHg or self-reported antihypertensive medication use) was 47.9% in 1999-2000, 43.0% in 2009-2010, and 44.7% in 2017-2020. In 2017-2020, 115.3 million US adults had hypertension. The age-adjusted prevalence of controlled BP, defined by the 2017 American College of Cardiology/American Heart Association BP guideline, among non-pregnant US adults with hypertension was 9.7% in 1999-2000, 25.0% in 2013-2014, and 21.9% in 2017-2020. After age-adjustment and among non-pregnant US adults who self-reported taking antihypertensive medication, 27.6%, 48.5%, and 43.0% had controlled BP in 1999-2000, 2013-2014, and 2017-2020, respectively.
 
 **Conclusions**: The application developed in the current study is publicly available and produced valid, transparent, and reproducible results.
 
