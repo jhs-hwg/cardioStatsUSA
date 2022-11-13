@@ -125,7 +125,7 @@ variable_description <- tibble::tribble(
 
  "demo_age_cat", "Age grouping: 18-44, 45-64, 65-74, \u2265 75 years",
  "demo_race", "Self-reported race/ethnicity. From 1999-2000 through 2009-2010 this was available as non-Hispanic White, non-Hispanic Black, Hispanic and other. From 2011-2012 through 2017-2020 this was available as non-Hispanic White, non-Hispanic Black, non-Hispanic Asian, Hispanic and other.",
- "demo_age_years", "Participant age in years.  Participants > 80 years of age are given an age of 80 years.",
+ "demo_age_years", "Participant age in years.  Participants > 80 years of age are given an age of 80 years. This top-coding was changed from 85 years to 80 with the 2007-2008 cycle (prior to then, was top-coded at 85).",
  "demo_pregnant", "Pregnancy status. This is defined by either self-report of being pregnant or a positive pregnancy test conducted during the study visit.",
  "demo_gender", "Self-reported gender",
 
@@ -146,12 +146,12 @@ variable_description <- tibble::tribble(
  "bp_med_recommended_jnc7", "Systolic blood pressure \u2265 140 mm Hg or diastolic blood pressure \u2265 90 mm Hg; Systolic blood pressure \u2265 130 mm Hg or diastolic blood pressure \u2265 80 mm Hg for those with chronic kidney disease or diabetes. Those taking antihypertensive medications were considered to be recommended treatment.",
  "bp_med_recommended_accaha", "Systolic blood pressure ≥ 130 mm Hg or diastolic blood pressure ≥ 80 mm Hg; Systolic blood pressure ≥ 130 mm Hg for those age ≥ 65 years without diabetes, chronic kidney disease, history of cardiovascular disease, or 10-year predicted atherosclerotic cardiovascular disease risk ≥ 10% by the pooled cohort risk equations. Those taking antihypertensive medications were considered to be recommended treatment.",
  "bp_med_n_class", "Number of antihypertensive medication classes being taken based on the pill bottle review",
- "bp_med_ace", "Taking an angiotensin converting enzyme inhibitor, defined using the pill bottle review. Drugs in this class included bnazepril, captopril, enalapril, fosinopril, lisonopril, moexipril, perindopril, quinapril, ramipril, trandolapril",
+ "bp_med_ace", "Taking an angiotensin converting enzyme inhibitor, defined using the pill bottle review. Drugs in this class included benazepril, captopril, enalapril, fosinopril, lisinopril, moexipril, perindopril, quinapril, ramipril, trandolapril",
  "bp_med_aldo", "Taking an aldosterone antagonist, defined using the pill bottle review. Drugs in this class included eplerenone, spironolactone.",
  "bp_med_alpha", "Taking an alpha blocker, defined using the pill bottle review. Drugs in this class included doxazosin, prazosin, terazosin.",
  "bp_med_angioten", "Taking an angiotensin receptor blocker, defined using the pill bottle review. Drugs in this class included candesartan, eprosartan, irbesartan, losartan, olmesartan, telmisartan, valsartan, azilsartan.",
  "bp_med_beta", "Taking a beta blocker. Drugs in this class included acebutolol, atenolol, betaxolol, bisoprolol, carvedilol, labetalol, metoprolol, nadolol, nebivolol, pindolol, propranolol.",
- "bp_med_central", "Taking a centrally acting agents, defined using the pill bottle review. Drugs in this class included clonidine, guanabenz, guanfaacine, methyldopa, reserpine.",
+ "bp_med_central", "Taking a centrally acting agents, defined using the pill bottle review. Drugs in this class included clonidine, guanabenz, guanfacine, methyldopa, reserpine.",
  "bp_med_ccb", "Taking a calcium channel blocker, defined using the pill bottle review. Drugs in this class included amlodipine, diltiazem, felodipine, isradipine, nicardipine, nifedipine, nisoldipine, verapamil.",
  "bp_med_diur_Ksparing", "Taking a potassium-sparing diuretic, defined using the pill bottle review. Drugs in this class included amiloride, triamterene.",
  "bp_med_diur_loop", "Taking a loop diuretic, defined using the pill bottle review. Drugs in this class included bumetanide, furosemide, torsemide, ethacrynic acid.",

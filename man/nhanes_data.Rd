@@ -138,7 +138,9 @@ Black, non-Hispanic Asian, Hispanic and other.
 \itemize{
 \item \strong{Label}: Age, years
 \item \strong{Description}: Participant age in years. Participants > 80 years
-of age are given an age of 80 years.
+of age are given an age of 80 years. This top-coding was changed
+from 85 years to 80 with the 2007-2008 cycle (prior to then, was
+top-coded at 85).
 \item \strong{Number of observed values}: 56,017 (100\%)
 \item \strong{Mean (standard deviation)}: 47.49 (19.15)
 \item \strong{Median (25th, 75th percentile)}: 31.00 (47.00, 63.00)
@@ -637,7 +639,7 @@ taken based on the pill bottle review
 \item \strong{Label}: ACE inhibitors
 \item \strong{Description}: Taking an angiotensin converting enzyme inhibitor,
 defined using the pill bottle review. Drugs in this class included
-bnazepril, captopril, enalapril, fosinopril, lisonopril, moexipril,
+benazepril, captopril, enalapril, fosinopril, lisinopril, moexipril,
 perindopril, quinapril, ramipril, trandolapril
 \item \strong{Number of observed values}: 55,649 (99.3\%)
 \item \strong{Counts of observed values}
@@ -719,7 +721,7 @@ metoprolol, nadolol, nebivolol, pindolol, propranolol.
 \item \strong{Label}: Central alpha1 agonist and other centrally acting agents
 \item \strong{Description}: Taking a centrally acting agents, defined using the
 pill bottle review. Drugs in this class included clonidine,
-guanabenz, guanfaacine, methyldopa, reserpine.
+guanabenz, guanfacine, methyldopa, reserpine.
 \item \strong{Number of observed values}: 55,649 (99.3\%)
 \item \strong{Counts of observed values}
 \itemize{
