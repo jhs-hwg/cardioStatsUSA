@@ -121,7 +121,7 @@ variable_description <- tibble::tribble(
  "svy_weight_mec", "Weight applied to produce statistical estimates for the non-institutionalized US population. This weight is used for calculating means and proportions.",
  "svy_weight_cal", "Weight applied to produce statistical estimates for the non-institutionalized US population. This weight is used for estimating population counts and is recalibrated to account for participants excluded from this analysis due to missing data on systolic blood pressure, diastolic blood pressure or self-reported antihypertensive medication use.",
  "svy_subpop_htn", "This indicates that the person has data needed to be included in the analysis of blood pressure or hypertension data (i.e., they had at least one systolic and diastolic blood pressure measurement and they had information on self-reported antihypertensive medication use).",
- "svy_year", "NHANES survey cycle: 1999-2000, 2001-2002, 2003-2004, 2005-2006, 2007-2008, 2009-2010, 2011-2012, 2013-2014, 2015-2016, 2017-2020",
+ "svy_year", "NHANES survey cycle: 1999-2000, 2001-2002, 2003-2004, 2005-2006, 2007-2008, 2009-2010, 2011-2012, 2013-2014, 2015-2016, 2017-2020. Each cycle is 2 years in length, apart from 2017-2020, which covers 2017 through March of 2020 (approximately 3.2 years)",
 
  "demo_age_cat", "Age grouping: 18-44, 45-64, 65-74, \u2265 75 years",
  "demo_race", "Self-reported race/ethnicity. From 1999-2000 through 2009-2010 this was available as non-Hispanic White, non-Hispanic Black, Hispanic and other. From 2011-2012 through 2017-2020 this was available as non-Hispanic White, non-Hispanic Black, non-Hispanic Asian, Hispanic and other.",
