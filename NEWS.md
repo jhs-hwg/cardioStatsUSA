@@ -1,6 +1,8 @@
 
 # cardioStatsUSA 0.0.1
 
+* Bookmarking has been added as a feature to the Shiny application.
+
 * A paper has been drafted to summarize the design and development of `cardioStatsUSA`
 
 * The blood pressure and hypertension module is ready to be analyzed. 
