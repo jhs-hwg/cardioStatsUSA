@@ -11,15 +11,6 @@ output:
 
 ```{r setup, include = FALSE}
 
-knitr::opts_chunk$set(
- echo = FALSE,
- message = FALSE,
- warning = FALSE,
- fig.width = 10.5,
- fig.height = 4, 
- dpi = 300,
- ft.keepnext = FALSE
-)
 
 suppressPackageStartupMessages({
  library(officer)
@@ -31,6 +22,16 @@ suppressPackageStartupMessages({
  library(flextable)
  library(plotly)
 })
+
+knitr::opts_chunk$set(
+ echo = FALSE,
+ message = FALSE,
+ warning = FALSE,
+ fig.width = 10.5,
+ fig.height = 4, 
+ dpi = 300,
+ ft.keepnext = FALSE
+)
 
 conflicted::conflict_prefer('as_flextable', 'flextable')
 conflicted::conflict_prefer('filter', 'dplyr')
@@ -92,7 +93,7 @@ Shakia T. Hardy,^2^
 Adam P. Bress, PharmD, MS,^3,4^ 
 Sean P. Kane, PharmD, BCPS,^5^
 Jennifer S. Herrick, MS,^3,6^
-Catherine Derington, PharmD, MS,^7^ 
+Catherine G. Derington, PharmD, MS,^7^ 
 Bharat Poudel, MSPH,^2^
 Ashley Christenson, BS,^2^ 
 Lisandro D. Colantonio, MD, PhD,^2^
@@ -101,13 +102,12 @@ Paul Muntner, PhD,^2^
 **AUTHOR ORDER NOT FINALIZED**
 
 
-^1^Department of Biostatistics and Data Science, Wake Forest School of Medicine, Winston-Salem, NC. `r single_par`
+^1^Department of Biostatistics and Data Science, Wake Forest University School of Medicine, Winston-Salem, NC. `r single_par`
 ^2^Department of Epidemiology, University of Alabama at Birmingham, Birmingham, AL. `r single_par`
-^3^Informatics, Decision-Enhancement, and Analytic Sciences (IDEAS) Center, Veterans Affairs, Salt Lake City Health Care System, Salt Lake City, UT. `r single_par`
-^4^Department of Population Health Sciences, University of Utah School of Medicine, Salt Lake City, UT. `r single_par`
-^5^Department of Pharmacy Practice, Rosalind Franklin University of Medicine and Science, North Chicago, IL, USA
-^6^Department of Internal Medicine, University of Utah School of Medicine, Salt Lake City, UT
-^7^ University of Colorado Skaggs School of Pharmacy and Pharmaceutical Sciences, Aurora, CO, USA
+^3^Informatics, Decision-Enhancement, and Analytic Sciences (IDEAS) Center, Veterans Affairs, Salt Lake City Health Care System, Salt Lake City, UT.`r single_par`
+^4^ Intermountain Healthcare Department of Population Health Sciences, Spencer Fox Eccles School of Medicine, University of Utah, Salt Lake City, UT. `r single_par`
+^5^Department of Pharmacy Practice, Rosalind Franklin University of Medicine and Science, North Chicago, IL, USA `r single_par`
+^6^Department of Internal Medicine, Spencer Fox Eccles School of Medicine, University of Utah, Salt Lake City, UT `r single_par`
 
 \newpage
 
@@ -115,7 +115,7 @@ Paul Muntner, PhD,^2^
 
 **Background**: Data from the US National Health and Nutrition Examination Survey (NHANES) are freely available and can be analyzed to produce hypertension statistics for the non-institutionalized US population. The analysis of these data requires statistical programming knowledge.
 
-**Methods**: We developed and validated a web-based application that provides hypertension statistics for US adults using 10 cycles of NHANES data, 1999-2000 through 2017-2020, without requiring users to conduct statistical programming. The application's interface allows users to estimate crude and age-adjusted means, quantiles, and proportions. Population counts can also be estimated. To demonstrate the application’s capabilities, we estimated hypertension statistics for US adults.The application was validated by replicating statistics from three publications.
+**Methods**: We developed and validated a web-based application that provides hypertension statistics for US adults using 10 cycles of NHANES data, 1999-2000 through 2017-2020, without requiring users to conduct statistical programming. The application's interface allows users to estimate population counts in addition to crude and age-adjusted summary statistics. To demonstrate the application's capabilities, we estimated hypertension statistics for US adults. The application was validated by replicating statistics from three publications.
 
 **Results**: The estimated mean systolic blood pressure (BP) declined from 123 mmHg in 1999-2000 to 120 mmHg in 2009-2010 and increased to 123 mmHg in 2017-2020. The age-adjusted prevalence of hypertension (i.e., systolic BP ≥130 mmHg, diastolic BP ≥80 mmHg or self-reported antihypertensive medication use) was 47.9% in 1999-2000, 43.0% in 2009-2010, and 44.7% in 2017-2020. In 2017-2020, 115.3 million US adults had hypertension. The age-adjusted prevalence of controlled BP, defined by the 2017 American College of Cardiology/American Heart Association BP guideline, among non-pregnant US adults with hypertension was 9.7% in 1999-2000, 25.0% in 2013-2014, and 21.9% in 2017-2020. After age-adjustment and among non-pregnant US adults who self-reported taking antihypertensive medication, 27.6%, 48.5%, and 43.0% had controlled BP in 1999-2000, 2013-2014, and 2017-2020, respectively.
 
@@ -127,9 +127,7 @@ The National Health and Nutrition Examination Survey (NHANES) is a program condu
 
 <br>
 
-NHANES data are publicly available and accessible through the CDC website.[@nhanes_home; @nhanes_data] However, analyzing NHANES data may be challenging for a number of reasons. Specific statistical techniques are required to account for the multi-stage sampling design used to select NHANES participants and analyses need to be weighted to produce nationally representative estimates. NHANES data are currently collected in two-year periods, referred to as cycles, and each cycle includes over 50 data files and accompanying informational material. NHANES data collection protocols have changed over time for some variables, and these differences should be considered when comparing or aggregating data from multiple cycles. For example, while BP was measured using a mercury sphygmomanometer until 2016,[@centers2015national] a validated oscillometric device was used in 2017 through 2020.[@ostchega2010assessing] Also, tests need to be performed to ensure the statistical estimates are reliable, and unstable estimates should be suppressed.[@parker2017national]
-
-
+NHANES data are publicly available and accessible through the CDC website.[@nhanes_home; @nhanes_data] However, analyzing NHANES data may be challenging for a number of reasons. Specific statistical techniques are required to account for the multi-stage sampling design used to select NHANES participants and analyses need to be weighted to produce nationally representative estimates. Prior studies have found analytic errors related to survey design and estimation methods are an important component of total survey error.[@west2017analytic, @west2016big] NHANES data are currently collected in two-year periods, referred to as cycles, and each cycle includes over 50 data files and accompanying informational material. NHANES data collection protocols have changed over time for some variables, and these differences should be considered when comparing or aggregating data from multiple cycles. For example, while BP was measured using a mercury sphygmomanometer until 2016,[@centers2015national] a validated oscillometric device was used in 2017 through 2020.[@ostchega2010assessing] Also, tests need to be performed to ensure the statistical estimates are reliable, and unstable estimates should be suppressed.[@parker2017national] 
 
 <br>
 
@@ -143,7 +141,7 @@ The NHANES program was initiated in the early 1960s and beginning in 1999 has be
 
 <br>
 
-NHANES data were collected through an in-home interview and study examination conducted at a mobile examination center. The interview included questions about demographics, health behaviors, medical history, and medication use. During the interview, the labels of medications that participants reported taking in the preceding 30 days were recorded. Antihypertensive medication classes were defined using those listed in the 2017 ACC/AHA BP guideline.[@whelton20182017] During the study examination, height, weight and BP were measured and blood and spot urine samples were collected. Of relevance to the current application, blood samples were used to measure total and high-density lipoprotein cholesterol, glycated hemoglobin and serum creatinine, and the urine sample was used to measure albumin and creatinine and to conduct a pregnancy test. The protocol for measuring BP is available online.[@ostchega_national_2003] In brief, systolic and diastolic BP (SBP and DBP, respectively) were measured three times by trained and certified physicians. BP was measured using a mercury sphygmomanometer from 1999-2000 through 2015-2016 and using an oscillometric device in 2017-2020. The mean SBP and DBP levels were computed over all available measurements for each participant. The oscillometric SBP and DBP values were calibrated to the mercury device.[@muntner2022blood; @ostchega2021comparing] For the current analysis, we defined hypertension, BP control, and resistant hypertension according to the 2017 ACC/AHA BP guideline.[@whelton20182017] The application also has these variables defined according to the JNC7 definitions.[@chobanian2003seventh] Chronic kidney disease (CKD) was defined by estimated glomerular filtration rate < 60 ml/min/1.73 m^2^ calculated using the 2021 serum creatinine-based equation or albumin-to-creatinine ratio > 30 mg/g.[@inker_new_2021] A list of BP, hypertension, and antihypertensive medication variables is provided in **Table 1** with full definitions for all variables provided in **Table S1**.
+NHANES data were collected through an in-home interview and study examination conducted at a mobile examination center. The interview included questions about demographics, health behaviors, medical history, and medication use. During the interview, the labels of medications that participants reported taking in the preceding 30 days were recorded. In the current study, antihypertensive medication classes were defined using those listed in the 2017 ACC/AHA BP guideline (Section 8.1.4; Table 18).[@whelton20182017] During the study examination, height, weight and BP were measured and blood and spot urine samples were collected. Of relevance to the current application, blood samples were used to measure total and high-density lipoprotein cholesterol, glycated hemoglobin and serum creatinine, and the urine sample was used to measure albumin and creatinine and to conduct a pregnancy test. The protocol for measuring BP is available online.[@ostchega_national_2003] In brief, systolic and diastolic BP (SBP and DBP, respectively) were measured three times by trained and certified physicians. BP was measured using a mercury sphygmomanometer from 1999-2000 through 2015-2016 and using an oscillometric device in 2017-2020. The mean SBP and DBP levels were computed over all available measurements for each participant. The oscillometric SBP and DBP values were calibrated to the mercury device.[@muntner2022blood; @ostchega2021comparing] For the current analysis, we defined hypertension, BP control, and resistant hypertension according to the 2017 ACC/AHA BP guideline.[@whelton20182017] The application also has these variables defined according to the JNC7 definitions.[@chobanian2003seventh] Chronic kidney disease (CKD) was defined by estimated glomerular filtration rate < 60 ml/min/1.73 m^2^ calculated using the 2021 serum creatinine-based equation or albumin-to-creatinine ratio > 30 mg/g.[@inker_new_2021] A list of BP, hypertension, and antihypertensive medication variables is provided in **Table 1** with full definitions for all variables provided in **Table S1**.
 
 <br>
 
@@ -181,7 +179,7 @@ We also illustrated how core features of the application can be combined to perf
 
 # RESULTS
 
-Among non-institutionalized US adults ≥ 18 years of age, the estimated mean SBP was 123 (95% CI 121, 124) mm Hg in 1999-2000, 120 (95% CI 120, 121) mm Hg in 2009-2010 and 123 (95% CI 122, 124) mm Hg in 2017-2020 (**Figure 1**).  The age-adjusted prevalence of hypertension was highest in 1999-2000 (47.9%), lowest in 2009-2010 (43.0%), and 44.7% in 2017-2020 (**Figure 2**). In 1999-2000, there were an estimated 89.8 million US adults with hypertension (**Figure 3**). The number of US adults with hypertension increased to 115.3 million in 2017-2020.  In each NHANES cycle, the estimated prevalence of hypertension was higher among US adults with versus without CKD (**Figure S2**). In 2017-2020, a higher percentage of US adults with versus without hypertension were non-Hispanic Black (13.5% versus 9.3%) while a lower percentage of US adults with versus without hypertension were Hispanic (12.3% versus 18.1%) (**Table 2**). Among pregnant women, the distribution of BP categories could not be estimated reliably in 2017-2020 (**Figure S3; Panel A**), but it could be estimated reliably after pooling NHANES cycles from 2009-2010 through 2017-2020 (**Figure S3; Panel B**)
+Among non-institutionalized US adults ≥ 18 years of age, the estimated mean SBP was 123 (95% CI 121, 124) mm Hg in 1999-2000, 120 (95% CI 120, 121) mm Hg in 2009-2010 and 123 (95% CI 122, 124) mm Hg in 2017-2020 (**Figure 1**).  The age-adjusted prevalence of hypertension was highest in 1999-2000 (47.9%), lowest in 2009-2010 (43.0%), and 44.7% in 2017-2020 (**Figure 2**). In 1999-2000, there were an estimated 89.8 (95% CI 77.9, 101.7) million US adults with hypertension (**Figure 3**). The number of US adults with hypertension increased to 115.3 (95% CI 107.4, 123.2) million in 2017-2020.  In each NHANES cycle, the estimated prevalence of hypertension was higher among US adults with versus without CKD (**Figure S2**). In 2017-2020, a higher percentage of US adults with versus without hypertension were non-Hispanic Black (13.5% versus 9.3%) while a lower percentage of US adults with versus without hypertension were Hispanic (12.3% versus 18.1%) (**Table 2**). Among pregnant women, the distribution of BP categories could not be estimated reliably in 2017-2020 (**Figure S3; Panel A**), but it could be estimated reliably after pooling NHANES cycles from 2009-2010 through 2017-2020 (**Figure S3; Panel B**)
 
 <br>
 
@@ -191,11 +189,11 @@ The age-adjusted prevalence of BP control among non-pregnant US adults with hype
 
 # DISCUSSION
 
-In the current manuscript, we present a web application with a user-friendly point and click interface that allows the calculation of nationally representative estimates for BP, hypertension and antihypertensive medication-related statistics using publicly available NHANES data. Using this application, we generated crude and age-adjusted BP and hypertension statistics. Also, we generated statistics stratified by characteristics of US adults and pooling multiple NHANES cycles to obtain more precise estimates when working with the small sub-group of pregnant women. Following its validation, version 0.0.1 of the application was released and deployed on a publicly available server on **DATE TBD (it's almost ready)**.[@app_cardioStatsUSA] Researchers, clinicians, and the public can use the application to generate customized BP and hypertension statistics for US adults to inform their research and policy decisions.
+In the current manuscript, we present a web application with a user-friendly point and click interface that allows the calculation of nationally representative estimates for BP, hypertension and antihypertensive medication-related statistics using publicly available NHANES data. Using this application, we generated crude and age-adjusted BP and hypertension statistics. Also, we generated statistics stratified by characteristics of US adults and demonstrated how multiple NHANES cycles can be pooled to obtain more precise estimates when working with small sub-groups (e.g., pregnant women). Following its validation, version 0.0.1 of the application was released and deployed on a publicly available server on **DATE TBD (it's almost ready)**.[@app_cardioStatsUSA] Researchers, clinicians, and the public can use the application to generate customized BP and hypertension statistics for US adults to inform their research and policy decisions.
 
 <br>
 
-NHANES was designed to obtain nationally representative estimates of the health and nutrition status of non-institutionalized US adults and is an ideal data source to obtain statistics related to hypertension. SBP and DBP were measured following a standardized protocol by trained and certified physicians.  NHANES data are publicly available to download, but working with these data requires understanding variable definitions and advanced programming and statistical knowledge. Challenges of analyzing NHANES data may also include downloading and merging multiple data files, even for a single NHANES cycle; combining multiple variables to create outcome definitions, which may require dealing with missing data and questionnaire skip patterns; harmonizing variables across multiple NHANES cycles; and the analysis of complex survey design data. Although multiple reports based on the data are publicly available, it may be difficult to customize reports based on user requests. The web application that we present in the current manuscript addresses these challenges, allowing NHANES data to more fully inform public health decisions and future research related to hypertension.
+NHANES is an ideal data source to obtain statistics related to hypertension. It was designed to obtain nationally representative estimates of the health and nutrition status of non-institutionalized US adults. SBP and DBP were measured following a standardized protocol by trained and certified physicians. NHANES data are publicly available to download, but working with these data requires understanding variable definitions and advanced programming and statistical knowledge. Challenges of analyzing NHANES data may also include downloading and merging multiple data files, even for a single NHANES cycle; combining multiple variables to create outcome definitions, which may require dealing with missing data and questionnaire skip patterns; harmonizing variables across multiple NHANES cycles; and the analysis of complex survey design data. Although multiple reports based on the data are publicly available, it may be difficult to customize reports based on user requests. The web application that we present in the current manuscript addresses these challenges, allowing NHANES data to more fully inform public health decisions and future research related to hypertension.
 
 <br>
 
@@ -203,7 +201,7 @@ Several design decisions have been incorporated into the application. We require
 
 <br>
 
-Using the application, we replicated results from several prior manuscripts.[@muntner2020htn; @muntner2022blood; @fryar_hypertension_2017] However, we were not able to replicate some results.[@carey_prevalence_2019] For example, a prior manuscript reported the prevalence of resistant hypertension defined by the 2017 ACC/AHA BP guideline to be 19.7% in 2009-2014.[@carey_prevalence_2019] When estimated by the application, the prevalence of resistant hypertension over this time period was 17.1%. The difference in the prevalence estimates can be attributed to the approach used to categorize antiyhpertensive medications into their medication classes. The prior publication used Lexicon Plus®, which counted spironolactone as two drug classes, a potassium-sparing diuretic and an aldosterone antagonist. We included spironolactone as a single drug class, an aldosterone antagonist. Additionally, Lexicon Plus® includes sotalol as a beta blocker and nitroglycerine as a direct vasodilator and we did not include these drugs as antihypertensive medications as they are not listed in the 2017 ACC/AHA BP guideline.[@whelton20182017] The differences in results between the application and this previously published manuscript emphasize that it may not be possible to always generate results that are identical to prior publications. Users should be aware of the choices made in defining variables as this may affect the statistical estimates generated using the application.
+Using the application, we replicated results from several prior manuscripts.[@muntner2020htn; @muntner2022blood; @fryar_hypertension_2017] However, we were not able to replicate some results.[@carey_prevalence_2019] For example, a prior manuscript reported the prevalence of resistant hypertension defined by the 2017 ACC/AHA BP guideline to be 19.7% in 2009-2014.[@carey_prevalence_2019] When estimated by the application, the prevalence of resistant hypertension over this time period was 17.1%. The difference in the prevalence estimates can be attributed to the approach used to categorize antiyhpertensive medications into their medication classes. The prior publication used Lexicon Plus®, which counted spironolactone as two drug classes, a potassium-sparing diuretic and an aldosterone antagonist. We included spironolactone as a single drug class, an aldosterone antagonist. Additionally, Lexicon Plus® includes sotalol as a beta blocker and nitroglycerine as a direct vasodilator and we did not include these drugs as antihypertensive medications as they are not listed in the 2017 ACC/AHA BP guideline and are not used for the treatment of hypertension.[@whelton20182017] The differences in results between the application and this previously published manuscript emphasize that it may not be possible to always generate results that are identical to prior publications. Users should be aware of the choices made in defining variables as this may affect the statistical estimates generated using the application.
 
 <br>
 
@@ -407,6 +405,12 @@ footer_hover <- function(parenthetical,
  
 }
 
+footer_hyperlink <- function(url){
+ glue::glue(
+  "This commands used to generate this graph are [available online]({url})"
+ )
+}
+
 ```
 
 
@@ -433,6 +437,9 @@ Dots represent mean systolic blood pressure. Vertical lines represent the 95% co
 
 `r footer_hover(parenthetical = "estimated mean and the upper and lower limits of the 95% confidence interval", hover_over = "the mean systolic blood pressure")` `r single_par`
 
+`r footer_hyperlink(url = "https://bcjaeger.shinyapps.io/nhanesShinyBP/?_inputs_&standard_weights_2=33.6&help=0&stratify_class=null&group=null&wont_do_computation=0&standard_weights_1=49.3&year_stratify=%5B%221999-2000%22%2C%222001-2002%22%2C%222003-2004%22%2C%222005-2006%22%2C%222007-2008%22%2C%222009-2010%22%2C%222011-2012%22%2C%222013-2014%22%2C%222015-2016%22%2C%222017-2020%22%5D&shinyjs-delay-09f5dfa7e9684def7b5c54ddf5175adf=200&geom=%22scatter%22&outcome=%22bp_sys_mean%22&statistic_primary=%22mean%22&standard_weights_4=7&shinyjs-delay-9c5ec1c3f7219bb7bf0d2e2dae255e33=200&shinyjs-delay-c2a3e79393f36660786d425d151ef85e=500&n_exposure_group=null&pool=%22no%22&stratify=null&exposure_cut_type=%22interval%22&group_class=null&statistic=%22mean%22&subset_n=%220%22&outcome_class=%22Blood%20pressure%22&standard_weights_3=10.1&.clientValue-default-plotlyCrosstalkOpts=%7B%22on%22%3A%22plotly_click%22%2C%22persistent%22%3Afalse%2C%22dynamic%22%3Afalse%2C%22selectize%22%3Afalse%2C%22opacityDim%22%3A0.2%2C%22selected%22%3A%7B%22opacity%22%3A1%7D%2C%22debounce%22%3A0%2C%22color%22%3A%5B%5D%7D&do=%22figure%22&year_pool=%5B%221999-2000%22%2C%222017-2020%22%5D&plotly_afterplot-A=%22%5C%22htmlwidget-b15366fdef4727083aad%5C%22%22&age_standardize=false&plotly_hover-A=null")` `r single_par`
+
+
 \newpage
 
 
@@ -453,6 +460,8 @@ Age adjustment was performed through direct standardization, using the estimated
 
 `r footer_hover(parenthetical = "estimated prevalence and the upper and lower limits of the 95% confidence interval", hover_over = "the bars")` `r single_par`
 
+`r footer_hyperlink(url = "https://bcjaeger.shinyapps.io/nhanesShinyBP/?_inputs_&standard_weights_2=33.6&help=0&stratify_class=null&group=null&wont_do_computation=0&standard_weights_1=49.3&year_stratify=%5B%221999-2000%22%2C%222001-2002%22%2C%222003-2004%22%2C%222005-2006%22%2C%222007-2008%22%2C%222009-2010%22%2C%222011-2012%22%2C%222013-2014%22%2C%222015-2016%22%2C%222017-2020%22%5D&geom=%22bar%22&outcome=%22htn_accaha%22&statistic_primary=%22percentage%22&standard_weights_4=7&outcome_open=false&plotly_hover-A=null&n_exposure_group=null&pool=%22no%22&stratify=null&exposure_cut_type=%22interval%22&group_class=null&statistic=%22percentage%22&subset_n=%220%22&outcome_class=%22Hypertension%22&standard_weights_3=10.1&.clientValue-default-plotlyCrosstalkOpts=%7B%22on%22%3A%22plotly_click%22%2C%22persistent%22%3Afalse%2C%22dynamic%22%3Afalse%2C%22selectize%22%3Afalse%2C%22opacityDim%22%3A0.2%2C%22selected%22%3A%7B%22opacity%22%3A1%7D%2C%22debounce%22%3A0%2C%22color%22%3A%5B%5D%7D&do=%22figure%22&year_pool=%5B%221999-2000%22%2C%222017-2020%22%5D&plotly_afterplot-A=%22%5C%22htmlwidget-9eb170c07bf326bb924d%5C%22%22&age_standardize=true&outcome_class_open=false")` `r single_par`
+
 \newpage
 
 ### Figure 3: Number of US adults with hypertension by calendar year
@@ -469,6 +478,8 @@ nhanes_visualize(data = nhanes_data,
 
 ```
 `r footer_hover(parenthetical = "estimated count and the upper and lower limits of the 95% confidence interval", hover_over = "the bars")` `r single_par`
+
+`r footer_hyperlink(url = "https://bcjaeger.shinyapps.io/nhanesShinyBP/?_inputs_&standard_weights_2=33.6&help=0&stratify_class=null&group=null&wont_do_computation=0&standard_weights_1=49.3&year_stratify=%5B%221999-2000%22%2C%222001-2002%22%2C%222003-2004%22%2C%222005-2006%22%2C%222007-2008%22%2C%222009-2010%22%2C%222011-2012%22%2C%222013-2014%22%2C%222015-2016%22%2C%222017-2020%22%5D&geom=%22bar%22&outcome=%22htn_accaha%22&statistic_primary=%22count%22&standard_weights_4=7&outcome_open=false&plotly_hover-A=null&n_exposure_group=null&pool=%22no%22&stratify=null&exposure_cut_type=%22interval%22&group_class=null&statistic=%22count%22&subset_n=%220%22&outcome_class=%22Hypertension%22&standard_weights_3=10.1&.clientValue-default-plotlyCrosstalkOpts=%7B%22on%22%3A%22plotly_click%22%2C%22persistent%22%3Afalse%2C%22dynamic%22%3Afalse%2C%22selectize%22%3Afalse%2C%22opacityDim%22%3A0.2%2C%22selected%22%3A%7B%22opacity%22%3A1%7D%2C%22debounce%22%3A0%2C%22color%22%3A%5B%5D%7D&do=%22figure%22&year_pool=%5B%221999-2000%22%2C%222017-2020%22%5D&plotly_afterplot-A=%22%5C%22htmlwidget-72fc5230e0cbdfdb5676%5C%22%22&age_standardize=false&outcome_class_open=false")` `r single_par`
 
 \newpage
 
@@ -512,6 +523,8 @@ Age adjustment was performed through direct standardization, using the estimated
 
 Survey participants with missing values for pregnancy status were assumed to be non-pregnant `r single_par`
 
+`r footer_hyperlink(url = "https://bcjaeger.shinyapps.io/nhanesShinyBP/?_inputs_&standard_weights_2=43.5&subset_variable_2=%22demo_pregnant%22&help=0&stratify_class=null&subset_value_1_ctns=%5B0%2C0%5D&subset_value_2_catg=%5B%22No%22%2C%22Missing%22%5D&subset_variable_1=%22htn_accaha%22&group=null&wont_do_computation=0&standard_weights_1=26.4&subset_variable_2_open=false&year_stratify=%5B%221999-2000%22%2C%222001-2002%22%2C%222003-2004%22%2C%222005-2006%22%2C%222007-2008%22%2C%222009-2010%22%2C%222011-2012%22%2C%222013-2014%22%2C%222015-2016%22%2C%222017-2020%22%5D&subset_value_1_catg=%22Yes%22&geom=%22bar%22&outcome=%22bp_control_accaha%22&statistic_primary=%22percentage%22&subset_n_open=false&standard_weights_4=13.2&outcome_open=false&plotly_hover-A=null&n_exposure_group=null&pool=%22no%22&stratify=null&exposure_cut_type=%22interval%22&group_class=null&statistic=%22percentage%22&subset_n=%222%22&outcome_class=%22Blood%20pressure%22&standard_weights_3=17&.clientValue-default-plotlyCrosstalkOpts=%7B%22on%22%3A%22plotly_click%22%2C%22persistent%22%3Afalse%2C%22dynamic%22%3Afalse%2C%22selectize%22%3Afalse%2C%22opacityDim%22%3A0.2%2C%22selected%22%3A%7B%22opacity%22%3A1%7D%2C%22debounce%22%3A0%2C%22color%22%3A%5B%5D%7D&do=%22figure%22&year_pool=%5B%221999-2000%22%2C%222017-2020%22%5D&plotly_afterplot-A=%22%5C%22htmlwidget-1d7ba8c29733e6d67fa7%5C%22%22&age_standardize=true&statistic_primary_open=false&subset_value_2_ctns=%5B0%2C0%5D&subset_variable_1_open=false&outcome_class_open=false")` `r single_par`
+
 \newpage
 
 B. Among non-pregnant US adults who self-report taking antihypertensive medication `r single_par`
@@ -523,6 +536,8 @@ Age adjustment was performed through direct standardization, using the estimated
 `r footer_hover(parenthetical = "estimated prevalence and the upper and lower limits of the 95% confidence interval", hover_over = "the bars")` `r single_par`
 
 Survey participants with missing values for pregnancy status were assumed to be non-pregnant `r single_par`
+
+`r footer_hyperlink(url = "https://bcjaeger.shinyapps.io/nhanesShinyBP/?_inputs_&standard_weights_2=43.5&subset_variable_2=%22demo_pregnant%22&subset_variable_3=%22bp_med_use%22&help=0&stratify_class=null&subset_value_1_ctns=%5B0%2C0%5D&subset_value_2_catg=%5B%22No%22%2C%22Missing%22%5D&subset_variable_1=%22htn_accaha%22&group=null&wont_do_computation=0&standard_weights_1=26.4&subset_variable_2_open=false&subset_value_3_ctns=%5B0%2C0%5D&year_stratify=%5B%221999-2000%22%2C%222001-2002%22%2C%222003-2004%22%2C%222005-2006%22%2C%222007-2008%22%2C%222009-2010%22%2C%222011-2012%22%2C%222013-2014%22%2C%222015-2016%22%2C%222017-2020%22%5D&subset_value_1_catg=%22Yes%22&geom=%22bar%22&outcome=%22bp_control_accaha%22&statistic_primary=%22percentage%22&subset_n_open=false&standard_weights_4=13.2&outcome_open=false&plotly_hover-A=null&n_exposure_group=null&pool=%22no%22&stratify=null&exposure_cut_type=%22interval%22&group_class=null&statistic=%22percentage%22&subset_n=%223%22&outcome_class=%22Blood%20pressure%22&standard_weights_3=17&.clientValue-default-plotlyCrosstalkOpts=%7B%22on%22%3A%22plotly_click%22%2C%22persistent%22%3Afalse%2C%22dynamic%22%3Afalse%2C%22selectize%22%3Afalse%2C%22opacityDim%22%3A0.2%2C%22selected%22%3A%7B%22opacity%22%3A1%7D%2C%22debounce%22%3A0%2C%22color%22%3A%5B%5D%7D&do=%22figure%22&year_pool=%5B%221999-2000%22%2C%222017-2020%22%5D&plotly_afterplot-A=%22%5C%22htmlwidget-49855de1c73b4f93593a%5C%22%22&age_standardize=true&statistic_primary_open=false&subset_value_2_ctns=%5B0%2C0%5D&subset_variable_3_open=false&subset_value_3_catg=%22Yes%22&subset_variable_1_open=false&outcome_class_open=false")` `r single_par`
 
 \newpage
 
