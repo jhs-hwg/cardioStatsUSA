@@ -171,7 +171,8 @@ print(ds)
 ## - label: Systolic blood pressure (SBP), mm Hg
 ## - type: continuous
 ## - description: Mean systolic blood pressure in mm Hg. This is
-##     based on the average of up to 3 readings.  Overall, >95\% of
+##     based on the average of up to 3 readings. Participants were
+##     required to have at least one reading. Overall, >95\% of
 ##     participants with at least one systolic blood pressure
 ##     reading had three readings.  From 1999-2000 through
 ##     2015-2016, systolic blood pressure was measured using a

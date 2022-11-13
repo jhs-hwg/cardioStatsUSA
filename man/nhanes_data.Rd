@@ -188,14 +188,14 @@ computed over all available
 \itemize{
 \item \strong{Label}: Systolic blood pressure (SBP), mm Hg
 \item \strong{Description}: Mean systolic blood pressure in mm Hg. This is
-based on the average of up to 3 readings. Overall, >95\% of
-participants with at least one systolic blood pressure reading had
-three readings. From 1999-2000 through 2015-2016, systolic blood
-pressure was measured using a mercury sphygmomanometer. In
-2017-2020, systolic blood pressure was measured using an
-oscillometric device. The systolic blood pressure in 2017-2020 was
-calibrated to the mercury device by adding 1.5 mm Hg to the mean
-measured oscillometric value.
+based on the average of up to 3 readings. Participants were required
+to have at least one reading. Overall, >95\% of participants with at
+least one systolic blood pressure reading had three readings. From
+1999-2000 through 2015-2016, systolic blood pressure was measured
+using a mercury sphygmomanometer. In 2017-2020, systolic blood
+pressure was measured using an oscillometric device. The systolic
+blood pressure in 2017-2020 was calibrated to the mercury device by
+adding 1.5 mm Hg to the mean measured oscillometric value.
 \item \strong{Number of observed values}: 56,017 (100\%)
 \item \strong{Mean (standard deviation)}: 124.06 (19.34)
 \item \strong{Median (25th, 75th percentile)}: 110.67 (120.67, 134.00)
@@ -207,14 +207,14 @@ measured oscillometric value.
 \itemize{
 \item \strong{Label}: Diastolic blood pressure (DBP), mm Hg
 \item \strong{Description}: Mean diastolic blood pressure in mm Hg. This is
-based on the average of up to 3 readings. Overall, >95\% of
-participants with at least one diastolic blood pressure reading had
-three readings. From 1999-2000 through 2015-2016, diastolic blood
-pressure was measured using a mercury sphygmomanometer. In
-2017-2020, diastolic blood pressure was measured using an
-oscillometric device. The diastolic blood pressure in 2017-2020 was
-calibrated to the mercury device by subtracting 1.0 mm Hg to the
-mean measured oscillometric value.
+based on the average of up to 3 readings. Participants were required
+to have at least one reading. Overall, >95\% of participants with at
+least one diastolic blood pressure reading had three readings. From
+1999-2000 through 2015-2016, diastolic blood pressure was measured
+using a mercury sphygmomanometer. In 2017-2020, diastolic blood
+pressure was measured using an oscillometric device. The diastolic
+blood pressure in 2017-2020 was calibrated to the mercury device by
+subtracting 1.3 mm Hg to the mean measured oscillometric value.
 \item \strong{Number of observed values}: 56,017 (100\%)
 \item \strong{Mean (standard deviation)}: 70.34 (12.10)
 \item \strong{Median (25th, 75th percentile)}: 62.67 (70.37, 78.00)
@@ -345,10 +345,10 @@ blood pressure < 80 mm Hg
 \subsection{bp_uncontrolled_jnc7}{
 \itemize{
 \item \strong{Label}: Uncontrolled blood pressure defined by the JNC7 guideline
-\item \strong{Description}: Systolic blood pressure >= 140 mm Hg or diastolic
-blood pressure >= 90 mm Hg for those without diabetes and without
-chronic kidney disease; Systolic blood pressure >= 130 mm Hg or
-diastolic blood pressure >= 80 mm Hg for those with diabetes or
+\item \strong{Description}: Systolic blood pressure = 140 mm Hg or diastolic
+blood pressure = 90 mm Hg for those without diabetes and without
+chronic kidney disease; Systolic blood pressure = 130 mm Hg or
+diastolic blood pressure = 80 mm Hg for those with diabetes or
 chronic kidney disease
 \item \strong{Number of observed values}: 56,017 (100\%)
 \item \strong{Counts of observed values}
@@ -364,12 +364,12 @@ chronic kidney disease
 \itemize{
 \item \strong{Label}: Uncontrolled blood pressure defined by the 2017 ACC/AHA
 BP guideline
-\item \strong{Description}: Systolic blood pressure >= 130 mm Hg or diastolic
-blood pressure >= 80 mm Hg except for adults >= 65 years of age
+\item \strong{Description}: Systolic blood pressure = 130 mm Hg or diastolic
+blood pressure = 80 mm Hg except for adults = 65 years of age
 without diabetes, chronic kidney disease, history of cardiovascular
-disease or 10-year predicted ASCVD risk >= 10\% estimated using the
-Pooled Cohort risk equations. For this group, uncontrolled blood
-pressure was defined as systolic blood pressure >= 130 mm Hg
+disease or 10-year predicted ASCVD risk = 10\%. For this group,
+uncontrolled blood pressure was defined as systolic blood pressure =
+130 mm Hg.
 \item \strong{Number of observed values}: 56,017 (100\%)
 \item \strong{Counts of observed values}
 \itemize{
@@ -490,15 +490,15 @@ kidney disease.
 \item \strong{Label}: Resistant hypertension defined by the 2017 ACC/AHA BP
 guideline
 \item \strong{Description}: Taking 4 or more classes of antihypertensive
-medication; systolic blood pressure >= 130 mm Hg or diastolic blood
-pressure >= 80 mm Hg with the use of 3 classes of antihypertensive
-medication for those < 65 years of age and those >= 65 years of
-age with diabetes, chronic kidney disease, history of cardiovascular
-disease or 10-year predicted ASCVD risk >= 10\%; Systolic blood
-pressure >= 130 mm Hg with the use of 3 classes of antihypertensive
-medication for those >= 65 years of age without diabetes, chronic
+medication; systolic blood pressure = 130 mm Hg or diastolic blood
+pressure = 80 mm Hg with the use of 3 classes of antihypertensive
+medication for those < 65 years of age and those = 65 years of age
+with diabetes, chronic kidney disease, history of cardiovascular
+disease or 10-year predicted ASCVD risk = 10\%; Systolic blood
+pressure = 130 mm Hg with the use of 3 classes of antihypertensive
+medication for those = 65 years of age without diabetes, chronic
 kidney disease, history of cardiovascular disease or 10-year
-predicted ASCVD risk >= 10\%.
+predicted ASCVD risk = 10\%.
 \item \strong{Number of observed values}: 56,017 (100\%)
 \item \strong{Counts of observed values}
 \itemize{
@@ -514,16 +514,16 @@ predicted ASCVD risk >= 10\%.
 \item \strong{Label}: Resistant hypertension defined by the JNC7 guideline,
 requires thiazide diuretic
 \item \strong{Description}: Taking 4 or more classes of antihypertensive
-medication, systolic blood pressure >= 140 mm Hg or diastolic blood
-pressure >= 90 mm Hg with the use of 3 classes of antihypertensive
-medication, or systolic blood pressure >= 130 mm Hg or diastolic
-blood pressure >= 80 mm Hg with the use of 3 classes of
-antihypertensive medication for those < 65 years of age and those
->= 65 years of age with diabetes, chronic kidney disease or high
-cardiovascular risk defined by a history of cardiovascular disease
-or 10-year predicted risk >= 10\% using the pooled cohort risk
-equations. To meet this definition of resistant hypertension, the
-participant had to be taking a thiazide diuretic.
+medication; systolic blood pressure = 130 mm Hg or diastolic blood
+pressure = 80 mm Hg with the use of 3 classes of antihypertensive
+medication for those < 65 years of age and those = 65 years of age
+with diabetes, chronic kidney disease, history of cardiovascular
+disease or 10-year predicted ASCVD risk = 10\%; Systolic blood
+pressure = 130 mm Hg with the use of 3 classes of antihypertensive
+medication for those = 65 years of age without diabetes, chronic
+kidney disease, history of cardiovascular disease or 10-year
+predicted ASCVD risk = 10\%. To meet this definition of resistant
+hypertension, the participant had to be taking a thiazide diuretic.
 \item \strong{Number of observed values}: 56,017 (100\%)
 \item \strong{Counts of observed values}
 \itemize{
@@ -582,8 +582,7 @@ JNC7 guideline
 blood pressure >= 90 mm Hg; Systolic blood pressure >= 130 mm Hg
 or diastolic blood pressure >= 80 mm Hg for those with chronic
 kidney disease or diabetes. Those taking antihypertensive
-medications were considered to be recommended treatment by this
-definition.
+medications were considered to be recommended treatment.
 \item \strong{Number of observed values}: 56,017 (100\%)
 \item \strong{Counts of observed values}
 \itemize{
@@ -598,13 +597,13 @@ definition.
 \itemize{
 \item \strong{Label}: Antihypertensive medications recommended by the 2017
 ACC/AHA BP guideline
-\item \strong{Description}: Systolic blood pressure >= 140 mm Hg or diastolic
-blood pressure >= 90 mm Hg; Systolic blood pressure >= 130 mm Hg
-or diastolic blood pressure >= 80 mm Hg for those with chronic
-kidney disease, diabetes, 10-year predicted atherosclerotic
-cardiovascular disease risk by the pooled cohort risk equations or
-age >= 65 years. Those taking antihypertensive medications were
-considered to be recommended treatment by this definition.
+\item \strong{Description}: Systolic blood pressure = 130 mm Hg or diastolic
+blood pressure = 80 mm Hg; Systolic blood pressure = 130 mm Hg for
+those age = 65 years without diabetes, chronic kidney disease,
+history of cardiovascular disease, or 10-year predicted
+atherosclerotic cardiovascular disease risk = 10\% by the pooled
+cohort risk equations. Those taking antihypertensive medications
+were considered to be recommended treatment.
 \item \strong{Number of observed values}: 56,017 (100\%)
 \item \strong{Counts of observed values}
 \itemize{
@@ -884,8 +883,8 @@ height and weight measured during the study examination.
 \itemize{
 \item \strong{Label}: Prevalent diabetes
 \item \strong{Description}: HbA1c >= 6.5\% or self-report of a prior diagnosis
-of diabetes with use of insulin or oral glucose-lowering
-medications.
+of diabetes with self-reported use of insulin or oral
+glucose-lowering medications.
 \item \strong{Number of observed values}: 56,017 (100\%)
 \item \strong{Counts of observed values}
 \itemize{

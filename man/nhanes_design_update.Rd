@@ -74,13 +74,24 @@ a modified \link{nhanes_design} object.
 Modify an NHANES design
 }
 \section{Examples}{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{library(cardioStatsUSA)
+
+ds <- nhanes_design(data = nhanes_data,
+                    key = nhanes_key, 
+                    time_values = 'most_recent',
+                    outcome_variable = 'bp_sys_mean')
+
+print(ds)
+}\if{html}{\out{</div>}}
+
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## ----------------------- NHANES design -----------------------
 ## 
 ## Outcome variable: bp_sys_mean
 ## - label: Systolic blood pressure (SBP), mm Hg
 ## - type: continuous
 ## - description: Mean systolic blood pressure in mm Hg. This is
-##     based on the average of up to 3 readings.  Overall, >95\% of
+##     based on the average of up to 3 readings. Participants were
+##     required to have at least one reading. Overall, >95\% of
 ##     participants with at least one systolic blood pressure
 ##     reading had three readings.  From 1999-2000 through
 ##     2015-2016, systolic blood pressure was measured using a
@@ -102,13 +113,17 @@ Modify an NHANES design
 There are a few ways the design can be updated. For example, we can add
 a group variable:
 
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{nhanes_design_update(ds, group_variable = 'demo_gender')
+}\if{html}{\out{</div>}}
+
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## ----------------------- NHANES design -----------------------
 ## 
 ## Outcome variable: bp_sys_mean
 ## - label: Systolic blood pressure (SBP), mm Hg
 ## - type: continuous
 ## - description: Mean systolic blood pressure in mm Hg. This is
-##     based on the average of up to 3 readings.  Overall, >95\% of
+##     based on the average of up to 3 readings. Participants were
+##     required to have at least one reading. Overall, >95\% of
 ##     participants with at least one systolic blood pressure
 ##     reading had three readings.  From 1999-2000 through
 ##     2015-2016, systolic blood pressure was measured using a
@@ -133,13 +148,19 @@ a group variable:
 
 Pipes and multiple modifications are allowed:
 
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{ds \%>\% 
+ nhanes_design_update(group_variable = 'demo_gender',
+                      stratify_variable = 'demo_race')
+}\if{html}{\out{</div>}}
+
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## ----------------------- NHANES design -----------------------
 ## 
 ## Outcome variable: bp_sys_mean
 ## - label: Systolic blood pressure (SBP), mm Hg
 ## - type: continuous
 ## - description: Mean systolic blood pressure in mm Hg. This is
-##     based on the average of up to 3 readings.  Overall, >95\% of
+##     based on the average of up to 3 readings. Participants were
+##     required to have at least one reading. Overall, >95\% of
 ##     participants with at least one systolic blood pressure
 ##     reading had three readings.  From 1999-2000 through
 ##     2015-2016, systolic blood pressure was measured using a
