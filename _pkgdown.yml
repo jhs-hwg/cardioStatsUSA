@@ -1,17 +1,13 @@
 url: https://jhs-hwg.github.io/cardioStatsUSA/
+
 template:
   bootstrap: 5
   bootswatch: sandstone
+
 navbar:
   structure:
-    left:
-    - articles
-    - intro
-    - tutorials
-    - news
-    right:
-    - search
-    - github
+    left: [articles, intro, tutorials, news]
+    right: [github, search]
   components:
     articles:
       text: Results
@@ -35,6 +31,10 @@ navbar:
         href: articles/replicate_hypertension_2022.html
       - text: Extending the application
         href: articles/modules.html
+    github:
+      icon: fa-github
+      href: https://github.com/jhs-hwg/cardioStatsUSA
+      aria-label: Github
 
 reference:
 - title: NHANES data

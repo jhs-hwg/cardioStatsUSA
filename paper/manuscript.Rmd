@@ -127,11 +127,11 @@ The National Health and Nutrition Examination Survey (NHANES) is a program condu
 
 <br>
 
-NHANES data are publicly available and accessible through the CDC website.[@nhanes_home; @nhanes_data] However, analyzing NHANES data may be challenging for a number of reasons. Specific statistical techniques are required to account for the multi-stage sampling design used to select NHANES participants and analyses need to be weighted to produce nationally representative estimates. Prior studies have found analytic errors related to survey design and estimation methods are an important component of total survey error.[@west2017analytic, @west2016big] NHANES data are currently collected in two-year periods, referred to as cycles, and each cycle includes over 50 data files and accompanying informational material. NHANES data collection protocols have changed over time for some variables, and these differences should be considered when comparing or aggregating data from multiple cycles. For example, while BP was measured using a mercury sphygmomanometer until 2016,[@centers2015national] a validated oscillometric device was used in 2017 through 2020.[@ostchega2010assessing] Also, tests need to be performed to ensure the statistical estimates are reliable, and unstable estimates should be suppressed.[@parker2017national] 
+NHANES data are publicly available and accessible through the CDC website.[@nhanes_home; @nhanes_data] However, analyzing NHANES data may be challenging for a number of reasons. Specific statistical techniques are required to account for the multi-stage sampling design used to select NHANES participants and analyses need to be weighted to produce nationally representative estimates. Prior studies have found errors related to survey design and estimation be an important component of total survey error.[@west2017analytic; @west2016big]. NHANES data are currently collected in two-year periods, referred to as cycles, and each cycle includes over 50 data files and accompanying informational material. NHANES data collection protocols have changed over time for some variables, and these differences should be considered when comparing or aggregating data from multiple cycles. For example, while BP was measured using a mercury sphygmomanometer until 2016,[@centers2015national] a validated oscillometric device was used in 2017 through 2020.[@ostchega2010assessing] Also, tests need to be performed to ensure the statistical estimates are reliable, and unstable estimates should be suppressed.[@parker2017national] 
 
 <br>
 
-We developed an open-source web-based application that provides nationally representative BP and hypertension statistics for non-institutionalized US adults using NHANES data without requiring users to conduct statistical programming. The goal of the application is to increase the use of NHANES data for research and policy decision making with a focus on ensuring results are valid and reproducible. The application is also "open-source" as it's source code is publicly available. In this manuscript, we review the design, development and validation of the application and present BP and hypertension statistics for US adults that were generated using the application.
+We developed an open-source web-based application that provides nationally representative BP and hypertension statistics for non-institutionalized US adults using NHANES data without requiring users to conduct statistical programming. The goal of the application is to increase the use of NHANES data for research and policy decision making with a focus on ensuring results are valid and reproducible. The application is also "open-source" as it's source code is publicly available.[@rpack_cardioStatsUSA] In this manuscript, we review the design, development and validation of the application and present BP and hypertension statistics for US adults that were generated using the application.
 
 <br>
 
@@ -163,7 +163,7 @@ A full summary of this application’s features and associated tutorials are ava
 
 ## Development and validation of the web application
 
-The web application was created using Shiny,[@rpack_shiny; @rpack_shinyWidgets; @rpack_shinyalert] an open-source software package that translates code from the R programming language into HTML, CSS, or JavaScript commands and creates a website interface.[@r_language] We created the “cardioStatsUSA” R package to provide additional details on the web application’s design and comprehensive documentation of its components.[@rpack_cardioStatsUSA] We validated the web application by using it to reproduce statistics reported in two prior studies and one CDC report.[@muntner2020htn; @muntner2022blood; @fryar_hypertension_2017]
+The web application was created using Shiny,[@rpack_shiny; @rpack_shinyWidgets; @rpack_shinyalert] an open-source software package that translates code from the R programming language into HTML, CSS, or JavaScript commands and creates a website interface.[@r_language] We created the “cardioStatsUSA” R package to provide additional details on the web application’s design and comprehensive documentation of its components.[@rpack_cardioStatsUSA] We validated the web application by using it to reproduce statistics reported in two prior studies and one CDC report.[@muntner2020htn; @muntner2022blood; @fryar_hypertension_2017] Details on the validation are available online.
 
 <br>
 
@@ -296,7 +296,7 @@ ft <- ft_data %>%
  width(j = 1, width = 6) %>% 
  add_footer_lines(
   values = abbrvs_write(
-   abbrvs[c('BP', 'SBP', 'DBP', 'ACC', 'AHA', 'JNC7')]
+   abbrvs[c('BP', 'SBP', 'DBP', 'ACC', 'ACE', 'AHA', 'JNC7')]
   )
  )
 
