@@ -12,6 +12,18 @@ library(testthat)
 knitr::spin_child('aaa.R')
 ```
 
+`r cardioStatsUSA:::describe_replicate_intro("a prior study in the *Hypertension* journal")`
+
+## Replicate with shiny application
+
+The video below shows how Table S2 can be replicated using our web application.
+
+**ADD VIDEO**
+
+## Replicate with code
+
+`r cardioStatsUSA:::describe_replicate_with_code()` 
+
 ```{r}
 knitr::spin_child("../tests/testthat/test-replicate_muntner_hypertension_2022.R")
 ```

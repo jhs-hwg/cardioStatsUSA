@@ -23,6 +23,18 @@ describe_module_sample <- function(type = 'htn'){
  )
 }
 
+describe_replicate_with_code <- function(){
+
+ "The code in this section does exactly what the videos above do, and provides a glimpse of the R code that is used on the back-end of the shiny application."
+
+}
+
+describe_replicate_intro <- function(replicate_from){
+
+ glue::glue("This article shows how `cardioStatsUSA` can replicate results from {replicate_from}. The results can be replicated with our shiny application or with code.")
+
+}
+
 tabulate_module_sample <- function(type = 'htn',
                                    subset_calls = NULL,
                                    subset_labs = NULL){

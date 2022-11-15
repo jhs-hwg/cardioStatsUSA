@@ -61,9 +61,7 @@ nhanes_visualize <- function(data,
                           standard_weights = standard_weights,
                           simplify_output = FALSE)
 
- # browser()
-
- nhanes_design_viz(
+ fig <- nhanes_design_viz(
   smry,
   statistic_primary = statistic_primary,
   title = title,
@@ -74,5 +72,8 @@ nhanes_visualize <- function(data,
   size_point = size_point,
   size_error = size_error
  )
+
+ list(fig_data = smry$results,
+      fig_object = fig)
 
 }

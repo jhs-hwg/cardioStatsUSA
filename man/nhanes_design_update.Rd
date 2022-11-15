@@ -84,21 +84,19 @@ ds <- nhanes_design(data = nhanes_data,
 print(ds)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## ------------------------- NHANES design -------------------------
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## ------------------------------ NHANES design ------------------------------
 ## 
 ## Outcome variable: bp_sys_mean
 ## - label: Systolic blood pressure (SBP), mm Hg
 ## - type: continuous
-## - description: Mean systolic blood pressure in mm Hg. This is
-##     based on the average of up to 3 readings. Participants were
-##     required to have at least one reading. Overall, >95\% of
-##     participants with at least one systolic blood pressure reading
-##     had three readings.  From 1999-2000 through 2015-2016, systolic
-##     blood pressure was measured using a mercury sphygmomanometer.  In
-##     2017-2020, systolic blood pressure was measured using an
-##     oscillometric device.  The systolic blood pressure in 2017-2020
-##     was calibrated to the mercury device by adding 1.5 mm Hg to the
-##     mean measured oscillometric value.
+## - description: Mean systolic blood pressure in mm Hg. This is based on the
+##     average of up to 3 readings. Participants were required to have at least one
+##     reading. Overall, >95\% of participants with at least one systolic blood
+##     pressure reading had three readings.  From 1999-2000 through 2015-2016,
+##     systolic blood pressure was measured using a mercury sphygmomanometer.  In
+##     2017-2020, systolic blood pressure was measured using an oscillometric
+##     device.  The systolic blood pressure in 2017-2020 was calibrated to the
+##     mercury device by adding 1.5 mm Hg to the mean measured oscillometric value.
 ## 
 ## Group variable: None
 ## Stratify variable: None
@@ -106,7 +104,7 @@ print(ds)
 ## N observations
 ## - Unweighted: 8,965
 ## - Weighted: 247,835,696
-## ------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 }\if{html}{\out{</div>}}
 
 There are a few ways the design can be updated. For example, we can add
@@ -115,21 +113,19 @@ a group variable:
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{nhanes_design_update(ds, group_variable = 'demo_gender')
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## ------------------------- NHANES design -------------------------
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## ------------------------------ NHANES design ------------------------------
 ## 
 ## Outcome variable: bp_sys_mean
 ## - label: Systolic blood pressure (SBP), mm Hg
 ## - type: continuous
-## - description: Mean systolic blood pressure in mm Hg. This is
-##     based on the average of up to 3 readings. Participants were
-##     required to have at least one reading. Overall, >95\% of
-##     participants with at least one systolic blood pressure reading
-##     had three readings.  From 1999-2000 through 2015-2016, systolic
-##     blood pressure was measured using a mercury sphygmomanometer.  In
-##     2017-2020, systolic blood pressure was measured using an
-##     oscillometric device.  The systolic blood pressure in 2017-2020
-##     was calibrated to the mercury device by adding 1.5 mm Hg to the
-##     mean measured oscillometric value.
+## - description: Mean systolic blood pressure in mm Hg. This is based on the
+##     average of up to 3 readings. Participants were required to have at least one
+##     reading. Overall, >95\% of participants with at least one systolic blood
+##     pressure reading had three readings.  From 1999-2000 through 2015-2016,
+##     systolic blood pressure was measured using a mercury sphygmomanometer.  In
+##     2017-2020, systolic blood pressure was measured using an oscillometric
+##     device.  The systolic blood pressure in 2017-2020 was calibrated to the
+##     mercury device by adding 1.5 mm Hg to the mean measured oscillometric value.
 ## 
 ## Group variable: demo_gender
 ## - label: Gender
@@ -141,7 +137,7 @@ a group variable:
 ## N observations
 ## - Unweighted: 8,965
 ## - Weighted: 247,835,696
-## ------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 }\if{html}{\out{</div>}}
 
 Pipes and multiple modifications are allowed:
@@ -151,21 +147,19 @@ Pipes and multiple modifications are allowed:
                       stratify_variable = 'demo_race')
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## ------------------------- NHANES design -------------------------
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## ------------------------------ NHANES design ------------------------------
 ## 
 ## Outcome variable: bp_sys_mean
 ## - label: Systolic blood pressure (SBP), mm Hg
 ## - type: continuous
-## - description: Mean systolic blood pressure in mm Hg. This is
-##     based on the average of up to 3 readings. Participants were
-##     required to have at least one reading. Overall, >95\% of
-##     participants with at least one systolic blood pressure reading
-##     had three readings.  From 1999-2000 through 2015-2016, systolic
-##     blood pressure was measured using a mercury sphygmomanometer.  In
-##     2017-2020, systolic blood pressure was measured using an
-##     oscillometric device.  The systolic blood pressure in 2017-2020
-##     was calibrated to the mercury device by adding 1.5 mm Hg to the
-##     mean measured oscillometric value.
+## - description: Mean systolic blood pressure in mm Hg. This is based on the
+##     average of up to 3 readings. Participants were required to have at least one
+##     reading. Overall, >95\% of participants with at least one systolic blood
+##     pressure reading had three readings.  From 1999-2000 through 2015-2016,
+##     systolic blood pressure was measured using a mercury sphygmomanometer.  In
+##     2017-2020, systolic blood pressure was measured using an oscillometric
+##     device.  The systolic blood pressure in 2017-2020 was calibrated to the
+##     mercury device by adding 1.5 mm Hg to the mean measured oscillometric value.
 ## 
 ## Group variable: demo_gender
 ## - label: Gender
@@ -175,16 +169,16 @@ Pipes and multiple modifications are allowed:
 ## Stratify variable: demo_race
 ## - label: Race
 ## - type: categorical
-## - description: Self-reported race/ethnicity. From 1999-2000
-##     through 2009-2010 this was available as non-Hispanic White,
-##     non-Hispanic Black, Hispanic and other. From 2011-2012 through
-##     2017-2020 this was available as non-Hispanic White, non-Hispanic
-##     Black, non-Hispanic Asian, Hispanic and other.
+## - description: Self-reported race/ethnicity. From 1999-2000 through
+##     2009-2010 this was available as non-Hispanic White, non-Hispanic Black,
+##     Hispanic and other. From 2011-2012 through 2017-2020 this was available as
+##     non-Hispanic White, non-Hispanic Black, non-Hispanic Asian, Hispanic and
+##     other.
 ## 
 ## N observations
 ## - Unweighted: 8,965
 ## - Weighted: 247,835,696
-## ------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 }\if{html}{\out{</div>}}
 }
 
