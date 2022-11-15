@@ -1,7 +1,7 @@
-# one group blots, continuous outcome mean
+# one group plot, continuous outcome mean
 
     Code
-      nhanes_visualize(outcome_variable = "bp_sys_mean")
+      nhanes_visualize(outcome_variable = "bp_sys_mean")$fig_object
     Output
       [[1]]
       
@@ -9,16 +9,16 @@
 ---
 
     Code
-      nhanes_visualize(outcome_variable = "bp_sys_mean", geom = "point")
+      nhanes_visualize(outcome_variable = "bp_sys_mean", geom = "point")$fig_object
     Output
       [[1]]
       
 
-# one group bar blots, continuous outcome quantile
+# one group bar plot, continuous outcome quantile
 
     Code
       nhanes_visualize(outcome_variable = "bp_sys_mean", outcome_quantiles = seq(1,
-        10) / 10, statistic_primary = "quantile")
+        10) / 10, statistic_primary = "quantile")$fig_object
     Output
       [[1]]
       
@@ -27,15 +27,16 @@
 
     Code
       nhanes_visualize(outcome_variable = "bp_sys_mean", outcome_quantiles = seq(1,
-        10) / 10, statistic_primary = "quantile", geom = "point")
+        10) / 10, statistic_primary = "quantile", geom = "point")$fig_object
     Output
       [[1]]
       
 
-# multiple group bar blots, continuous outcome mean
+# multiple group bar plot, continuous outcome mean
 
     Code
-      nhanes_visualize(outcome_variable = "bp_sys_mean", group_variable = "demo_gender")
+      nhanes_visualize(outcome_variable = "bp_sys_mean", group_variable = "demo_gender")$
+        fig_object
     Output
       [[1]]
       
@@ -44,7 +45,7 @@
 
     Code
       nhanes_visualize(outcome_variable = "bp_sys_mean", group_variable = "demo_gender",
-        geom = "point")
+        geom = "point")$fig_object
     Output
       [[1]]
       
@@ -53,7 +54,8 @@
 
     Code
       nhanes_visualize(outcome_variable = "bp_sys_mean", outcome_quantiles = seq(1,
-        10) / 10, statistic_primary = "quantile", group_variable = "demo_gender")
+        10) / 10, statistic_primary = "quantile", group_variable = "demo_gender")$
+        fig_object
     Output
       [[1]]
       
@@ -63,7 +65,7 @@
     Code
       nhanes_visualize(outcome_variable = "bp_sys_mean", outcome_quantiles = seq(1,
         10) / 10, statistic_primary = "quantile", group_variable = "demo_gender",
-      geom = "point")
+      geom = "point")$fig_object
     Output
       [[1]]
       
@@ -88,10 +90,10 @@
     Code
       plts_pnt[[2]]
 
-# one group blots, binary outcome prevalence
+# one group plot, binary outcome prevalence
 
     Code
-      nhanes_visualize(outcome_variable = "htn_jnc7")
+      nhanes_visualize(outcome_variable = "htn_jnc7")$fig_object
     Output
       [[1]]
       
@@ -99,15 +101,16 @@
 ---
 
     Code
-      nhanes_visualize(outcome_variable = "htn_jnc7", geom = "point")
+      nhanes_visualize(outcome_variable = "htn_jnc7", geom = "point")$fig_object
     Output
       [[1]]
       
 
-# one group bar blots, binary outcome count
+# one group bar plot, binary outcome count
 
     Code
-      nhanes_visualize(outcome_variable = "htn_jnc7", statistic_primary = "count")
+      nhanes_visualize(outcome_variable = "htn_jnc7", statistic_primary = "count")$
+        fig_object
     Output
       [[1]]
       
@@ -116,15 +119,16 @@
 
     Code
       nhanes_visualize(outcome_variable = "htn_jnc7", statistic_primary = "count",
-        geom = "point")
+        geom = "point")$fig_object
     Output
       [[1]]
       
 
-# multiple group bar blots, binary outcome prevalence
+# multiple group bar plot, binary outcome prevalence
 
     Code
-      nhanes_visualize(outcome_variable = "htn_jnc7", group_variable = "demo_gender")
+      nhanes_visualize(outcome_variable = "htn_jnc7", group_variable = "demo_gender")$
+        fig_object
     Output
       [[1]]
       
@@ -133,7 +137,7 @@
 
     Code
       nhanes_visualize(outcome_variable = "htn_jnc7", group_variable = "demo_gender",
-        geom = "point")
+        geom = "point")$fig_object
     Output
       [[1]]
       
@@ -142,7 +146,7 @@
 
     Code
       nhanes_visualize(outcome_variable = "htn_jnc7", statistic_primary = "count",
-        group_variable = "demo_gender")
+        group_variable = "demo_gender")$fig_object
     Output
       [[1]]
       
@@ -151,7 +155,7 @@
 
     Code
       nhanes_visualize(outcome_variable = "htn_jnc7", statistic_primary = "count",
-        group_variable = "demo_gender", geom = "point")
+        group_variable = "demo_gender", geom = "point")$fig_object
     Output
       [[1]]
       
@@ -176,10 +180,10 @@
     Code
       plts_pnt[[2]]
 
-# one group blots, categorical outcome prevalence
+# one group plot, categorical outcome prevalence
 
     Code
-      nhanes_visualize(outcome_variable = "bp_cat_meds_excluded")
+      nhanes_visualize(outcome_variable = "bp_cat_meds_excluded")$fig_object
     Output
       [[1]]
       
@@ -187,15 +191,17 @@
 ---
 
     Code
-      nhanes_visualize(outcome_variable = "bp_cat_meds_excluded", geom = "point")
+      nhanes_visualize(outcome_variable = "bp_cat_meds_excluded", geom = "point")$
+        fig_object
     Output
       [[1]]
       
 
-# one group bar blots, categorical outcome count
+# one group bar plot, categorical outcome count
 
     Code
-      nhanes_visualize(outcome_variable = "bp_cat_meds_excluded", statistic_primary = "count")
+      nhanes_visualize(outcome_variable = "bp_cat_meds_excluded", statistic_primary = "count")$
+        fig_object
     Output
       [[1]]
       
@@ -204,15 +210,16 @@
 
     Code
       nhanes_visualize(outcome_variable = "bp_cat_meds_excluded", statistic_primary = "count",
-        geom = "point")
+        geom = "point")$fig_object
     Output
       [[1]]
       
 
-# multiple group bar blots, categorical outcome prevalence
+# multiple group bar plot, categorical outcome prevalence
 
     Code
-      nhanes_visualize(outcome_variable = "bp_cat_meds_excluded", group_variable = "demo_gender")
+      nhanes_visualize(outcome_variable = "bp_cat_meds_excluded", group_variable = "demo_gender")$
+        fig_object
     Output
       [[1]]
       
@@ -223,18 +230,18 @@
 
     Code
       nhanes_visualize(outcome_variable = "bp_cat_meds_excluded", group_variable = "demo_gender",
-        geom = "point")
+        geom = "point")$fig_object
     Output
       [[1]]
       
       [[2]]
       
 
-# multiple group plots, categorical outcome count
+# multiple group plot, categorical outcome count
 
     Code
       nhanes_visualize(outcome_variable = "bp_cat_meds_excluded", statistic_primary = "count",
-        group_variable = "demo_gender")
+        group_variable = "demo_gender")$fig_object
     Output
       [[1]]
       
@@ -245,7 +252,7 @@
 
     Code
       nhanes_visualize(outcome_variable = "bp_cat_meds_excluded", statistic_primary = "count",
-        group_variable = "demo_gender", geom = "point")
+        group_variable = "demo_gender", geom = "point")$fig_object
     Output
       [[1]]
       

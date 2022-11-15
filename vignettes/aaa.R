@@ -37,7 +37,7 @@ plotly_vignette <- function(x,
  xaxis  <- list(title = list(text = xaxis_text, standoff = 15L))
 
 
- x[[1]] %>%
+ x$fig_object[[1]] %>%
   plotly::layout(margin = margin,
                  yaxis = yaxis,
                  xaxis = xaxis) %>%

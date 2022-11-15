@@ -2,42 +2,42 @@
 # continuous outcome ----
 
 test_that(
- desc = 'one group blots, continuous outcome mean',
+ desc = 'one group plot, continuous outcome mean',
  code = {
-  expect_snapshot(nhanes_visualize(outcome_variable = 'bp_sys_mean'),
+  expect_snapshot(nhanes_visualize(outcome_variable = 'bp_sys_mean')$fig_object,
                   cran = FALSE)
 
   expect_snapshot(nhanes_visualize(outcome_variable = 'bp_sys_mean',
-                                   geom = 'point'),
+                                   geom = 'point')$fig_object,
                   cran = FALSE)
 
  }
 )
 
 test_that(
- desc = 'one group bar blots, continuous outcome quantile',
+ desc = 'one group bar plot, continuous outcome quantile',
  code = {
   expect_snapshot(nhanes_visualize(outcome_variable = 'bp_sys_mean',
                                    outcome_quantiles = seq(1,10)/10,
-                                   statistic_primary = 'quantile'),
+                                   statistic_primary = 'quantile')$fig_object,
                   cran = FALSE)
   expect_snapshot(nhanes_visualize(outcome_variable = 'bp_sys_mean',
                                    outcome_quantiles = seq(1,10)/10,
                                    statistic_primary = 'quantile',
-                                   geom = 'point'),
+                                   geom = 'point')$fig_object,
                   cran = FALSE)
  }
 )
 
 test_that(
- desc = 'multiple group bar blots, continuous outcome mean',
+ desc = 'multiple group bar plot, continuous outcome mean',
  code = {
   expect_snapshot(nhanes_visualize(outcome_variable = 'bp_sys_mean',
-                                   group_variable = 'demo_gender'),
+                                   group_variable = 'demo_gender')$fig_object,
                   cran = FALSE)
   expect_snapshot(nhanes_visualize(outcome_variable = 'bp_sys_mean',
                                    group_variable = 'demo_gender',
-                                   geom = 'point'),
+                                   geom = 'point')$fig_object,
                   cran = FALSE)
  }
 )
@@ -48,13 +48,13 @@ test_that(
   expect_snapshot(nhanes_visualize(outcome_variable = 'bp_sys_mean',
                                    outcome_quantiles = seq(1,10)/10,
                                    statistic_primary = 'quantile',
-                                   group_variable = 'demo_gender'),
+                                   group_variable = 'demo_gender')$fig_object,
                   cran = FALSE)
   expect_snapshot(nhanes_visualize(outcome_variable = 'bp_sys_mean',
                                    outcome_quantiles = seq(1,10)/10,
                                    statistic_primary = 'quantile',
                                    group_variable = 'demo_gender',
-                                   geom = 'point'),
+                                   geom = 'point')$fig_object,
                   cran = FALSE)
  }
 )
@@ -67,7 +67,7 @@ test_that(
                                outcome_quantiles = seq(1,10)/10,
                                statistic_primary = 'quantile',
                                group_variable = 'demo_gender',
-                               stratify_variable = 'cc_ckd')
+                               stratify_variable = 'cc_ckd')$fig_object
 
   expect_snapshot(plts_bar[[1]])
   expect_snapshot(plts_bar[[2]])
@@ -77,7 +77,7 @@ test_that(
                                statistic_primary = 'quantile',
                                group_variable = 'demo_gender',
                                stratify_variable = 'cc_ckd',
-                               geom = 'point')
+                               geom = 'point')$fig_object
 
   expect_snapshot(plts_pnt[[1]])
   expect_snapshot(plts_pnt[[2]])
@@ -88,39 +88,39 @@ test_that(
 # binary outcome ----
 
 test_that(
- desc = 'one group blots, binary outcome prevalence',
+ desc = 'one group plot, binary outcome prevalence',
  code = {
 
-  expect_snapshot(nhanes_visualize(outcome_variable = 'htn_jnc7'))
+  expect_snapshot(nhanes_visualize(outcome_variable = 'htn_jnc7')$fig_object)
 
   expect_snapshot(nhanes_visualize(outcome_variable = 'htn_jnc7',
-                                   geom = 'point'))
+                                   geom = 'point')$fig_object)
 
  }
 )
 
 test_that(
- desc = 'one group bar blots, binary outcome count',
+ desc = 'one group bar plot, binary outcome count',
  code = {
   expect_snapshot(nhanes_visualize(outcome_variable = 'htn_jnc7',
-                                   statistic_primary = 'count'))
+                                   statistic_primary = 'count')$fig_object)
 
   expect_snapshot(nhanes_visualize(outcome_variable = 'htn_jnc7',
                                    statistic_primary = 'count',
-                                   geom = 'point'))
+                                   geom = 'point')$fig_object)
  }
 )
 
 test_that(
- desc = 'multiple group bar blots, binary outcome prevalence',
+ desc = 'multiple group bar plot, binary outcome prevalence',
  code = {
 
   expect_snapshot(nhanes_visualize(outcome_variable = 'htn_jnc7',
-                                   group_variable = 'demo_gender'))
+                                   group_variable = 'demo_gender')$fig_object)
 
   expect_snapshot(nhanes_visualize(outcome_variable = 'htn_jnc7',
                                    group_variable = 'demo_gender',
-                                   geom = 'point'))
+                                   geom = 'point')$fig_object)
  }
 )
 
@@ -130,12 +130,12 @@ test_that(
 
   expect_snapshot(nhanes_visualize(outcome_variable = 'htn_jnc7',
                                    statistic_primary = 'count',
-                                   group_variable = 'demo_gender'))
+                                   group_variable = 'demo_gender')$fig_object)
 
   expect_snapshot(nhanes_visualize(outcome_variable = 'htn_jnc7',
                                    statistic_primary = 'count',
                                    group_variable = 'demo_gender',
-                                   geom = 'point'))
+                                   geom = 'point')$fig_object)
  }
 )
 
@@ -146,7 +146,7 @@ test_that(
   plts_bar <- nhanes_visualize(outcome_variable = 'htn_jnc7',
                                statistic_primary = 'count',
                                group_variable = 'demo_gender',
-                               stratify_variable = 'cc_ckd')
+                               stratify_variable = 'cc_ckd')$fig_object
 
   expect_snapshot(plts_bar[[1]])
   expect_snapshot(plts_bar[[2]])
@@ -155,7 +155,7 @@ test_that(
                                statistic_primary = 'count',
                                group_variable = 'demo_gender',
                                stratify_variable = 'cc_ckd',
-                               geom = 'point')
+                               geom = 'point')$fig_object
 
   expect_snapshot(plts_pnt[[1]])
   expect_snapshot(plts_pnt[[2]])
@@ -166,54 +166,54 @@ test_that(
 # catg outcome ----
 
 test_that(
- desc = 'one group blots, categorical outcome prevalence',
+ desc = 'one group plot, categorical outcome prevalence',
  code = {
 
-  expect_snapshot(nhanes_visualize(outcome_variable = 'bp_cat_meds_excluded'))
+  expect_snapshot(nhanes_visualize(outcome_variable = 'bp_cat_meds_excluded')$fig_object)
 
   expect_snapshot(nhanes_visualize(outcome_variable = 'bp_cat_meds_excluded',
-                                   geom = 'point'))
+                                   geom = 'point')$fig_object)
 
  }
 )
 
 test_that(
- desc = 'one group bar blots, categorical outcome count',
+ desc = 'one group bar plot, categorical outcome count',
  code = {
   expect_snapshot(nhanes_visualize(outcome_variable = 'bp_cat_meds_excluded',
-                                   statistic_primary = 'count'))
+                                   statistic_primary = 'count')$fig_object)
 
   expect_snapshot(nhanes_visualize(outcome_variable = 'bp_cat_meds_excluded',
                                    statistic_primary = 'count',
-                                   geom = 'point'))
+                                   geom = 'point')$fig_object)
  }
 )
 
 test_that(
- desc = 'multiple group bar blots, categorical outcome prevalence',
+ desc = 'multiple group bar plot, categorical outcome prevalence',
  code = {
 
   expect_snapshot(nhanes_visualize(outcome_variable = 'bp_cat_meds_excluded',
-                                   group_variable = 'demo_gender'))
+                                   group_variable = 'demo_gender')$fig_object)
 
   expect_snapshot(nhanes_visualize(outcome_variable = 'bp_cat_meds_excluded',
                                    group_variable = 'demo_gender',
-                                   geom = 'point'))
+                                   geom = 'point')$fig_object)
  }
 )
 
 test_that(
- desc = 'multiple group plots, categorical outcome count',
+ desc = 'multiple group plot, categorical outcome count',
  code = {
 
   expect_snapshot(nhanes_visualize(outcome_variable = 'bp_cat_meds_excluded',
                                    statistic_primary = 'count',
-                                   group_variable = 'demo_gender'))
+                                   group_variable = 'demo_gender')$fig_object)
 
   expect_snapshot(nhanes_visualize(outcome_variable = 'bp_cat_meds_excluded',
                                    statistic_primary = 'count',
                                    group_variable = 'demo_gender',
-                                   geom = 'point'))
+                                   geom = 'point')$fig_object)
  }
 )
 
@@ -224,7 +224,7 @@ test_that(
   plts_bar <- nhanes_visualize(outcome_variable = 'bp_cat_meds_excluded',
                                statistic_primary = 'count',
                                group_variable = 'demo_gender',
-                               stratify_variable = 'cc_ckd')
+                               stratify_variable = 'cc_ckd')$fig_object
 
   expect_snapshot(plts_bar[[1]])
   expect_snapshot(plts_bar[[2]])
@@ -233,7 +233,7 @@ test_that(
                                statistic_primary = 'count',
                                group_variable = 'demo_gender',
                                stratify_variable = 'cc_ckd',
-                               geom = 'point')
+                               geom = 'point')$fig_object
 
   expect_snapshot(plts_pnt[[1]])
   expect_snapshot(plts_pnt[[2]])
