@@ -1,4 +1,4 @@
-
+# to do: add hints for age standardization check box
 # nocov start
 
 library(shiny)
