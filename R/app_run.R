@@ -1,4 +1,4 @@
-# to do: add hints for age standardization check box
+
 # nocov start
 
 library(shiny)
@@ -539,9 +539,8 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
  # Server ------------------------------------------------------------------
  server <- function(input, output, session) {
 
-  # initiate hints on startup with custom button and event
-  hintjs(session, options = list("hintButtonLabel"="Hope this hint was helpful"),
-         events = list("onhintclose"=I('alert("Wasn\'t that hint helpful")')))
+  # initiate hints on startup
+  hintjs(session)
 
   n_exclusion_max <- 5
 
