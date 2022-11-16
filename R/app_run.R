@@ -2,6 +2,7 @@
 # nocov start
 
 library(shiny)
+library(rintrojs)
 
 #' Run the NHANES application
 #'
@@ -212,6 +213,7 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
       #  )
       # ),
 
+
       awesomeCheckbox(
        inputId = "age_standardize",
        label = "Age-adjustment by standardization?",
@@ -246,7 +248,8 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
       data.step = 4,
       data.intro = paste(
        "Results can be presented crude or age-adjusted."
-      )
+      ),
+      data.hint = "You can press me"
      ),
 
      introBox(
@@ -535,6 +538,10 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
 
  # Server ------------------------------------------------------------------
  server <- function(input, output, session) {
+
+  # initiate hints on startup with custom button and event
+  hintjs(session, options = list("hintButtonLabel"="Hope this hint was helpful"),
+         events = list("onhintclose"=I('alert("Wasn\'t that hint helpful")')))
 
   n_exclusion_max <- 5
 
