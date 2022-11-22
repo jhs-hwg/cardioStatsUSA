@@ -2,7 +2,6 @@
 # nocov start
 
 library(shiny)
-library(rintrojs)
 
 #' Run the NHANES application
 #'
@@ -76,6 +75,86 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
    input.statistic.length > 0
   )"
 
+ helper_compute <- c(
+  "Click on this button to compute your statistics. This button is blue when you have entered enough information to calculate statistics. If you still need to provide more information, this button will be grey and cannot be clicked."
+ )
+
+ helper_do <- c(
+  "You can choose to see your results as a figure or in a dataset. The dataset will provide one row for each statistic (e.g., one row for each age group for age-stratified statistics). It is similar to a table but the data can be sorted in the dataset."
+ )
+
+ helper_fig_type <- c(
+  "You can choose to make a bar graph or a point and error graph.<br/>",
+  "<ol>
+    <li>The bar graph includes annotations for each bar that show the primary statistic from your analysis</li>
+    <li>The point and error graph includes error bars that cover a 95% confidence interval for the primary statistic in your analysis.</li>
+  </ol>",
+  "No matter what type of graph you choose, you can always see every statistic in your analysis by hovering your mouse over the part of the graph you are interested in."
+ )
+
+ helper_age_standard <- c(
+  "Age standardization, sometimes referred to as age adjustment, is a method that applies observed age-specific rates to a standard age distribution. The method adjusts for the confounding effect of age. Standard age proportions are calculated by dividing the age-specific Census population (P) by the total Census population number (T). The standardizing percentages (100 * P/T) must each by > 0 and should collectively sum to 100.<br/>",
+  "There are two steps:",
+  "<ol>
+    <li>Choose a standard population. The default population for this application is adults aged 18 and over in NHANES cycles from 1999-2000 through 2017-2020</li>
+    <li>The age-specific prevalence from the study population is multiplied by the proportion of people in that age group in the standard population, and results summed up to get the age-adjusted estimates.</li>
+  </ol>",
+  "Details and examples are provided online by the <a href=\"http://medbox.iiab.me/modules/en-cdc/www.cdc.gov/nchs/tutorials/nhanes/NHANESAnalyses/AgeStandardization/age_standardization_intro.htm\">Centers for Disease Control tutorial on age standardization</a>"
+ )
+
+ helper_pool <- c(
+  "Data can be presented for individual cycles or multiple cycles pooled together."
+ )
+
+ helper_year_stratify <- c(
+  "You can select individual NHANES cycles and then present statistics for each one, separately, by clicking the box next to the cycle(s) you would like to include. You can also click the buttons below the cycles to select all 10, the last 5, or deselect everything. Any combination of cycles is allowed."
+ )
+
+ helper_year_pool <- c(
+  "You can pool multiple cycles together and present statistics for the aggregate of NHANES participants in these cycles. Adjust the slider below so that it contains the cycles you want to pool. Note that the cycles on the lower and upper boundaries of the slider are included."
+ )
+
+ helper_subset_n <- c(
+  "You can restrict your analytic population to participants meeting specific criteria. Up to five exclusion criteria can be applied.<br/>For example, you may want to restrict the population to non-pregnant individuals. To do this, select \"Yes - one restriction\" from the drop-down menu, select \"pregnant\" and participants to include (e.g., check the box next to no)."
+ )
+
+ helper_outcome <- c(
+  "The outcome variable you select will be summarized in your results.<br><br>",
+  "There are two boxes:
+  <ul>
+   <li><b>Select outcome type</b>: the type you select determines what options will be available in the outcome variable input</li>
+   <li><b>Select outcome variable</b>: the variable you select will be the variable that is summarized in your results</li>
+  </ul><br>",
+  "For example, the outcome variables that can be selected when outcome type is \"Hypertension\" include hypertension defined by the JNC7 and 2017 ACC/AHA BP guidelines, awareness of hypertension, and resistant hypertension."
+ )
+
+ helper_statistic <- c(
+  "Multiple statistics may be requested.</p>
+   <p>For continuous outcomes, options include</p>
+   <ul>
+     <li><em>Mean</em>: estimates the mean value of the outcome</li>
+     <li><em>Quantile</em>: estimates 25th, 50th, and 75th percentile of the outcome.</li>
+   </ul>
+   <p>For categorical outcomes, options include</p>
+   <ul>
+     <li><em>Percentage</em>: estimates the prevalence of the outcome</li>
+     <li><em>Percentage (Korn and Graubard)</em>: estimates the prevalence and uses Korn and Graubard&#39;s method to estimate a 95% confidence interval</li>
+     <li><em>Count</em>: estimates the number of US adults with the outcome.</li>
+   </ul>"
+ )
+
+ helper_statistic_primary <- c(
+  "The primary statistic is the one that will define bars (or points) in your figure.</p>
+   <p> Although only one statistic can define the objects in the plot, all of the statistics you select are shown in text that appears when you hover your mouse over objects in the plot"
+ )
+
+ helper_group <- c(
+  "This produces results for sub-groups on the same graph. If there are too many bars/data points, the results will be presented on multiple graphs."
+ )
+
+ helper_stratify <- c(
+  "This produces results for sub-groups in separate panels."
+ )
 
  # User interface (UI) -----------------------------------------------------
  ui <- function(request){
@@ -130,9 +209,12 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
         inputId =  "run",
         label = "Compute results",
         icon = icon("cog"),
-        width = "100%",
+        width = "96%",
         style = "color: #fff; background-color: #337ab7; border-color: #2e6da4"
-       )
+       ) %>%
+        shinyhelper::helper(type = "inline",
+                            title = "Compute results",
+                            content = helper_compute)
       ),
 
       conditionalPanel(
@@ -141,17 +223,16 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
         inputId =  "wont_do_computation",
         label = "Compute results",
         icon = icon("cog"),
-        width = "100%",
+        width = "96%",
         style = "color: #fff; background-color: #808080; border-color: #2e6da4"
-       )
+       ) %>%
+        shinyhelper::helper(type = "inline",
+                            title = "Compute results",
+                            content = helper_compute)
       ),
       data.step = 2,
       data.intro = paste(
-       "Click on this button to compute your statistics.",
-       "This button is blue when you have entered enough" ,
-       "information to calculate statistics. If you still",
-       "need to provide more information, this button will",
-       "be grey and cannot be clicked."
+       helper_compute
       )
      ),
 
@@ -176,14 +257,12 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
        multiple = FALSE,
        selected = 'figure',
        width = "100%"
-      ),
+      ) %>%
+       shinyhelper::helper(type = "inline",
+                           title = "How to present your results?",
+                           content = helper_do),
       data.step = 3,
-      data.intro = paste(
-       "You can choose to see your results as a figure or in a dataset.",
-       "The dataset will provide one row for each statistic (e.g., one",
-       "row for each age group for age-stratified statistics).  It is",
-       "similar to a table but the data can be sorted in the dataset."
-      )
+      data.intro = helper_do
      ),
 
      conditionalPanel(
@@ -197,22 +276,13 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
        width = "100%",
        justified = TRUE,
        checkIcon = list(yes = icon("ok", lib = "glyphicon"))
-      )
+      ) %>%
+       shinyhelper::helper(type = "inline",
+                           title = "Figure type",
+                           content = helper_fig_type)
      ),
 
      introBox(
-
-      # conditionalPanel(
-      #  # if 'count' is not in the selected statistics
-      #  "input.statistic.indexOf('count') == -1",
-      #  awesomeCheckbox(
-      #   inputId = "age_standardize",
-      #   label = "Age-adjustment by standardization?",
-      #   value = FALSE,
-      #   status = "primary"
-      #  )
-      # ),
-
 
       awesomeCheckbox(
        inputId = "age_standardize",
@@ -243,13 +313,15 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
                      value = 7.0,
                      min = 5),
         cellWidths = "24.25%"
-       )
+       ) %>%
+        shinyhelper::helper(type = "inline",
+                            title = "Age standardization",
+                            content = helper_age_standard)
       ),
       data.step = 4,
       data.intro = paste(
        "Results can be presented crude or age-adjusted."
-      ),
-      data.hint = "You can press me"
+      )
      ),
 
      introBox(
@@ -263,14 +335,13 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
        multiple = TRUE,
        options = pickerOptions(maxOptions = 1),
        width = "100%"
-      ),
+      ) %>%
+       shinyhelper::helper(type = "inline",
+                           title = "Pool results or stratify by cycle?",
+                           content = helper_pool),
 
       data.step = 5,
-      data.intro = paste(
-       "Data can be presented for individual",
-       "cycles or multiple cycles pooled together."
-      )
-
+      data.intro = helper_pool
      ),
 
      conditionalPanel(
@@ -282,7 +353,10 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
        selected = NULL,
        choices = time_values,
        width = "100%"
-      ),
+      ) %>%
+       shinyhelper::helper(type = "inline",
+                           title = "Analyze selected NHANES cycle(s)",
+                           content = helper_year_stratify),
       actionGroupButtons(
        inputIds = c('select_all_years',
                     'select_last_5',
@@ -304,29 +378,28 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
        choices = time_values,
        selected = c(time_values[1], last(time_values)),
        width = "100%"
-      )
+      ) %>%
+       shinyhelper::helper(type = "inline",
+                           title = "Choose a range of cycles to pool",
+                           content = helper_year_pool)
      ),
 
      introBox(
       pickerInput("subset_n",
-                  "How many exclusions do you want to make?",
-                  choices = c("None" = 0,
-                              "One" = 1,
-                              "Two" = 2,
-                              "Three" = 3,
-                              "Four" = 4,
-                              "Five" = 5),
+                  "Restrict analysis to specific sub-population?",
+                  choices = c("No" = 0,
+                              "Yes - one restriction" = 1,
+                              "Yes - two restrictions" = 2,
+                              "Yes - three restrictions" = 3,
+                              "Yes - four restrictions" = 4,
+                              "Yes - five restrictions" = 5),
                   selected = "None",
-                  width = "100%"),
+                  width = "100%") %>%
+       shinyhelper::helper(type = "inline",
+                           title = "Restrict analysis to specific sub-population",
+                           content = helper_subset_n),
       data.step = 6,
-      data.intro = paste(
-       "You can restrict your analytic population to participants",
-       "meeting certain criteria.<br><br>For example, you may want to",
-       "restrict the population to non-pregnant individuals. To do this,",
-       "select \"one\" from the drop-down menu, select \"pregnant\" and",
-       "participants to include (e.g., check the box next to no). Up to",
-       "five exclusion criteria can be applied."
-      )
+      data.intro = helper_subset_n
      ),
 
 
@@ -363,18 +436,15 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
                                  liveSearch = TRUE,
                                  noneSelectedText = 'Options depend on type'),
          width = '100%'
-        )
+        ) %>%
+         shinyhelper::helper(
+          type = "inline",
+          title = "Outcome variable",
+          content = helper_outcome
+         )
        ),
        data.step = 7,
-       data.intro = paste(
-        "The outcome variable you select will be summarized in your results.",
-        "There are two boxes: \"Select outcome type\" and \"Select outcome",
-        "variable\". This was done to avoid having a long list of variables.",
-        "<br><br>For example, the outcome variables that can be selected when",
-        "outcome type is \"Hypertension\" include hypertension defined",
-        "by the JNC7 and 2017 ACC/AHA BP guidelines, awareness of",
-        "hypertension, and resistant hypertension."
-       )
+       data.intro = helper_outcome
       )
      ),
 
@@ -382,11 +452,16 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
       condition = 'input.outcome.length > 0',
       prettyCheckboxGroup(
        inputId = 'statistic',
-       label = glue('Select statistic(s) to compute'),
+       label = 'Select statistic(s) to compute',
        choices = character(),
        selected = NULL,
        width = '100%'
-      )
+      ) %>%
+       shinyhelper::helper(
+        type = "inline",
+        title = "Statistic(s) to compute",
+        content = helper_statistic
+       )
      ),
 
      conditionalPanel(
@@ -398,7 +473,12 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
        multiple = TRUE,
        options = pickerOptions(maxOptions = 1),
        width = "100%"
-      )
+      ) %>%
+       shinyhelper::helper(
+        type = "inline",
+        title = "Primary statistic",
+        content = helper_statistic_primary
+       )
      ),
 
      introBox(
@@ -441,14 +521,15 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
                                  liveSearch = TRUE,
                                  noneSelectedText = 'Options depend on type'),
          width = '100%'
-        )
+        ) %>%
+         shinyhelper::helper(
+          type = "inline",
+          title = "Stratification (within panel)",
+          content = helper_group
+         )
        ),
        data.step = 9,
-       data.intro = paste(
-        "This produces results for sub-groups on the same graph.",
-        "If there are too many bars/data points, the results will",
-        "be presented on multiple graphs."
-       )
+       data.intro = helper_group
       )
      ),
 
@@ -510,12 +591,15 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
                                  liveSearch = TRUE,
                                  noneSelectedText = 'Options depend on type'),
          width = '100%'
-        )
+        ) %>%
+         shinyhelper::helper(
+          type = "inline",
+          title = "Stratification (between panel)",
+          content = helper_stratify
+         )
        ),
        data.step = 10,
-       data.intro = paste(
-        "This produces results for sub-groups in separate panels."
-       )
+       data.intro = helper_stratify
       )
      )
     ),
@@ -539,10 +623,11 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
  # Server ------------------------------------------------------------------
  server <- function(input, output, session) {
 
-  # initiate hints on startup
-  hintjs(session)
-
   n_exclusion_max <- 5
+
+  # uses 'helpfiles' directory by default
+  # in this example, we use the withMathJax parameter to render formulae
+  shinyhelper::observe_helpers(withMathJax = TRUE)
 
   setBookmarkExclude(c("run",
                        "select_all_years",
@@ -1147,7 +1232,10 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
   )
 
   # start introjs when button is pressed with custom options and events
-  observeEvent(input$help, introjs(session))
+  observeEvent(input$help,
+               introjs(session,
+                       options = list("nextLabel" = "Continue",
+                                      "prevLabel" = "Previous")))
 
   # for testing, maybe?
   # exportTestValues(smry = smry())

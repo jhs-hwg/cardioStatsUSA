@@ -50,8 +50,7 @@ process.
 \itemize{
 \item \strong{Label}: primary sampling unit
 \item \strong{Description}: Population sampling unit. This variable is used to
-account for the non-random selection of study participants for
-NHANES
+account for the non-random selection of study participants for NHANES
 }
 }
 
@@ -59,8 +58,7 @@ NHANES
 \itemize{
 \item \strong{Label}: strata
 \item \strong{Description}: Population stratification. This variable is used to
-account for the non-random selection of study participants for
-NHANES
+account for the non-random selection of study participants for NHANES
 }
 }
 
@@ -76,22 +74,21 @@ calculating means and proportions.
 \subsection{svy_subpop_htn}{
 \itemize{
 \item \strong{Label}: Subpopulation for hypertension
-\item \strong{Description}: This indicates that the person has data needed to
-be included in the analysis of blood pressure or hypertension data
-(i.e., they had at least one systolic and diastolic blood pressure
-measurement and they had information on self-reported
-antihypertensive medication use).
+\item \strong{Description}: This indicates that the person has data needed to be
+included in the analysis of blood pressure or hypertension data (i.e.,
+they had at least one systolic and diastolic blood pressure
+measurement and they had information on self-reported antihypertensive
+medication use).
 }
 }
 
 \subsection{svy_year}{
 \itemize{
 \item \strong{Label}: NHANES cycle
-\item \strong{Description}: NHANES survey cycle: 1999-2000, 2001-2002,
-2003-2004, 2005-2006, 2007-2008, 2009-2010, 2011-2012, 2013-2014,
-2015-2016, 2017-2020. Each cycle is 2 years in length, apart from
-2017-2020, which covers 2017 through March of 2020 (approximately
-3.2 years)
+\item \strong{Description}: NHANES survey cycle: 1999-2000, 2001-2002, 2003-2004,
+2005-2006, 2007-2008, 2009-2010, 2011-2012, 2013-2014, 2015-2016,
+2017-2020. Each cycle is 2 years in length, apart from 2017-2020,
+which covers 2017 through March of 2020 (approximately 3.2 years)
 }
 }
 }
@@ -118,11 +115,11 @@ demographics, including age, sex, race/ethnicity, and pregnancy status
 \subsection{demo_race}{
 \itemize{
 \item \strong{Label}: Race
-\item \strong{Description}: Self-reported race/ethnicity. From 1999-2000
-through 2009-2010 this was available as non-Hispanic White,
-non-Hispanic Black, Hispanic and other. From 2011-2012 through
-2017-2020 this was available as non-Hispanic White, non-Hispanic
-Black, non-Hispanic Asian, Hispanic and other.
+\item \strong{Description}: Self-reported race/ethnicity. From 1999-2000 through
+2009-2010 this was available as non-Hispanic White, non-Hispanic
+Black, Hispanic and other. From 2011-2012 through 2017-2020 this was
+available as non-Hispanic White, non-Hispanic Black, non-Hispanic
+Asian, Hispanic and other.
 \item \strong{Number of observed values}: 56,017 (100\%)
 \item \strong{Counts of observed values}
 \itemize{
@@ -139,10 +136,10 @@ Black, non-Hispanic Asian, Hispanic and other.
 \subsection{demo_age_years}{
 \itemize{
 \item \strong{Label}: Age, years
-\item \strong{Description}: Participant age in years. Participants > 80 years
-of age are given an age of 80 years. This top-coding was changed
-from 85 years to 80 with the 2007-2008 cycle (prior to then, was
-top-coded at 85).
+\item \strong{Description}: Participant age in years. Participants > 80 years of
+age are given an age of 80 years. This top-coding was changed from 85
+years to 80 with the 2007-2008 cycle (prior to then, was top-coded at
+85).
 \item \strong{Number of observed values}: 56,017 (100\%)
 \item \strong{Mean (standard deviation)}: 47.49 (19.15)
 \item \strong{Median (25th, 75th percentile)}: 31.00 (47.00, 63.00)
@@ -191,15 +188,15 @@ computed over all available
 \subsection{bp_sys_mean}{
 \itemize{
 \item \strong{Label}: Systolic blood pressure (SBP), mm Hg
-\item \strong{Description}: Mean systolic blood pressure in mm Hg. This is
-based on the average of up to 3 readings. Participants were required
-to have at least one reading. Overall, >95\% of participants with at
-least one systolic blood pressure reading had three readings. From
-1999-2000 through 2015-2016, systolic blood pressure was measured
-using a mercury sphygmomanometer. In 2017-2020, systolic blood
-pressure was measured using an oscillometric device. The systolic
-blood pressure in 2017-2020 was calibrated to the mercury device by
-adding 1.5 mm Hg to the mean measured oscillometric value.
+\item \strong{Description}: Mean systolic blood pressure in mm Hg. This is based
+on the average of up to 3 readings. Participants were required to have
+at least one reading. Overall, >95\% of participants with at least one
+systolic blood pressure reading had three readings. From 1999-2000
+through 2015-2016, systolic blood pressure was measured using a
+mercury sphygmomanometer. In 2017-2020, systolic blood pressure was
+measured using an oscillometric device. The systolic blood pressure in
+2017-2020 was calibrated to the mercury device by adding 1.5 mm Hg to
+the mean measured oscillometric value.
 \item \strong{Number of observed values}: 56,017 (100\%)
 \item \strong{Mean (standard deviation)}: 124.06 (19.34)
 \item \strong{Median (25th, 75th percentile)}: 110.67 (120.67, 134.00)
@@ -210,15 +207,15 @@ adding 1.5 mm Hg to the mean measured oscillometric value.
 \subsection{bp_dia_mean}{
 \itemize{
 \item \strong{Label}: Diastolic blood pressure (DBP), mm Hg
-\item \strong{Description}: Mean diastolic blood pressure in mm Hg. This is
-based on the average of up to 3 readings. Participants were required
-to have at least one reading. Overall, >95\% of participants with at
-least one diastolic blood pressure reading had three readings. From
-1999-2000 through 2015-2016, diastolic blood pressure was measured
-using a mercury sphygmomanometer. In 2017-2020, diastolic blood
-pressure was measured using an oscillometric device. The diastolic
-blood pressure in 2017-2020 was calibrated to the mercury device by
-subtracting 1.3 mm Hg to the mean measured oscillometric value.
+\item \strong{Description}: Mean diastolic blood pressure in mm Hg. This is based
+on the average of up to 3 readings. Participants were required to have
+at least one reading. Overall, >95\% of participants with at least one
+diastolic blood pressure reading had three readings. From 1999-2000
+through 2015-2016, diastolic blood pressure was measured using a
+mercury sphygmomanometer. In 2017-2020, diastolic blood pressure was
+measured using an oscillometric device. The diastolic blood pressure
+in 2017-2020 was calibrated to the mercury device by subtracting 1.3
+mm Hg to the mean measured oscillometric value.
 \item \strong{Number of observed values}: 56,017 (100\%)
 \item \strong{Mean (standard deviation)}: 70.34 (12.10)
 \item \strong{Median (25th, 75th percentile)}: 62.67 (70.37, 78.00)
@@ -253,12 +250,12 @@ Hg and diastolic blood pressure of 76 mm Hg was placed in the
 \item \strong{Label}: Blood pressure category including antihypertensive
 medication use as a group
 \item \strong{Description}: Systolic/diastolic blood pressure <120/80,
-120-129/<80, 130-139/80-89, 140-159/90-99, >= 160/100.
-Participants taking antihypertensive medication were placed in a
-separate category. Participants were placed in the category
-associated with higher blood pressure (e.g., someone with systolic
-blood pressure of 150 mm Hg and diastolic blood pressure of 76 mm Hg
-was placed in the 140-159/90-99 mm Hg category)
+120-129/<80, 130-139/80-89, 140-159/90-99, >= 160/100. Participants
+taking antihypertensive medication were placed in a separate category.
+Participants were placed in the category associated with higher blood
+pressure (e.g., someone with systolic blood pressure of 150 mm Hg and
+diastolic blood pressure of 76 mm Hg was placed in the 140-159/90-99
+mm Hg category)
 \item \strong{Number of observed values}: 56,017 (100\%)
 \item \strong{Counts of observed values}
 \itemize{
@@ -277,11 +274,11 @@ was placed in the 140-159/90-99 mm Hg category)
 \itemize{
 \item \strong{Label}: Blood pressure control defined by the JNC7 guideline
 \item \strong{Description}: Systolic and diastolic blood pressure controlled to
-the levels recommended in the JNC7 guideline, systolic blood
-pressure < 140 mm Hg and diastolic blood pressure < 90 mm Hg
-except for those with diabetes or chronic kidney disease, where
-blood pressure control was defined by systolic blood pressure < 130
-mm Hg and diastolic blood pressure < 80 mm Hg.
+the levels recommended in the JNC7 guideline, systolic blood pressure
+< 140 mm Hg and diastolic blood pressure < 90 mm Hg except for those
+with diabetes or chronic kidney disease, where blood pressure control
+was defined by systolic blood pressure < 130 mm Hg and diastolic
+blood pressure < 80 mm Hg.
 \item \strong{Number of observed values}: 56,017 (100\%)
 \item \strong{Counts of observed values}
 \itemize{
@@ -299,11 +296,11 @@ guideline
 \item \strong{Description}: Systolic and diastolic blood pressure controlled to
 the levels recommended in the 2017 ACC/AHA BP guideline, systolic
 blood pressure < 130 mm Hg and diastolic blood pressure < 80 mm Hg
-except for those >= 65 years of age without diabetes, chronic
-kidney disease, history of cardiovascular disease or 10-year
-predicted ASCVD risk >= 10\% estimated using the Pooled Cohort risk
-equations. For this group, blood pressure control was defined as
-systolic blood pressure < 130 mm Hg
+except for those >= 65 years of age without diabetes, chronic kidney
+disease, history of cardiovascular disease or 10-year predicted ASCVD
+risk >= 10\% estimated using the Pooled Cohort risk equations. For
+this group, blood pressure control was defined as systolic blood
+pressure < 130 mm Hg
 \item \strong{Number of observed values}: 56,017 (100\%)
 \item \strong{Counts of observed values}
 \itemize{
@@ -352,8 +349,8 @@ blood pressure < 80 mm Hg
 \item \strong{Description}: Systolic blood pressure = 140 mm Hg or diastolic
 blood pressure = 90 mm Hg for those without diabetes and without
 chronic kidney disease; Systolic blood pressure = 130 mm Hg or
-diastolic blood pressure = 80 mm Hg for those with diabetes or
-chronic kidney disease
+diastolic blood pressure = 80 mm Hg for those with diabetes or chronic
+kidney disease
 \item \strong{Number of observed values}: 56,017 (100\%)
 \item \strong{Counts of observed values}
 \itemize{
@@ -366,14 +363,13 @@ chronic kidney disease
 
 \subsection{bp_uncontrolled_accaha}{
 \itemize{
-\item \strong{Label}: Uncontrolled blood pressure defined by the 2017 ACC/AHA
-BP guideline
+\item \strong{Label}: Uncontrolled blood pressure defined by the 2017 ACC/AHA BP
+guideline
 \item \strong{Description}: Systolic blood pressure = 130 mm Hg or diastolic
-blood pressure = 80 mm Hg except for adults = 65 years of age
-without diabetes, chronic kidney disease, history of cardiovascular
-disease or 10-year predicted ASCVD risk = 10\%. For this group,
-uncontrolled blood pressure was defined as systolic blood pressure =
-130 mm Hg.
+blood pressure = 80 mm Hg except for adults = 65 years of age without
+diabetes, chronic kidney disease, history of cardiovascular disease or
+10-year predicted ASCVD risk = 10\%. For this group, uncontrolled blood
+pressure was defined as systolic blood pressure = 130 mm Hg.
 \item \strong{Number of observed values}: 56,017 (100\%)
 \item \strong{Counts of observed values}
 \itemize{
@@ -424,9 +420,9 @@ Seventh Joint National Committee (JNC7) BP guideline.
 \subsection{htn_jnc7}{
 \itemize{
 \item \strong{Label}: Hypertension defined by the JNC7 guideline
-\item \strong{Description}: Hypertension defined by the JNC7 guideline,
-systolic blood pressure >= 140 mm Hg, diastolic blood pressure >=
-90 mm Hg or self-reported antihypertensive medication use.
+\item \strong{Description}: Hypertension defined by the JNC7 guideline, systolic
+blood pressure >= 140 mm Hg, diastolic blood pressure >= 90 mm Hg or
+self-reported antihypertensive medication use.
 \item \strong{Number of observed values}: 56,017 (100\%)
 \item \strong{Counts of observed values}
 \itemize{
@@ -457,8 +453,8 @@ medication use.
 \subsection{htn_aware}{
 \itemize{
 \item \strong{Label}: Awareness of hypertension
-\item \strong{Description}: Self-report of a prior diagnosis of
-antihypertensive medication.
+\item \strong{Description}: Self-report of a prior diagnosis of antihypertensive
+medication.
 \item \strong{Number of observed values}: 56,017 (100\%)
 \item \strong{Counts of observed values}
 \itemize{
@@ -477,8 +473,8 @@ medication, systolic blood pressure >= 140 mm Hg or diastolic blood
 pressure >= 90 mm Hg with the use of 3 classes of antihypertensive
 medication, or systolic blood pressure >= 130 mm Hg or diastolic
 blood pressure >= 80 mm Hg with the use of 3 classes of
-antihypertensive medication for those with diabetes or chronic
-kidney disease.
+antihypertensive medication for those with diabetes or chronic kidney
+disease.
 \item \strong{Number of observed values}: 56,017 (100\%)
 \item \strong{Counts of observed values}
 \itemize{
@@ -498,11 +494,11 @@ medication; systolic blood pressure = 130 mm Hg or diastolic blood
 pressure = 80 mm Hg with the use of 3 classes of antihypertensive
 medication for those < 65 years of age and those = 65 years of age
 with diabetes, chronic kidney disease, history of cardiovascular
-disease or 10-year predicted ASCVD risk = 10\%; Systolic blood
-pressure = 130 mm Hg with the use of 3 classes of antihypertensive
-medication for those = 65 years of age without diabetes, chronic
-kidney disease, history of cardiovascular disease or 10-year
-predicted ASCVD risk = 10\%.
+disease or 10-year predicted ASCVD risk = 10\%; Systolic blood pressure
+= 130 mm Hg with the use of 3 classes of antihypertensive medication
+for those = 65 years of age without diabetes, chronic kidney disease,
+history of cardiovascular disease or 10-year predicted ASCVD risk =
+10\%.
 \item \strong{Number of observed values}: 56,017 (100\%)
 \item \strong{Counts of observed values}
 \itemize{
@@ -522,12 +518,12 @@ medication; systolic blood pressure = 130 mm Hg or diastolic blood
 pressure = 80 mm Hg with the use of 3 classes of antihypertensive
 medication for those < 65 years of age and those = 65 years of age
 with diabetes, chronic kidney disease, history of cardiovascular
-disease or 10-year predicted ASCVD risk = 10\%; Systolic blood
-pressure = 130 mm Hg with the use of 3 classes of antihypertensive
-medication for those = 65 years of age without diabetes, chronic
-kidney disease, history of cardiovascular disease or 10-year
-predicted ASCVD risk = 10\%. To meet this definition of resistant
-hypertension, the participant had to be taking a thiazide diuretic.
+disease or 10-year predicted ASCVD risk = 10\%; Systolic blood pressure
+= 130 mm Hg with the use of 3 classes of antihypertensive medication
+for those = 65 years of age without diabetes, chronic kidney disease,
+history of cardiovascular disease or 10-year predicted ASCVD risk =
+10\%. To meet this definition of resistant hypertension, the
+participant had to be taking a thiazide diuretic.
 \item \strong{Number of observed values}: 56,017 (100\%)
 \item \strong{Counts of observed values}
 \itemize{
@@ -547,9 +543,9 @@ medication, systolic blood pressure >= 140 mm Hg or diastolic blood
 pressure >= 90 mm Hg with the use of 3 classes of antihypertensive
 medication, or systolic blood pressure >= 130 mm Hg or diastolic
 blood pressure >= 80 mm Hg with the use of 3 classes of
-antihypertensive medication for those with diabetes or chronic
-kidney disease. To meet this definition of resistant hypertension,
-the participant had to be taking a thiazide diuretic.
+antihypertensive medication for those with diabetes or chronic kidney
+disease. To meet this definition of resistant hypertension, the
+participant had to be taking a thiazide diuretic.
 \item \strong{Number of observed values}: 56,017 (100\%)
 \item \strong{Counts of observed values}
 \itemize{
@@ -583,10 +579,10 @@ reported taking in the preceding 30 days were recorded.
 \item \strong{Label}: Antihypertensive medications recommended defined by the
 JNC7 guideline
 \item \strong{Description}: Systolic blood pressure >= 140 mm Hg or diastolic
-blood pressure >= 90 mm Hg; Systolic blood pressure >= 130 mm Hg
-or diastolic blood pressure >= 80 mm Hg for those with chronic
-kidney disease or diabetes. Those taking antihypertensive
-medications were considered to be recommended treatment.
+blood pressure >= 90 mm Hg; Systolic blood pressure >= 130 mm Hg or
+diastolic blood pressure >= 80 mm Hg for those with chronic kidney
+disease or diabetes. Those taking antihypertensive medications were
+considered to be recommended treatment.
 \item \strong{Number of observed values}: 56,017 (100\%)
 \item \strong{Counts of observed values}
 \itemize{
@@ -603,11 +599,11 @@ medications were considered to be recommended treatment.
 ACC/AHA BP guideline
 \item \strong{Description}: Systolic blood pressure = 130 mm Hg or diastolic
 blood pressure = 80 mm Hg; Systolic blood pressure = 130 mm Hg for
-those age = 65 years without diabetes, chronic kidney disease,
-history of cardiovascular disease, or 10-year predicted
-atherosclerotic cardiovascular disease risk = 10\% by the pooled
-cohort risk equations. Those taking antihypertensive medications
-were considered to be recommended treatment.
+those age = 65 years without diabetes, chronic kidney disease, history
+of cardiovascular disease, or 10-year predicted atherosclerotic
+cardiovascular disease risk = 10\% by the pooled cohort risk equations.
+Those taking antihypertensive medications were considered to be
+recommended treatment.
 \item \strong{Number of observed values}: 56,017 (100\%)
 \item \strong{Counts of observed values}
 \itemize{
@@ -688,10 +684,10 @@ terazosin.
 \subsection{bp_med_angioten}{
 \itemize{
 \item \strong{Label}: Angiotensin receptor blockers
-\item \strong{Description}: Taking an angiotensin receptor blocker, defined
-using the pill bottle review. Drugs in this class included
-candesartan, eprosartan, irbesartan, losartan, olmesartan,
-telmisartan, valsartan, azilsartan.
+\item \strong{Description}: Taking an angiotensin receptor blocker, defined using
+the pill bottle review. Drugs in this class included candesartan,
+eprosartan, irbesartan, losartan, olmesartan, telmisartan, valsartan,
+azilsartan.
 \item \strong{Number of observed values}: 55,649 (99.3\%)
 \item \strong{Counts of observed values}
 \itemize{
@@ -722,8 +718,8 @@ metoprolol, nadolol, nebivolol, pindolol, propranolol.
 \itemize{
 \item \strong{Label}: Central alpha1 agonist and other centrally acting agents
 \item \strong{Description}: Taking a centrally acting agents, defined using the
-pill bottle review. Drugs in this class included clonidine,
-guanabenz, guanfacine, methyldopa, reserpine.
+pill bottle review. Drugs in this class included clonidine, guanabenz,
+guanfacine, methyldopa, reserpine.
 \item \strong{Number of observed values}: 55,649 (99.3\%)
 \item \strong{Counts of observed values}
 \itemize{
@@ -770,8 +766,8 @@ triamterene.
 \subsection{bp_med_diur_loop}{
 \itemize{
 \item \strong{Label}: Loop diuretics
-\item \strong{Description}: Taking a loop diuretic, defined using the pill
-bottle review. Drugs in this class included bumetanide, furosemide,
+\item \strong{Description}: Taking a loop diuretic, defined using the pill bottle
+review. Drugs in this class included bumetanide, furosemide,
 torsemide, ethacrynic acid.
 \item \strong{Number of observed values}: 55,649 (99.3\%)
 \item \strong{Counts of observed values}
@@ -869,8 +865,8 @@ risk >= 10\% estimated by the pooled cohort risk equations
 \subsection{cc_bmi}{
 \itemize{
 \item \strong{Label}: Body mass index, kg/m2
-\item \strong{Description}: Body mass index in kg/m2, estimated using the
-height and weight measured during the study examination.
+\item \strong{Description}: Body mass index in kg/m2, estimated using the height
+and weight measured during the study examination.
 \item \strong{Number of observed values}: 54,862 (97.9\%)
 \item \strong{Counts of observed values}
 \itemize{
@@ -886,9 +882,9 @@ height and weight measured during the study examination.
 \subsection{cc_diabetes}{
 \itemize{
 \item \strong{Label}: Prevalent diabetes
-\item \strong{Description}: HbA1c >= 6.5\% or self-report of a prior diagnosis
-of diabetes with self-reported use of insulin or oral
-glucose-lowering medications.
+\item \strong{Description}: HbA1c >= 6.5\% or self-report of a prior diagnosis of
+diabetes with self-reported use of insulin or oral glucose-lowering
+medications.
 \item \strong{Number of observed values}: 56,017 (100\%)
 \item \strong{Counts of observed values}
 \itemize{

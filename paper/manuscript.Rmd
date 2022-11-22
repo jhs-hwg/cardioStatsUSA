@@ -442,7 +442,7 @@ n_included <-
 ```
 
 
-There were 107,622 NHANES participants in the 10 cycles from 1999-2000 to 2017-2020. We restricted the dataset to adults ≥ 18 years of age. This exclusion was applied because statistics for BP levels and the prevalence of hypertension in children and adolescents are markedly different than for adults.[@muntner2004trends] We further restricted the population to participants who completed the in-home interview and study examination, with one or more SBP and DBP measurement, and who had data on self-reported antihypertensive medication use. After these exclusions were applied, the population in the current application included `r n_included` participants (**Figure S1**).
+There were 107,622 NHANES participants in the 10 cycles from 1999-2000 to 2017-2020. We restricted the dataset to adults ≥ 18 years of age. This exclusion was applied because hypertension is defined differently for children and adolescents compared to adults.[@flynn_clinical_2017] We further restricted the population to participants who completed the in-home interview and study examination, with one or more SBP and DBP measurement, and who had data on self-reported antihypertensive medication use. After these exclusions were applied, the population in the current application included `r n_included` participants (**Figure S1**).
 
 <br>
 
@@ -464,7 +464,7 @@ We performed statistical analyses to demonstrate core features of the applicatio
 
 <br>
 
-We also illustrated how core features of the application can be combined to perform customized analyses. Specifically, we estimated the age-adjusted proportion of US adults with controlled BP by NHANES cycle among non-pregnant US adults with hypertension, overall and among those who self-reported taking antihypertensive medication. We also estimated the age-adjusted prevalence of resistant hypertension by NHANES cycle for non-pregnant US adults with hypertension who self-reported taking antihypertensive medication and had ≥ 1 classes of antihypertensive medication identified during the medication inventory. This was repeated among those taking ≥ 3 classes of antihypertensive medication. For age adjustment in the analysis of BP control and resistant hypertension, we set the age distribution for the standard population to represent US adults with hypertension from 1999 to 2020: 26.4%, 43.4%, 17.0% and 13.2% being 18 to 44 years, 45 to 64, 65 to 74, and ≥ 75 years of age, respectively.
+We also illustrated how core features of the application can be combined to perform customized analyses. Specifically, we estimated the age-adjusted proportion of US adults with controlled BP by NHANES cycle among non-pregnant US adults with hypertension, overall and among those who self-reported taking antihypertensive medication. We also estimated the age-adjusted prevalence of resistant hypertension by NHANES cycle for non-pregnant US adults with hypertension who self-reported taking antihypertensive medication and had ≥ 1 classes of antihypertensive medication identified during the medication inventory. This was repeated among those taking ≥ 3 classes of antihypertensive medication. For age adjustment in the analysis of BP control and resistant hypertension, we set the age distribution for the standard population to represent US adults with hypertension from 1999 to 2020: 26.4%, 43.4%, 17.0% and 13.2% being 18 to 44 years, 45 to 64, 65 to 74, and ≥ 75 years of age, respectively. Participants with missing pregnancy status were assumed to be non-pregnant for these analyses.
 
 <br>
 
