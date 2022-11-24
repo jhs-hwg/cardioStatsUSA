@@ -11,9 +11,14 @@ coverage](https://codecov.io/gh/jhs-hwg/cardioStatsUSA/branch/main/graph/badge.s
 <!-- badges: end -->
 
 Our goal is to provide a platform for exploration of the National Health
-and Nutrition Examination Survey (NHANES) data. We created this website
-to give context and documentation for users of the application, which
-can be accessed here: <https://bcjaeger.shinyapps.io/nhanesShinyBP/>
+and Nutrition Examination Survey (NHANES) data.
+
+## Web application
+
+- Live version here: <https://bcjaeger.shinyapps.io/nhanesShinyBP/>
+
+- This website provides context and documentation for our web
+  application
 
 ## Examples
 
@@ -22,16 +27,37 @@ be found by selecting the “Results” tab above. Instructions on how to
 generate statistics using the application are available by clicking on
 the “Get Started” tab.
 
-**Systolic blood pressure by age group in the last three NHANES
-cycles.**
+**Figure 1: Systolic blood pressure by age group in the last three
+NHANES cycles.**
 
 <img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />
 
-**Prevalence of blood pressure control by sex among adults with
-hypertension.**
+**Figure 2: Prevalence of blood pressure control by sex among adults
+with hypertension.**
 
 <img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
 
+## Make your own results
+
+You can use the `cardioStatsUSA` web application to run customized
+analyses of NHANES data. The videos below show how I used it to make
+Figures 1 and 2.
+
+- This video shows how **Figure 1** was made
+
+<div class="vembedr">
+<div>
+<iframe src="https://www.youtube.com/embed/SjuzOp4ZMww" width="533" height="300" frameborder="0" allowfullscreen="" data-external="1"></iframe>
+</div>
+</div>
+
+- This video shows how **Figure 2** was made
+
+<div class="vembedr">
+<div>
+<iframe src="https://www.youtube.com/embed/oMporQuiodo" width="533" height="300" frameborder="0" allowfullscreen="" data-external="1"></iframe>
+</div>
+</div>
 <!-- ## Installation -->
 <!-- You can install the development version of cardioStatsUSA from [GitHub](https://github.com/) with: -->
 <!-- ``` r -->

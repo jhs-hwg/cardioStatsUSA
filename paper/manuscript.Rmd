@@ -357,14 +357,14 @@ fig_supp_4_b <- nhanes_data %>%
   geom = 'bar'
  )
 
-htn_resistant_2009b <- fig_supp_4_b %>% 
+htn_resistant_1999b <- fig_supp_4_b %>% 
  getElement("fig_data") %>% 
- .[svy_year == '2009-2010' & htn_resistant_accaha == 'Yes'] %>% 
+ .[svy_year == '1999-2000' & htn_resistant_accaha == 'Yes'] %>% 
  est_ci()
 
-htn_resistant_2003b <- fig_supp_4_b %>% 
+htn_resistant_2005b <- fig_supp_4_b %>% 
  getElement("fig_data") %>% 
- .[svy_year == '2003-2004' & htn_resistant_accaha == 'Yes'] %>% 
+ .[svy_year == '2005-2006' & htn_resistant_accaha == 'Yes'] %>% 
  est_ci()
 
 htn_resistant_2017b <- fig_supp_4_b %>% 
@@ -474,7 +474,7 @@ Among non-institutionalized US adults ≥ 18 years of age, the estimated mean SB
 
 <br>
 
-The age-adjusted prevalence of BP control defined as in the 2017 ACC/AHA BP guideline among non-pregnant US adults with hypertension was lowest in 1999-2000 (`r bracket_drop(bp_control_1999a)`%), highest in 2013-2014 (`r bracket_drop(bp_control_2013a)`%), and `r bracket_drop(bp_control_2017a)`% in 2017-2020 (**Figure 4; Panel A**). Among US adults with hypertension who self-reported taking antihypertensive medication, `r bracket_drop(bp_control_1999b)`%, `r bracket_drop(bp_control_2013b)`%, and `r bracket_drop(bp_control_2017b)`% had controlled BP in 1999-2000, 2013-2014, and 2017-2020, respectively (**Figure 4; Panel B**). The age-adjusted prevalence of resistant hypertension defined as in the 2017 ACC/AHA BP guideline among non-pregnant US adults with hypertension who self-reported taking antihypertensive medication and had ≥1 antihypertensive medication class identified during the medication inventory was lowest in 1999-2000 (`r bracket_drop(htn_resistant_1999a)`%), highest in 2005-2006 (21.4%), and 16.6% in 2017-2020 (**Figure S4; Panel A**). Further restricting this analysis to those who were taking three or more classes of antihypertensive medication, the prevalence of resistant hypertension was lowest in 2009-2010 (64.1%), highest in 2003-2004 (78.3%), and 67.9% in 2017-2020 (**Figure S4; Panel B**).
+The age-adjusted prevalence of BP control defined as in the 2017 ACC/AHA BP guideline among non-pregnant US adults with hypertension was lowest in 1999-2000 (`r bracket_drop(bp_control_1999a)`%), highest in 2013-2014 (`r bracket_drop(bp_control_2013a)`%), and `r bracket_drop(bp_control_2017a)`% in 2017-2020 (**Figure 4; Panel A**). Among US adults with hypertension who self-reported taking antihypertensive medication, `r bracket_drop(bp_control_1999b)`%, `r bracket_drop(bp_control_2013b)`%, and `r bracket_drop(bp_control_2017b)`% had controlled BP in 1999-2000, 2013-2014, and 2017-2020, respectively (**Figure 4; Panel B**). The age-adjusted prevalence of resistant hypertension defined as in the 2017 ACC/AHA BP guideline among non-pregnant US adults with hypertension who self-reported taking antihypertensive medication and had ≥1 antihypertensive medication class identified during the medication inventory was lowest in 1999-2000 (`r bracket_drop(htn_resistant_1999a)`%), highest in 2005-2006 (`r bracket_drop(htn_resistant_2005a)`%), and `r bracket_drop(htn_resistant_2017a)`% in 2017-2020 (**Figure S4; Panel A**). Further restricting this analysis to those who were taking three or more classes of antihypertensive medication, the prevalence of resistant hypertension was `r bracket_drop(htn_resistant_1999b)`%,  `r bracket_drop(htn_resistant_2005b)`%, and `r bracket_drop(htn_resistant_2017b)`% in 1999-2000, 2005-2006, and 2017-2020, respectively (**Figure S4; Panel B**).
 
 <br>
 
