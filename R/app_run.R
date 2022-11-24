@@ -48,6 +48,51 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
     )
   )
 
+ age_cat_levels <- levels(nhanes_data$demo_age_cat)
+
+ age_cat_ids <- paste("standard",
+                      "weights",
+                      seq(length(age_cat_levels)),
+                      sep = "_")
+
+ # default weights for age standardization
+ # yes, 7 should be 7.1, but this sums to 100 and that's more intuitive.
+ age_cat_wts <- c(49.3, 33.6, 10.1,  7)
+
+ # if a different age variable is provided, you're going to want
+ # a new default set of weights based on the new age categories
+ if(!all(age_cat_levels == c("18 to 44", "45 to 64", "65 to 74", "75+"))){
+
+  nhd <- nhanes_design(nhanes_data[svy_subpop_htn==1],
+                       key = nhanes_key,
+                       outcome_variable = 'demo_age_cat',
+                       pool = TRUE)
+
+  age_cat_wts <- nhd %>%
+   nhanes_design_summarize(simplify_output = T,
+                           outcome_stats = 'percentage') %>%
+   .[['estimate']] %>%
+   round(1)
+
+ }
+
+ standard_weights <- purrr::pmap(
+  .l = list(age_cat_ids, age_cat_levels, age_cat_wts),
+  .f = function(id, label, value){
+   numericInput(inputId=id,
+                label=label,
+                value = value,
+                min = .1)
+  }
+ )
+
+ standard_weights_width <-
+  (100 - length(age_cat_levels) + 1) / length(age_cat_levels)
+
+ # convert to character (the expected type for splitLayout)
+ standard_weights_width <- paste0(standard_weights_width, "%")
+
+
  ctns_variables <- nhanes_key[type == 'ctns', variable]
 
  boundaries <- ctns_variables %>%
@@ -295,28 +340,37 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
        condition = "input.age_standardize == true",
        h5("Weights for each age group (must be >0)"),
 
-       splitLayout(
-        numericInput(inputId="standard_weights_1",
-                     label="18-44",
-                     value = 49.3,
-                     min = 5),
-        numericInput(inputId="standard_weights_2",
-                     label="45-64",
-                     value = 33.6,
-                     min = 5),
-        numericInput(inputId="standard_weights_3",
-                     label="65-74",
-                     value = 10.1,
-                     min = 5),
-        numericInput(inputId="standard_weights_4",
-                     label="75+",
-                     value = 7.0,
-                     min = 5),
-        cellWidths = "24.25%"
-       ) %>%
+       do.call(splitLayout,
+               args = c(standard_weights,
+                        cellWidths = standard_weights_width)) %>%
         shinyhelper::helper(type = "inline",
                             title = "Age standardization",
                             content = helper_age_standard)
+
+       # older version was fixed at 4 categories
+       # splitLayout(
+       #  numericInput(inputId="standard_weights_1",
+       #               label="18-44",
+       #               value = 49.3,
+       #               min = 5),
+       #  numericInput(inputId="standard_weights_2",
+       #               label="45-64",
+       #               value = 33.6,
+       #               min = 5),
+       #  numericInput(inputId="standard_weights_3",
+       #               label="65-74",
+       #               value = 10.1,
+       #               min = 5),
+       #  numericInput(inputId="standard_weights_4",
+       #               label="75+",
+       #               value = 7.0,
+       #               min = 5),
+       #  cellWidths = "24.25%"
+       # ) %>%
+       #  shinyhelper::helper(type = "inline",
+       #                      title = "Age standardization",
+       #                      content = helper_age_standard)
+
       ),
       data.step = 4,
       data.intro = paste(
