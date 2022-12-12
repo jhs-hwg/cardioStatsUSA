@@ -16,7 +16,7 @@ nhanes_rename <- function(data){
   # Survey  -----------------------------------------------------------------
   svy_id          = seqn,
   svy_weight_mec  = wtmec2yr,  # uncalibrated
-  svy_weight_af   = wtsaf2yr,  # uncalibrated
+  # svy_weight_af   = wtsaf2yr,  # uncalibrated
   # svy_weight_htn  = newwt,     # dropped for auto-calibrated wts
   # svy_weight_chol = newwtldl,  # dropped for auto-calibrated wts
   svy_psu         = sdmvpsu,
@@ -56,6 +56,7 @@ nhanes_rename <- function(data){
   bp_med_recommended_jnc7   = jnc7tx,
   bp_med_recommended_accaha = newgdltx,
   bp_med_n_class            = num_htn_class,
+  bp_med_combination        = combination,
 
   # bp_med_x, a sub-class of bp_med variables
   bp_med_ace = ace,
@@ -137,7 +138,7 @@ nhanes_rename <- function(data){
   cc_bmi        = bmicat,
   cc_diabetes   = diabetes,
   cc_ckd        = ckd,
-  cc_n_highrisk = highriskcond,
+  # cc_n_highrisk = highriskcond,
 
   # cc_cvd, a sub-class of cc variables
   cc_cvd_mi       = hxmi,

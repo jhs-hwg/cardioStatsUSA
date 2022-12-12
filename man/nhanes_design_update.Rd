@@ -167,7 +167,7 @@ Pipes and multiple modifications are allowed:
 ## - description: Self-reported gender
 ## 
 ## Stratify variable: demo_race
-## - label: Race
+## - label: Race/ethnicity
 ## - type: categorical
 ## - description: Self-reported race/ethnicity. From 1999-2000 through 2009-2010
 ##     this was available as non-Hispanic White, non-Hispanic Black, Hispanic and

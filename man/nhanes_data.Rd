@@ -5,7 +5,7 @@
 \alias{nhanes_data}
 \title{NHANES data, 1999-2020}
 \format{
-An object of class \code{data.table} (inherits from \code{data.frame}) with 59799 rows and 102 columns.
+An object of class \code{data.table} (inherits from \code{data.frame}) with 59799 rows and 103 columns.
 }
 \source{
 \url{https://wwwn.cdc.gov/nchs/nhanes/continuousnhanes/default.aspx}
@@ -41,14 +41,14 @@ multi-stage sampling process. The variables below are based on this
 process.
 \subsection{svy_id}{
 \itemize{
-\item \strong{Label}: participant identifier
+\item \strong{Label}: Participant identifier
 \item \strong{Description}: NHANES participant unique identifier.
 }
 }
 
 \subsection{svy_psu}{
 \itemize{
-\item \strong{Label}: primary sampling unit
+\item \strong{Label}: Primary sampling unit
 \item \strong{Description}: Population sampling unit. This variable is used to
 account for the non-random selection of study participants for NHANES
 }
@@ -56,7 +56,7 @@ account for the non-random selection of study participants for NHANES
 
 \subsection{svy_strata}{
 \itemize{
-\item \strong{Label}: strata
+\item \strong{Label}: Strata
 \item \strong{Description}: Population stratification. This variable is used to
 account for the non-random selection of study participants for NHANES
 }
@@ -114,7 +114,7 @@ demographics, including age, sex, race/ethnicity, and pregnancy status
 
 \subsection{demo_race}{
 \itemize{
-\item \strong{Label}: Race
+\item \strong{Label}: Race/ethnicity
 \item \strong{Description}: Self-reported race/ethnicity. From 1999-2000 through
 2009-2010 this was available as non-Hispanic White, non-Hispanic
 Black, Hispanic and other. From 2011-2012 through 2017-2020 this was
@@ -141,7 +141,7 @@ age are given an age of 80 years. This top-coding was changed from 85
 years to 80 with the 2007-2008 cycle (prior to then, was top-coded at
 85).
 \item \strong{Number of observed values}: 56,017 (100\%)
-\item \strong{Mean (standard deviation)}: 47.49 (19.15)
+\item \strong{Mean (standard deviation)}: 47.41 (19.02)
 \item \strong{Median (25th, 75th percentile)}: 31.00 (47.00, 63.00)
 \item \strong{Number of missing values}: 0 (0.00\%)
 }
@@ -282,8 +282,8 @@ blood pressure < 80 mm Hg.
 \item \strong{Number of observed values}: 56,017 (100\%)
 \item \strong{Counts of observed values}
 \itemize{
-\item \emph{No}: 13,868 (24.8\%)
-\item \emph{Yes}: 42,149 (75.2\%)
+\item \emph{No}: 13,867 (24.8\%)
+\item \emph{Yes}: 42,150 (75.2\%)
 }
 \item \strong{Number of missing values}: 0 (0.00\%)
 }
@@ -346,16 +346,16 @@ blood pressure < 80 mm Hg
 \subsection{bp_uncontrolled_jnc7}{
 \itemize{
 \item \strong{Label}: Uncontrolled blood pressure defined by the JNC7 guideline
-\item \strong{Description}: Systolic blood pressure = 140 mm Hg or diastolic
-blood pressure = 90 mm Hg for those without diabetes and without
-chronic kidney disease; Systolic blood pressure = 130 mm Hg or
-diastolic blood pressure = 80 mm Hg for those with diabetes or chronic
-kidney disease
+\item \strong{Description}: Systolic blood pressure >= 140 mm Hg or diastolic
+blood pressure >= 90 mm Hg for those without diabetes and without
+chronic kidney disease; Systolic blood pressure >= 130 mm Hg or
+diastolic blood pressure >= 80 mm Hg for those with diabetes or
+chronic kidney disease
 \item \strong{Number of observed values}: 56,017 (100\%)
 \item \strong{Counts of observed values}
 \itemize{
-\item \emph{No}: 42,149 (75.2\%)
-\item \emph{Yes}: 13,868 (24.8\%)
+\item \emph{No}: 42,150 (75.2\%)
+\item \emph{Yes}: 13,867 (24.8\%)
 }
 \item \strong{Number of missing values}: 0 (0.00\%)
 }
@@ -365,11 +365,12 @@ kidney disease
 \itemize{
 \item \strong{Label}: Uncontrolled blood pressure defined by the 2017 ACC/AHA BP
 guideline
-\item \strong{Description}: Systolic blood pressure = 130 mm Hg or diastolic
-blood pressure = 80 mm Hg except for adults = 65 years of age without
-diabetes, chronic kidney disease, history of cardiovascular disease or
-10-year predicted ASCVD risk = 10\%. For this group, uncontrolled blood
-pressure was defined as systolic blood pressure = 130 mm Hg.
+\item \strong{Description}: Systolic blood pressure >= 130 mm Hg or diastolic
+blood pressure >= 80 mm Hg except for adults >= 65 years of age
+without diabetes, chronic kidney disease, history of cardiovascular
+disease or 10-year predicted ASCVD risk >= 10\%. For this group,
+uncontrolled blood pressure was defined as systolic blood pressure >=
+130 mm Hg.
 \item \strong{Number of observed values}: 56,017 (100\%)
 \item \strong{Counts of observed values}
 \itemize{
@@ -478,8 +479,8 @@ disease.
 \item \strong{Number of observed values}: 56,017 (100\%)
 \item \strong{Counts of observed values}
 \itemize{
-\item \emph{No}: 53,628 (95.7\%)
-\item \emph{Yes}: 2,389 (4.26\%)
+\item \emph{No}: 53,626 (95.7\%)
+\item \emph{Yes}: 2,391 (4.27\%)
 }
 \item \strong{Number of missing values}: 0 (0.00\%)
 }
@@ -490,20 +491,20 @@ disease.
 \item \strong{Label}: Resistant hypertension defined by the 2017 ACC/AHA BP
 guideline
 \item \strong{Description}: Taking 4 or more classes of antihypertensive
-medication; systolic blood pressure = 130 mm Hg or diastolic blood
-pressure = 80 mm Hg with the use of 3 classes of antihypertensive
-medication for those < 65 years of age and those = 65 years of age
+medication; systolic blood pressure >= 130 mm Hg or diastolic blood
+pressure >= 80 mm Hg with the use of 3 classes of antihypertensive
+medication for those < 65 years of age and those >= 65 years of age
 with diabetes, chronic kidney disease, history of cardiovascular
-disease or 10-year predicted ASCVD risk = 10\%; Systolic blood pressure
-= 130 mm Hg with the use of 3 classes of antihypertensive medication
-for those = 65 years of age without diabetes, chronic kidney disease,
-history of cardiovascular disease or 10-year predicted ASCVD risk =
-10\%.
+disease or 10-year predicted ASCVD risk >= 10\%; Systolic blood
+pressure >= 130 mm Hg with the use of 3 classes of antihypertensive
+medication for those >= 65 years of age without diabetes, chronic
+kidney disease, history of cardiovascular disease or 10-year predicted
+ASCVD risk >= 10\%.
 \item \strong{Number of observed values}: 56,017 (100\%)
 \item \strong{Counts of observed values}
 \itemize{
-\item \emph{No}: 53,392 (95.3\%)
-\item \emph{Yes}: 2,625 (4.69\%)
+\item \emph{No}: 53,390 (95.3\%)
+\item \emph{Yes}: 2,627 (4.69\%)
 }
 \item \strong{Number of missing values}: 0 (0.00\%)
 }
@@ -514,21 +515,21 @@ history of cardiovascular disease or 10-year predicted ASCVD risk =
 \item \strong{Label}: Resistant hypertension defined by the JNC7 guideline,
 requires thiazide diuretic
 \item \strong{Description}: Taking 4 or more classes of antihypertensive
-medication; systolic blood pressure = 130 mm Hg or diastolic blood
-pressure = 80 mm Hg with the use of 3 classes of antihypertensive
-medication for those < 65 years of age and those = 65 years of age
+medication; systolic blood pressure >= 130 mm Hg or diastolic blood
+pressure >= 80 mm Hg with the use of 3 classes of antihypertensive
+medication for those < 65 years of age and those >= 65 years of age
 with diabetes, chronic kidney disease, history of cardiovascular
-disease or 10-year predicted ASCVD risk = 10\%; Systolic blood pressure
-= 130 mm Hg with the use of 3 classes of antihypertensive medication
-for those = 65 years of age without diabetes, chronic kidney disease,
-history of cardiovascular disease or 10-year predicted ASCVD risk =
-10\%. To meet this definition of resistant hypertension, the
-participant had to be taking a thiazide diuretic.
+disease or 10-year predicted ASCVD risk >= 10\%; Systolic blood
+pressure >= 130 mm Hg with the use of 3 classes of antihypertensive
+medication for those >= 65 years of age without diabetes, chronic
+kidney disease, history of cardiovascular disease or 10-year predicted
+ASCVD risk >= 10\%. To meet this definition of resistant hypertension,
+the participant had to be taking a thiazide diuretic.
 \item \strong{Number of observed values}: 56,017 (100\%)
 \item \strong{Counts of observed values}
 \itemize{
-\item \emph{No}: 54,487 (97.3\%)
-\item \emph{Yes}: 1,530 (2.73\%)
+\item \emph{No}: 54,484 (97.3\%)
+\item \emph{Yes}: 1,533 (2.74\%)
 }
 \item \strong{Number of missing values}: 0 (0.00\%)
 }
@@ -549,8 +550,8 @@ participant had to be taking a thiazide diuretic.
 \item \strong{Number of observed values}: 56,017 (100\%)
 \item \strong{Counts of observed values}
 \itemize{
-\item \emph{No}: 54,649 (97.6\%)
-\item \emph{Yes}: 1,368 (2.44\%)
+\item \emph{No}: 54,647 (97.6\%)
+\item \emph{Yes}: 1,370 (2.45\%)
 }
 \item \strong{Number of missing values}: 0 (0.00\%)
 }
@@ -586,8 +587,8 @@ considered to be recommended treatment.
 \item \strong{Number of observed values}: 56,017 (100\%)
 \item \strong{Counts of observed values}
 \itemize{
-\item \emph{No}: 35,265 (63.0\%)
-\item \emph{Yes}: 20,752 (37.0\%)
+\item \emph{No}: 35,266 (63.0\%)
+\item \emph{Yes}: 20,751 (37.0\%)
 }
 \item \strong{Number of missing values}: 0 (0.00\%)
 }
@@ -597,13 +598,13 @@ considered to be recommended treatment.
 \itemize{
 \item \strong{Label}: Antihypertensive medications recommended by the 2017
 ACC/AHA BP guideline
-\item \strong{Description}: Systolic blood pressure = 130 mm Hg or diastolic
-blood pressure = 80 mm Hg; Systolic blood pressure = 130 mm Hg for
-those age = 65 years without diabetes, chronic kidney disease, history
-of cardiovascular disease, or 10-year predicted atherosclerotic
-cardiovascular disease risk = 10\% by the pooled cohort risk equations.
-Those taking antihypertensive medications were considered to be
-recommended treatment.
+\item \strong{Description}: Systolic blood pressure >= 130 mm Hg or diastolic
+blood pressure >= 80 mm Hg; Systolic blood pressure >= 130 mm Hg for
+those age >= 65 years without diabetes, chronic kidney disease,
+history of cardiovascular disease, or 10-year predicted
+atherosclerotic cardiovascular disease risk >= 10\% by the pooled
+cohort risk equations. Those taking antihypertensive medications were
+considered to be recommended treatment.
 \item \strong{Number of observed values}: 56,017 (100\%)
 \item \strong{Counts of observed values}
 \itemize{
@@ -618,17 +619,32 @@ recommended treatment.
 \itemize{
 \item \strong{Label}: Number of antihypertensive medication classes
 \item \strong{Description}: Number of antihypertensive medication classes being
-taken based on the pill bottle review
-\item \strong{Number of observed values}: 55,649 (99.3\%)
+taken based on the pill bottle review.
+\item \strong{Number of observed values}: 55,600 (99.3\%)
 \item \strong{Counts of observed values}
 \itemize{
-\item \emph{None}: 39,556 (71.1\%)
-\item \emph{One}: 6,880 (12.4\%)
-\item \emph{Two}: 5,340 (9.60\%)
-\item \emph{Three}: 2,712 (4.87\%)
-\item \emph{Four or more}: 1,161 (2.09\%)
+\item \emph{None}: 39,489 (71.0\%)
+\item \emph{One}: 6,885 (12.4\%)
+\item \emph{Two}: 5,349 (9.62\%)
+\item \emph{Three}: 2,710 (4.87\%)
+\item \emph{Four or more}: 1,167 (2.10\%)
 }
-\item \strong{Number of missing values}: 368 (0.66\%)
+\item \strong{Number of missing values}: 417 (0.74\%)
+}
+}
+
+\subsection{bp_med_combination}{
+\itemize{
+\item \strong{Label}: Combination therapy
+\item \strong{Description}: Taking a single pill with two classes of
+antihypertensive medication.
+\item \strong{Number of observed values}: 55,600 (99.3\%)
+\item \strong{Counts of observed values}
+\itemize{
+\item \emph{No}: 52,523 (94.5\%)
+\item \emph{Yes}: 3,077 (5.53\%)
+}
+\item \strong{Number of missing values}: 417 (0.74\%)
 }
 }
 
@@ -639,13 +655,13 @@ taken based on the pill bottle review
 defined using the pill bottle review. Drugs in this class included
 benazepril, captopril, enalapril, fosinopril, lisinopril, moexipril,
 perindopril, quinapril, ramipril, trandolapril
-\item \strong{Number of observed values}: 55,649 (99.3\%)
+\item \strong{Number of observed values}: 55,600 (99.3\%)
 \item \strong{Counts of observed values}
 \itemize{
-\item \emph{No}: 49,016 (88.1\%)
+\item \emph{No}: 48,967 (88.1\%)
 \item \emph{Yes}: 6,633 (11.9\%)
 }
-\item \strong{Number of missing values}: 368 (0.66\%)
+\item \strong{Number of missing values}: 417 (0.74\%)
 }
 }
 
@@ -655,13 +671,13 @@ perindopril, quinapril, ramipril, trandolapril
 \item \strong{Description}: Taking an aldosterone antagonist, defined using the
 pill bottle review. Drugs in this class included eplerenone,
 spironolactone.
-\item \strong{Number of observed values}: 55,649 (99.3\%)
+\item \strong{Number of observed values}: 55,600 (99.3\%)
 \item \strong{Counts of observed values}
 \itemize{
-\item \emph{No}: 55,235 (99.3\%)
+\item \emph{No}: 55,186 (99.3\%)
 \item \emph{Yes}: 414 (0.74\%)
 }
-\item \strong{Number of missing values}: 368 (0.66\%)
+\item \strong{Number of missing values}: 417 (0.74\%)
 }
 }
 
@@ -671,13 +687,13 @@ spironolactone.
 \item \strong{Description}: Taking an alpha blocker, defined using the pill
 bottle review. Drugs in this class included doxazosin, prazosin,
 terazosin.
-\item \strong{Number of observed values}: 55,649 (99.3\%)
+\item \strong{Number of observed values}: 55,600 (99.3\%)
 \item \strong{Counts of observed values}
 \itemize{
-\item \emph{No}: 54,880 (98.6\%)
+\item \emph{No}: 54,831 (98.6\%)
 \item \emph{Yes}: 769 (1.38\%)
 }
-\item \strong{Number of missing values}: 368 (0.66\%)
+\item \strong{Number of missing values}: 417 (0.74\%)
 }
 }
 
@@ -685,16 +701,16 @@ terazosin.
 \itemize{
 \item \strong{Label}: Angiotensin receptor blockers
 \item \strong{Description}: Taking an angiotensin receptor blocker, defined using
-the pill bottle review. Drugs in this class included candesartan,
-eprosartan, irbesartan, losartan, olmesartan, telmisartan, valsartan,
-azilsartan.
-\item \strong{Number of observed values}: 55,649 (99.3\%)
+the pill bottle review. Drugs in this class included azilsartan,
+candesartan, eprosartan, irbesartan, losartan, olmesartan,
+telmisartan, valsartan.
+\item \strong{Number of observed values}: 55,600 (99.3\%)
 \item \strong{Counts of observed values}
 \itemize{
-\item \emph{No}: 52,132 (93.7\%)
-\item \emph{Yes}: 3,517 (6.32\%)
+\item \emph{No}: 52,083 (93.7\%)
+\item \emph{Yes}: 3,517 (6.33\%)
 }
-\item \strong{Number of missing values}: 368 (0.66\%)
+\item \strong{Number of missing values}: 417 (0.74\%)
 }
 }
 
@@ -703,30 +719,15 @@ azilsartan.
 \item \strong{Label}: Beta blockers
 \item \strong{Description}: Taking a beta blocker. Drugs in this class included
 acebutolol, atenolol, betaxolol, bisoprolol, carvedilol, labetalol,
-metoprolol, nadolol, nebivolol, pindolol, propranolol.
-\item \strong{Number of observed values}: 55,649 (99.3\%)
+metoprolol, nadolol, nebivolol, pindolol, penbutolol, propranolol,
+timolol.
+\item \strong{Number of observed values}: 55,600 (99.3\%)
 \item \strong{Counts of observed values}
 \itemize{
-\item \emph{No}: 49,610 (89.1\%)
-\item \emph{Yes}: 6,039 (10.9\%)
+\item \emph{No}: 49,527 (89.1\%)
+\item \emph{Yes}: 6,073 (10.9\%)
 }
-\item \strong{Number of missing values}: 368 (0.66\%)
-}
-}
-
-\subsection{bp_med_central}{
-\itemize{
-\item \strong{Label}: Central alpha1 agonist and other centrally acting agents
-\item \strong{Description}: Taking a centrally acting agents, defined using the
-pill bottle review. Drugs in this class included clonidine, guanabenz,
-guanfacine, methyldopa, reserpine.
-\item \strong{Number of observed values}: 55,649 (99.3\%)
-\item \strong{Counts of observed values}
-\itemize{
-\item \emph{No}: 55,185 (99.2\%)
-\item \emph{Yes}: 464 (0.83\%)
-}
-\item \strong{Number of missing values}: 368 (0.66\%)
+\item \strong{Number of missing values}: 417 (0.74\%)
 }
 }
 
@@ -737,29 +738,59 @@ guanfacine, methyldopa, reserpine.
 pill bottle review. Drugs in this class included amlodipine,
 diltiazem, felodipine, isradipine, nicardipine, nifedipine,
 nisoldipine, verapamil.
-\item \strong{Number of observed values}: 55,649 (99.3\%)
+\item \strong{Number of observed values}: 55,600 (99.3\%)
 \item \strong{Counts of observed values}
 \itemize{
-\item \emph{No}: 50,787 (91.3\%)
+\item \emph{No}: 50,738 (91.3\%)
 \item \emph{Yes}: 4,862 (8.74\%)
 }
-\item \strong{Number of missing values}: 368 (0.66\%)
+\item \strong{Number of missing values}: 417 (0.74\%)
 }
 }
 
-\subsection{bp_med_diur_Ksparing}{
+\subsection{bp_med_central}{
 \itemize{
-\item \strong{Label}: Potassium sparing diuretics
-\item \strong{Description}: Taking a potassium-sparing diuretic, defined using
-the pill bottle review. Drugs in this class included amiloride,
-triamterene.
-\item \strong{Number of observed values}: 55,649 (99.3\%)
+\item \strong{Label}: Central alpha1 agonist and other centrally acting agents
+\item \strong{Description}: Taking a centrally acting agents, defined using the
+pill bottle review. Drugs in this class included clonidine, guanabenz,
+guanadrel, guanethidine, guanfacine, methyldopa, reserpine.
+\item \strong{Number of observed values}: 55,600 (99.3\%)
 \item \strong{Counts of observed values}
 \itemize{
-\item \emph{No}: 54,853 (98.6\%)
-\item \emph{Yes}: 796 (1.43\%)
+\item \emph{No}: 55,135 (99.2\%)
+\item \emph{Yes}: 465 (0.84\%)
 }
-\item \strong{Number of missing values}: 368 (0.66\%)
+\item \strong{Number of missing values}: 417 (0.74\%)
+}
+}
+
+\subsection{bp_med_renin_inhibitors}{
+\itemize{
+\item \strong{Label}: Direct renin inhibitors
+\item \strong{Description}: Taking a renin inhibitor, defined using the pill
+bottle review. Drugs in this class included aliskiren.
+\item \strong{Number of observed values}: 55,600 (99.3\%)
+\item \strong{Counts of observed values}
+\itemize{
+\item \emph{No}: 55,577 (100\%)
+\item \emph{Yes}: 23 (0.04\%)
+}
+\item \strong{Number of missing values}: 417 (0.74\%)
+}
+}
+
+\subsection{bp_med_vasod}{
+\itemize{
+\item \strong{Label}: Direct vasodilators
+\item \strong{Description}: Taking a vasodilator, defined using the pill bottle
+review. Drugs in this class included hydralazine, minoxidil.
+\item \strong{Number of observed values}: 55,600 (99.3\%)
+\item \strong{Counts of observed values}
+\itemize{
+\item \emph{No}: 55,331 (99.5\%)
+\item \emph{Yes}: 269 (0.48\%)
+}
+\item \strong{Number of missing values}: 417 (0.74\%)
 }
 }
 
@@ -769,13 +800,29 @@ triamterene.
 \item \strong{Description}: Taking a loop diuretic, defined using the pill bottle
 review. Drugs in this class included bumetanide, furosemide,
 torsemide, ethacrynic acid.
-\item \strong{Number of observed values}: 55,649 (99.3\%)
+\item \strong{Number of observed values}: 55,600 (99.3\%)
 \item \strong{Counts of observed values}
 \itemize{
-\item \emph{No}: 53,806 (96.7\%)
+\item \emph{No}: 53,757 (96.7\%)
 \item \emph{Yes}: 1,843 (3.31\%)
 }
-\item \strong{Number of missing values}: 368 (0.66\%)
+\item \strong{Number of missing values}: 417 (0.74\%)
+}
+}
+
+\subsection{bp_med_diur_Ksparing}{
+\itemize{
+\item \strong{Label}: Potassium sparing diuretics
+\item \strong{Description}: Taking a potassium-sparing diuretic, defined using
+the pill bottle review. Drugs in this class included amiloride,
+triamterene.
+\item \strong{Number of observed values}: 55,600 (99.3\%)
+\item \strong{Counts of observed values}
+\itemize{
+\item \emph{No}: 54,804 (98.6\%)
+\item \emph{Yes}: 796 (1.43\%)
+}
+\item \strong{Number of missing values}: 417 (0.74\%)
 }
 }
 
@@ -784,45 +831,16 @@ torsemide, ethacrynic acid.
 \item \strong{Label}: Thiazide or thiazide-type diuretics
 \item \strong{Description}: Taking a thiazide diuretic, defined using the pill
 bottle review. Drugs in this class included bendroflumethiazide,
-chlorthalidone, chlorothiazide, hydrochlorothiazide, indapamide,
-metolazone, polythiazide.
-\item \strong{Number of observed values}: 55,649 (99.3\%)
+chlorthalidone, chlorothiazide, hydrochlorothiazide,
+hydroflumethiazide, indapamide, metolazone, methyclothiazide,
+trichlormethiazide.
+\item \strong{Number of observed values}: 55,600 (99.3\%)
 \item \strong{Counts of observed values}
 \itemize{
-\item \emph{No}: 50,646 (91.0\%)
-\item \emph{Yes}: 5,003 (8.99\%)
+\item \emph{No}: 50,592 (91.0\%)
+\item \emph{Yes}: 5,008 (9.01\%)
 }
-\item \strong{Number of missing values}: 368 (0.66\%)
-}
-}
-
-\subsection{bp_med_renin_inhibitors}{
-\itemize{
-\item \strong{Label}: Direct renin inhibitors
-\item \strong{Description}: Taking a renin inhibitor, defined using the pill
-bottle review. Drugs in this class included aliskiren.
-\item \strong{Number of observed values}: 55,649 (99.3\%)
-\item \strong{Counts of observed values}
-\itemize{
-\item \emph{No}: 55,626 (100\%)
-\item \emph{Yes}: 23 (0.04\%)
-}
-\item \strong{Number of missing values}: 368 (0.66\%)
-}
-}
-
-\subsection{bp_med_vasod}{
-\itemize{
-\item \strong{Label}: Direct vasodilators
-\item \strong{Description}: Taking a vasodilator, defined using the pill bottle
-review. Drugs in this class included hydralazine, minoxidil.
-\item \strong{Number of observed values}: 55,649 (99.3\%)
-\item \strong{Counts of observed values}
-\itemize{
-\item \emph{No}: 55,380 (99.5\%)
-\item \emph{Yes}: 269 (0.48\%)
-}
-\item \strong{Number of missing values}: 368 (0.66\%)
+\item \strong{Number of missing values}: 417 (0.74\%)
 }
 }
 }
@@ -905,8 +923,8 @@ creatinine-based equation.
 \item \strong{Number of observed values}: 56,017 (100\%)
 \item \strong{Counts of observed values}
 \itemize{
-\item \emph{No}: 46,773 (83.5\%)
-\item \emph{Yes}: 9,244 (16.5\%)
+\item \emph{No}: 46,806 (83.6\%)
+\item \emph{Yes}: 9,211 (16.4\%)
 }
 \item \strong{Number of missing values}: 0 (0.00\%)
 }

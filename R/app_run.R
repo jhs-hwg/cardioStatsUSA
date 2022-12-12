@@ -741,6 +741,25 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
 
     }
 
+    if(state$input$age_standardize){
+
+     shinyjs::delay(200, {
+
+      weight_input_index <- grep(x = names(state$input),
+                                 pattern = '^standard_weights')
+      for(i in weight_input_index){
+
+       .standard_weight <- names(state$input)[i]
+       updateNumericInput(session = session,
+                          inputId = .standard_weight,
+                          value = state$input[[.standard_weight]])
+
+      }
+
+     })
+
+    }
+
 
     if(is_used(state$input$group))
      updatePickerInput(

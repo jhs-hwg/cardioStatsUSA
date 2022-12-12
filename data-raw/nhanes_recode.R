@@ -198,22 +198,22 @@ nhanes_recode <- function(data = NULL){
     )
    ),
 
-   highriskcond = factor(
-    highriskcond,
-    levels = 0:9,
-    labels = c(
-     "0",
-     "1",
-     "2",
-     "3 or more",
-     "3 or more",
-     "3 or more",
-     "3 or more",
-     "3 or more",
-     "3 or more",
-     "3 or more"
-    )
-   ),
+   # highriskcond = factor(
+   #  highriskcond,
+   #  levels = 0:9,
+   #  labels = c(
+   #   "0",
+   #   "1",
+   #   "2",
+   #   "3 or more",
+   #   "3 or more",
+   #   "3 or more",
+   #   "3 or more",
+   #   "3 or more",
+   #   "3 or more",
+   #   "3 or more"
+   #  )
+   # ),
 
    # 0/1 indicators ----
 
@@ -262,6 +262,7 @@ nhanes_recode <- function(data = NULL){
               total_c240pl,
               persistent_ldl,
               vhr,
+              combination,
               addontherapy,
               recommended_ill,
               llt_rec_2018,

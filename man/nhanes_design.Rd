@@ -114,8 +114,8 @@ the \code{cardioStatsUSA} package for analysis of NHANES data.
 \code{data} should include at a minimum the following variables:
 \itemize{
 \item \code{svy_weight_mec}: mobile examination center weights
-\item \code{svy_psu}: primary sampling unit
-\item \code{svy_strata}: strata
+\item \code{svy_psu}: Primary sampling unit
+\item \code{svy_strata}: Strata
 \item \code{svy_year}: NHANES cycle
 }
 }
