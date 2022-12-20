@@ -688,6 +688,18 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
                        "select_last_5",
                        "deselect_all_years"))
 
+  onBookmark(function(state) {
+
+   state$values$show_popup <-
+    ((input$pool == 'no' & length(input$year_stratify) > 0) |
+      input$pool == 'yes') & (
+    length(input$outcome) > 0
+   ) & (
+    length(input$statistic) > 0
+   )
+
+  })
+
   # Read values from state$values when we restore
   onRestore(function(state) {
 
@@ -774,6 +786,14 @@ app_run <- function(nhanes_data = cardioStatsUSA::nhanes_data,
       inputId = 'stratify',
       selected = state$input$stratify
      )
+
+    if(state$values$show_popup){
+     shinyjs::delay(100, {
+      shinyalert::shinyalert(title = "Welcome",
+                             text = "Push the 'Compute results' button to generate the bookmarked output",
+                             type = "success")
+     })
+    }
 
    })
 
