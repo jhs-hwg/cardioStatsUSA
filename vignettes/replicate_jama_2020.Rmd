@@ -24,7 +24,9 @@ vembedr::embed_url("https://www.youtube.com/watch?v=EQe7feUjNuo")
 
 The video below shows how eTable 1 can be replicated using our web application.
 
-**ADD VIDEO**
+```{r}
+vembedr::embed_url("https://www.youtube.com/watch?v=Knc-Os7yUdQ")
+```
 
 ## Replicate with code
 
