@@ -14,13 +14,18 @@ knitr::opts_chunk$set(
 )
 ```
 
-## Under construction
+`cardioStatsUSA` aims to provide a platform for exploration of the National Health and Nutrition Examination Survey (NHANES) data. 
 
-Below is short a YouTube video explaining how to use the application.  Technical information is provided by clicking the “Technical stuff” tab above.
+- We recommend new users start by using our shiny application to get a sense of what `cardioStatsUSA` can do. An example use of the application is provided in the instructional video below.
 
-1. How to make results using the shiny app (youtube tutorials)
+  ```{r, echo = FALSE}
+  vembedr::embed_url("https://www.youtube.com/watch?v=oMporQuiodo")
+  ```
 
-1. How to make results using the R package
+- To automate the web application using code, we recommend reading more about the exported functions from `cardioStatsUSA` and its NHANES data in the [documentation](https://jhs-hwg.github.io/cardioStatsUSA/reference/index.html).
+
+- To extend the web application using your own data and code, we recommend reading our vignette on [extending the web application](https://jhs-hwg.github.io/cardioStatsUSA/articles/modules.html) and also check out the videos provided in [this vignette](https://jhs-hwg.github.io/cardioStatsUSA/articles/replicate_nchs_2017.html) where I extend the application to replicate results from a prior study.
+
 
 ```{r finale, echo=FALSE}
 knitr::spin_child("footer.R")

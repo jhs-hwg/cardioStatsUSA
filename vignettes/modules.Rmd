@@ -87,10 +87,4 @@ nhanes_summarize(data = my_nhanes_derived,
 
 ```
 
-
-```{r, echo=FALSE}
-
-knitr::include_app(url = 'https://bcjaeger.shinyapps.io/nhanesShinyBP/')
-
-```
-
+Now you can run the application locally with your customized data using `app_run(nhanes_data = my_nhanes_derived, nhanes_key = my_key)`
