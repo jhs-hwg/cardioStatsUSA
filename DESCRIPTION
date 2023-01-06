@@ -1,6 +1,6 @@
 Package: cardioStatsUSA
 Title: Analysis and Visualization of Cardiometabolic Outcomes Using NHANES
-Version: 0.0.0.9000
+Version: 0.0.1
 Authors@R: c(
     person(given = "Byron",
            family = "Jaeger",
