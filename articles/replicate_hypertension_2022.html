@@ -87,7 +87,7 @@
 
 
 
-
+<link href="replicate_hypertension_2022_files/vembedr-0.1.5/css/vembedr.css" rel="stylesheet">
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Replicating analysis from Muntner et al, 2022</h1>
@@ -107,7 +107,11 @@ results can be replicated with our shiny application or with code.</p>
 </h2>
 <p>The video below shows how Table S2 can be replicated using our web
 application.</p>
-<p><strong>ADD VIDEO</strong></p>
+<div class="vembedr">
+<div>
+<iframe src="https://www.youtube.com/embed/07_-lNL4QOw" width="533" height="300" frameborder="0" allowfullscreen="" data-external="1"></iframe>
+</div>
+</div>
 </div>
 <div class="section level2">
 <h2 id="replicate-with-code">Replicate with code<a class="anchor" aria-label="anchor" href="#replicate-with-code"></a>
@@ -278,8 +282,8 @@ estimate_hypertension in all cells shown.</p>
 <span><span class="co">#&gt;     ci_lower_hypertension ci_lower_shiny ci_upper_hypertension ci_upper_shiny</span></span></code></pre></div>
 <p>In some cases, we have minor differences due to rounding and/or minor
 differences due to a small differences in the study cohorts. To ensure
-all of these differences are small enough, we allow a 1% difference in
-the boundaries for our test. I.e., |A-B|/ B &lt; 0.01</p>
+all of these differences are small enough, we set a 1% tolerance for
+differences in the Shiny app versus the paper.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tolerance</span> <span class="op">&lt;-</span> <span class="fl">0.01</span></span>
 <span></span>
@@ -301,7 +305,7 @@ the boundaries for our test. I.e., |A-B|/ B &lt; 0.01</p>
 <span></span>
 <span> <span class="op">}</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">Test passed</span> 🎊</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #00BB00;">Test passed</span> 🥇</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="make-your-own-results">Make your own results<a class="anchor" aria-label="anchor" href="#make-your-own-results"></a>
