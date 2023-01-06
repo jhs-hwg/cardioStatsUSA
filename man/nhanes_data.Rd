@@ -5,7 +5,7 @@
 \alias{nhanes_data}
 \title{NHANES data, 1999-2020}
 \format{
-An object of class \code{data.table} (inherits from \code{data.frame}) with 59799 rows and 103 columns.
+An object of class \code{data.table} (inherits from \code{data.frame}) with 59799 rows and 101 columns.
 }
 \source{
 \url{https://wwwn.cdc.gov/nchs/nhanes/continuousnhanes/default.aspx}
@@ -847,24 +847,6 @@ trichlormethiazide.
 
 \section{Comorbidities variables}{
 These variables describe comorbid conditions.
-\subsection{cc_n_highrisk}{
-\itemize{
-\item \strong{Label}: Number of high risk conditions
-\item \strong{Description}: Self-reported history of coronary heart disease,
-myocardial infarction, stroke or heart failure or 10-year predicted
-risk >= 10\% estimated by the pooled cohort risk equations
-\item \strong{Number of observed values}: 22,506 (40.2\%)
-\item \strong{Counts of observed values}
-\itemize{
-\item \emph{0}: 7,300 (32.4\%)
-\item \emph{1}: 6,974 (31.0\%)
-\item \emph{2}: 4,680 (20.8\%)
-\item \emph{3 or more}: 3,552 (15.8\%)
-}
-\item \strong{Number of missing values}: 33,511 (59.8\%)
-}
-}
-
 \subsection{cc_smoke}{
 \itemize{
 \item \strong{Label}: Smoking status

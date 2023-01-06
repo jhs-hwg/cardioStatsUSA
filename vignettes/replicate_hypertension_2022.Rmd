@@ -18,7 +18,10 @@ knitr::spin_child('aaa.R')
 
 The video below shows how Table S2 can be replicated using our web application.
 
-**ADD VIDEO**
+```{r}
+vembedr::embed_url("https://www.youtube.com/watch?v=07_-lNL4QOw")
+```
+
 
 ## Replicate with code
 

@@ -25,7 +25,9 @@ vembedr::embed_url("https://www.youtube.com/watch?v=FwxdEfyTiIQ")
 
 The video below shows how Figure 2 can be replicated using our web application.
 
-**ADD VIDEO**
+```{r}
+vembedr::embed_url("https://www.youtube.com/watch?v=DzAhLVP0AaY")
+```
 
 ## Replicate with code
 
