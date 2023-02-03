@@ -468,7 +468,8 @@ medication.
 
 \subsection{htn_resistant_jnc7}{
 \itemize{
-\item \strong{Label}: Resistant hypertension defined by the JNC7 guideline
+\item \strong{Label}: Apparent resistant hypertension defined by the JNC7
+guideline
 \item \strong{Description}: Taking 4 or more classes of antihypertensive
 medication, systolic blood pressure >= 140 mm Hg or diastolic blood
 pressure >= 90 mm Hg with the use of 3 classes of antihypertensive
@@ -488,8 +489,8 @@ disease.
 
 \subsection{htn_resistant_accaha}{
 \itemize{
-\item \strong{Label}: Resistant hypertension defined by the 2017 ACC/AHA BP
-guideline
+\item \strong{Label}: Apparent resistant hypertension defined by the 2017 ACC/AHA
+BP guideline
 \item \strong{Description}: Taking 4 or more classes of antihypertensive
 medication; systolic blood pressure >= 130 mm Hg or diastolic blood
 pressure >= 80 mm Hg with the use of 3 classes of antihypertensive
@@ -512,8 +513,8 @@ ASCVD risk >= 10\%.
 
 \subsection{htn_resistant_accaha_thz}{
 \itemize{
-\item \strong{Label}: Resistant hypertension defined by the JNC7 guideline,
-requires thiazide diuretic
+\item \strong{Label}: Apparent resistant hypertension defined by the JNC7
+guideline, requires thiazide diuretic
 \item \strong{Description}: Taking 4 or more classes of antihypertensive
 medication; systolic blood pressure >= 130 mm Hg or diastolic blood
 pressure >= 80 mm Hg with the use of 3 classes of antihypertensive
@@ -537,8 +538,8 @@ the participant had to be taking a thiazide diuretic.
 
 \subsection{htn_resistant_jnc7_thz}{
 \itemize{
-\item \strong{Label}: Resistant hypertension defined by the 2017 ACC/AHA BP
-guideline, requires thiazide diuretic
+\item \strong{Label}: Apparent resistant hypertension defined by the 2017 ACC/AHA
+BP guideline, requires thiazide diuretic
 \item \strong{Description}: Taking 4 or more classes of antihypertensive
 medication, systolic blood pressure >= 140 mm Hg or diastolic blood
 pressure >= 90 mm Hg with the use of 3 classes of antihypertensive
