@@ -28,6 +28,45 @@ test_that(
 
 )
 
+# load development version data
+#
+# run this test when data are updated.
+#
+# data_raw_dev <- haven::read_sas(file.path(here::here(),
+#                                           'data-raw',
+#                                           'htn-raw-dev.sas7bdat'))
+#
+# data_raw_old <- haven::read_sas(file.path(here::here(),
+#                                           'data-raw',
+#                                           'htn-raw.sas7bdat'))
+#
+# test_that(
+#  desc = 'dev data has not changed pre-existing columns',
+#  code = {
+#   for(i in intersect(colnames(data_raw_dev), colnames(data_raw_old))){
+#
+#    expect_equal(data_raw_dev[[i]], data_raw_old[[i]])
+#
+#   }
+#  }
+# )
+
+# TODO: open issue on Github about this.
+# expect_equal(
+#  data_raw_dev$DhpCCB + data_raw_dev$NdhpCCB,
+#  data_raw_dev$CCB
+# )
+
+# TODO: inspect these
+# which(data_raw_dev$n_aht_pills > data_raw_dev$num_htn_class)
+
+
+
+# draft cdc email to paul
+# testing number of pills:
+# number of pills <= number of classes
+# number of pills == number of classes for adults not taking combo therapy
+
 # LOCAL tests
 # pm_23sep2022 <- haven::read_sas('data-raw/final9920_0923022.sas7bdat')
 #

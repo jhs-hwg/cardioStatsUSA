@@ -73,6 +73,21 @@ nhanes_recode <- function(data = NULL){
                "Four or more")
    ),
 
+   # number of BP medication pills
+
+   num_htn_pills = factor(
+    n_aht_pills,
+    levels = 0:7,
+    labels = c("None",
+               "One",
+               "Two",
+               "Three",
+               "Four or more",
+               "Four or more",
+               "Four or more",
+               "Four or more")
+   ),
+
    # Blood pressure ----
 
    # BP categories according to the 2017 ACC/AHA BP guideline
@@ -155,7 +170,16 @@ nhanes_recode <- function(data = NULL){
               diur_loop,
               diur_thz,
               renin_inhibitors,
-              vasod),
+              vasod,
+              dhpccb,
+              ndhpccb,
+              htpills2pl,
+              escesh_control1,
+              escesh_control2,
+              escesh_uncontrol1,
+              escesh_uncontrol2,
+              escesh7tx,
+              esceshhtn),
     .fns = ~ factor(.x, labels = c("No", "Yes"))
    ),
 

@@ -5,7 +5,7 @@
 \alias{nhanes_data}
 \title{NHANES data, 1999-2020}
 \format{
-An object of class \code{data.table} (inherits from \code{data.frame}) with 59799 rows and 101 columns.
+An object of class \code{data.table} (inherits from \code{data.frame}) with 59799 rows and 111 columns.
 }
 \source{
 \url{https://wwwn.cdc.gov/nchs/nhanes/continuousnhanes/default.aspx}
@@ -311,6 +311,46 @@ pressure < 130 mm Hg
 }
 }
 
+\subsection{bp_control_escesh_1}{
+\itemize{
+\item \strong{Label}: Blood pressure control defined by the 2018 ESC/ESH arterial
+hypertension guideline’s first goal
+\item \strong{Description}: Systolic and diastolic blood pressure controlled to
+the levels recommended in the 2018 ESC/ESH arterial hypertension
+guideline’s first goal, systolic blood pressure < 140 mm Hg and
+diastolic blood pressure < 90 mm Hg.
+\item \strong{Number of observed values}: 56,017 (100\%)
+\item \strong{Counts of observed values}
+\itemize{
+\item \emph{No}: 10,923 (19.5\%)
+\item \emph{Yes}: 45,094 (80.5\%)
+}
+\item \strong{Number of missing values}: 0 (0.00\%)
+}
+}
+
+\subsection{bp_control_escesh_2}{
+\itemize{
+\item \strong{Label}: Blood pressure control defined by the 2018 ESC/ESH arterial
+hypertension guideline’s second goal
+\item \strong{Description}: Systolic and diastolic blood pressure controlled to
+the levels recommended in the 2018 ESC/ESH arterial hypertension
+guideline’s second goal, systolic blood pressure < 130 mm Hg and
+diastolic blood pressure < 80 mm Hg for those < 65 years of age
+except those with chronic kidney disease and those age >= 65 years.
+For those with chronic kidney disease < 65 years and those age >= 65
+years, blood pressure control was defined as systolic blood pressure
+< 140 and diastolic blood pressure < 80 mm Hg.
+\item \strong{Number of observed values}: 56,017 (100\%)
+\item \strong{Counts of observed values}
+\itemize{
+\item \emph{No}: 19,152 (34.2\%)
+\item \emph{Yes}: 36,865 (65.8\%)
+}
+\item \strong{Number of missing values}: 0 (0.00\%)
+}
+}
+
 \subsection{bp_control_140_90}{
 \itemize{
 \item \strong{Label}: Blood pressure control (SBP < 140 mm Hg and DBP < 90 mm
@@ -381,6 +421,42 @@ uncontrolled blood pressure was defined as systolic blood pressure >=
 }
 }
 
+\subsection{bp_uncontrolled_escesh_1}{
+\itemize{
+\item \strong{Label}: Uncontrolled blood pressure control defined by the 2018
+ESC/ESH arterial hypertension guideline’s first goal
+\item \strong{Description}: Systolic blood pressure >= 140 mm Hg or diastolic
+blood pressure >= 90 mm Hg
+\item \strong{Number of observed values}: 56,017 (100\%)
+\item \strong{Counts of observed values}
+\itemize{
+\item \emph{No}: 45,094 (80.5\%)
+\item \emph{Yes}: 10,923 (19.5\%)
+}
+\item \strong{Number of missing values}: 0 (0.00\%)
+}
+}
+
+\subsection{bp_uncontrolled_escesh_2}{
+\itemize{
+\item \strong{Label}: Uncontrolled blood pressure control defined by the 2018
+ESC/ESH arterial hypertension guideline’s second goal
+\item \strong{Description}: Systolic blood pressure >= 130 mm Hg or diastolic
+blood pressure >= 80 mm Hg except for those < 65 years of age with
+chronic kidney disease and those age >= 65 years. For those < 65
+years of age with chronic kidney disease and those age >= 65 years,
+uncontrolled blood pressure was defined as systolic blood pressure >=
+140 and diastolic blood pressure >= 80 mm Hg.
+\item \strong{Number of observed values}: 56,017 (100\%)
+\item \strong{Counts of observed values}
+\itemize{
+\item \emph{No}: 36,865 (65.8\%)
+\item \emph{Yes}: 19,152 (34.2\%)
+}
+\item \strong{Number of missing values}: 0 (0.00\%)
+}
+}
+
 \subsection{bp_uncontrolled_140_90}{
 \itemize{
 \item \strong{Label}: Uncontrolled blood pressure (SBP >= 140 mm Hg or DBP >=
@@ -446,6 +522,25 @@ medication use.
 \itemize{
 \item \emph{No}: 29,061 (51.9\%)
 \item \emph{Yes}: 26,956 (48.1\%)
+}
+\item \strong{Number of missing values}: 0 (0.00\%)
+}
+}
+
+\subsection{htn_escesh}{
+\itemize{
+\item \strong{Label}: Hypertension defined by the 2018 ESC/ESH arterial
+hypertension guideline
+\item \strong{Description}: Hypertension defined by the 2018 ESC/ESH arterial
+hypertension guideline Hypertension defined by the 2018 ESC/ESH
+arterial hypertension guideline, systolic blood pressure >= 140 mm
+Hg, diastolic blood pressure >= 90 mm Hg, or self-reported
+antihypertensive medication.
+\item \strong{Number of observed values}: 56,017 (100\%)
+\item \strong{Counts of observed values}
+\itemize{
+\item \emph{No}: 36,640 (65.4\%)
+\item \emph{Yes}: 19,377 (34.6\%)
 }
 \item \strong{Number of missing values}: 0 (0.00\%)
 }
@@ -616,6 +711,23 @@ considered to be recommended treatment.
 }
 }
 
+\subsection{bp_med_recommended_escesh}{
+\itemize{
+\item \strong{Label}: Antihypertensive medications recommended by the 2018
+ESC/ESH arterial hypertension guideline
+\item \strong{Description}: Systolic blood pressure >= 140 mm Hg or diastolic
+blood pressure >= 90 mm Hg. Those taking antihypertensive medications
+were considered to be recommended treatment.
+\item \strong{Number of observed values}: 56,017 (100\%)
+\item \strong{Counts of observed values}
+\itemize{
+\item \emph{No}: 36,640 (65.4\%)
+\item \emph{Yes}: 19,377 (34.6\%)
+}
+\item \strong{Number of missing values}: 0 (0.00\%)
+}
+}
+
 \subsection{bp_med_n_class}{
 \itemize{
 \item \strong{Label}: Number of antihypertensive medication classes
@@ -634,6 +746,24 @@ taken based on the pill bottle review.
 }
 }
 
+\subsection{bp_med_n_pills}{
+\itemize{
+\item \strong{Label}: Number of antihypertensive medication pills
+\item \strong{Description}: Number of antihypertensive medication pills being
+taken based on the medication inventory.
+\item \strong{Number of observed values}: 55,600 (99.3\%)
+\item \strong{Counts of observed values}
+\itemize{
+\item \emph{None}: 39,489 (71.0\%)
+\item \emph{One}: 8,432 (15.2\%)
+\item \emph{Two}: 4,820 (8.67\%)
+\item \emph{Three}: 2,050 (3.69\%)
+\item \emph{Four or more}: 809 (1.46\%)
+}
+\item \strong{Number of missing values}: 417 (0.74\%)
+}
+}
+
 \subsection{bp_med_combination}{
 \itemize{
 \item \strong{Label}: Combination therapy
@@ -646,6 +776,21 @@ antihypertensive medication.
 \item \emph{Yes}: 3,077 (5.53\%)
 }
 \item \strong{Number of missing values}: 417 (0.74\%)
+}
+}
+
+\subsection{bp_med_pills_gteq_2}{
+\itemize{
+\item \strong{Label}: Taking two or more antihypertensive medication pills
+\item \strong{Description}: Taking >= 2 antihypertensive medication pills based
+on the medication inventory.
+\item \strong{Number of observed values}: 56,017 (100\%)
+\item \strong{Counts of observed values}
+\itemize{
+\item \emph{No}: 48,338 (86.3\%)
+\item \emph{Yes}: 7,679 (13.7\%)
+}
+\item \strong{Number of missing values}: 0 (0.00\%)
 }
 }
 
@@ -744,6 +889,39 @@ nisoldipine, verapamil.
 \itemize{
 \item \emph{No}: 50,738 (91.3\%)
 \item \emph{Yes}: 4,862 (8.74\%)
+}
+\item \strong{Number of missing values}: 417 (0.74\%)
+}
+}
+
+\subsection{bp_med_ccb_dh}{
+\itemize{
+\item \strong{Label}: Dihydropyridine calcium channel blockers
+\item \strong{Description}: Taking a dihydropyridine calcium channel blocker,
+defined using the medication inventory. Drugs in this class included
+amlodipine, felodipine, isradipine, nicardipine, nifedipine, and
+nisoldipine.
+\item \strong{Number of observed values}: 55,600 (99.3\%)
+\item \strong{Counts of observed values}
+\itemize{
+\item \emph{No}: 51,782 (93.1\%)
+\item \emph{Yes}: 3,818 (6.87\%)
+}
+\item \strong{Number of missing values}: 417 (0.74\%)
+}
+}
+
+\subsection{bp_med_ccb_ndh}{
+\itemize{
+\item \strong{Label}: Non-dihydropyridine calcium channel blockers
+\item \strong{Description}: Taking a dihydropyridine calcium channel blocker,
+defined using the medication inventory. Drugs in this class included
+diltiazem, verapamil.
+\item \strong{Number of observed values}: 55,600 (99.3\%)
+\item \strong{Counts of observed values}
+\itemize{
+\item \emph{No}: 54,535 (98.1\%)
+\item \emph{Yes}: 1,065 (1.92\%)
 }
 \item \strong{Number of missing values}: 417 (0.74\%)
 }

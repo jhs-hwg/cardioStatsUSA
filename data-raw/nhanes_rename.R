@@ -42,12 +42,16 @@ nhanes_rename <- function(data){
   # bp_control, a sub-class of bp variables
   bp_control_jnc7   = jnc7_control,
   bp_control_accaha = accaha_control,
+  bp_control_escesh_1 = escesh_control1,
+  bp_control_escesh_2 = escesh_control2,
   bp_control_140_90 = control14090,
   bp_control_130_80 = control13080,
 
   # uncontrolled bp, inverse of controlled
   bp_uncontrolled_jnc7,   # was already named this
   bp_uncontrolled_accaha, # was already named this
+  bp_uncontrolled_escesh_1 = escesh_uncontrol1,
+  bp_uncontrolled_escesh_2 = escesh_uncontrol2,
   bp_uncontrolled_140_90 = uncontrol14090,
   bp_uncontrolled_130_80 = uncontrol13080,
 
@@ -55,8 +59,12 @@ nhanes_rename <- function(data){
   bp_med_use                = htmeds,
   bp_med_recommended_jnc7   = jnc7tx,
   bp_med_recommended_accaha = newgdltx,
+  bp_med_recommended_escesh = escesh7tx,
+
   bp_med_n_class            = num_htn_class,
+  bp_med_n_pills            = num_htn_pills,
   bp_med_combination        = combination,
+  bp_med_pills_gteq_2       = htpills2pl,
 
   # bp_med_x, a sub-class of bp_med variables
   bp_med_ace = ace,
@@ -66,6 +74,8 @@ nhanes_rename <- function(data){
   bp_med_beta = beta,
   bp_med_central = central,
   bp_med_ccb = ccb,
+  bp_med_ccb_dh = dhpccb,
+  bp_med_ccb_ndh = ndhpccb,
   bp_med_diur_Ksparing = diur_ksparing,
   bp_med_diur_loop = diur_loop,
   bp_med_diur_thz = diur_thz,
@@ -75,6 +85,7 @@ nhanes_rename <- function(data){
   # Hypertension ------------------------------------------------------------
   htn_jnc7             = jnc7htn,
   htn_accaha           = accahahtn,
+  htn_escesh           = esceshhtn,
   htn_aware,           # no need to rename this one
 
   # htn_resistant, a sub-class of htn variables
