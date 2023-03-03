@@ -314,10 +314,10 @@ pressure < 130 mm Hg
 \subsection{bp_control_escesh_1}{
 \itemize{
 \item \strong{Label}: Blood pressure control defined by the 2018 ESC/ESH arterial
-hypertension guideline’s first goal
+hypertension guideline; first goal
 \item \strong{Description}: Systolic and diastolic blood pressure controlled to
 the levels recommended in the 2018 ESC/ESH arterial hypertension
-guideline’s first goal, systolic blood pressure < 140 mm Hg and
+guideline; first goal, systolic blood pressure < 140 mm Hg and
 diastolic blood pressure < 90 mm Hg.
 \item \strong{Number of observed values}: 56,017 (100\%)
 \item \strong{Counts of observed values}
@@ -332,10 +332,10 @@ diastolic blood pressure < 90 mm Hg.
 \subsection{bp_control_escesh_2}{
 \itemize{
 \item \strong{Label}: Blood pressure control defined by the 2018 ESC/ESH arterial
-hypertension guideline’s second goal
+hypertension guideline; second goal
 \item \strong{Description}: Systolic and diastolic blood pressure controlled to
 the levels recommended in the 2018 ESC/ESH arterial hypertension
-guideline’s second goal, systolic blood pressure < 130 mm Hg and
+guideline; second goal, systolic blood pressure < 130 mm Hg and
 diastolic blood pressure < 80 mm Hg for those < 65 years of age
 except those with chronic kidney disease and those age >= 65 years.
 For those with chronic kidney disease < 65 years and those age >= 65
@@ -424,7 +424,7 @@ uncontrolled blood pressure was defined as systolic blood pressure >=
 \subsection{bp_uncontrolled_escesh_1}{
 \itemize{
 \item \strong{Label}: Uncontrolled blood pressure control defined by the 2018
-ESC/ESH arterial hypertension guideline’s first goal
+ESC/ESH arterial hypertension guideline; first goal
 \item \strong{Description}: Systolic blood pressure >= 140 mm Hg or diastolic
 blood pressure >= 90 mm Hg
 \item \strong{Number of observed values}: 56,017 (100\%)
@@ -440,7 +440,7 @@ blood pressure >= 90 mm Hg
 \subsection{bp_uncontrolled_escesh_2}{
 \itemize{
 \item \strong{Label}: Uncontrolled blood pressure control defined by the 2018
-ESC/ESH arterial hypertension guideline’s second goal
+ESC/ESH arterial hypertension guideline; second goal
 \item \strong{Description}: Systolic blood pressure >= 130 mm Hg or diastolic
 blood pressure >= 80 mm Hg except for those < 65 years of age with
 chronic kidney disease and those age >= 65 years. For those < 65
@@ -673,8 +673,8 @@ reported taking in the preceding 30 days were recorded.
 
 \subsection{bp_med_recommended_jnc7}{
 \itemize{
-\item \strong{Label}: Antihypertensive medications recommended defined by the
-JNC7 guideline
+\item \strong{Label}: Antihypertensive medication use recommended by the JNC7
+guideline
 \item \strong{Description}: Systolic blood pressure >= 140 mm Hg or diastolic
 blood pressure >= 90 mm Hg; Systolic blood pressure >= 130 mm Hg or
 diastolic blood pressure >= 80 mm Hg for those with chronic kidney
@@ -692,7 +692,7 @@ considered to be recommended treatment.
 
 \subsection{bp_med_recommended_accaha}{
 \itemize{
-\item \strong{Label}: Antihypertensive medications recommended by the 2017
+\item \strong{Label}: Antihypertensive medication use recommended by the 2017
 ACC/AHA BP guideline
 \item \strong{Description}: Systolic blood pressure >= 130 mm Hg or diastolic
 blood pressure >= 80 mm Hg; Systolic blood pressure >= 130 mm Hg for
@@ -713,7 +713,7 @@ considered to be recommended treatment.
 
 \subsection{bp_med_recommended_escesh}{
 \itemize{
-\item \strong{Label}: Antihypertensive medications recommended by the 2018
+\item \strong{Label}: Antihypertensive medication use recommended by the 2018
 ESC/ESH arterial hypertension guideline
 \item \strong{Description}: Systolic blood pressure >= 140 mm Hg or diastolic
 blood pressure >= 90 mm Hg. Those taking antihypertensive medications
