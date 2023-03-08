@@ -465,20 +465,25 @@ estimate_jama in all cells shown.</p>
 <span><span class="co">#&gt; 92:           63.0          70.6           70.6</span></span>
 <span><span class="co">#&gt; 93:           63.9          71.9           71.8</span></span>
 <span><span class="co">#&gt;     ci_lower_shiny ci_upper_jama ci_upper_shiny</span></span></code></pre></div>
-<p>In some cases, we have differences in CI estimates due to rounding
+<p>In some cases, we have differences in estimates due to rounding
 and/or minor differences in the way CI boundaries are computed in R
 versus stata. To ensure all of these differences are small enough, we
-allow a 1% difference in the CI boundaries for our test. I.e., |A-B|/ B
-&lt; 0.01</p>
+allow a 0.005% and a 0.01% difference in the point estimates and CI
+boundaries, respectively, for our test of equality. I.e., |A-B|/ B &lt;
+0.005 for point estimates and |A-B|/ B &lt; 0.01 for upper and lower CI
+estimates, where A is from our web application and B is the
+corresponding estimate from Muntner et al.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ci_diff_tolerance</span> <span class="op">&lt;-</span> <span class="fl">0.01</span></span>
+<code class="sourceCode R"><span><span class="va">est_diff_tolerance</span> <span class="op">&lt;-</span> <span class="fl">0.005</span></span>
+<span><span class="va">ci_diff_tolerance</span> <span class="op">&lt;-</span> <span class="fl">0.01</span></span>
 <span></span>
 <span><span class="fu">test_that</span><span class="op">(</span></span>
 <span> desc <span class="op">=</span> <span class="st">"shiny app matches eTable 1 of JAMA paper"</span>,</span>
 <span> code <span class="op">=</span> <span class="op">{</span></span>
 <span></span>
 <span>  <span class="fu">expect_equal</span><span class="op">(</span><span class="va">test_results</span><span class="op">$</span><span class="va">estimate_jama</span>,</span>
-<span>               <span class="va">test_results</span><span class="op">$</span><span class="va">estimate_shiny</span><span class="op">)</span></span>
+<span>               <span class="va">test_results</span><span class="op">$</span><span class="va">estimate_shiny</span>,</span>
+<span>               tolerance <span class="op">=</span> <span class="va">est_diff_tolerance</span><span class="op">)</span></span>
 <span></span>
 <span>  <span class="fu">expect_equal</span><span class="op">(</span><span class="va">test_results</span><span class="op">$</span><span class="va">ci_lower_jama</span>,</span>
 <span>               <span class="va">test_results</span><span class="op">$</span><span class="va">ci_lower_shiny</span>,</span>
@@ -490,7 +495,7 @@ allow a 1% difference in the CI boundaries for our test. I.e., |A-B|/ B
 <span></span>
 <span> <span class="op">}</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">Test passed</span> 😸</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #00BB00;">Test passed</span> 🥇</span></span></code></pre></div>
 <p>success!</p>
 </div>
 <div class="section level2">
@@ -692,7 +697,7 @@ corresponding value in the JAMA table.</p>
 <span></span>
 <span>  <span class="fu">expect_equal</span><span class="op">(</span><span class="va">test_results</span><span class="op">$</span><span class="va">estimate_jama</span>,</span>
 <span>               <span class="va">test_results</span><span class="op">$</span><span class="va">estimate_shiny</span>,</span>
-<span>               tolerance <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></span>
+<span>               tolerance <span class="op">=</span> <span class="va">est_diff_tolerance</span><span class="op">)</span></span>
 <span></span>
 <span>  <span class="fu">expect_equal</span><span class="op">(</span><span class="va">test_results</span><span class="op">$</span><span class="va">ci_lower_jama</span>,</span>
 <span>               <span class="va">test_results</span><span class="op">$</span><span class="va">ci_lower_shiny</span>,</span>
