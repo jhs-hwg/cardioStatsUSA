@@ -114,6 +114,13 @@ test_results <- test_data %>%
 
 test_results
 
+#' In the following tests, we will compare our application's estimates
+#' to corresponding estimates reported by the CDC. To ensure all of
+#' these differences are exactly 0, we set the tolerance values to 0
+#+ echo = TRUE
+est_diff_tolerance <- 0
+se_diff_tolerance <- 0
+
 #' Now we can formally check for equality:
 #+ echo = TRUE
 test_that(
@@ -121,10 +128,12 @@ test_that(
  code = {
 
   expect_equal(test_results$cdc_estimate,
-               test_results$shiny_estimate)
+               test_results$shiny_estimate,
+               tolerance = est_diff_tolerance)
 
   expect_equal(test_results$cdc_std_error,
-               test_results$shiny_std_error)
+               test_results$shiny_std_error,
+               tolerance = se_diff_tolerance)
 
  }
 )
@@ -186,12 +195,14 @@ test_that(
 
   expect_equal(
    test_results$cdc_estimate,
-   test_results$shiny_estimate
+   test_results$shiny_estimate,
+   tolerance = est_diff_tolerance
   )
 
   expect_equal(
    test_results$cdc_std_error,
-   test_results$shiny_std_error
+   test_results$shiny_std_error,
+   tolerance = se_diff_tolerance
   )
 
  }

@@ -143,11 +143,15 @@ test_results <- list(
 #+ echo = TRUE
 test_results
 
-#' In some cases, we have differences in CI estimates due to rounding and/or
+#' In some cases, we have differences in estimates due to rounding and/or
 #' minor differences in the way CI boundaries are computed in R versus stata.
-#' To ensure all of these differences are small enough, we allow a 1%
-#' difference in the CI boundaries for our test. I.e., |A-B|/ B < 0.01
+#' To ensure all of these differences are small enough, we allow a 0.005% and
+#' a 0.01% difference in the point estimates and CI boundaries, respectively,
+#' for our test of equality. I.e., |A-B|/ B < 0.005 for point estimates and
+#' |A-B|/ B < 0.01 for upper and lower CI estimates, where A is from our web
+#' application and B is the corresponding estimate from Muntner et al.
 #+ echo = TRUE
+est_diff_tolerance <- 0.005
 ci_diff_tolerance <- 0.01
 
 test_that(
@@ -155,7 +159,8 @@ test_that(
  code = {
 
   expect_equal(test_results$estimate_jama,
-               test_results$estimate_shiny)
+               test_results$estimate_shiny,
+               tolerance = est_diff_tolerance)
 
   expect_equal(test_results$ci_lower_jama,
                test_results$ci_lower_shiny,
@@ -224,7 +229,7 @@ test_that(
 
   expect_equal(test_results$estimate_jama,
                test_results$estimate_shiny,
-               tolerance = 0.01)
+               tolerance = est_diff_tolerance)
 
   expect_equal(test_results$ci_lower_jama,
                test_results$ci_lower_shiny,

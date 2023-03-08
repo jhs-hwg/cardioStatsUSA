@@ -120,7 +120,7 @@ test_results
 
 #' In some cases, we have minor differences due to rounding and/or
 #' minor differences due to a small differences in the study cohorts.
-#' To ensure all of these differences are small enough, we set a 0.5%
+#' To ensure all of these differences are small enough, we set a 0.005%
 #' tolerance for differences in the Shiny app versus the paper.
 #+ echo = TRUE
 tolerance <- 0.005

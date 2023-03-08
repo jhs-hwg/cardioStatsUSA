@@ -29,6 +29,53 @@ The video below shows how Figure 2 can be replicated using our web application.
 vembedr::embed_url("https://www.youtube.com/watch?v=DzAhLVP0AaY")
 ```
 
+The code used in the video to run the application with a different age variable is provided below for interested users:
+
+```{r, eval=FALSE, echo = TRUE}
+
+library(cardioStatsUSA)
+library(data.table)
+library(magrittr)
+
+# Make a copy of the NHANES data
+nhanes_data_test <- copy(nhanes_data)
+
+# modify the age groups prior to running the app
+nhanes_data_test[
+ , demo_age_cat := cut(demo_age_years,
+                       breaks = c(18, 39, 59, Inf),
+                       labels = c("18-39", "40-59", "60+"),
+                       include.lowest = TRUE)
+]
+
+#' Include the same cohort as the CDC report
+
+nhanes_data_test <- nhanes_data_test %>%
+ # exclude pregnant women
+ .[demo_pregnant == 'No' | is.na(demo_pregnant)] %>%
+ # exclude participants missing both SBP and DBP
+ .[!(is.na(bp_dia_mean) & is.na(bp_sys_mean))]
+
+
+# don't include cholesterol module (cholesterol is in development)
+nhanes_key_test <- nhanes_key[module != 'chol']
+
+# important: if 'module' is included as a column in your key,
+# then the app will automatically subset your cohort to include
+# NHANES participants in the module that your outcome variable is in.
+# We don't want to do that here, since the cohort analyzed by the CDC 
+# didn't have the same exclusion criteria as the cohort we analyze by
+# default in the app. So, the simple fix is to delete the module column:
+nhanes_key_test$module <- NULL
+
+
+app_run(nhanes_data = nhanes_data_test,
+        nhanes_key = nhanes_key_test)
+
+
+```
+
+
 ## Replicate with code
 
 `r cardioStatsUSA:::describe_replicate_with_code()` 
