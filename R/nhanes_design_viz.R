@@ -141,8 +141,6 @@ nhanes_design_viz <- function(x,
 
  }
 
- # browser()
-
  if(!group_used){
   group <- 'fake_._group'
   data[[group]] <- 1

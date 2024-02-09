@@ -72,8 +72,6 @@ nhanes_design_summarize <- function(x,
 
  use_statby <- !is.null(x$by_variables)
 
- # browser()
-
  smry_output <- purrr::map_dfr(
 
   .x = x$stats[x$stats %in% outcome_stats],

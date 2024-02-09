@@ -78,7 +78,7 @@ nhanes_summarize <- function(data,
 
  if('module' %in% names(dt_key)){
 
-  type_subpop <- dt_key[variable == outcome_variable, module]
+  type_subpop <- dt_key$module[dt_key$variable == outcome_variable]
   colname_subpop <- paste('svy_subpop', type_subpop, sep = '_')
 
   if(colname_subpop %in% names(dt_data)){
