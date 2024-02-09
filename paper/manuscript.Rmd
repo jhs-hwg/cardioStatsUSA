@@ -663,7 +663,7 @@ tbl_main_2_flex
 
 ### Figure 1: Mean systolic blood pressure for US adults by calendar year
 
-```{r, fig.height=3.75}
+```{r fig_1, fig.height=3.75}
 
 fig_print(fig_main_1)
 
@@ -680,7 +680,7 @@ Dots represent mean systolic blood pressure. Vertical lines represent the 95% co
 
 ### Figure 2: Age-adjusted prevalence of hypertension for US adults by calendar year
 
-```{r, fig.height=3.75}
+```{r fig_2, fig.height=3.75}
 
 fig_print(fig_main_2)
 
@@ -695,7 +695,7 @@ Age adjustment was performed through direct standardization, using the estimated
 
 ### Figure 3: Number of US adults with hypertension by calendar year
 
-```{r}
+```{r fig_3}
 
 fig_print(fig_main_3)
 
@@ -711,7 +711,7 @@ fig_print(fig_main_3)
 ### Figure 4: Age-adjusted prevalence of blood pressure control by calendar year.
 
 A. Among non-pregnant US adults with hypertension `r single_par`
-```{r, fig.height=3.75}
+```{r fig_4a, fig.height=3.75}
 
 fig_print(fig_main_4_a)
 
@@ -727,7 +727,7 @@ Participants with missing values for pregnancy status were assumed to be non-pre
 \newpage
 
 B. Among non-pregnant US adults who self-report taking antihypertensive medication `r single_par`
-```{r, fig.height=3.75}
+```{r fig_4b, fig.height=3.75}
 fig_print(fig_main_4_b)
 ```
 Age adjustment was performed through direct standardization, using the estimated age distribution of US adults with hypertension from 1999 to 2020 as the standard (26.4%, 43.4%, 17.0% and 13.2% being 18 to 44 years, 45 to 64, 65 to 74, and ≥ 75 years of age, respectively) `r single_par`
