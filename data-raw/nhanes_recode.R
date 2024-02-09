@@ -334,7 +334,14 @@ nhanes_recode <- function(data = NULL){
      "30 to <35",
      "35+"
     )
-   )
+   ),
+
+   cc_acr = acr,
+   cc_egfr = egfr,
+   cc_hba1c = lbxgh,
+   cc_egfr_lt60 = if_else(cc_egfr < 60, "Yes", "No"),
+   cc_acr_gteq30 = if_else(cc_acr >= 30, "Yes", "No")
+
   )
 
  # finish recoding ----

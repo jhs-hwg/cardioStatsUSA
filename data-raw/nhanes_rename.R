@@ -149,6 +149,13 @@ nhanes_rename <- function(data){
   cc_bmi        = bmicat,
   cc_diabetes   = diabetes,
   cc_ckd        = ckd,
+
+  cc_acr,
+  cc_egfr,
+  cc_hba1c,
+  cc_egfr_lt60,
+  cc_acr_gteq30,
+
   # cc_n_highrisk = highriskcond,
 
   # cc_cvd, a sub-class of cc variables
